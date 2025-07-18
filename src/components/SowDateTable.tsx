@@ -55,20 +55,17 @@ export function SeedForm() {
     sowDates: { seed: string; date: Date }[];
   } | null>(null);
 
-  // CSV headers definition
+  // CSV headers
   const csvHeaders = [
     { label: "Seed", key: "seed" },
     { label: "Sow Date", key: "date" },
   ];
-
-  // Transform sowDates to CSV-friendly format
   const csvData =
     results?.sowDates.map(({ seed, date }) => ({
       seed,
       date: date.toISOString().split("T")[0],
     })) || [];
 
-  // Download .ics calendar
   const downloadICS = () => {
     if (!results) return;
     const icsContent = buildICS(results.sowDates);
@@ -82,8 +79,7 @@ export function SeedForm() {
   };
 
   function handleSeedChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const opts = Array.from(e.target.selectedOptions).map((o) => o.value);
-    setSelectedSeeds(opts);
+    setSelectedSeeds(Array.from(e.target.selectedOptions).map((o) => o.value));
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -94,68 +90,79 @@ export function SeedForm() {
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="space-y-4 p-4">
-        <div>
-          <Label htmlFor="zip">ZIP Code</Label>
-          <Input
-            id="zip"
-            type="text"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
-            placeholder="e.g. 55423"
-            className="mt-1 w-full"
-          />
-        </div>
-
-        <div>
-          <Label htmlFor="seeds">Choose seeds</Label>
-          <select
-            id="seeds"
-            multiple
-            value={selectedSeeds}
-            onChange={handleSeedChange}
-            className="mt-1 block w-full rounded-md border-gray-300 bg-white p-2"
-          >
-            {availableSeeds.map((seed) => (
-              <option key={seed} value={seed}>
-                {seed.charAt(0).toUpperCase() + seed.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <Button type="submit">Start</Button>
-      </form>
-
-      {results && (
-        <div className="p-4">
-          <h2 className="text-lg font-medium">
-            Your Zone: {results.zone.toUpperCase()}
-          </h2>
-
-          <ul className="list-disc pl-5 mt-2">
-            {results.sowDates.map(({ seed, date }) => (
-              <li key={seed}>
-                {seed.charAt(0).toUpperCase() + seed.slice(1)}: {format(date, 'MM/dd/yyyy')}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-4 flex flex-wrap gap-3 items-center">
-            <CSVLink
-              data={csvData}
-              headers={csvHeaders}
-              filename={`sow-dates-${zip}.csv`}
-              className="inline-block"
-            >
-              <Button>Download CSV</Button>
-            </CSVLink>
-
-            <Button onClick={downloadICS}>Download .ics</Button>
+    <div className="container mx-auto px-4 py-6">
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-4 p-6 bg-white rounded-lg shadow-md"
+        >
+          <div>
+            <Label htmlFor="zip">ZIP Code</Label>
+            <Input
+              id="zip"
+              type="text"
+              value={zip}
+              onChange={(e) => setZip(e.target.value)}
+              placeholder="e.g. 55423"
+              className="mt-1 w-full"
+            />
           </div>
-        </div>
-      )}
-    </>
+
+          <div>
+            <Label htmlFor="seeds">Choose seeds</Label>
+            <select
+              id="seeds"
+              multiple
+              value={selectedSeeds}
+              onChange={handleSeedChange}
+              className="mt-1 block w-full rounded-md border-gray-300 bg-white p-2"
+            >
+              {availableSeeds.map((seed) => (
+                <option key={seed} value={seed}>
+                  {seed.charAt(0).toUpperCase() + seed.slice(1)}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <Button type="submit" className="w-full">
+            Start
+          </Button>
+        </form>
+
+        {/* Results */}
+        {results && (
+          <div className="p-6 bg-white rounded-lg shadow-md">
+            <h2 className="text-lg font-medium">
+              Your Zone: {results.zone.toUpperCase()}
+            </h2>
+
+            <div className="overflow-x-auto my-4">
+              <ul className="list-disc pl-5">
+                {results.sowDates.map(({ seed, date }) => (
+                  <li key={seed}>
+                    {seed.charAt(0).toUpperCase() + seed.slice(1)}: {format(date, 'MM/dd/yyyy')}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-4 flex flex-col sm:flex-row gap-3">
+              <CSVLink
+                data={csvData}
+                headers={csvHeaders}
+                filename={`sow-dates-${zip}.csv`}
+                className="inline-block"
+              >
+                <Button>Download CSV</Button>
+              </CSVLink>
+
+              <Button onClick={downloadICS}>Download .ics</Button>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
