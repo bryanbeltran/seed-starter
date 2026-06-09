@@ -1,7 +1,7 @@
 import { addDays, subDays } from "date-fns";
 import { resolveCropRules } from "./cropCatalog";
 import { resolveLastFrost } from "./frostResolver";
-import { shiftFrostDate } from "./riskProfile";
+import { selectFrostDate } from "./riskProfile";
 import type { CropSelection, PlantingTask, RiskProfile, Schedule, ScheduleInput } from "./types";
 
 const DEFAULT_RISK_PROFILE: RiskProfile = "balanced";
@@ -75,19 +75,29 @@ export function buildSchedule(input: ScheduleInput): Schedule {
     zip,
     riskProfile = DEFAULT_RISK_PROFILE,
     referenceDate = new Date(),
+    climateRepository,
   } = input;
 
   const selections: CropSelection[] =
     cropSelections ??
     crops.map((cropId) => ({ cropId }));
 
-  const frostResolution = resolveLastFrost({ zone, zip, referenceDate });
-  const lastFrostDate = shiftFrostDate(
-    frostResolution.lastFrostDate,
-    riskProfile,
+  const frostResolution = resolveLastFrost(
+    { zone, zip, referenceDate },
+    climateRepository,
   );
+  const lastFrostDate = selectFrostDate(frostResolution, riskProfile);
 
   const tasks = selections.flatMap((crop) => tasksForCrop(crop, lastFrostDate));
+
+  const frostPercentiles =
+    frostResolution.lastFrostP10 && frostResolution.lastFrostP90
+      ? {
+          p10: frostResolution.lastFrostP10,
+          p50: frostResolution.lastFrostDate,
+          p90: frostResolution.lastFrostP90,
+        }
+      : undefined;
 
   return {
     zone,
@@ -95,6 +105,8 @@ export function buildSchedule(input: ScheduleInput): Schedule {
     lastFrostDate,
     frostSource: frostResolution.source,
     frostProvenance: frostResolution.provenance,
+    frostPercentiles,
+    climateDataVersion: frostResolution.dataVersion,
     riskProfile,
     tasks,
   };
@@ -111,9 +123,10 @@ export function sowDatesFromSchedule(schedule: Schedule): LegacySowDate[] {
 export function compareSchedules(
   input: Omit<ScheduleInput, "riskProfile">,
 ): Record<RiskProfile, Schedule> {
+  const base = { ...input };
   return {
-    conservative: buildSchedule({ ...input, riskProfile: "conservative" }),
-    balanced: buildSchedule({ ...input, riskProfile: "balanced" }),
-    aggressive: buildSchedule({ ...input, riskProfile: "aggressive" }),
+    conservative: buildSchedule({ ...base, riskProfile: "conservative" }),
+    balanced: buildSchedule({ ...base, riskProfile: "balanced" }),
+    aggressive: buildSchedule({ ...base, riskProfile: "aggressive" }),
   };
 }

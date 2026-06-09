@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { Trash2 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,6 +24,8 @@ export type SavedPlanSummary = {
   zone: string;
   crops: string[];
   riskProfile: RiskProfile;
+  climateDataVersion?: string | null;
+  climateDataStale?: boolean;
   schedule: ScheduleResult;
 };
 
@@ -134,9 +137,23 @@ export function SavedPlansPanel({
               <button
                 type="button"
                 className="min-w-0 flex-1 text-left"
-                onClick={() => onLoadPlan(plan)}
+                onClick={() => {
+                  onLoadPlan(plan);
+                  if (plan.climateDataStale) {
+                    onStatusMessage(
+                      `Loaded "${plan.name}" — climate data updated since save; dates refreshed.`,
+                    );
+                  }
+                }}
               >
-                <span className="font-medium">{plan.name}</span>
+                <span className="flex items-center gap-2 font-medium">
+                  {plan.name}
+                  {plan.climateDataStale && (
+                    <Badge variant="outline" className="text-xs font-normal">
+                      Stale data
+                    </Badge>
+                  )}
+                </span>
                 <span className="text-muted-foreground block text-xs">
                   {plan.zip} · Zone {plan.zone.toUpperCase()}
                 </span>

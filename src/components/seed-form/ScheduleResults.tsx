@@ -42,7 +42,22 @@ export function ScheduleResults({ results, zip, planName }: Props) {
                   {results.frostSource} frost
                 </Badge>
               </TooltipTrigger>
-              <TooltipContent>{results.frostProvenance}</TooltipContent>
+              <TooltipContent className="max-w-xs">
+                <p>{results.frostProvenance}</p>
+                {results.climateDataVersion && (
+                  <p className="text-muted-foreground mt-1">
+                    Data {results.climateDataVersion}
+                    {results.lastFrostP10 && results.lastFrostP90 && (
+                      <>
+                        {" "}
+                        · p10{" "}
+                        {format(parseISO(results.lastFrostP10), "MMM d")} – p90{" "}
+                        {format(parseISO(results.lastFrostP90), "MMM d")}
+                      </>
+                    )}
+                  </p>
+                )}
+              </TooltipContent>
             </Tooltip>
           </TooltipProvider>
         </div>

@@ -13,6 +13,10 @@ export type ScheduleResult = {
   lastFrostDate: string;
   frostSource: string;
   frostProvenance: string;
+  lastFrostP10?: string;
+  lastFrostP50?: string;
+  lastFrostP90?: string;
+  climateDataVersion?: string;
   riskProfile: RiskProfile;
   tasks: ScheduleTask[];
   sowDates: { seed: string; date: string }[];

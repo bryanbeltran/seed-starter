@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import initSqlJs, { type Database } from "sql.js";
+import { getFileClimateRepository, getCurrentClimateDataVersion, isClimateVersionStale } from "@/climate";
 import type { RiskProfile, Schedule } from "@/planning";
 import { buildSchedule } from "@/planning";
 import { resolveLocation } from "@/lib/resolveLocation";
@@ -20,15 +21,19 @@ export type SavedPlan = {
   zone: string;
   crops: string[];
   riskProfile: RiskProfile;
+  climateDataVersion: string | null;
+  climateDataStale: boolean;
   createdAt: string;
   updatedAt: string;
   schedule: ReturnType<typeof serializeSchedule>;
 };
 
-const MIGRATION_PATH = path.join(
-  process.cwd(),
-  "db/migrations/001_saved_plans.sql",
-);
+const MIGRATIONS = [
+  "001_saved_plans.sql",
+  "002_climate_version.sql",
+];
+
+const climateRepository = getFileClimateRepository();
 
 function dbDir() {
   return process.env.SEEDSTARTER_DB_DIR ?? path.join(process.cwd(), ".seedstarter");
@@ -41,6 +46,30 @@ function dbPath() {
 let dbPromise: Promise<Database> | null = null;
 let dbPromisePath: string | null = null;
 
+/** @internal test helper */
+export function resetDbCacheForTests() {
+  dbPromise = null;
+  dbPromisePath = null;
+}
+
+function hasColumn(db: Database, table: string, column: string): boolean {
+  const result = db.exec(`PRAGMA table_info(${table})`);
+  if (!result[0]) return false;
+  const nameIdx = result[0].columns.indexOf("name");
+  return result[0].values.some((row) => row[nameIdx] === column);
+}
+
+function runMigrations(db: Database) {
+  const migrationsDir = path.join(process.cwd(), "db/migrations");
+  for (const file of MIGRATIONS) {
+    const sql = fs.readFileSync(path.join(migrationsDir, file), "utf8").trim();
+    if (sql) db.run(sql);
+  }
+  if (!hasColumn(db, "saved_plans", "climate_data_version")) {
+    db.run("ALTER TABLE saved_plans ADD COLUMN climate_data_version TEXT");
+  }
+}
+
 async function getDb(): Promise<Database> {
   const currentPath = dbPath();
   if (!dbPromise || dbPromisePath !== currentPath) {
@@ -52,8 +81,7 @@ async function getDb(): Promise<Database> {
       const db = fs.existsSync(currentPath)
         ? new SQL.Database(fs.readFileSync(currentPath))
         : new SQL.Database();
-      const migration = fs.readFileSync(MIGRATION_PATH, "utf8");
-      db.run(migration);
+      runMigrations(db);
       persist(db);
       return db;
     })();
@@ -70,6 +98,10 @@ function rowToPlan(
   row: Record<string, unknown>,
   schedule: Schedule,
 ): SavedPlan {
+  const storedVersion = row.climate_data_version
+    ? String(row.climate_data_version)
+    : null;
+
   return {
     id: String(row.id),
     name: String(row.name),
@@ -77,6 +109,8 @@ function rowToPlan(
     zone: String(row.zone),
     crops: JSON.parse(String(row.crops_json)) as string[],
     riskProfile: String(row.risk_profile) as RiskProfile,
+    climateDataVersion: storedVersion,
+    climateDataStale: isClimateVersionStale(storedVersion),
     createdAt: String(row.created_at),
     updatedAt: String(row.updated_at),
     schedule: serializeSchedule(schedule),
@@ -94,6 +128,7 @@ async function scheduleForPlan(
     zip,
     crops,
     riskProfile,
+    climateRepository,
   });
 }
 
@@ -150,11 +185,12 @@ export async function createSavedPlan(
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   const riskProfile = input.riskProfile ?? "balanced";
+  const climateDataVersion = getCurrentClimateDataVersion();
 
   const db = await getDb();
   db.run(
-    `INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, climate_data_version, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       id,
       input.name,
@@ -162,6 +198,7 @@ export async function createSavedPlan(
       zone,
       JSON.stringify(input.crops),
       riskProfile,
+      climateDataVersion,
       now,
       now,
     ],
@@ -182,6 +219,7 @@ export async function createSavedPlan(
       zone,
       crops_json: JSON.stringify(input.crops),
       risk_profile: riskProfile,
+      climate_data_version: climateDataVersion,
       created_at: now,
       updated_at: now,
     },
@@ -202,13 +240,15 @@ export async function updateSavedPlan(
   const zip = patch.zip ?? existing.zip;
   const { zone } = await resolveLocation(zip);
   const now = new Date().toISOString();
+  const climateDataVersion = getCurrentClimateDataVersion();
 
   const db = await getDb();
   db.run(
     `UPDATE saved_plans
-     SET name = ?, zip = ?, zone = ?, crops_json = ?, risk_profile = ?, updated_at = ?
+     SET name = ?, zip = ?, zone = ?, crops_json = ?, risk_profile = ?,
+         climate_data_version = ?, updated_at = ?
      WHERE id = ?`,
-    [name, zip, zone, JSON.stringify(crops), riskProfile, now, id],
+    [name, zip, zone, JSON.stringify(crops), riskProfile, climateDataVersion, now, id],
   );
   persist(db);
 
@@ -221,6 +261,7 @@ export async function updateSavedPlan(
       zone,
       crops_json: JSON.stringify(crops),
       risk_profile: riskProfile,
+      climate_data_version: climateDataVersion,
       created_at: existing.createdAt,
       updated_at: now,
     },

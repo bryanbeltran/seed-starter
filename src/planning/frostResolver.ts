@@ -1,7 +1,7 @@
 import stationData from "./data/stationFrost.json";
 import regionalData from "./data/regionalFrost.json";
 import { frostDateStringForZone, nextFrostDate } from "./frost";
-import type { FrostModelSource } from "./types";
+import type { FrostClimateLookup, FrostModelSource } from "./types";
 
 type StationRecord = {
   name: string;
@@ -24,8 +24,13 @@ export type { FrostModelSource };
 
 export type FrostResolution = {
   lastFrostDate: Date;
+  lastFrostP10?: Date;
+  lastFrostP90?: Date;
   source: FrostModelSource;
   provenance: string;
+  dataVersion?: string;
+  stationId?: string;
+  distanceKm?: number;
 };
 
 function parseFrostString(mmdd: string, referenceDate: Date): Date {
@@ -41,12 +46,32 @@ function regionForZone(zone: string): RegionalRecord | undefined {
   return Object.values(regions).find((r) => r.zones.includes(zone));
 }
 
-export function resolveLastFrost(input: {
-  zone: string;
-  zip?: string;
-  referenceDate?: Date;
-}): FrostResolution {
+export function resolveLastFrost(
+  input: {
+    zone: string;
+    zip?: string;
+    referenceDate?: Date;
+  },
+  climateLookup?: FrostClimateLookup,
+): FrostResolution {
   const referenceDate = input.referenceDate ?? new Date();
+
+  if (input.zip && climateLookup) {
+    const climate = climateLookup.getByZip(input.zip);
+    if (climate) {
+      const p50 = parseFrostString(climate.lastFrostP50, referenceDate);
+      return {
+        lastFrostDate: p50,
+        lastFrostP10: parseFrostString(climate.lastFrostP10, referenceDate),
+        lastFrostP90: parseFrostString(climate.lastFrostP90, referenceDate),
+        source: "climate",
+        provenance: `${climate.provenance} via ${climate.stationName ?? climate.stationId} (${climate.distanceKm}km)`,
+        dataVersion: climate.dataVersion,
+        stationId: climate.stationId,
+        distanceKm: climate.distanceKm,
+      };
+    }
+  }
 
   if (input.zip) {
     const station = stationForZip(input.zip);

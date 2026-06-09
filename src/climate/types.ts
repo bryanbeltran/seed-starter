@@ -1,0 +1,18 @@
+export type ClimateRecord = {
+  zip: string;
+  zone: string;
+  stationId: string;
+  stationName: string;
+  distanceKm: number;
+  lastFrostP10: string;
+  lastFrostP50: string;
+  lastFrostP90: string;
+  yearsSampled: number;
+  provenance: string;
+  dataVersion: string;
+  method: string;
+};
+
+export type ClimateRepository = {
+  getByZip(zip: string): ClimateRecord | undefined;
+};

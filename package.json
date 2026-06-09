@@ -12,7 +12,9 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check": "node scripts/check-data-quality.mjs && pnpm run lint && pnpm exec tsc --noEmit && pnpm run test:coverage && pnpm run build"
+    "check": "node scripts/check-data-quality.mjs && pnpm run lint && pnpm exec tsc --noEmit && pnpm run test:coverage && pnpm run build",
+    "spike:climate": "node scripts/spike-ghcn-zip-frost.mjs",
+    "etl:climate": "node scripts/etl-ghcn-zip-climate.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.13",

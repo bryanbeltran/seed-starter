@@ -1,12 +1,15 @@
 import fs from "fs";
 import os from "os";
 import path from "path";
+import initSqlJs from "sql.js";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { getCurrentClimateDataVersion } from "@/climate";
 import {
   createSavedPlan,
   deleteSavedPlan,
   getSavedPlan,
   listSavedPlans,
+  resetDbCacheForTests,
   updateSavedPlan,
 } from "./savedPlanService";
 
@@ -18,6 +21,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  resetDbCacheForTests();
   fs.rmSync(tempDir, { recursive: true, force: true });
   delete process.env.SEEDSTARTER_DB_DIR;
 });
@@ -42,6 +46,8 @@ describe("savedPlanService", () => {
 
     expect(first.id).toBeTruthy();
     expect(first.schedule.tasks.length).toBeGreaterThan(0);
+    expect(first.climateDataVersion).toBe(getCurrentClimateDataVersion());
+    expect(first.climateDataStale).toBe(false);
     expect(second.riskProfile).toBe("balanced");
 
     const plans = await listSavedPlans();
@@ -79,6 +85,32 @@ describe("savedPlanService", () => {
     const deleted = await deleteSavedPlan(plan.id);
     expect(deleted).toBe(true);
     expect(await getSavedPlan(plan.id)).toBeNull();
+  });
+
+  it("flags stale climate when stored version differs", async () => {
+    const plan = await createSavedPlan({
+      name: "Spring bed",
+      zip: "55423",
+      crops: ["tomato"],
+    });
+
+    const SQL = await initSqlJs();
+    const sqlitePath = path.join(tempDir, "seedstarter.sqlite");
+    const db = new SQL.Database(fs.readFileSync(sqlitePath));
+    db.run("UPDATE saved_plans SET climate_data_version = ? WHERE id = ?", [
+      "outdated-2020",
+      plan.id,
+    ]);
+    fs.writeFileSync(sqlitePath, Buffer.from(db.export()));
+    db.close();
+    resetDbCacheForTests();
+
+    const reopened = await getSavedPlan(plan.id);
+    expect(reopened?.climateDataVersion).toBe("outdated-2020");
+    expect(reopened?.climateDataStale).toBe(true);
+    expect(reopened?.schedule.climateDataVersion).toBe(
+      getCurrentClimateDataVersion(),
+    );
   });
 
   it("returns null for missing plan", async () => {

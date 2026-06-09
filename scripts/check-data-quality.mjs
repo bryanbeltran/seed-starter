@@ -9,6 +9,8 @@ function readJson(relPath) {
 }
 
 const zipZones = readJson("data/zipZones.json");
+const zipClimate = readJson("data/zipClimate.json");
+const zipCentroids = readJson("data/zipCentroids.json");
 const stationFrost = readJson("src/planning/data/stationFrost.json");
 const regionalFrost = readJson("src/planning/data/regionalFrost.json");
 const frostDates = readJson("src/planning/frostDates.json");
@@ -38,6 +40,30 @@ for (const record of Object.values(regionalFrost)) {
 
 if (Object.keys(frostDates).length < 10) {
   errors.push("frostDates should cover at least 10 zones");
+}
+
+const mmdd = /^\d{2}-\d{2}$/;
+for (const [zip, record] of Object.entries(zipClimate)) {
+  if (!/^\d{5}$/.test(zip)) errors.push(`invalid zipClimate key: ${zip}`);
+  for (const field of ["lastFrostP10", "lastFrostP50", "lastFrostP90"]) {
+    if (!mmdd.test(record[field])) {
+      errors.push(`zipClimate ${zip}: invalid ${field}`);
+    }
+  }
+  if (!record.dataVersion) errors.push(`zipClimate ${zip}: missing dataVersion`);
+}
+
+const climateZips = new Set(Object.keys(zipClimate));
+const fixtureZips = Object.keys(zipZones);
+const missingClimate = fixtureZips.filter((z) => !climateZips.has(z));
+if (missingClimate.length) {
+  errors.push(`zipClimate missing fixture zips: ${missingClimate.join(", ")}`);
+}
+
+for (const zip of fixtureZips) {
+  if (!zipCentroids[zip]) {
+    errors.push(`zipCentroids missing fixture zip: ${zip}`);
+  }
 }
 
 if (errors.length) {

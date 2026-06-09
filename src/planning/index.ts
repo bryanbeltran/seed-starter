@@ -5,6 +5,8 @@
 
 export type {
   CropSelection,
+  FrostClimateLookup,
+  FrostPercentiles,
   Location,
   PlantingTask,
   RiskProfile,
@@ -25,7 +27,11 @@ export {
 } from "./cropCatalog";
 export type { FrostModelSource, FrostResolution } from "./frostResolver";
 export { resolveLastFrost } from "./frostResolver";
-export { riskProfiles, shiftFrostDate } from "./riskProfile";
+export {
+  riskProfiles,
+  selectFrostDate,
+  shiftFrostDate,
+} from "./riskProfile";
 export type { LegacySowDate } from "./schedule";
 export {
   buildSchedule,

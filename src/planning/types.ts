@@ -1,6 +1,6 @@
 export type RiskProfile = "conservative" | "balanced" | "aggressive";
 
-export type FrostModelSource = "station" | "regional" | "zone";
+export type FrostModelSource = "climate" | "station" | "regional" | "zone";
 
 export type Location = {
   zip: string;
@@ -28,12 +28,35 @@ export type PlantingTask = {
   label: string;
 };
 
+export type FrostClimateRecord = {
+  lastFrostP10: string;
+  lastFrostP50: string;
+  lastFrostP90: string;
+  provenance: string;
+  dataVersion: string;
+  stationId?: string;
+  stationName?: string;
+  distanceKm?: number;
+};
+
+export type FrostClimateLookup = {
+  getByZip(zip: string): FrostClimateRecord | undefined;
+};
+
+export type FrostPercentiles = {
+  p10: Date;
+  p50: Date;
+  p90: Date;
+};
+
 export type Schedule = {
   zone: string;
   zip?: string;
   lastFrostDate: Date;
   frostSource: FrostModelSource;
   frostProvenance: string;
+  frostPercentiles?: FrostPercentiles;
+  climateDataVersion?: string;
   riskProfile: RiskProfile;
   tasks: PlantingTask[];
 };
@@ -45,4 +68,5 @@ export type ScheduleInput = {
   cropSelections?: CropSelection[];
   riskProfile?: RiskProfile;
   referenceDate?: Date;
+  climateRepository?: FrostClimateLookup;
 };

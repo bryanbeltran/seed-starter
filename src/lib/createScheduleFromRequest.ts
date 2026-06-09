@@ -5,7 +5,10 @@ import {
   type Schedule,
 } from "@/planning";
 import type { ScheduleRequest } from "@/planning/api/scheduleRequestSchema";
+import { getFileClimateRepository } from "@/climate";
 import { resolveLocation } from "@/lib/resolveLocation";
+
+const climateRepository = getFileClimateRepository();
 
 export async function createScheduleFromRequest(
   data: ScheduleRequest,
@@ -20,6 +23,7 @@ export async function createScheduleFromRequest(
     crops: data.seeds,
     cropSelections,
     riskProfile: data.riskProfile,
+    climateRepository,
   });
 }
 
@@ -35,5 +39,6 @@ export async function compareSchedulesFromRequest(
     zip,
     crops: data.seeds,
     cropSelections,
+    climateRepository,
   });
 }

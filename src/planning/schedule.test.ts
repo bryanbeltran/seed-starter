@@ -1,10 +1,13 @@
 import { describe, expect, it } from "vitest";
+import { getFileClimateRepository } from "@/climate";
 import { getCropOrDefault } from "@/planning/cropCatalog";
 import {
   buildSchedule,
   compareSchedules,
   sowDatesFromSchedule,
 } from "./schedule";
+
+const climate = getFileClimateRepository();
 
 const ref = new Date(2026, 0, 15);
 
@@ -89,6 +92,22 @@ describe("buildSchedule", () => {
     const transplant = schedule.tasks.find((t) => t.type === "transplant")!;
     expect(sow.label).toContain("Habanero");
     expect(transplant.date.getTime()).toBeGreaterThan(sow.date.getTime());
+  });
+
+  it("uses climate percentiles when repository is provided", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      zip: "55423",
+      crops: ["tomato"],
+      referenceDate: ref,
+      climateRepository: climate,
+    });
+
+    expect(schedule.frostSource).toBe("climate");
+    expect(schedule.frostPercentiles?.p10!.getTime()).toBeLessThan(
+      schedule.frostPercentiles?.p90!.getTime() ?? 0,
+    );
+    expect(schedule.climateDataVersion).toBe("spike-2026-06");
   });
 
   it("shifts frost date by risk profile", () => {

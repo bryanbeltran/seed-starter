@@ -7,6 +7,10 @@ export function serializeSchedule(schedule: Schedule) {
     lastFrostDate: schedule.lastFrostDate.toISOString(),
     frostSource: schedule.frostSource,
     frostProvenance: schedule.frostProvenance,
+    lastFrostP10: schedule.frostPercentiles?.p10.toISOString(),
+    lastFrostP50: schedule.frostPercentiles?.p50.toISOString(),
+    lastFrostP90: schedule.frostPercentiles?.p90.toISOString(),
+    climateDataVersion: schedule.climateDataVersion,
     riskProfile: schedule.riskProfile,
     tasks: schedule.tasks.map((t) => ({
       cropId: t.cropId,

@@ -1,0 +1,13 @@
+[
+  { "id": "USW00014922", "name": "Minneapolis-St Paul Intl", "lat": 44.88, "lon": -93.23 },
+  { "id": "USW00094728", "name": "NY Central Park", "lat": 40.779, "lon": -73.969 },
+  { "id": "USW00023174", "name": "Los Angeles Intl", "lat": 33.938, "lon": -118.389 },
+  { "id": "USW00024233", "name": "Seattle Tacoma Intl", "lat": 47.444, "lon": -122.314 },
+  { "id": "USW00094846", "name": "Chicago Ohare", "lat": 41.995, "lon": -87.933 },
+  { "id": "USW00013874", "name": "Atlanta Hartsfield", "lat": 33.64, "lon": -84.427 },
+  { "id": "USW00013904", "name": "Austin Bergstrom", "lat": 30.183, "lon": -97.68 },
+  { "id": "USW00014739", "name": "Boston Logan", "lat": 42.361, "lon": -71.011 },
+  { "id": "USW00013739", "name": "Philadelphia Intl", "lat": 39.873, "lon": -75.241 },
+  { "id": "USW00023062", "name": "Denver Intl", "lat": 39.833, "lon": -104.658 },
+  { "id": "USW00024229", "name": "Portland Intl", "lat": 45.595, "lon": -122.598 }
+]
