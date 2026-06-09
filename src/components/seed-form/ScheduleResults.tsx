@@ -1,3 +1,5 @@
+"use client";
+
 import { format, parseISO } from "date-fns";
 import {
   Card,
@@ -6,47 +8,53 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ExportActions } from "./ExportActions";
+import { TaskTimeline } from "./TaskTimeline";
 import type { ScheduleResult } from "./types";
 
 type Props = {
   results: ScheduleResult;
   zip: string;
+  planName?: string;
 };
 
-export function ScheduleResults({ results, zip }: Props) {
+export function ScheduleResults({ results, zip, planName }: Props) {
+  const generatedAt = format(new Date(), "MMM d, yyyy h:mm a");
+
   return (
     <Card className="print:shadow-none print:border-none">
       <CardHeader>
-        <CardTitle className="print:text-xl">
-          Zone {results.zone.toUpperCase()}
-        </CardTitle>
+        <div className="flex flex-wrap items-center gap-2">
+          <CardTitle className="print:text-xl">
+            Zone {results.zone.toUpperCase()}
+          </CardTitle>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Badge variant="secondary" className="capitalize">
+                  {results.frostSource} frost
+                </Badge>
+              </TooltipTrigger>
+              <TooltipContent>{results.frostProvenance}</TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
         <CardDescription className="print:text-foreground">
-          Last frost: {format(parseISO(results.lastFrostDate), "MMM d, yyyy")} (
-          {results.frostSource} model)
+          {planName && <span className="block font-medium">{planName}</span>}
+          Last frost: {format(parseISO(results.lastFrostDate), "MMM d, yyyy")} ·{" "}
+          <span className="capitalize">{results.riskProfile}</span> profile
+          <span className="print:block text-xs">Generated {generatedAt}</span>
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="text-left text-muted-foreground">
-              <tr>
-                <th className="pb-2 pr-4">Task</th>
-                <th className="pb-2">Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {results.tasks.map((task, i) => (
-                <tr key={`${task.cropId}-${task.type}-${i}`} className="border-t">
-                  <td className="py-2 pr-4">{task.label}</td>
-                  <td className="py-2 text-muted-foreground print:text-foreground">
-                    {format(parseISO(task.date), "MMM d, yyyy")}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <TaskTimeline tasks={results.tasks} />
         <ExportActions results={results} zip={zip} />
       </CardContent>
     </Card>

@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Seed Starter",
   description:
-    "Plan indoor sow dates from your ZIP code and USDA hardiness zone.",
+    "Frost-aware garden planner with full planting timelines, risk profiles, and saved plans.",
 };
 
 export default function RootLayout({

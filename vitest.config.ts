@@ -1,12 +1,15 @@
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vitest/config";
 
 export default defineConfig({
+  plugins: [react()],
   resolve: {
     tsconfigPaths: true,
   },
   test: {
-    environment: "node",
-    include: ["src/**/*.test.ts"],
+    environment: "jsdom",
+    setupFiles: ["./vitest.setup.ts"],
+    include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
     coverage: {
       provider: "v8",
       include: [
@@ -14,8 +17,10 @@ export default defineConfig({
         "src/lib/**",
         "src/persistence/**",
         "src/components/seed-form/buildICS.ts",
+        "src/components/seed-form/formState.ts",
+        "src/components/seed-form/taskUtils.ts",
       ],
-      exclude: ["src/**/*.test.ts", "src/lib/utils.ts"],
+      exclude: ["src/**/*.test.ts", "src/**/*.test.tsx", "src/lib/utils.ts"],
       thresholds: {
         statements: 90,
         branches: 85,

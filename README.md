@@ -30,24 +30,37 @@ Domain logic lives in `src/planning/` (framework-free). API routes validate inpu
 ## Setup
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+## UI
+
+- Variety picker per crop, risk profile compare, saved plans sidebar
+- Grouped task timeline with icons, frost provenance badge, skeleton loading
+- Print / CSV / ICS export, dark mode, mobile sticky calculate bar
+- Shareable read-only plan view: `/plans?id={planId}`
+
+### UX decisions
+
+- **Server-owned schedules** — the UI never computes dates; it displays API results so frost logic stays testable and consistent.
+- **Progressive disclosure** — compare profiles and varieties are optional without leaving the main flow.
+- **Print-first results** — timeline layout works on paper for use in the garden.
 
 ## Scripts
 
 | Command | Description |
 |---------|-------------|
-| `npm run dev` | Dev server |
-| `npm run build` | Production build |
-| `npm run start` | Serve production build |
-| `npm run lint` | ESLint |
-| `npm test` | Unit tests |
-| `npm run test:coverage` | Unit tests + coverage gates |
-| `npm run test:e2e` | Playwright browser tests |
-| `npm run check` | Data quality, lint, types, coverage, build |
+| `pnpm run dev` | Dev server |
+| `pnpm run build` | Production build |
+| `pnpm run start` | Serve production build |
+| `pnpm run lint` | ESLint |
+| `pnpm test` | Unit tests |
+| `pnpm run test:coverage` | Unit tests + coverage gates |
+| `pnpm run test:e2e` | Playwright browser tests |
+| `pnpm run check` | Data quality, lint, types, coverage, build |
 
 ## API
 
@@ -55,4 +68,4 @@ See [docs/api.md](docs/api.md).
 
 ## Deploy
 
-Works on [Vercel](https://vercel.com) or any Node host supporting Next.js 15. Run `npm run build` before `npm run start`.
+Works on [Vercel](https://vercel.com) or any Node host supporting Next.js 15. Run `pnpm run build` before `pnpm run start`.
