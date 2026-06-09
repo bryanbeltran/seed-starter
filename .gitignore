@@ -20,6 +20,9 @@
 # production
 /build
 
+# local project context (not for GitHub)
+.cursor/context/
+
 # misc
 .DS_Store
 *.pem

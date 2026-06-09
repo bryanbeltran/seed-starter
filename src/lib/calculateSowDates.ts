@@ -1,38 +1,32 @@
-// src/lib/calculateSowDates.ts
 import { subDays } from "date-fns";
 import frostDatesData from "./frostDates.json";
+import { cropOffsets } from "./cropOffsets";
+import { zipToZone } from "./zipToZone";
+
 const frostDates: Record<string, string> = frostDatesData;
 
-import { cropOffsets } from "./cropOffsets";
-// import { zipToLatLong } from "./zipToLatLong"; // Uncomment when geolocation is needed
+function nextFrostDate(month: number, day: number): Date {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const year = today.getFullYear();
+  const frost = new Date(year, month - 1, day);
+  if (frost < today) return new Date(year + 1, month - 1, day);
+  return frost;
+}
 
-const zipToZone: Record<string, string> = {
-  "55423": "4a",
-  "10001": "7b",
-  // …add more ZIP → zone entries as you go…
+export type SowDateResult = {
+  zone: string;
+  sowDates: { seed: string; date: Date }[];
 };
 
-export async function calculateSowDates(zip: string, seeds: string[]) {
-  let zone: string;
-  try {
-    // const { lat, lng } = await zipToLatLong(zip);
-    // zone = lookupZoneFromLatLng(lat, lng);
-    if (zipToZone[zip]) {
-      zone = zipToZone[zip];
-    } else {
-      console.warn(`Unrecognized ZIP code: ${zip}, defaulting to zone 4a.`);
-      zone = "4a";
-    }
-  } catch (err) {
-    console.error("Error determining zone for ZIP:", zip, err);
-    zone = "4a";
-  }
-
-  const lastFrostStr = frostDates[zone] || frostDates["4a"];
+export async function calculateSowDates(
+  zip: string,
+  seeds: string[],
+): Promise<SowDateResult> {
+  const zone = await zipToZone(zip);
+  const lastFrostStr = frostDates[zone] ?? frostDates["4a"];
   const [month, day] = lastFrostStr.split("-").map(Number);
-
-  const year = new Date().getFullYear();
-  const frostDate = new Date(year, month - 1, day);
+  const frostDate = nextFrostDate(month, day);
 
   const sowDates = seeds.map((seed) => ({
     seed,

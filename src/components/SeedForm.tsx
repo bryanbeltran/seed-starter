@@ -1,13 +1,18 @@
 "use client";
-// Silence missing type declarations for react-csv
-// @ts-ignore
+
 import { CSVLink } from "react-csv";
-import React, { useState, FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import { format, parseISO } from "date-fns";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { calculateSowDates } from "@/lib/calculateSowDates";
-import { format } from "date-fns";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const availableSeeds = [
   "tomato",
@@ -15,147 +20,214 @@ const availableSeeds = [
   "lettuce",
   "carrot",
   "broccoli",
+] as const;
+
+type SowResult = {
+  zone: string;
+  sowDates: { seed: string; date: Date }[];
+};
+
+const csvHeaders = [
+  { label: "Seed", key: "seed" },
+  { label: "Sow Date", key: "date" },
 ];
 
-/**
- * Build an iCalendar (.ics) string for all-day sow events
- */
-const buildICS = (items: { seed: string; date: Date }[]) => {
-  const header = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//SeedStarter//EN',
-  ];
+function capitalize(s: string) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+}
 
+function buildICS(items: { seed: string; date: Date }[]) {
   const events = items.map(({ seed, date }) => {
-    const yyyy = date.getUTCFullYear().toString().padStart(4, '0');
-    const mm = (date.getUTCMonth() + 1).toString().padStart(2, '0');
-    const dd = date.getUTCDate().toString().padStart(2, '0');
+    const yyyy = date.getFullYear().toString().padStart(4, "0");
+    const mm = (date.getMonth() + 1).toString().padStart(2, "0");
+    const dd = date.getDate().toString().padStart(2, "0");
     const dt = `${yyyy}${mm}${dd}`;
-    const uid = `${seed}-${dt}@seedstarter`;
-
     return [
-      'BEGIN:VEVENT',
-      `UID:${uid}`,
-      `DTSTAMP:${dt}T000000Z`,
+      "BEGIN:VEVENT",
+      `UID:${seed}-${dt}@seedstarter`,
+      `DTSTAMP:${dt}T120000Z`,
       `DTSTART;VALUE=DATE:${dt}`,
-      `SUMMARY:Sow ${seed.charAt(0).toUpperCase() + seed.slice(1)}`,
-      'END:VEVENT',
-    ].join('\n');
+      `SUMMARY:Sow ${capitalize(seed)}`,
+      "END:VEVENT",
+    ].join("\n");
   });
 
-  return [...header, ...events, 'END:VCALENDAR'].join('\n');
-};
+  return ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//SeedStarter//EN", ...events, "END:VCALENDAR"].join("\n");
+}
 
 export function SeedForm() {
   const [zip, setZip] = useState("");
   const [selectedSeeds, setSelectedSeeds] = useState<string[]>([]);
-  const [results, setResults] = useState<{
-    zone: string;
-    sowDates: { seed: string; date: Date }[];
-  } | null>(null);
+  const [results, setResults] = useState<SowResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  // CSV headers definition
-  const csvHeaders = [
-    { label: "Seed", key: "seed" },
-    { label: "Sow Date", key: "date" },
-  ];
-
-  // Transform sowDates to CSV-friendly format
   const csvData =
     results?.sowDates.map(({ seed, date }) => ({
       seed,
-      date: date.toISOString().split("T")[0],
-    })) || [];
+      date: format(date, "yyyy-MM-dd"),
+    })) ?? [];
 
-  // Download .ics calendar
-  const downloadICS = () => {
+  function toggleSeed(seed: string) {
+    setSelectedSeeds((prev) =>
+      prev.includes(seed) ? prev.filter((s) => s !== seed) : [...prev, seed],
+    );
+  }
+
+  function downloadICS() {
     if (!results) return;
-    const icsContent = buildICS(results.sowDates);
-    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const blob = new Blob([buildICS(results.sowDates)], {
+      type: "text/calendar;charset=utf-8",
+    });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
     link.download = `sow-dates-${zip}.ics`;
     link.click();
     URL.revokeObjectURL(url);
-  };
-
-  function handleSeedChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    const opts = Array.from(e.target.selectedOptions).map((o) => o.value);
-    setSelectedSeeds(opts);
   }
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!zip || selectedSeeds.length === 0) return;
-    const res = await calculateSowDates(zip, selectedSeeds);
-    setResults(res);
+    setError(null);
+
+    if (!zip.trim()) {
+      setError("Enter a ZIP code.");
+      return;
+    }
+    if (selectedSeeds.length === 0) {
+      setError("Select at least one crop.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/schedules", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ zip, seeds: selectedSeeds }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setResults(null);
+        setError(data.error ?? "Something went wrong.");
+        return;
+      }
+      setResults({
+        zone: data.zone,
+        sowDates: data.sowDates.map(
+          (row: { seed: string; date: string }) => ({
+            seed: row.seed,
+            date: parseISO(row.date),
+          }),
+        ),
+      });
+    } catch {
+      setResults(null);
+      setError("Could not reach the server. Try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="space-y-4 p-4">
-        <div>
-          <Label htmlFor="zip">ZIP Code</Label>
-          <Input
-            id="zip"
-            type="text"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
-            placeholder="e.g. 55423"
-            className="mt-1 w-full"
-          />
-        </div>
+    <div className="grid gap-6 md:grid-cols-2">
+      <Card>
+        <CardHeader>
+          <CardTitle>Your garden</CardTitle>
+          <CardDescription>
+            Enter a US ZIP code and pick crops to plan indoor sow dates.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="zip">ZIP code</Label>
+              <Input
+                id="zip"
+                inputMode="numeric"
+                autoComplete="postal-code"
+                value={zip}
+                onChange={(e) => setZip(e.target.value)}
+                placeholder="e.g. 55423"
+                className="mt-1"
+                disabled={loading}
+              />
+            </div>
 
-        <div>
-          <Label htmlFor="seeds">Choose seeds</Label>
-          <select
-            id="seeds"
-            multiple
-            value={selectedSeeds}
-            onChange={handleSeedChange}
-            className="mt-1 block w-full rounded-md border-gray-300 bg-white p-2"
-          >
-            {availableSeeds.map((seed) => (
-              <option key={seed} value={seed}>
-                {seed.charAt(0).toUpperCase() + seed.slice(1)}
-              </option>
-            ))}
-          </select>
-        </div>
+            <fieldset className="space-y-2">
+              <legend className="text-sm font-medium">Crops</legend>
+              {availableSeeds.map((seed) => (
+                <label
+                  key={seed}
+                  className="flex cursor-pointer items-center gap-2 text-sm"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedSeeds.includes(seed)}
+                    onChange={() => toggleSeed(seed)}
+                    disabled={loading}
+                    className="size-4 rounded border-input"
+                  />
+                  {capitalize(seed)}
+                </label>
+              ))}
+            </fieldset>
 
-        <Button type="submit">Start</Button>
-      </form>
+            {error && (
+              <p role="alert" className="text-sm text-destructive">
+                {error}
+              </p>
+            )}
+
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Calculating…" : "Calculate sow dates"}
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
 
       {results && (
-        <div className="p-4">
-          <h2 className="text-lg font-medium">
-            Your Zone: {results.zone.toUpperCase()}
-          </h2>
+        <Card>
+          <CardHeader>
+            <CardTitle>Zone {results.zone.toUpperCase()}</CardTitle>
+            <CardDescription>
+              Indoor sow dates based on your last frost date.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <ul className="space-y-1 text-sm">
+              {results.sowDates.map(({ seed, date }) => (
+                <li key={seed} className="flex justify-between gap-4">
+                  <span>{capitalize(seed)}</span>
+                  <span className="text-muted-foreground">
+                    {format(date, "MMM d, yyyy")}
+                  </span>
+                </li>
+              ))}
+            </ul>
 
-          <ul className="list-disc pl-5 mt-2">
-            {results.sowDates.map(({ seed, date }) => (
-              <li key={seed}>
-                {seed.charAt(0).toUpperCase() + seed.slice(1)}: {format(date, 'MM/dd/yyyy')}
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-4 flex flex-wrap gap-3 items-center">
-            <CSVLink
-              data={csvData}
-              headers={csvHeaders}
-              filename={`sow-dates-${zip}.csv`}
-              className="inline-block"
-            >
-              <Button>Download CSV</Button>
-            </CSVLink>
-
-            <Button onClick={downloadICS}>Download .ics</Button>
-          </div>
-        </div>
+            <div className="flex flex-col gap-2 sm:flex-row">
+              <CSVLink
+                data={csvData}
+                headers={csvHeaders}
+                filename={`sow-dates-${zip}.csv`}
+              >
+                <Button variant="outline" className="w-full sm:w-auto">
+                  Download CSV
+                </Button>
+              </CSVLink>
+              <Button
+                variant="outline"
+                className="w-full sm:w-auto"
+                onClick={downloadICS}
+              >
+                Download calendar (.ics)
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       )}
-    </>
+    </div>
   );
 }
