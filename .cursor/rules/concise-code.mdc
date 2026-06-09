@@ -1,0 +1,18 @@
+---
+description: Compact code generation
+alwaysApply: true
+---
+
+Generate production-quality code with minimal verbosity.
+
+Rules:
+- Prefer concise names.
+- Remove redundant comments.
+- Avoid unnecessary abstractions.
+- Avoid wrapper functions used only once.
+- Prefer composition over boilerplate.
+- Prefer destructuring.
+- Prefer early returns.
+- Keep code dense but readable.
+- Do not code-golf.
+- Optimize for low token count and maintainability.

@@ -14,3 +14,8 @@ export type {
 } from "./types";
 
 export { PlanningError, UnknownCropError } from "./errors";
+export {
+  frostDateStringForZone,
+  lastFrostDateForZone,
+  nextFrostDate,
+} from "./frost";
