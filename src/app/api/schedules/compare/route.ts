@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { parseScheduleRequest } from "@/planning/api/scheduleRequestSchema";
-import { createScheduleFromRequest } from "@/lib/createScheduleFromRequest";
+import { compareSchedulesFromRequest } from "@/lib/createScheduleFromRequest";
 import { serializeSchedule } from "@/lib/serializeSchedule";
 import { ZoneLookupError } from "@/lib/zipToZone";
 
@@ -18,15 +18,19 @@ export async function POST(req: Request) {
   }
 
   try {
-    const schedule = await createScheduleFromRequest(parsed.data);
-    return NextResponse.json(serializeSchedule(schedule));
+    const compared = await compareSchedulesFromRequest(parsed.data);
+    return NextResponse.json({
+      conservative: serializeSchedule(compared.conservative),
+      balanced: serializeSchedule(compared.balanced),
+      aggressive: serializeSchedule(compared.aggressive),
+    });
   } catch (err) {
     if (err instanceof ZoneLookupError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     }
-    console.error("Schedule calculation failed:", err);
+    console.error("Schedule compare failed:", err);
     return NextResponse.json(
-      { error: "Could not calculate sow dates. Try again." },
+      { error: "Could not compare schedules. Try again." },
       { status: 500 },
     );
   }

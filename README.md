@@ -1,19 +1,31 @@
 # Seed Starter
 
-Frost-aware indoor sow date planner for US gardeners. Enter a ZIP code, pick crops, and get sow dates based on your USDA hardiness zone and estimated last frost date.
+Frost-aware garden planning for US ZIP codes. Pick crops and a risk profile, get a full planting timeline (sow, harden, transplant, harvest), and export CSV, calendar, or print-friendly schedules.
 
 ## Features
 
-- ZIP code → USDA hardiness zone lookup ([PHZM API](https://phzmapi.org/))
-- Last-frost estimates by zone
-- Per-crop indoor sow offsets (tomato, pepper, lettuce, carrot, broccoli)
-- Rolls dates to next season when frost has already passed
-- Export CSV or iCalendar (.ics)
+- 11 crops, 23 varieties with lifecycle rules
+- Risk profiles: conservative / balanced / aggressive
+- Frost fallback chain: NOAA station fixture → regional fixture → zone estimate
+- Offline USDA ZIP → zone fixture with PHZM API fallback
+- Saved plans (local SQLite via sql.js)
+- CSV, iCalendar, and print exports
 
-## Requirements
+## Architecture
 
-- Node.js 20+
-- npm
+```mermaid
+flowchart LR
+  UI[SeedForm UI] --> API[Next.js API routes]
+  API --> LOC[resolveLocation]
+  API --> PLAN[planning/buildSchedule]
+  LOC --> FIX[zipZones fixture]
+  LOC --> PHZM[PHZM API]
+  PLAN --> FROST[frostResolver]
+  PLAN --> CROP[cropCatalog]
+  API --> DB[(sql.js saved plans)]
+```
+
+Domain logic lives in `src/planning/` (framework-free). API routes validate input, resolve location, delegate to `buildSchedule()`, and serialize results. See [docs/api.md](docs/api.md) and [docs/adrs/001-planning-boundary.md](docs/adrs/001-planning-boundary.md).
 
 ## Setup
 
@@ -26,39 +38,21 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command       | Description              |
-|---------------|--------------------------|
-| `npm run dev` | Start dev server         |
-| `npm run build` | Production build       |
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Dev server |
+| `npm run build` | Production build |
 | `npm run start` | Serve production build |
-| `npm run lint`  | ESLint                 |
+| `npm run lint` | ESLint |
+| `npm test` | Unit tests |
+| `npm run test:coverage` | Unit tests + coverage gates |
+| `npm run test:e2e` | Playwright browser tests |
+| `npm run check` | Data quality, lint, types, coverage, build |
 
 ## API
 
-### `POST /api/schedules`
-
-```json
-{ "zip": "55423", "seeds": ["tomato", "lettuce"] }
-```
-
-Response:
-
-```json
-{
-  "zone": "5a",
-  "sowDates": [
-    { "seed": "tomato", "date": "2027-02-07T06:00:00.000Z" }
-  ]
-}
-```
-
-## Limitations
-
-- US ZIP codes only (5 digits)
-- Zone lookup requires network access to phzmapi.org
-- Frost dates are zone-level estimates, not station-specific
-- Five crops with fixed offsets; no varieties or risk profiles yet
+See [docs/api.md](docs/api.md).
 
 ## Deploy
 
-Works on [Vercel](https://vercel.com) or any Node host that supports Next.js 15.
+Works on [Vercel](https://vercel.com) or any Node host supporting Next.js 15. Run `npm run build` before `npm run start`.

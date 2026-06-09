@@ -7,6 +7,11 @@ export const riskProfileSchema = z.enum([
   "aggressive",
 ]);
 
+const cropSelectionSchema = z.object({
+  cropId: z.string(),
+  varietyId: z.string().optional(),
+});
+
 export const scheduleRequestSchema = z.object({
   zip: z
     .string()
@@ -18,6 +23,7 @@ export const scheduleRequestSchema = z.object({
     .array(z.string())
     .min(1, "Select at least one crop.")
     .transform((seeds) => [...new Set(seeds)]),
+  cropSelections: z.array(cropSelectionSchema).optional(),
   riskProfile: riskProfileSchema.optional(),
 });
 

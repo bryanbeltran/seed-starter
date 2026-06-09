@@ -22,6 +22,7 @@ describe("nextFrostDate", () => {
 describe("lastFrostDateForZone", () => {
   it("uses zone-specific frost date strings", () => {
     expect(frostDateStringForZone("5a")).toBe("03-28");
+    expect(frostDateStringForZone("unknown")).toBe(frostDateStringForZone("4a"));
   });
 
   it("falls back to zone 4a for unknown zones", () => {

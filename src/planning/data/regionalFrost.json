@@ -1,0 +1,20 @@
+{
+  "upper-midwest": {
+    "name": "Upper Midwest",
+    "zones": ["3a", "3b", "4a", "4b", "5a"],
+    "lastFrost": "04-20",
+    "provenance": "regional probability fixture"
+  },
+  "northeast": {
+    "name": "Northeast",
+    "zones": ["5b", "6a", "6b", "7a", "7b"],
+    "lastFrost": "04-05",
+    "provenance": "regional probability fixture"
+  },
+  "southeast": {
+    "name": "Southeast",
+    "zones": ["8a", "8b", "9a", "9b"],
+    "lastFrost": "03-01",
+    "provenance": "regional probability fixture"
+  }
+}

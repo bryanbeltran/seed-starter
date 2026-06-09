@@ -1,5 +1,7 @@
 export type RiskProfile = "conservative" | "balanced" | "aggressive";
 
+export type FrostModelSource = "station" | "regional" | "zone";
+
 export type Location = {
   zip: string;
   zone: string;
@@ -28,15 +30,19 @@ export type PlantingTask = {
 
 export type Schedule = {
   zone: string;
+  zip?: string;
   lastFrostDate: Date;
+  frostSource: FrostModelSource;
+  frostProvenance: string;
   riskProfile: RiskProfile;
   tasks: PlantingTask[];
 };
 
 export type ScheduleInput = {
   zone: string;
+  zip?: string;
   crops: string[];
+  cropSelections?: CropSelection[];
   riskProfile?: RiskProfile;
-  /** Override "today" for deterministic tests and season roll-forward. */
   referenceDate?: Date;
 };

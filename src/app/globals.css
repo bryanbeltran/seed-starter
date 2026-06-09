@@ -120,3 +120,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+
+  @page {
+    margin: 1cm;
+  }
+}
