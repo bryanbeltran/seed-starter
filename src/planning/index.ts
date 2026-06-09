@@ -19,3 +19,10 @@ export {
   lastFrostDateForZone,
   nextFrostDate,
 } from "./frost";
+export type { CropDefinition } from "./cropCatalog";
+export {
+  cropIds,
+  getCrop,
+  getCropOrDefault,
+  listCrops,
+} from "./cropCatalog";

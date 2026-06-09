@@ -1,3 +1,6 @@
+/** @deprecated Use @/planning/cropCatalog instead. */
+import { getCropOrDefault } from "@/planning/cropCatalog";
+
 export const cropOffsets: Record<string, number> = {
   tomato: 56,
   pepper: 56,
@@ -5,3 +8,7 @@ export const cropOffsets: Record<string, number> = {
   carrot: 14,
   broccoli: 84,
 };
+
+export function offsetForCrop(cropId: string): number {
+  return getCropOrDefault(cropId).indoorSowOffsetDays;
+}

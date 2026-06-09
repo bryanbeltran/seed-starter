@@ -1,6 +1,6 @@
 import { subDays } from "date-fns";
 import { lastFrostDateForZone } from "@/planning/frost";
-import { cropOffsets } from "./cropOffsets";
+import { getCropOrDefault } from "@/planning/cropCatalog";
 import { zipToZone } from "./zipToZone";
 
 export type SowDateResult = {
@@ -17,7 +17,7 @@ export async function calculateSowDates(
 
   const sowDates = seeds.map((seed) => ({
     seed,
-    date: subDays(frostDate, cropOffsets[seed] ?? 30),
+    date: subDays(frostDate, getCropOrDefault(seed).indoorSowOffsetDays),
   }));
 
   return { zone, sowDates };
