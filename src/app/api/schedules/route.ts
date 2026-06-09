@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { calculateSowDates } from "@/lib/calculateSowDates";
-import { ZoneLookupError } from "@/lib/zipToZone";
+import { buildSchedule, sowDatesFromSchedule } from "@/planning";
+import { zipToZone, ZoneLookupError } from "@/lib/zipToZone";
 
 export async function POST(req: Request) {
   let body: unknown;
@@ -23,9 +23,12 @@ export async function POST(req: Request) {
   }
 
   try {
-    const { zone, sowDates } = await calculateSowDates(zip, seeds);
+    const zone = await zipToZone(zip);
+    const schedule = buildSchedule({ zone, crops: seeds });
+    const sowDates = sowDatesFromSchedule(schedule);
+
     return NextResponse.json({
-      zone,
+      zone: schedule.zone,
       sowDates: sowDates.map(({ seed, date }) => ({
         seed,
         date: date.toISOString(),
