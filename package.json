@@ -2,9 +2,9 @@
   "name": "seed-starter",
   "version": "0.1.0",
   "private": true,
-  "packageManager": "pnpm@9.15.7",
+  "packageManager": "pnpm@11.5.1",
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--disable-warning=DEP0205' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
