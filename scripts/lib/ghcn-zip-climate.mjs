@@ -1,3 +1,4 @@
+import { execSync } from "child_process";
 import fs from "fs";
 import path from "path";
 
@@ -91,8 +92,85 @@ export async function fetchGhcndStations() {
   return parseGhcndStations(await res.text());
 }
 
+export const ZCTA_GAZETTEER_ZIP_URL =
+  "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/2020_Gazetteer/2020_Gaz_zcta_national.zip";
+
+export const ghcndDailyUrl = (stationId) =>
+  `https://www.ncei.noaa.gov/pub/data/ghcn/daily/all/${stationId}.dly`;
+
 export function loadJson(root, relPath) {
   return JSON.parse(fs.readFileSync(path.join(root, relPath), "utf8"));
+}
+
+export function parseZctaGazetteer(text) {
+  const lines = text.trim().split("\n");
+  const centroids = {};
+  for (let i = 1; i < lines.length; i++) {
+    const cols = lines[i].split("\t");
+    const zip = cols[0]?.padStart(5, "0");
+    const lat = Number(cols[cols.length - 2]);
+    const lon = Number(cols[cols.length - 1]);
+    if (!zip || Number.isNaN(lat) || Number.isNaN(lon)) continue;
+    centroids[zip] = { lat, lon };
+  }
+  return centroids;
+}
+
+export async function fetchZctaCentroids(cacheDir) {
+  const res = await fetch(ZCTA_GAZETTEER_ZIP_URL);
+  if (!res.ok) throw new Error(`ZCTA gazetteer download failed: ${res.status}`);
+  fs.mkdirSync(cacheDir, { recursive: true });
+  const zipPath = path.join(cacheDir, "zcta.zip");
+  fs.writeFileSync(zipPath, Buffer.from(await res.arrayBuffer()));
+  execSync(`unzip -o -q "${zipPath}" -d "${cacheDir}"`);
+  const txtPath = path.join(cacheDir, "2020_Gaz_zcta_national.txt");
+  if (!fs.existsSync(txtPath)) {
+    throw new Error(`Expected ${txtPath} after unzip`);
+  }
+  return parseZctaGazetteer(fs.readFileSync(txtPath, "utf8"));
+}
+
+/** Parse GHCN-Daily monthly .dly rows (TMIN) into spike-compatible year map. */
+export function parseGhcndDailyTmin(text) {
+  const byYear = {};
+  for (const line of text.split("\n")) {
+    if (line.length < 27) continue;
+    const element = line.slice(17, 21).trim();
+    if (element !== "TMIN") continue;
+    const year = line.slice(11, 15).trim();
+    const month = line.slice(15, 17).trim();
+    if (Number(month) > 7) continue;
+    if (!byYear[year]) byYear[year] = [];
+
+    for (let day = 1, pos = 21; day <= 31 && pos + 5 <= line.length; day++) {
+      const raw = Number(line.slice(pos, pos + 5).trim());
+      pos += 6;
+      if (Number.isNaN(raw) || raw <= -9000) continue;
+      const tmin = raw / 10;
+      const dd = String(day).padStart(2, "0");
+      byYear[year].push([month, dd, tmin]);
+    }
+  }
+  return byYear;
+}
+
+export async function fetchStationTmin(stationId) {
+  const res = await fetch(ghcndDailyUrl(stationId));
+  if (!res.ok) throw new Error(`GHCN daily fetch failed for ${stationId}: ${res.status}`);
+  return parseGhcndDailyTmin(await res.text());
+}
+
+export async function fetchBundledStationTmin(stationIds) {
+  const tminByStation = {};
+  for (const id of stationIds) {
+    try {
+      tminByStation[id] = await fetchStationTmin(id);
+      console.log(`  fetched TMIN: ${id}`);
+    } catch (err) {
+      console.warn(`  skip ${id}: ${err.message}`);
+    }
+  }
+  return tminByStation;
 }
 
 export function buildZipClimate(root, options = {}) {
@@ -104,17 +182,29 @@ export function buildZipClimate(root, options = {}) {
     centroidsPath = "data/zipCentroids.json",
     zonesPath = "data/zipZones.json",
     stationsOverride = null,
+    centroidsOverride = null,
+    tminOverride = null,
+    full = false,
   } = options;
 
   const stations = stationsOverride ?? loadJson(root, stationsPath);
-  const tminByStation = loadJson(root, tminPath);
-  const centroids = loadJson(root, centroidsPath);
+  const tminByStation = tminOverride ?? loadJson(root, tminPath);
+  const fixtureCentroids = loadJson(root, "data/zipCentroids.json");
+  const centroids = {
+    ...fixtureCentroids,
+    ...(centroidsOverride ?? loadJson(root, centroidsPath)),
+  };
   const zipZones = loadJson(root, zonesPath);
+  const spikeSample = loadJson(root, "data/spike/zipClimate-sample.json");
 
   const output = {};
   const skipped = [];
 
-  for (const [zip, zone] of Object.entries(zipZones)) {
+  const zipEntries = full
+    ? Object.keys(centroids).map((zip) => [zip, zipZones[zip] ?? ""])
+    : Object.entries(zipZones);
+
+  for (const [zip, zone] of zipEntries) {
     const centroid = centroids[zip];
     if (!centroid) {
       skipped.push(zip);
@@ -131,7 +221,7 @@ export function buildZipClimate(root, options = {}) {
     const percentiles = frostPercentiles(byYear);
     output[zip] = {
       zip,
-      zone,
+      zone: zone || undefined,
       stationId: station.id,
       stationName: station.name,
       distanceKm,
@@ -146,5 +236,16 @@ export function buildZipClimate(root, options = {}) {
     };
   }
 
-  return { output, skipped, stationCount: stations.length };
+  for (const zip of Object.keys(zipZones)) {
+    if (!output[zip] && spikeSample[zip]) {
+      output[zip] = { ...spikeSample[zip], computedAt: new Date().toISOString() };
+    }
+  }
+
+  return {
+    output,
+    skipped,
+    stationCount: stations.length,
+    zipCount: Object.keys(output).length,
+  };
 }

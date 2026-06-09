@@ -1,8 +1,15 @@
 import { describe, expect, it } from "vitest";
 import zipClimate from "../../data/zipClimate.json";
+import zipZones from "../../data/zipZones.json";
 import { resolveLastFrost } from "@/planning/frostResolver";
 import { buildSchedule } from "@/planning/schedule";
 import { getFileClimateRepository } from "./fileClimateRepository";
+
+const fixtureClimate = Object.fromEntries(
+  Object.keys(zipZones)
+    .filter((zip) => zip in zipClimate)
+    .map((zip) => [zip, zipClimate[zip as keyof typeof zipClimate]]),
+);
 
 const ref = new Date(2026, 0, 15);
 const climate = getFileClimateRepository();
@@ -13,10 +20,10 @@ function parseMmDd(mmdd: string, year = 2026) {
 }
 
 describe("golden ZIP climate records", () => {
-  for (const [zip, record] of Object.entries(zipClimate)) {
+  for (const [zip, record] of Object.entries(fixtureClimate)) {
     it(`${zip} resolves climate tier with expected p50`, () => {
       const result = resolveLastFrost(
-        { zone: record.zone, zip, referenceDate: ref },
+        { zone: zipZones[zip as keyof typeof zipZones], zip, referenceDate: ref },
         climate,
       );
       expect(result.source).toBe("climate");

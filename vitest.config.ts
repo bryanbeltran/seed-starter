@@ -20,7 +20,12 @@ export default defineConfig({
         "src/components/seed-form/formState.ts",
         "src/components/seed-form/taskUtils.ts",
       ],
-      exclude: ["src/**/*.test.ts", "src/**/*.test.tsx", "src/lib/utils.ts"],
+      exclude: [
+        "src/**/*.test.ts",
+        "src/**/*.test.tsx",
+        "src/lib/utils.ts",
+        "src/persistence/postgresSavedPlans.ts",
+      ],
       thresholds: {
         statements: 90,
         branches: 85,

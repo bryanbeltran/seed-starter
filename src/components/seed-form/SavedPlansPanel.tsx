@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Trash2 } from "lucide-react";
+import { Link2, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -158,16 +158,28 @@ export function SavedPlansPanel({
                   {plan.zip} · Zone {plan.zone.toUpperCase()}
                 </span>
               </button>
-              <Button
-                type="button"
-                variant="ghost"
-                size="icon"
-                className="shrink-0"
-                aria-label={`Delete ${plan.name}`}
-                onClick={() => void handleDelete(plan.id, plan.name)}
-              >
-                <Trash2 className="size-4" />
-              </Button>
+              <div className="flex shrink-0 items-center gap-0.5">
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  aria-label={`Share ${plan.name}`}
+                  asChild
+                >
+                  <a href={`/plans?id=${plan.id}`} target="_blank" rel="noreferrer">
+                    <Link2 className="size-4" />
+                  </a>
+                </Button>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  aria-label={`Delete ${plan.name}`}
+                  onClick={() => void handleDelete(plan.id, plan.name)}
+                >
+                  <Trash2 className="size-4" />
+                </Button>
+              </div>
             </li>
           ))}
         </ul>

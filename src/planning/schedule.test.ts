@@ -107,7 +107,7 @@ describe("buildSchedule", () => {
     expect(schedule.frostPercentiles?.p10!.getTime()).toBeLessThan(
       schedule.frostPercentiles?.p90!.getTime() ?? 0,
     );
-    expect(schedule.climateDataVersion).toBe("spike-2026-06");
+    expect(schedule.climateDataVersion).toMatch(/^(spike|ghcn)-/);
   });
 
   it("shifts frost date by risk profile", () => {

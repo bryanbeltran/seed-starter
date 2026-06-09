@@ -6,7 +6,7 @@ import {
 
 describe("climate version", () => {
   it("returns current data version from zipClimate", () => {
-    expect(getCurrentClimateDataVersion()).toBe("spike-2026-06");
+    expect(getCurrentClimateDataVersion()).toMatch(/^(spike|ghcn)-/);
   });
 
   it("detects stale stored versions", () => {

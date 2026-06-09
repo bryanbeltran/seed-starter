@@ -28,6 +28,6 @@ describe("serializeSchedule", () => {
     const json = serializeSchedule(schedule);
     expect(json.lastFrostP50).toMatch(/2026-04-/);
     expect(json.lastFrostP90).toBeTruthy();
-    expect(json.climateDataVersion).toBe("spike-2026-06");
+    expect(json.climateDataVersion).toMatch(/^(spike|ghcn)-/);
   });
 });

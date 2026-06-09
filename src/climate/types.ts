@@ -1,6 +1,6 @@
 export type ClimateRecord = {
   zip: string;
-  zone: string;
+  zone?: string;
   stationId: string;
   stationName: string;
   distanceKm: number;

@@ -2,13 +2,18 @@
 
 Frost-aware garden planning for US ZIP codes. Pick crops and a risk profile, get a full planting timeline (sow, harden, transplant, harvest), and export CSV, calendar, or print-friendly schedules.
 
+**[Live demo](https://seed-starter.vercel.app)** · [API docs](docs/api.md) · [Data sources](docs/data-sources.md)
+
+![Demo](docs/demo.gif)
+
 ## Features
 
 - 11 crops, 23 varieties with lifecycle rules
-- Risk profiles: conservative / balanced / aggressive
-- Frost fallback chain: NOAA station fixture → regional fixture → zone estimate
-- Offline USDA ZIP → zone fixture with PHZM API fallback
-- Saved plans (local SQLite via sql.js)
+- Risk profiles: conservative / balanced / aggressive (frost p90 / p50 / p10)
+- Climate data: NOAA GHCN nearest-station frost percentiles for US ZCTAs
+- Frost fallback chain: climate → station → regional → zone
+- USDA ZIP → zone via PHZM API + offline fixture
+- Saved plans (Postgres on Vercel, sql.js locally)
 - CSV, iCalendar, and print exports
 
 ## Architecture
@@ -20,34 +25,23 @@ flowchart LR
   API --> PLAN[planning/buildSchedule]
   LOC --> FIX[zipZones fixture]
   LOC --> PHZM[PHZM API]
+  PLAN --> CLIM[ClimateRepository]
   PLAN --> FROST[frostResolver]
   PLAN --> CROP[cropCatalog]
-  API --> DB[(sql.js saved plans)]
+  API --> DB[(Postgres or sql.js)]
 ```
 
-Domain logic lives in `src/planning/` (framework-free). API routes validate input, resolve location, delegate to `buildSchedule()`, and serialize results. See [docs/api.md](docs/api.md) and [docs/adrs/001-planning-boundary.md](docs/adrs/001-planning-boundary.md).
+Domain logic lives in `src/planning/` (framework-free). See [docs/adrs/001-planning-boundary.md](docs/adrs/001-planning-boundary.md).
 
 ## Setup
 
 ```bash
 pnpm install
+cp .env.example .env.local   # optional: DATABASE_URL for Postgres
 pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
-
-## UI
-
-- Variety picker per crop, risk profile compare, saved plans sidebar
-- Grouped task timeline with icons, frost provenance badge, skeleton loading
-- Print / CSV / ICS export, dark mode, mobile sticky calculate bar
-- Shareable read-only plan view: `/plans?id={planId}`
-
-### UX decisions
-
-- **Server-owned schedules** — the UI never computes dates; it displays API results so frost logic stays testable and consistent.
-- **Progressive disclosure** — compare profiles and varieties are optional without leaving the main flow.
-- **Print-first results** — timeline layout works on paper for use in the garden.
 
 ## Scripts
 
@@ -55,17 +49,30 @@ Open [http://localhost:3000](http://localhost:3000).
 |---------|-------------|
 | `pnpm run dev` | Dev server |
 | `pnpm run build` | Production build |
-| `pnpm run start` | Serve production build |
-| `pnpm run lint` | ESLint |
-| `pnpm test` | Unit tests |
-| `pnpm run test:coverage` | Unit tests + coverage gates |
-| `pnpm run test:e2e` | Playwright browser tests |
 | `pnpm run check` | Data quality, lint, types, coverage, build |
+| `pnpm test` | Unit tests |
+| `pnpm run test:e2e` | Playwright browser tests |
+| `pnpm run etl:climate` | Build `data/zipClimate.json` from GHCN |
+| `pnpm run capture:demo` | Record `docs/demo.gif` (needs running app + ffmpeg) |
+
+## Deploy (Vercel)
+
+1. Import repo at [vercel.com/new](https://vercel.com/new)
+2. Add **Postgres** (Neon) storage → sets `DATABASE_URL` automatically
+3. Deploy — `vercel.json` configures pnpm build
+
+Without `DATABASE_URL`, schedules work but saved plans use ephemeral local sql.js (not suitable for production).
+
+```bash
+npx vercel --prod
+```
+
+## UI
+
+- Variety picker, risk compare, saved plans with share links (`/plans?id=…`)
+- Task timeline, frost provenance badge, climate version + percentile tooltip
+- Print / CSV / ICS export, dark mode, mobile sticky calculate bar
 
 ## API
 
 See [docs/api.md](docs/api.md).
-
-## Deploy
-
-Works on [Vercel](https://vercel.com) or any Node host supporting Next.js 15. Run `pnpm run build` before `pnpm run start`.

@@ -37,12 +37,17 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
 
 # local persistence
 .seedstarter/
+
+# ETL cache
+data/.cache/
+data/zctaCentroids.json
 
 # typescript
 *.tsbuildinfo
