@@ -26,3 +26,4 @@ export {
   getCropOrDefault,
   listCrops,
 } from "./cropCatalog";
+export { buildSchedule } from "./schedule";
