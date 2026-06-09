@@ -20,8 +20,8 @@
 # production
 /build
 
-# local project context (not for GitHub)
-.cursor/context/
+# local cursor config (not for GitHub)
+.cursor/
 
 # misc
 .DS_Store
