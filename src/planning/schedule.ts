@@ -32,3 +32,12 @@ export function buildSchedule(input: ScheduleInput): Schedule {
     tasks,
   };
 }
+
+export type LegacySowDate = { seed: string; date: Date };
+
+/** Map schedule tasks to the legacy API/UI sow-date shape. */
+export function sowDatesFromSchedule(schedule: Schedule): LegacySowDate[] {
+  return schedule.tasks
+    .filter((t) => t.type === "indoor_sow")
+    .map((t) => ({ seed: t.cropId, date: t.date }));
+}

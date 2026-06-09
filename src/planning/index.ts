@@ -1,6 +1,8 @@
 /**
  * Public planning module boundary.
- * Framework-free domain logic lives under src/planning/.
+ *
+ * All schedule generation goes through buildSchedule().
+ * Location resolution (ZIP → zone) stays outside this module.
  */
 
 export type {
@@ -14,16 +16,9 @@ export type {
 } from "./types";
 
 export { PlanningError, UnknownCropError } from "./errors";
-export {
-  frostDateStringForZone,
-  lastFrostDateForZone,
-  nextFrostDate,
-} from "./frost";
+
 export type { CropDefinition } from "./cropCatalog";
-export {
-  cropIds,
-  getCrop,
-  getCropOrDefault,
-  listCrops,
-} from "./cropCatalog";
-export { buildSchedule } from "./schedule";
+export { cropIds, getCrop, getCropOrDefault, listCrops } from "./cropCatalog";
+
+export type { LegacySowDate } from "./schedule";
+export { buildSchedule, sowDatesFromSchedule } from "./schedule";
