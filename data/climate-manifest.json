@@ -1,0 +1,12 @@
+{
+  "dataVersion": "ghcn-2026-06-09",
+  "zipCount": 33145,
+  "skippedCount": 0,
+  "stationPoolCount": 8478,
+  "tminStationCount": 1764,
+  "zoneFillRate": 0.9769497661789108,
+  "medianDistanceKm": 27.9,
+  "p95DistanceKm": 54.9,
+  "maxDistanceKm": 5101.5,
+  "computedAt": "2026-06-09T21:13:18.203Z"
+}

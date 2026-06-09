@@ -1,4 +1,8 @@
-import { getFileClimateRepository, isClimateVersionStale } from "@/climate";
+import {
+  getClimateSnapshotId,
+  getFileClimateRepository,
+  isClimateVersionStale,
+} from "@/climate";
 import type { RiskProfile, Schedule } from "@/planning";
 import { buildSchedule } from "@/planning";
 import { serializeSchedule } from "@/lib/serializeSchedule";
@@ -18,6 +22,7 @@ export type SavedPlan = {
   crops: string[];
   riskProfile: RiskProfile;
   climateDataVersion: string | null;
+  climateSnapshotId: string | null;
   climateDataStale: boolean;
   createdAt: string;
   updatedAt: string;
@@ -41,6 +46,10 @@ export async function scheduleForPlan(
   });
 }
 
+export function climateSnapshotForZip(zip: string): string | null {
+  return getClimateSnapshotId(zip) ?? getFileClimateRepository().getByZip(zip)?.dataVersion ?? null;
+}
+
 export function rowToPlan(
   row: Record<string, unknown>,
   schedule: Schedule,
@@ -48,6 +57,10 @@ export function rowToPlan(
   const storedVersion = row.climate_data_version
     ? String(row.climate_data_version)
     : null;
+
+  const storedSnapshot = row.climate_snapshot_id
+    ? String(row.climate_snapshot_id)
+    : storedVersion;
 
   return {
     id: String(row.id),
@@ -57,7 +70,8 @@ export function rowToPlan(
     crops: JSON.parse(String(row.crops_json)) as string[],
     riskProfile: String(row.risk_profile) as RiskProfile,
     climateDataVersion: storedVersion,
-    climateDataStale: isClimateVersionStale(storedVersion),
+    climateSnapshotId: storedSnapshot,
+    climateDataStale: isClimateVersionStale(storedSnapshot ?? storedVersion),
     createdAt: String(row.created_at),
     updatedAt: String(row.updated_at),
     schedule: serializeSchedule(schedule),

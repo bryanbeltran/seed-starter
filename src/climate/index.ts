@@ -1,6 +1,7 @@
-export type { ClimateRecord, ClimateRepository } from "./types";
+export type { ClimateManifest, ClimateRecord, ClimateRepository } from "./types";
 export {
   emptyClimateRepository,
+  getClimateSnapshotId,
   getCurrentClimateDataVersion,
   getFileClimateRepository,
   isClimateVersionStale,

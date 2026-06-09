@@ -47,6 +47,7 @@ describe("savedPlanService", () => {
     expect(first.id).toBeTruthy();
     expect(first.schedule.tasks.length).toBeGreaterThan(0);
     expect(first.climateDataVersion).toBe(getCurrentClimateDataVersion());
+    expect(first.climateSnapshotId).toBeTruthy();
     expect(first.climateDataStale).toBe(false);
     expect(second.riskProfile).toBe("balanced");
 
@@ -97,10 +98,10 @@ describe("savedPlanService", () => {
     const SQL = await initSqlJs();
     const sqlitePath = path.join(tempDir, "seedstarter.sqlite");
     const db = new SQL.Database(fs.readFileSync(sqlitePath));
-    db.run("UPDATE saved_plans SET climate_data_version = ? WHERE id = ?", [
-      "outdated-2020",
-      plan.id,
-    ]);
+    db.run(
+      "UPDATE saved_plans SET climate_data_version = ?, climate_snapshot_id = ? WHERE id = ?",
+      ["outdated-2020", "outdated-2020", plan.id],
+    );
     fs.writeFileSync(sqlitePath, Buffer.from(db.export()));
     db.close();
     resetDbCacheForTests();

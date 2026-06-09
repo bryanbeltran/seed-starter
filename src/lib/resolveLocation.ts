@@ -1,7 +1,9 @@
 import zipZones from "../../data/zipZones.json";
+import phzmZones from "../../data/zipZones-phzm.json";
 import { normalizeZip, ZoneLookupError } from "./zipToZone";
 
 const fixtureZones: Record<string, string> = zipZones;
+const bundledPhzm: Record<string, string> = phzmZones;
 
 type PhzmResponse = { zone?: string; error?: string };
 
@@ -17,6 +19,11 @@ export async function resolveLocation(zip: string): Promise<ResolvedLocation> {
   const fixtureZone = fixtureZones[normalized];
   if (fixtureZone) {
     return { zip: normalized, zone: fixtureZone.toLowerCase(), source: "fixture" };
+  }
+
+  const bundledZone = bundledPhzm[normalized];
+  if (bundledZone) {
+    return { zip: normalized, zone: bundledZone.toLowerCase(), source: "phzm" };
   }
 
   const res = await fetch(`https://phzmapi.org/${normalized}.json`, {

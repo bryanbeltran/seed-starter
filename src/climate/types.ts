@@ -16,3 +16,16 @@ export type ClimateRecord = {
 export type ClimateRepository = {
   getByZip(zip: string): ClimateRecord | undefined;
 };
+
+export type ClimateManifest = {
+  dataVersion: string;
+  zipCount: number;
+  skippedCount: number;
+  stationPoolCount: number;
+  tminStationCount: number;
+  zoneFillRate: number;
+  medianDistanceKm: number;
+  p95DistanceKm: number;
+  maxDistanceKm: number;
+  computedAt: string;
+};

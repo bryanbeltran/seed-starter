@@ -5,13 +5,14 @@
 | Priority | Source | Coverage |
 |----------|--------|----------|
 | 1 | `data/zipZones.json` fixture | 15 sample ZIPs (offline/dev) |
-| 2 | [PHZM API](https://phzmapi.org) | US ZIP codes (USDA Plant Hardiness Zone Map) |
+| 2 | `data/zipZones-phzm.json` | PRISM 2023 USDA PHZM (~40k ZIPs) |
+| 3 | [PHZM API](https://phzmapi.org) | Fallback for ZIPs not in bundled table |
 
 ## Last spring frost (32°F / 0°C)
 
 | Priority | Source | Coverage |
 |----------|--------|----------|
-| 1 | `data/zipClimate.json` | ZIPs with centroids in `data/zipCentroids.json` |
+| 1 | `data/zipClimate.json` | US ZCTA centroids + nearest GHCN station with TMIN |
 | 2 | `src/planning/data/stationFrost.json` | 6 ZIPs (NOAA GHCN-D fixture) |
 | 3 | `src/planning/data/regionalFrost.json` | Zones 3a–9b (regional buckets) |
 | 4 | `src/planning/frostDates.json` | Zone medians 3a–11b |
@@ -23,12 +24,13 @@ Climate records include `lastFrostP10`, `lastFrostP50`, `lastFrostP90`. Risk pro
 ```bash
 pnpm run etl:climate              # preview
 pnpm run etl:climate -- --write # regenerate data/zipClimate.json
-pnpm run etl:climate -- --fetch-stations --write  # merge NOAA station inventory
+pnpm run etl:phzm -- --write
+pnpm run etl:climate -- --fetch-stations --fetch-daily-representative --full --write
 ```
 
-Method: ZCTA centroid → nearest GHCN station → median last spring TMIN below 0°C per year → percentiles.
+Method: ZCTA centroid → nearest GHCN station with TMIN → median last spring TMIN below 0°C per year → percentiles. Zones from PRISM PHZM backfill.
 
-Bundled samples: `data/ghcn/stations.json`, `data/ghcn/tmin-samples.json`. Full lower-48 coverage requires Census ZCTA centroids + GHCN-Daily ingest (Phase E).
+Station pool: `data/ghcn/stations-us-tmin.json` (US inventory filter). TMIN cache: `data/ghcn/tmin-parsed.json`. Coverage manifest: `data/climate-manifest.json`.
 
 ### Attribution
 

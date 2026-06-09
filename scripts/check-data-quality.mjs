@@ -10,6 +10,9 @@ function readJson(relPath) {
 
 const zipZones = readJson("data/zipZones.json");
 const zipClimate = readJson("data/zipClimate.json");
+const phzmZones = fs.existsSync(path.join(root, "data/zipZones-phzm.json"))
+  ? readJson("data/zipZones-phzm.json")
+  : {};
 const zipCentroids = readJson("data/zipCentroids.json");
 const stationFrost = readJson("src/planning/data/stationFrost.json");
 const regionalFrost = readJson("src/planning/data/regionalFrost.json");
@@ -64,6 +67,10 @@ for (const zip of fixtureZips) {
   if (!zipCentroids[zip]) {
     errors.push(`zipCentroids missing fixture zip: ${zip}`);
   }
+}
+
+if (Object.keys(phzmZones).length < 30_000) {
+  errors.push(`zipZones-phzm should include at least 30k ZIP codes`);
 }
 
 if (errors.length) {

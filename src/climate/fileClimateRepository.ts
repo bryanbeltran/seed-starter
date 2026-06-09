@@ -2,6 +2,7 @@ import zipClimateData from "../../data/zipClimate.json";
 import type { ClimateRecord, ClimateRepository } from "./types";
 
 const records = zipClimateData as Record<string, ClimateRecord>;
+const zipCache = new Map<string, ClimateRecord | undefined>();
 
 let instance: ClimateRepository | null = null;
 
@@ -9,11 +10,16 @@ export function getFileClimateRepository(): ClimateRepository {
   if (!instance) {
     instance = {
       getByZip(zip: string) {
-        return records[zip];
+        if (!zipCache.has(zip)) zipCache.set(zip, records[zip]);
+        return zipCache.get(zip);
       },
     };
   }
   return instance;
+}
+
+export function getClimateSnapshotId(zip: string): string | null {
+  return records[zip]?.dataVersion ?? null;
 }
 
 export const emptyClimateRepository: ClimateRepository = {

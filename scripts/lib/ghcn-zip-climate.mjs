@@ -4,6 +4,10 @@ import path from "path";
 
 const GHCND_STATIONS_URL =
   "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt";
+const GHCND_INVENTORY_URL =
+  "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-inventory.txt";
+export const PHZM_ZIP_CSV_URL =
+  "https://prism.oregonstate.edu/phzm/data/2023/phzm_us_zipcode_2023.csv";
 
 export function haversineKm(a, b) {
   const R = 6371;
@@ -30,12 +34,47 @@ export function nearestStation(centroid, stations) {
   return { station: best, distanceKm: Math.round(bestKm * 10) / 10 };
 }
 
-export function lastFrostMmDdPerYear(stationId, tminByStation) {
-  const byYear = tminByStation[stationId];
-  if (!byYear) return [];
+export function stationHasFrostTmin(stationId, tminByStation) {
+  return lastFrostMmDdPerYear(stationId, tminByStation).length > 0;
+}
 
+export function normalizeTminCache(raw) {
+  const out = {};
+  for (const [id, data] of Object.entries(raw)) {
+    out[id] = Array.isArray(data) ? data : frostSummaryFromParsedTmin(data);
+  }
+  return out;
+}
+
+/** Nearest station with parseable spring frost TMIN history. */
+export function nearestStationWithTmin(centroid, stations, tminByStation) {
+  let best = null;
+  let bestKm = Infinity;
+  for (const s of stations) {
+    if (!stationHasFrostTmin(s.id, tminByStation)) continue;
+    const km = haversineKm(centroid, s);
+    if (km < bestKm) {
+      bestKm = km;
+      best = s;
+    }
+  }
+  if (!best) return { station: null, distanceKm: null };
+  return { station: best, distanceKm: Math.round(bestKm * 10) / 10 };
+}
+
+export function computeNeededStationIds(centroids, stations, tminByStation) {
+  const needed = new Set();
+  for (const centroid of Object.values(centroids)) {
+    const { station } = nearestStation(centroid, stations);
+    if (!station || stationHasFrostTmin(station.id, tminByStation)) continue;
+    needed.add(station.id);
+  }
+  return [...needed];
+}
+
+export function frostSummaryFromParsedTmin(parsedByYear) {
   const results = [];
-  for (const [year, rows] of Object.entries(byYear)) {
+  for (const [year, rows] of Object.entries(parsedByYear)) {
     let lastFrost = null;
     for (const [mm, dd, tmin] of rows) {
       if (Number(mm) > 7) continue;
@@ -44,6 +83,14 @@ export function lastFrostMmDdPerYear(stationId, tminByStation) {
     if (lastFrost) results.push({ year: Number(year), lastFrost });
   }
   return results;
+}
+
+export function lastFrostMmDdPerYear(stationId, tminByStation) {
+  const data = tminByStation[stationId];
+  if (!data) return [];
+  if (Array.isArray(data)) return data;
+
+  return frostSummaryFromParsedTmin(data);
 }
 
 function medianMmDd(mmddList) {
@@ -84,12 +131,68 @@ export function parseGhcndStations(text) {
   return stations;
 }
 
+/** US stations with TMIN through at least minEndYear (inventory filter). */
+export function parseGhcndInventory(text, minEndYear = 2020) {
+  const tminEndYear = new Map();
+  for (const line of text.split("\n")) {
+    if (line.length < 30) continue;
+    const id = line.slice(0, 11).trim();
+    const element = line.slice(31, 36).trim();
+    if (element !== "TMIN" || !id.startsWith("US")) continue;
+    const endYear = Number(line.slice(41, 45).trim());
+    const prev = tminEndYear.get(id) ?? 0;
+    if (endYear > prev) tminEndYear.set(id, endYear);
+  }
+  return [...tminEndYear.entries()]
+    .filter(([, end]) => end >= minEndYear)
+    .map(([id]) => id);
+}
+
+export function filterStationsWithTminInventory(stations, inventoryIds) {
+  const ids = new Set(inventoryIds);
+  return stations.filter((s) => ids.has(s.id));
+}
+
+/** One station per lat/lon grid cell; prefer USW airport stations. */
+export function selectRepresentativeStations(stations, cellDeg = 0.75) {
+  const cells = new Map();
+  for (const s of stations) {
+    const key = `${Math.round(s.lat / cellDeg)}:${Math.round(s.lon / cellDeg)}`;
+    const existing = cells.get(key);
+    if (!existing) {
+      cells.set(key, s);
+      continue;
+    }
+    const prefer = s.id.startsWith("USW") && !existing.id.startsWith("USW");
+    if (prefer) cells.set(key, s);
+  }
+  return [...cells.values()];
+}
+
 export async function fetchGhcndStations() {
   const res = await fetch(GHCND_STATIONS_URL);
   if (!res.ok) {
     throw new Error(`GHCN station download failed: ${res.status}`);
   }
   return parseGhcndStations(await res.text());
+}
+
+export async function fetchGhcndInventory() {
+  const res = await fetch(GHCND_INVENTORY_URL);
+  if (!res.ok) {
+    throw new Error(`GHCN inventory download failed: ${res.status}`);
+  }
+  return await res.text();
+}
+
+export async function buildUsTminStationPool() {
+  const [stations, inventoryText] = await Promise.all([
+    fetchGhcndStations(),
+    fetchGhcndInventory(),
+  ]);
+  const inventoryIds = parseGhcndInventory(inventoryText);
+  const pool = filterStationsWithTminInventory(stations, inventoryIds);
+  return { pool, inventoryIds: inventoryIds.length, stationCount: pool.length };
 }
 
 export const ZCTA_GAZETTEER_ZIP_URL =
@@ -100,6 +203,12 @@ export const ghcndDailyUrl = (stationId) =>
 
 export function loadJson(root, relPath) {
   return JSON.parse(fs.readFileSync(path.join(root, relPath), "utf8"));
+}
+
+export function tryLoadJson(root, relPath) {
+  const full = path.join(root, relPath);
+  if (!fs.existsSync(full)) return null;
+  return JSON.parse(fs.readFileSync(full, "utf8"));
 }
 
 export function parseZctaGazetteer(text) {
@@ -114,6 +223,23 @@ export function parseZctaGazetteer(text) {
     centroids[zip] = { lat, lon };
   }
   return centroids;
+}
+
+export function parsePhzmZipCsv(text) {
+  const zones = {};
+  const lines = text.trim().split("\n");
+  for (let i = 1; i < lines.length; i++) {
+    const [zip, zone] = lines[i].split(",");
+    if (!zip || !zone) continue;
+    zones[zip.padStart(5, "0")] = zone.trim().toLowerCase();
+  }
+  return zones;
+}
+
+export async function fetchPhzmZipZones() {
+  const res = await fetch(PHZM_ZIP_CSV_URL);
+  if (!res.ok) throw new Error(`PHZM CSV download failed: ${res.status}`);
+  return parsePhzmZipCsv(await res.text());
 }
 
 export async function fetchZctaCentroids(cacheDir) {
@@ -154,23 +280,80 @@ export function parseGhcndDailyTmin(text) {
   return byYear;
 }
 
-export async function fetchStationTmin(stationId) {
-  const res = await fetch(ghcndDailyUrl(stationId));
-  if (!res.ok) throw new Error(`GHCN daily fetch failed for ${stationId}: ${res.status}`);
-  return parseGhcndDailyTmin(await res.text());
-}
-
-export async function fetchBundledStationTmin(stationIds) {
-  const tminByStation = {};
-  for (const id of stationIds) {
+export async function fetchStationFrostSummary(stationId, retries = 2) {
+  let lastErr;
+  for (let attempt = 0; attempt <= retries; attempt++) {
     try {
-      tminByStation[id] = await fetchStationTmin(id);
-      console.log(`  fetched TMIN: ${id}`);
+      const res = await fetch(ghcndDailyUrl(stationId));
+      if (!res.ok) throw new Error(`status ${res.status}`);
+      return frostSummaryFromParsedTmin(parseGhcndDailyTmin(await res.text()));
     } catch (err) {
-      console.warn(`  skip ${id}: ${err.message}`);
+      lastErr = err;
+      if (attempt < retries) await new Promise((r) => setTimeout(r, 500 * (attempt + 1)));
     }
   }
+  throw new Error(`GHCN daily fetch failed for ${stationId}: ${lastErr?.message}`);
+}
+
+export async function fetchBundledStationTmin(stationIds, options = {}) {
+  const { concurrency = 6, onProgress, onBatch, batchSize = 50, seed = {} } = options;
+  const tminByStation = normalizeTminCache(seed);
+  const queue = stationIds.filter((id) => !stationHasFrostTmin(id, tminByStation));
+  let batchCount = 0;
+
+  async function worker() {
+    while (queue.length) {
+      const id = queue.shift();
+      if (!id) break;
+      try {
+        tminByStation[id] = await fetchStationFrostSummary(id);
+        onProgress?.(id, "ok");
+      } catch (err) {
+        onProgress?.(id, err.message);
+      }
+      batchCount++;
+      if (onBatch && batchCount % batchSize === 0) {
+        await onBatch(tminByStation, batchCount, queue.length);
+      }
+    }
+  }
+
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, queue.length || 1) }, () => worker()),
+  );
+  if (onBatch && batchCount % batchSize !== 0) {
+    await onBatch(tminByStation, batchCount, queue.length);
+  }
   return tminByStation;
+}
+
+export function mergeTminCaches(existing, fetched) {
+  return { ...existing, ...fetched };
+}
+
+export function buildClimateManifest(output, skipped, stations, tminByStation, dataVersion) {
+  const rows = Object.values(output);
+  const distances = rows.map((r) => r.distanceKm).sort((a, b) => a - b);
+  const withZone = rows.filter((r) => r.zone).length;
+  const p = (q) =>
+    distances[Math.min(distances.length - 1, Math.floor(q * (distances.length - 1)))] ?? 0;
+
+  const tminStationCount = Object.keys(tminByStation).filter((id) =>
+    stationHasFrostTmin(id, tminByStation),
+  ).length;
+
+  return {
+    dataVersion,
+    zipCount: rows.length,
+    skippedCount: skipped.length,
+    stationPoolCount: stations.length,
+    tminStationCount,
+    zoneFillRate: rows.length ? withZone / rows.length : 0,
+    medianDistanceKm: p(0.5),
+    p95DistanceKm: p(0.95),
+    maxDistanceKm: distances[distances.length - 1] ?? 0,
+    computedAt: new Date().toISOString(),
+  };
 }
 
 export function buildZipClimate(root, options = {}) {
@@ -184,6 +367,7 @@ export function buildZipClimate(root, options = {}) {
     stationsOverride = null,
     centroidsOverride = null,
     tminOverride = null,
+    phzmZonesOverride = null,
     full = false,
   } = options;
 
@@ -195,33 +379,43 @@ export function buildZipClimate(root, options = {}) {
     ...(centroidsOverride ?? loadJson(root, centroidsPath)),
   };
   const zipZones = loadJson(root, zonesPath);
+  const phzmZones =
+    phzmZonesOverride ??
+    tryLoadJson(root, "data/zipZones-phzm.json") ??
+    {};
   const spikeSample = loadJson(root, "data/spike/zipClimate-sample.json");
 
   const output = {};
   const skipped = [];
 
   const zipEntries = full
-    ? Object.keys(centroids).map((zip) => [zip, zipZones[zip] ?? ""])
+    ? Object.keys(centroids).map((zip) => [zip, zipZones[zip] ?? phzmZones[zip] ?? ""])
     : Object.entries(zipZones);
 
-  for (const [zip, zone] of zipEntries) {
+  for (const [zip, fixtureZone] of zipEntries) {
     const centroid = centroids[zip];
     if (!centroid) {
       skipped.push(zip);
       continue;
     }
 
-    const { station, distanceKm } = nearestStation(centroid, stations);
-    const byYear = lastFrostMmDdPerYear(station.id, tminByStation);
-    if (!byYear.length) {
+    const { station, distanceKm } = nearestStationWithTmin(
+      centroid,
+      stations,
+      tminByStation,
+    );
+    if (!station || distanceKm == null) {
       skipped.push(zip);
       continue;
     }
 
+    const byYear = lastFrostMmDdPerYear(station.id, tminByStation);
     const percentiles = frostPercentiles(byYear);
+    const zone = fixtureZone || phzmZones[zip] || undefined;
+
     output[zip] = {
       zip,
-      zone: zone || undefined,
+      zone,
       stationId: station.id,
       stationName: station.name,
       distanceKm,
@@ -242,9 +436,18 @@ export function buildZipClimate(root, options = {}) {
     }
   }
 
+  const manifest = buildClimateManifest(
+    output,
+    skipped,
+    stations,
+    tminByStation,
+    dataVersion,
+  );
+
   return {
     output,
     skipped,
+    manifest,
     stationCount: stations.length,
     zipCount: Object.keys(output).length,
   };

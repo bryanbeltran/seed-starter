@@ -33,15 +33,17 @@ describe("golden ZIP climate records", () => {
   }
 
   it("90210 uses climate instead of zone fallback", () => {
+    const record = zipClimate["90210" as keyof typeof zipClimate];
     const result = resolveLastFrost(
       { zone: "10b", zip: "90210", referenceDate: ref },
       climate,
     );
     expect(result.source).toBe("climate");
-    expect(result.lastFrostDate).toEqual(new Date(2026, 1, 16));
+    expect(result.lastFrostDate).toEqual(parseMmDd(record.lastFrostP50));
   });
 
   it("80202 p50 differs from regional northeast bucket", () => {
+    const record = zipClimate["80202" as keyof typeof zipClimate];
     const schedule = buildSchedule({
       zone: "6a",
       zip: "80202",
@@ -49,8 +51,15 @@ describe("golden ZIP climate records", () => {
       referenceDate: ref,
       climateRepository: climate,
     });
+    const zoneOnly = buildSchedule({
+      zone: "6a",
+      zip: "00000",
+      crops: ["lettuce"],
+      referenceDate: ref,
+      climateRepository: climate,
+    });
     expect(schedule.frostSource).toBe("climate");
-    expect(schedule.lastFrostDate).toEqual(new Date(2026, 4, 4));
-    expect(schedule.frostPercentiles?.p50).toEqual(new Date(2026, 4, 4));
+    expect(schedule.lastFrostDate).toEqual(parseMmDd(record.lastFrostP50));
+    expect(schedule.lastFrostDate).not.toEqual(zoneOnly.lastFrostDate);
   });
 });

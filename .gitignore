@@ -48,6 +48,7 @@ yarn-error.log*
 # ETL cache
 data/.cache/
 data/zctaCentroids.json
+data/ghcn/tmin-parsed.json
 
 # typescript
 *.tsbuildinfo

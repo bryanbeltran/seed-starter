@@ -12,9 +12,10 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check": "node scripts/check-data-quality.mjs && pnpm run lint && pnpm exec tsc --noEmit && pnpm run test:coverage && pnpm run build",
+    "check": "node scripts/check-data-quality.mjs && node scripts/check-climate-drift.mjs && pnpm run lint && pnpm exec tsc --noEmit && pnpm run test:coverage && pnpm run build",
     "spike:climate": "node scripts/spike-ghcn-zip-frost.mjs",
     "etl:climate": "node scripts/etl-ghcn-zip-climate.mjs",
+    "etl:phzm": "node scripts/etl-phzm-zones.mjs",
     "capture:demo": "node scripts/capture-demo.mjs"
   },
   "dependencies": {

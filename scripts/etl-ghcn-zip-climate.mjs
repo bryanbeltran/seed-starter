@@ -4,18 +4,23 @@
  *
  *   pnpm run etl:climate
  *   pnpm run etl:climate -- --write
- *   pnpm run etl:climate -- --fetch-centroids --fetch-daily --full --write
+ *   pnpm run etl:climate -- --fetch-stations --fetch-daily-needed --full --write
  */
 
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 import {
+  buildUsTminStationPool,
   buildZipClimate,
+  computeNeededStationIds,
   fetchBundledStationTmin,
-  fetchGhcndStations,
   fetchZctaCentroids,
   loadJson,
+  mergeTminCaches,
+  normalizeTminCache,
+  selectRepresentativeStations,
+  tryLoadJson,
 } from "./lib/ghcn-zip-climate.mjs";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -23,23 +28,34 @@ const write = process.argv.includes("--write");
 const fetchStations = process.argv.includes("--fetch-stations");
 const fetchCentroids = process.argv.includes("--fetch-centroids");
 const fetchDaily = process.argv.includes("--fetch-daily");
+const fetchDailyNeeded = process.argv.includes("--fetch-daily-needed");
+const fetchDailyRepresentative = process.argv.includes("--fetch-daily-representative");
 const full = process.argv.includes("--full");
+
+const cellDegArg = process.argv.find((a) => a.startsWith("--cell-deg="));
+const cellDeg = cellDegArg ? Number(cellDegArg.split("=")[1]) : 0.75;
+
+const maxFetchArg = process.argv.find((a) => a.startsWith("--max-fetch="));
+const maxFetch = maxFetchArg ? Number(maxFetchArg.split("=")[1]) : Infinity;
 
 async function main() {
   let stationsOverride = null;
   let centroidsOverride = null;
   let tminOverride = null;
 
+  const usTminPath = path.join(root, "data/ghcn/stations-us-tmin.json");
   if (fetchStations) {
-    console.log("Fetching NOAA ghcnd-stations.txt…");
-    const fetched = await fetchGhcndStations();
-    const bundled = loadJson(root, "data/ghcn/stations.json");
-    const byId = new Map(bundled.map((s) => [s.id, s]));
-    for (const s of fetched) {
-      if (!byId.has(s.id)) byId.set(s.id, s);
+    console.log("Building US GHCN TMIN station pool…");
+    const { pool, inventoryIds, stationCount } = await buildUsTminStationPool();
+    stationsOverride = pool;
+    console.log(`Station pool: ${stationCount} (from ${inventoryIds} inventory TMIN rows)`);
+    if (write) {
+      fs.writeFileSync(usTminPath, JSON.stringify(pool) + "\n");
+      console.log(`Wrote ${usTminPath}`);
     }
-    stationsOverride = [...byId.values()];
-    console.log(`Station pool: ${stationsOverride.length}`);
+  } else if (full && fs.existsSync(usTminPath)) {
+    stationsOverride = loadJson(root, "data/ghcn/stations-us-tmin.json");
+    console.log(`Loaded ${stationsOverride.length} US TMIN stations`);
   }
 
   const centroidsPath = path.join(root, "data/zctaCentroids.json");
@@ -57,35 +73,87 @@ async function main() {
     }
   }
 
-  const bundledStations = loadJson(root, "data/ghcn/stations.json");
-  if (fetchDaily) {
-    console.log("Fetching GHCN-Daily TMIN for bundled stations…");
-    tminOverride = await fetchBundledStationTmin(
-      bundledStations.map((s) => s.id),
-    );
-    const tminPath = path.join(root, "data/ghcn/tmin-parsed.json");
+  const tminPath = path.join(root, "data/ghcn/tmin-frost-summaries.json");
+  const legacyPath = path.join(root, "data/ghcn/tmin-parsed.json");
+  let existingTmin = {};
+  if (fs.existsSync(tminPath)) {
+    existingTmin = normalizeTminCache(loadJson(root, "data/ghcn/tmin-frost-summaries.json"));
+  } else if (fs.existsSync(legacyPath)) {
+    existingTmin = normalizeTminCache(loadJson(root, "data/ghcn/tmin-parsed.json"));
+  }
+
+  if (fetchDailyNeeded || fetchDailyRepresentative || fetchDaily) {
+    const stationPool =
+      stationsOverride ??
+      (fs.existsSync(usTminPath) ? loadJson(root, "data/ghcn/stations-us-tmin.json") : null) ??
+      loadJson(root, "data/ghcn/stations.json");
+
+    let idsToFetch;
+    if (fetchDailyRepresentative) {
+      const reps = selectRepresentativeStations(stationPool, cellDeg);
+      idsToFetch = reps.map((s) => s.id).filter((id) => !stationHasFrostInCache(id, existingTmin));
+      console.log(
+        `Representative grid ${cellDeg}°: fetch TMIN for ${idsToFetch.length}/${reps.length} stations`,
+      );
+    } else if (fetchDailyNeeded && centroidsOverride) {
+      const fixtureCentroids = loadJson(root, "data/zipCentroids.json");
+      const centroids = { ...fixtureCentroids, ...centroidsOverride };
+      const needed = computeNeededStationIds(centroids, stationPool, existingTmin);
+      idsToFetch = needed.filter((id) => !stationHasFrostInCache(id, existingTmin));
+      console.log(`Need TMIN for ${idsToFetch.length} stations (${stationPool.length} in pool)`);
+    } else {
+      idsToFetch = stationPool.map((s) => s.id);
+      console.log(`Fetching GHCN-Daily TMIN for ${idsToFetch.length} stations…`);
+    }
+
+    if (Number.isFinite(maxFetch) && idsToFetch.length > maxFetch) {
+      console.log(`Capping fetch to --max-fetch=${maxFetch}`);
+      idsToFetch = idsToFetch.slice(0, maxFetch);
+    }
+
+    const fetched = await fetchBundledStationTmin(idsToFetch, {
+      concurrency: 8,
+      seed: existingTmin,
+      batchSize: 40,
+      onProgress: (id, status) => {
+        if (status === "ok") process.stdout.write(`  ✓ ${id}\n`);
+        else process.stderr.write(`  skip ${id}: ${status}\n`);
+      },
+      onBatch: write
+        ? async (cache, done, remaining) => {
+            fs.writeFileSync(tminPath, JSON.stringify(cache, null, 2) + "\n");
+            console.log(`  checkpoint ${done} fetched, ~${remaining} remaining`);
+          }
+        : undefined,
+    });
+    tminOverride = mergeTminCaches(existingTmin, fetched);
     if (write) {
       fs.writeFileSync(tminPath, JSON.stringify(tminOverride, null, 2) + "\n");
-      console.log(`Wrote ${tminPath}`);
+      console.log(`Wrote ${tminPath} (${Object.keys(tminOverride).length} stations)`);
     }
-  } else if (fs.existsSync(path.join(root, "data/ghcn/tmin-parsed.json"))) {
-    tminOverride = loadJson(root, "data/ghcn/tmin-parsed.json");
+  } else if (fs.existsSync(tminPath) || fs.existsSync(legacyPath)) {
+    tminOverride = existingTmin;
   }
 
   const dataVersion = `ghcn-${new Date().toISOString().slice(0, 10)}`;
-  const { output, skipped, stationCount, zipCount } = buildZipClimate(root, {
+  const { output, skipped, manifest, stationCount, zipCount } = buildZipClimate(root, {
     stationsOverride,
     centroidsOverride,
     tminOverride,
     full,
     dataVersion,
-    provenance: fetchDaily
-      ? "NOAA GHCN-Daily parsed TMIN"
-      : "NOAA GHCN-Daily nearest-station median",
+    provenance:
+      fetchDaily || fetchDailyNeeded || fetchDailyRepresentative
+        ? "NOAA GHCN-Daily parsed TMIN"
+        : "NOAA GHCN-Daily nearest-station median",
   });
 
   const rows = Object.values(output);
   console.log(`Built ${zipCount} ZIP records from ${stationCount} stations`);
+  console.log(
+    `Coverage: zone ${(manifest.zoneFillRate * 100).toFixed(1)}%, ` +
+      `median ${manifest.medianDistanceKm}km, p95 ${manifest.p95DistanceKm}km`,
+  );
   if (skipped.length && skipped.length <= 20) {
     console.warn(`Skipped: ${skipped.join(", ")}`);
   } else if (skipped.length) {
@@ -100,12 +168,34 @@ async function main() {
     p50: r.lastFrostP50,
   })));
 
-  if (write) {
+  const writeClimate =
+    write &&
+    (full ||
+      (!fetchStations &&
+        !fetchCentroids &&
+        !fetchDaily &&
+        !fetchDailyNeeded &&
+        !fetchDailyRepresentative));
+
+  if (writeClimate) {
     const outPath = path.join(root, "data/zipClimate.json");
     fs.writeFileSync(outPath, JSON.stringify(output) + "\n");
     const mb = (fs.statSync(outPath).size / 1024 / 1024).toFixed(2);
     console.log(`\nWrote ${outPath} (${mb} MB, ${zipCount} ZIPs)`);
+
+    const manifestPath = path.join(root, "data/climate-manifest.json");
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n");
+    console.log(`Wrote ${manifestPath}`);
+  } else if (write && !writeClimate) {
+    console.log("Skipped climate write (use --full --write to update zipClimate.json)");
   }
+}
+
+function stationHasFrostInCache(id, tminByStation) {
+  const data = tminByStation[id];
+  if (!data) return false;
+  if (Array.isArray(data)) return data.length > 0;
+  return false;
 }
 
 main().catch((err) => {
