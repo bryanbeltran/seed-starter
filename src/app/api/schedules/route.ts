@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { buildSchedule, sowDatesFromSchedule } from "@/planning";
+import { parseScheduleRequest } from "@/planning/api/scheduleRequestSchema";
 import { zipToZone, ZoneLookupError } from "@/lib/zipToZone";
 
 export async function POST(req: Request) {
@@ -10,21 +11,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
   }
 
-  const { zip, seeds } = body as { zip?: string; seeds?: string[] };
+  const parsed = parseScheduleRequest(body);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
+  }
 
-  if (!zip?.trim()) {
-    return NextResponse.json({ error: "ZIP code is required." }, { status: 400 });
-  }
-  if (!Array.isArray(seeds) || seeds.length === 0) {
-    return NextResponse.json(
-      { error: "Select at least one crop." },
-      { status: 400 },
-    );
-  }
+  const { zip, seeds, riskProfile } = parsed.data;
 
   try {
     const zone = await zipToZone(zip);
-    const schedule = buildSchedule({ zone, crops: seeds });
+    const schedule = buildSchedule({ zone, crops: seeds, riskProfile });
     const sowDates = sowDatesFromSchedule(schedule);
 
     return NextResponse.json({
