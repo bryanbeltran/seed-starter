@@ -26,7 +26,7 @@ export type CropCategoryFilter = "popular" | "browse" | "vegetable" | "herb" | "
 
 export const CROP_FILTERS: { id: CropCategoryFilter; label: string }[] = [
   { id: "popular", label: "Popular" },
-  { id: "browse", label: "Browse" },
+  { id: "browse", label: "All" },
   { id: "vegetable", label: "Vegetables" },
   { id: "herb", label: "Herbs" },
   { id: "fruit", label: "Fruits" },

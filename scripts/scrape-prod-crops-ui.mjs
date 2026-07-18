@@ -13,7 +13,7 @@ const JUNK = new Set([
   "type", "winter", "class", "gmo", "non", "the", "and", "for",
 ]);
 
-const TABS = ["Popular", "Browse", "Vegetables", "Herbs", "Fruits"];
+const TABS = ["Popular", "All", "Vegetables", "Herbs", "Fruits"];
 
 function flag(name) {
   const issues = [];
