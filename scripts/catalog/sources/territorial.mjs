@@ -33,11 +33,7 @@ export async function fetchRecord(root, url) {
   if (!tags.some((t) => /^Class:SEEDS/i.test(t))) return null;
   if (tags.some((t) => /Class:HARDGOOD|FERTILIZER|SUPPLIES/i.test(t))) return null;
 
-  const cropTag = tags.find((t) => /^[A-Z]+:/.test(t) && !t.startsWith("Class:"));
-  const cropCategory =
-    cropTag?.split(":")[1]?.toLowerCase() ??
-    handle.split("-")[0] ??
-    "vegetable";
+  const cropCategory = handle.split("-")[0] ?? "vegetable";
 
   const daysToHarvest =
     parseDays(product.description) ?? parseDays(product.body_html?.replace(/<[^>]+>/g, " "));

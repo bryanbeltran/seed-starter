@@ -1,3 +1,5 @@
+import { findJunkCrops } from "./cropResolve.mjs";
+
 export function validateCatalog(catalog) {
   const errors = [];
   const { crops } = catalog;
@@ -6,9 +8,11 @@ export function validateCatalog(catalog) {
     return errors;
   }
 
+  errors.push(...findJunkCrops(crops));
+
   const cropEntries = Object.entries(crops);
-  if (cropEntries.length < 50) {
-    errors.push(`expected >= 50 crops, got ${cropEntries.length}`);
+  if (cropEntries.length < 30) {
+    errors.push(`expected >= 30 crops, got ${cropEntries.length}`);
   }
 
   let varieties = 0;

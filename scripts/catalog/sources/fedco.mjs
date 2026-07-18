@@ -42,10 +42,7 @@ export async function fetchRecord(root, url) {
   const sub = html.match(/<h1[^>]*>[\s\S]*?<\/h1>\s*<[^>]+>([^<]+)/i)?.[1]?.trim();
   const name = title.split(/\s{2,}/)[0].trim();
   const slug = url.split("/").pop().replace(/-\d+$/, "");
-  const cropCategory =
-    slug.replace(/^[^-]+-/, "").replace(/-[^-]+$/, "") ||
-    sub ||
-    "vegetable";
+  const cropCategory = name || sub || slug;
 
   let daysToHarvest;
   const dtm = html.match(/Days to Maturity[\s\S]*?<dd[^>]*>\s*(\d{2,3})\s*days/i);

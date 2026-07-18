@@ -1,5 +1,6 @@
 import { cropDefaults, springSeason } from "./cropDefaults.mjs";
-import { cropIdFromCategory, displayName, slugify, varietyId } from "./slug.mjs";
+import { resolveCropRecord } from "./cropResolve.mjs";
+import { displayName, slugify, varietyId } from "./slug.mjs";
 
 const EDIBLE_PREFIXES = [
   "/vegetables/",
@@ -54,8 +55,13 @@ export function parseDays(text) {
 
 export function mergeRecords(records, { target = 2000 } = {}) {
   const byKey = new Map();
+  let dropped = 0;
   for (const rec of records) {
-    const cropId = cropIdFromCategory(rec.cropCategory);
+    const cropId = resolveCropRecord(rec);
+    if (!cropId) {
+      dropped++;
+      continue;
+    }
     const vid = varietyId(rec.name, cropId);
     const key = `${cropId}::${slugify(rec.name)}`;
     const existing = byKey.get(key);
@@ -68,6 +74,7 @@ export function mergeRecords(records, { target = 2000 } = {}) {
 
   let merged = [...byKey.values()];
   if (merged.length > target) merged = merged.slice(0, target);
+  if (dropped) console.log(`  dropped ${dropped} unresolvable records`);
   return buildCatalog(merged);
 }
 
