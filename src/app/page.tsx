@@ -12,7 +12,7 @@ export default function Page() {
         Skip to main content
       </a>
       <AppHeader />
-      <main id="main" className="mx-auto max-w-5xl px-4 py-8 pb-24 md:pb-8">
+      <main id="main" className="mx-auto max-w-5xl px-4 py-6 pb-28 md:py-8 md:pb-8 lg:pb-8">
         <SeedForm />
       </main>
       <AppFooter />

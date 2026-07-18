@@ -9,6 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { format, parseISO } from "date-fns";
+import { getCropName } from "@/planning";
 import { cn } from "@/lib/utils";
 import {
   Accordion,
@@ -67,7 +68,7 @@ export function TaskTimeline({ tasks }: Props) {
     <Accordion type="multiple" defaultValue={[...groups.keys()]} className="w-full">
       {[...groups.entries()].map(([cropId, cropTasks]) => (
         <AccordionItem key={cropId} value={cropId}>
-          <AccordionTrigger className="capitalize">{cropId}</AccordionTrigger>
+          <AccordionTrigger>{getCropName(cropId)}</AccordionTrigger>
           <AccordionContent>
             <ul className="space-y-1">
               {cropTasks.map((task, i) => (

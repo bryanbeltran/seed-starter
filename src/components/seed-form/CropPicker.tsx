@@ -1,8 +1,9 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import type { CropDefinition } from "@/planning";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { cn } from "@/lib/utils";
 import { VarietySelect } from "./VarietySelect";
 
 type Props = {
@@ -24,33 +25,71 @@ export function CropPicker({
   onToggle,
   onVarietyChange,
 }: Props) {
+  const [query, setQuery] = useState("");
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return crops;
+    return crops.filter(
+      (c) => c.name.toLowerCase().includes(q) || c.id.toLowerCase().includes(q),
+    );
+  }, [crops, query]);
+
   return (
     <fieldset className="space-y-3">
       <legend className="text-sm font-medium">Crops</legend>
-      {crops.map((crop) => {
-        const checked = selected.includes(crop.id);
+      <Input
+        type="search"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search crops…"
+        disabled={loading}
+        aria-label="Search crops"
+        className="h-9"
+      />
+      <div
+        className="flex flex-wrap gap-2"
+        role="group"
+        aria-label="Selected crops"
+        aria-describedby={cropError ? "crop-error" : undefined}
+      >
+        {filtered.map((crop) => {
+          const checked = selected.includes(crop.id);
+          return (
+            <button
+              key={crop.id}
+              type="button"
+              role="checkbox"
+              aria-checked={checked}
+              aria-label={crop.name}
+              disabled={loading}
+              onClick={() => onToggle(crop.id)}
+              className={cn(
+                "rounded-full border px-3 py-1.5 text-sm transition-colors",
+                checked
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "hover:bg-accent bg-background",
+              )}
+            >
+              {crop.name}
+            </button>
+          );
+        })}
+      </div>
+      {filtered.length === 0 && (
+        <p className="text-muted-foreground text-sm">No crops match your search.</p>
+      )}
+      {selected.map((cropId) => {
+        const crop = crops.find((c) => c.id === cropId);
+        if (!crop) return null;
         return (
-          <div key={crop.id} className="space-y-1">
-            <div className="flex items-center gap-2">
-              <Checkbox
-                id={`crop-${crop.id}`}
-                checked={checked}
-                onCheckedChange={() => onToggle(crop.id)}
-                disabled={loading}
-              />
-              <Label htmlFor={`crop-${crop.id}`} className="cursor-pointer font-normal">
-                {crop.name}
-              </Label>
-            </div>
-            {checked && (
-              <VarietySelect
-                crop={crop}
-                value={varieties[crop.id]}
-                disabled={loading}
-                onChange={(v) => onVarietyChange(crop.id, v)}
-              />
-            )}
-          </div>
+          <VarietySelect
+            key={cropId}
+            crop={crop}
+            value={varieties[cropId]}
+            disabled={loading}
+            onChange={(v) => onVarietyChange(cropId, v)}
+          />
         );
       })}
       {cropError && (

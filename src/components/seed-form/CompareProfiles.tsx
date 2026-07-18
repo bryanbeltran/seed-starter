@@ -2,6 +2,7 @@
 
 import { format, parseISO } from "date-fns";
 import type { RiskProfile } from "@/planning";
+import { getCropName } from "@/planning";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { ScheduleResult } from "./types";
 
@@ -18,14 +19,21 @@ function keyTasks(tasks: ScheduleResult["tasks"]) {
   );
 }
 
+function taskKey(task: ScheduleResult["tasks"][number]) {
+  return `${task.cropId}:${task.type}`;
+}
+
 export function CompareProfiles({ compared, baseline }: Props) {
   const profiles: RiskProfile[] = ["conservative", "balanced", "aggressive"];
+  const baseByKey = new Map(
+    keyTasks(compared[baseline].tasks).map((t) => [taskKey(t), t.date]),
+  );
 
   return (
     <Tabs defaultValue={baseline} className="print:hidden">
       <TabsList className="grid w-full grid-cols-3">
         {profiles.map((p) => (
-          <TabsTrigger key={p} value={p} className="capitalize">
+          <TabsTrigger key={p} value={p} className="capitalize text-xs sm:text-sm">
             {p}
           </TabsTrigger>
         ))}
@@ -33,7 +41,6 @@ export function CompareProfiles({ compared, baseline }: Props) {
       {profiles.map((profile) => {
         const schedule = compared[profile];
         const tasks = keyTasks(schedule.tasks);
-        const baseTasks = keyTasks(compared[baseline].tasks);
 
         return (
           <TabsContent key={profile} value={profile}>
@@ -41,8 +48,8 @@ export function CompareProfiles({ compared, baseline }: Props) {
               Last frost: {format(parseISO(schedule.lastFrostDate), "MMM d, yyyy")}
             </p>
             <ul className="space-y-2 text-sm">
-              {tasks.map((task, i) => {
-                const baseDate = baseTasks[i]?.date;
+              {tasks.map((task) => {
+                const baseDate = baseByKey.get(taskKey(task));
                 const delta =
                   baseDate && profile !== baseline
                     ? Math.round(
@@ -51,8 +58,8 @@ export function CompareProfiles({ compared, baseline }: Props) {
                       )
                     : 0;
                 return (
-                  <li key={`${task.type}-${i}`} className="flex justify-between gap-4">
-                    <span>{task.label}</span>
+                  <li key={taskKey(task)} className="flex justify-between gap-4">
+                    <span>{getCropName(task.cropId)} · {task.label}</span>
                     <span className="text-muted-foreground shrink-0">
                       {format(parseISO(task.date), "MMM d")}
                       {delta !== 0 && (

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Link2, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import type { RiskProfile } from "@/planning";
+import { ShareLinkButton } from "./ShareLinkButton";
 import type { ScheduleResult } from "./types";
 import type { CropSelection } from "./formState";
 
@@ -37,11 +38,12 @@ export type SavedPlanSummary = {
 
 type Props = {
   onLoadPlan: (plan: SavedPlanSummary) => void;
-  onStatusMessage: (msg: string) => void;
+  onStatusMessage: (msg: string, variant?: "success" | "error") => void;
   currentZip: string;
   currentCrops: string[];
   currentRisk: RiskProfile;
-  hasResults: boolean;
+  saveOpen: boolean;
+  onSaveOpenChange: (open: boolean) => void;
 };
 
 export function SavedPlansPanel({
@@ -50,13 +52,15 @@ export function SavedPlansPanel({
   currentZip,
   currentCrops,
   currentRisk,
-  hasResults,
+  saveOpen,
+  onSaveOpenChange,
 }: Props) {
   const [plans, setPlans] = useState<SavedPlanSummary[]>([]);
   const [loading, setLoading] = useState(true);
-  const [saveOpen, setSaveOpen] = useState(false);
   const [planName, setPlanName] = useState("");
   const [saving, setSaving] = useState(false);
+  const [deleteTarget, setDeleteTarget] = useState<SavedPlanSummary | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const refresh = useCallback(async () => {
     setLoading(true);
@@ -65,7 +69,7 @@ export function SavedPlansPanel({
       const data = await res.json();
       setPlans(data.plans ?? []);
     } catch {
-      onStatusMessage("Could not load saved plans.");
+      onStatusMessage("Could not load saved plans.", "error");
     } finally {
       setLoading(false);
     }
@@ -91,58 +95,66 @@ export function SavedPlansPanel({
       });
       if (!res.ok) {
         const data = await res.json();
-        onStatusMessage(data.error ?? "Could not save plan.");
+        onStatusMessage(data.error ?? "Could not save plan.", "error");
         return;
       }
-      setSaveOpen(false);
+      onSaveOpenChange(false);
       setPlanName("");
-      onStatusMessage("Plan saved.");
+      onStatusMessage("Plan saved.", "success");
       await refresh();
     } catch {
-      onStatusMessage("Could not save plan.");
+      onStatusMessage("Could not save plan.", "error");
     } finally {
       setSaving(false);
     }
   }
 
-  async function handleDelete(id: string, name: string) {
-    if (!confirm(`Delete plan "${name}"?`)) return;
-    const res = await fetch(`/api/saved-plans/${id}`, { method: "DELETE" });
-    if (res.ok) {
-      onStatusMessage("Plan deleted.");
-      await refresh();
+  async function confirmDelete() {
+    if (!deleteTarget) return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/saved-plans/${deleteTarget.id}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        onStatusMessage("Plan deleted.", "success");
+        setDeleteTarget(null);
+        await refresh();
+      } else {
+        onStatusMessage("Could not delete plan.", "error");
+      }
+    } finally {
+      setDeleting(false);
     }
+  }
+
+  function shareUrl(planId: string) {
+    if (typeof window !== "undefined") {
+      return `${window.location.origin}/plans?id=${planId}`;
+    }
+    return `/plans?id=${planId}`;
   }
 
   return (
     <aside className="space-y-3 print:hidden" aria-label="Saved plans">
-      <div className="flex items-center justify-between gap-2">
-        <h2 className="text-sm font-semibold">Saved plans</h2>
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          disabled={!hasResults || currentCrops.length === 0}
-          onClick={() => setSaveOpen(true)}
-        >
-          Save plan
-        </Button>
-      </div>
+      <h2 className="text-sm font-semibold">Saved plans</h2>
 
       {loading ? (
         <p className="text-muted-foreground text-sm">Loading…</p>
       ) : plans.length === 0 ? (
-        <p className="text-muted-foreground text-sm">No saved plans yet.</p>
+        <p className="text-muted-foreground text-sm">
+          No saved plans yet. Calculate a schedule, then save.
+        </p>
       ) : (
         <ul className="space-y-2">
           {plans.map((plan) => (
             <li
               key={plan.id}
-              className="hover:bg-accent flex items-center justify-between gap-2 rounded-md border p-2 text-sm"
+              className="hover:bg-accent flex flex-col gap-2 rounded-md border p-2 text-sm"
             >
               <button
                 type="button"
-                className="min-w-0 flex-1 text-left"
+                className="min-w-0 text-left"
                 onClick={() => {
                   onLoadPlan(plan);
                   if (plan.climateDataStale) {
@@ -153,6 +165,7 @@ export function SavedPlansPanel({
                         : "";
                     onStatusMessage(
                       `Loaded "${plan.name}" — climate data updated since save; dates refreshed.${frostNote}`,
+                      "success",
                     );
                   }
                 }}
@@ -171,24 +184,14 @@ export function SavedPlansPanel({
                   {plan.zip} · Zone {plan.zone.toUpperCase()}
                 </span>
               </button>
-              <div className="flex shrink-0 items-center gap-0.5">
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="icon"
-                  aria-label={`Share ${plan.name}`}
-                  asChild
-                >
-                  <a href={`/plans?id=${plan.id}`} target="_blank" rel="noreferrer">
-                    <Link2 className="size-4" />
-                  </a>
-                </Button>
+              <div className="flex items-center gap-1">
+                <ShareLinkButton url={shareUrl(plan.id)} label="Copy" />
                 <Button
                   type="button"
                   variant="ghost"
                   size="icon"
                   aria-label={`Delete ${plan.name}`}
-                  onClick={() => void handleDelete(plan.id, plan.name)}
+                  onClick={() => setDeleteTarget(plan)}
                 >
                   <Trash2 className="size-4" />
                 </Button>
@@ -198,12 +201,12 @@ export function SavedPlansPanel({
         </ul>
       )}
 
-      <Dialog open={saveOpen} onOpenChange={setSaveOpen}>
+      <Dialog open={saveOpen} onOpenChange={onSaveOpenChange}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>Save plan</DialogTitle>
             <DialogDescription>
-              Store this ZIP, crops, and risk profile locally.
+              Store this ZIP, crops, and risk profile for your account.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-2">
@@ -222,6 +225,38 @@ export function SavedPlansPanel({
           >
             {saving ? "Saving…" : "Save"}
           </Button>
+        </DialogContent>
+      </Dialog>
+
+      <Dialog
+        open={Boolean(deleteTarget)}
+        onOpenChange={(open) => !open && setDeleteTarget(null)}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete plan?</DialogTitle>
+            <DialogDescription>
+              This removes &ldquo;{deleteTarget?.name}&rdquo; permanently. Share
+              links will stop working.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end gap-2 pt-2">
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setDeleteTarget(null)}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="button"
+              variant="destructive"
+              disabled={deleting}
+              onClick={() => void confirmDelete()}
+            >
+              {deleting ? "Deleting…" : "Delete"}
+            </Button>
+          </div>
         </DialogContent>
       </Dialog>
     </aside>

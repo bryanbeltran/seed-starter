@@ -20,6 +20,7 @@ export type { CropDefinition, VarietyDefinition } from "./cropCatalog";
 export {
   cropIds,
   getCrop,
+  getCropName,
   getCropOrDefault,
   listCrops,
   resolveCropRules,
