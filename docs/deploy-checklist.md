@@ -14,7 +14,7 @@
 
 ```bash
 curl -s https://seed-starter.vercel.app/api/health | jq '{commit, persistence, auth, climate}'
-SMOKE_URL=https://seed-starter.vercel.app pnpm run smoke
+pnpm run smoke:prod
 ```
 
 Expect:
@@ -22,3 +22,10 @@ Expect:
 - `persistence: "postgres"`
 - `auth: "owner-cookie"` when `AUTH_SECRET` set
 - `commit` matches `git rev-parse --short HEAD` on `main`
+
+CI also runs:
+
+- Local smoke after `check` + e2e
+- `test:postgres` when `DATABASE_URL` GitHub secret is set
+- Strict prod smoke every 6h + after successful `main` CI (`smoke-prod.yml`)
+- Weekly climate ETL that opens a PR when data changes (`climate-etl.yml`)

@@ -2,21 +2,36 @@ name: Climate ETL
 
 on:
   workflow_dispatch:
+    inputs:
+      fetch_daily:
+        description: "Also fetch fresh GHCN daily TMIN (--fetch-daily-needed --full)"
+        type: boolean
+        default: false
   schedule:
     - cron: "0 12 * * 1"
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  validate-etl:
+  publish-etl:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run etl:climate
+      - name: Rebuild climate table
+        run: |
+          if [ "${{ github.event.inputs.fetch_daily }}" = "true" ]; then
+            pnpm run etl:climate -- --fetch-daily-needed --full --write
+          else
+            pnpm run etl:climate -- --write
+          fi
       - run: node scripts/check-data-quality.mjs
       - run: node scripts/check-climate-drift.mjs
       - run: node scripts/check-golden-climate.mjs
@@ -24,7 +39,27 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: climate-validate
+          name: climate-etl
           path: |
+            data/climate-manifest.json
+            data/golden-zips.json
+            data/zipClimate.json
+      - name: Open PR if climate data changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(climate): refresh GHCN zip climate"
+          branch: chore/climate-etl
+          delete-branch: true
+          title: "chore(climate): refresh GHCN zip climate"
+          body: |
+            Automated weekly climate ETL (`pnpm run etl:climate -- --write`).
+
+            - Regenerates `data/zipClimate.json` + `data/climate-manifest.json`
+            - Passed data quality, drift, and golden ZIP checks
+
+            Review distance/coverage deltas in the manifest before merge.
+          add-paths: |
+            data/zipClimate.json
             data/climate-manifest.json
             data/golden-zips.json

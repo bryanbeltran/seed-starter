@@ -10,6 +10,7 @@
     "lint": "next lint",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:postgres": "vitest run src/persistence/postgresSavedPlans.test.ts",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "check": "node scripts/check-data-quality.mjs && node scripts/check-climate-drift.mjs && node scripts/check-golden-climate.mjs && pnpm run lint && pnpm exec tsc --noEmit && pnpm run test:coverage && pnpm run build",
@@ -18,6 +19,7 @@
     "etl:phzm": "node scripts/etl-phzm-zones.mjs",
     "capture:demo": "node scripts/capture-demo.mjs",
     "smoke": "node scripts/smoke.mjs",
+    "smoke:prod": "SMOKE_URL=https://seed-starter.vercel.app SMOKE_STRICT=1 node scripts/smoke.mjs",
     "audit": "pnpm audit --prod --audit-level=high"
   },
   "dependencies": {

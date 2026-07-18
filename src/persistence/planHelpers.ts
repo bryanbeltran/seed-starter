@@ -16,6 +16,24 @@ export type SavedPlanInput = {
   ownerId?: string | null;
 };
 
+/** Open mode (no ownerId) reads all. Auth mode: own + legacy unowned. */
+export function canReadPlan(
+  rowOwnerId: string | null | undefined,
+  ownerId?: string | null,
+): boolean {
+  if (!ownerId) return true;
+  return !rowOwnerId || rowOwnerId === ownerId;
+}
+
+/** Open mode writes all. Auth mode: only matching owner_id (no orphan takeover). */
+export function canWritePlan(
+  rowOwnerId: string | null | undefined,
+  ownerId?: string | null,
+): boolean {
+  if (!ownerId) return true;
+  return Boolean(rowOwnerId) && rowOwnerId === ownerId;
+}
+
 export type SavedPlan = {
   id: string;
   name: string;

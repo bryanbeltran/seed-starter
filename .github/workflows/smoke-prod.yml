@@ -1,0 +1,34 @@
+name: Smoke production
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  smoke:
+    if: >
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Wait for Vercel alias (post-main CI)
+        if: github.event_name == 'workflow_run'
+        run: sleep 90
+      - name: Strict prod smoke
+        env:
+          SMOKE_URL: https://seed-starter.vercel.app
+          SMOKE_STRICT: "1"
+        run: pnpm run smoke
