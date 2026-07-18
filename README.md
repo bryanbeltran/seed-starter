@@ -8,7 +8,8 @@ Frost-aware garden planning for US ZIP codes. Pick crops and a risk profile, get
 
 ## Features
 
-- 11 crops, 23 varieties with lifecycle rules
+- 90 crops, 2000 varieties from Johnny's, High Mowing, Territorial, and Fedco
+- Crop picker: Popular / All / Vegetables / Herbs / Fruits + search
 - Risk profiles: conservative / balanced / aggressive (frost p90 / p50 / p10)
 - Climate data: NOAA GHCN nearest-station frost percentiles for ~33k US ZCTAs
 - Frost fallback chain: climate → station → regional → zone
@@ -84,6 +85,8 @@ Open [http://localhost:3000](http://localhost:3000).
 | `pnpm run audit` | Production dependency audit (high+) |
 | `pnpm run etl:climate` | Build `data/zipClimate.json` from GHCN |
 | `pnpm run etl:phzm` | Refresh PRISM zone table |
+| `pnpm run etl:catalog` | Scrape seed catalogs → `data/catalog/crops.json` |
+| `pnpm run check:catalog` | Validate catalog JSON (junk crops, counts) |
 | `pnpm run capture:demo` | Record `docs/demo.gif` |
 
 ## Deploy (Vercel)
@@ -103,6 +106,7 @@ pnpm run smoke   # SMOKE_URL=https://seed-starter.vercel.app
 
 ## UI
 
+- Crop picker with category tabs, search, and pagination
 - Variety picker, risk compare, saved plans with share links (`/plans?id=…`)
 - Task timeline, frost provenance + confidence badges, climate version tooltips
 - Stale-plan warning with last-frost recompute diff
