@@ -3,6 +3,8 @@ import { getCurrentClimateDataVersion } from "@/climate";
 import type { RiskProfile } from "@/planning";
 import { resolveLocation } from "@/lib/resolveLocation";
 import {
+  canReadPlan,
+  canWritePlan,
   climateSnapshotForZip,
   rowToPlan,
   scheduleForPlan,
@@ -33,6 +35,11 @@ function getSql() {
   return neon(url);
 }
 
+/** @internal test helper */
+export function resetPostgresMigratedForTests() {
+  migrated = false;
+}
+
 async function ensureMigrations() {
   if (migrated) return;
   const sql = getSql();
@@ -55,12 +62,16 @@ async function ensureMigrations() {
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS climate_snapshot_id TEXT`;
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS owner_id TEXT`;
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS last_frost_date TEXT`;
+  await sql`CREATE INDEX IF NOT EXISTS saved_plans_owner_id_idx ON saved_plans (owner_id)`;
   migrated = true;
 }
 
-function owns(row: PlanRow, ownerId?: string | null): boolean {
-  if (!ownerId) return true;
-  return !row.owner_id || row.owner_id === ownerId;
+async function fetchRow(id: string): Promise<PlanRow | null> {
+  const sql = getSql();
+  const rows = (await sql`
+    SELECT * FROM saved_plans WHERE id = ${id}
+  `) as PlanRow[];
+  return rows[0] ?? null;
 }
 
 async function planFromRow(row: PlanRow): Promise<SavedPlan> {
@@ -77,11 +88,16 @@ async function planFromRow(row: PlanRow): Promise<SavedPlan> {
 export async function listSavedPlans(ownerId?: string | null): Promise<SavedPlan[]> {
   await ensureMigrations();
   const sql = getSql();
-  const rows = (await sql`
-    SELECT * FROM saved_plans ORDER BY updated_at DESC
-  `) as PlanRow[];
-  const filtered = rows.filter((r) => owns(r, ownerId));
-  return Promise.all(filtered.map(planFromRow));
+  const rows = (
+    ownerId
+      ? await sql`
+          SELECT * FROM saved_plans
+          WHERE owner_id = ${ownerId} OR owner_id IS NULL
+          ORDER BY updated_at DESC
+        `
+      : await sql`SELECT * FROM saved_plans ORDER BY updated_at DESC`
+  ) as PlanRow[];
+  return Promise.all(rows.map(planFromRow));
 }
 
 export async function getSavedPlan(
@@ -89,12 +105,9 @@ export async function getSavedPlan(
   ownerId?: string | null,
 ): Promise<SavedPlan | null> {
   await ensureMigrations();
-  const sql = getSql();
-  const rows = (await sql`
-    SELECT * FROM saved_plans WHERE id = ${id}
-  `) as PlanRow[];
-  if (!rows[0] || !owns(rows[0], ownerId)) return null;
-  return planFromRow(rows[0]);
+  const row = await fetchRow(id);
+  if (!row || !canReadPlan(row.owner_id, ownerId)) return null;
+  return planFromRow(row);
 }
 
 export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan> {
@@ -139,8 +152,10 @@ export async function updateSavedPlan(
   patch: Partial<SavedPlanInput>,
   ownerId?: string | null,
 ): Promise<SavedPlan | null> {
-  const existing = await getSavedPlan(id, ownerId);
-  if (!existing) return null;
+  await ensureMigrations();
+  const row = await fetchRow(id);
+  if (!row || !canWritePlan(row.owner_id, ownerId)) return null;
+  const existing = await planFromRow(row);
 
   const name = patch.name ?? existing.name;
   const crops = patch.crops ?? existing.crops;
@@ -187,9 +202,9 @@ export async function deleteSavedPlan(
   id: string,
   ownerId?: string | null,
 ): Promise<boolean> {
-  const existing = await getSavedPlan(id, ownerId);
-  if (!existing) return false;
   await ensureMigrations();
+  const row = await fetchRow(id);
+  if (!row || !canWritePlan(row.owner_id, ownerId)) return false;
   const sql = getSql();
   await sql`DELETE FROM saved_plans WHERE id = ${id}`;
   return true;

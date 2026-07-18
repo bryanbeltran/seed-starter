@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 /** Prod/local smoke: health + schedule + openapi. */
 const base = (process.env.SMOKE_URL ?? "http://127.0.0.1:3000").replace(/\/$/, "");
+const strict =
+  process.env.SMOKE_STRICT === "1" ||
+  process.env.SMOKE_STRICT === "true" ||
+  /seed-starter\.vercel\.app$/i.test(new URL(base).hostname);
 
 async function check(name, fn) {
   const started = Date.now();
@@ -19,6 +23,14 @@ await check("GET /api/health", async () => {
   const body = await res.json();
   if (body.status !== "ok") throw new Error("status not ok");
   if (!body.climate?.zipCount) throw new Error("missing climate.zipCount");
+  if (strict) {
+    if (body.persistence !== "postgres") {
+      throw new Error(`persistence=${body.persistence} (want postgres)`);
+    }
+    if (body.auth !== "owner-cookie") {
+      throw new Error(`auth=${body.auth} (want owner-cookie)`);
+    }
+  }
 });
 
 await check("GET /api/openapi", async () => {
@@ -41,4 +53,4 @@ await check("POST /api/schedules", async () => {
 });
 
 if (process.exitCode) process.exit(process.exitCode);
-console.log(`Smoke OK against ${base}`);
+console.log(`Smoke OK against ${base}${strict ? " (strict)" : ""}`);

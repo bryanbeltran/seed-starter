@@ -33,4 +33,24 @@ describe("apiRoute", () => {
     const body = await res.json();
     expect(body.requestId).toBeTruthy();
   });
+
+  it("blocks cross-site POST when AUTH_SECRET set", async () => {
+    const prev = process.env.AUTH_SECRET;
+    process.env.AUTH_SECRET = "test-secret";
+    try {
+      const handler = apiRoute("test-csrf", async () =>
+        NextResponse.json({ ok: true }),
+      );
+      const res = await handler(
+        new Request("http://localhost/api/x", {
+          method: "POST",
+          headers: { "sec-fetch-site": "cross-site", host: "localhost" },
+        }),
+      );
+      expect(res.status).toBe(403);
+    } finally {
+      if (prev === undefined) delete process.env.AUTH_SECRET;
+      else process.env.AUTH_SECRET = prev;
+    }
+  });
 });

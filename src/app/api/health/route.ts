@@ -5,7 +5,7 @@ import {
   getCurrentClimateDataVersion,
 } from "@/climate";
 import climateManifest from "../../../../data/climate-manifest.json";
-import { authEnabled } from "@/lib/ownerAuth";
+import { authEnabled } from "@/lib/ownerToken";
 import { apiRoute } from "@/lib/apiRoute";
 import { OUTLIER_DISTANCE_KM } from "@/lib/climateConfidence";
 

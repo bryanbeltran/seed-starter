@@ -46,6 +46,7 @@ Domain logic lives in `src/planning/` (framework-free). ADRs:
 | [003](docs/adrs/003-climate-nearest-station.md) | GHCN nearest-station model |
 | [004](docs/adrs/004-frost-first-mvp.md) | Frost-first scope |
 | [005](docs/adrs/005-owner-cookie-auth.md) | Owner cookie auth |
+| [Threat model](docs/threat-model.md) | Cookie, share links, rate limits |
 
 ### Failure modes
 
@@ -78,6 +79,8 @@ Open [http://localhost:3000](http://localhost:3000).
 | `pnpm test` | Unit tests |
 | `pnpm run test:e2e` | Playwright browser tests |
 | `pnpm run smoke` | Hit health + schedule + openapi (`SMOKE_URL`) |
+| `pnpm run smoke:prod` | Strict prod smoke (`postgres` + `owner-cookie`) |
+| `pnpm run test:postgres` | Saved-plan tests against `DATABASE_URL` |
 | `pnpm run audit` | Production dependency audit (high+) |
 | `pnpm run etl:climate` | Build `data/zipClimate.json` from GHCN |
 | `pnpm run etl:phzm` | Refresh PRISM zone table |

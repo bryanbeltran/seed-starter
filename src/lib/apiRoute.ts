@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { clientKey, rateLimit } from "./rateLimit";
 import { log, newRequestId, withRequestId } from "./observability";
+import { assertSameOrigin } from "./sameOrigin";
 
 type Handler = (req: Request, ctx: { requestId: string }) => Promise<Response>;
 
@@ -15,6 +16,15 @@ export function apiRoute(
   return async (req: Request) => {
     const requestId = req.headers.get("x-request-id") || newRequestId();
     const started = Date.now();
+
+    if (!assertSameOrigin(req)) {
+      log("warn", "csrf_blocked", { requestId, route: name });
+      return NextResponse.json(
+        { error: "Cross-origin request blocked." },
+        { status: 403, headers: withRequestId(new Headers(), requestId) },
+      );
+    }
+
     const rl = rateLimit(clientKey(req, name), limit, windowMs);
     if (!rl.ok) {
       log("warn", "rate_limited", { requestId, route: name });

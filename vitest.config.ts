@@ -27,6 +27,7 @@ export default defineConfig({
         "src/lib/ownerAuth.ts",
         "src/lib/observability.ts",
         "src/persistence/postgresSavedPlans.ts",
+        "src/persistence/postgresSavedPlans.test.ts",
       ],
       thresholds: {
         statements: 90,

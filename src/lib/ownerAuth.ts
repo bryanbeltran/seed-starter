@@ -1,37 +1,21 @@
-import { createHmac, timingSafeEqual } from "crypto";
 import { cookies } from "next/headers";
+import {
+  OWNER_MAX_AGE_SEC,
+  authEnabled,
+  signOwnerToken,
+  verifyOwnerToken,
+} from "./ownerToken";
 
 export const OWNER_COOKIE = "ss_owner";
+export {
+  OWNER_MAX_AGE_SEC,
+  authEnabled,
+  signOwnerToken,
+  verifyOwnerToken,
+} from "./ownerToken";
 
-function authSecret(): string | undefined {
-  return process.env.AUTH_SECRET || undefined;
-}
-
-export function authEnabled(): boolean {
-  return Boolean(authSecret());
-}
-
-function sign(ownerId: string): string {
-  const secret = authSecret();
-  if (!secret) return ownerId;
-  const sig = createHmac("sha256", secret).update(ownerId).digest("base64url");
-  return `${ownerId}.${sig}`;
-}
-
-function verify(token: string): string | null {
-  const secret = authSecret();
-  if (!secret) return token || null;
-  const [ownerId, sig] = token.split(".");
-  if (!ownerId || !sig) return null;
-  const expected = createHmac("sha256", secret).update(ownerId).digest("base64url");
-  try {
-    const a = Buffer.from(sig);
-    const b = Buffer.from(expected);
-    if (a.length !== b.length || !timingSafeEqual(a, b)) return null;
-    return ownerId;
-  } catch {
-    return null;
-  }
+function cookieSecure(): boolean {
+  return process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
 }
 
 export async function getOrCreateOwnerId(): Promise<string | null> {
@@ -39,16 +23,16 @@ export async function getOrCreateOwnerId(): Promise<string | null> {
   const jar = await cookies();
   const existing = jar.get(OWNER_COOKIE)?.value;
   if (existing) {
-    const id = verify(existing);
+    const id = verifyOwnerToken(existing);
     if (id) return id;
   }
   const ownerId = crypto.randomUUID();
-  jar.set(OWNER_COOKIE, sign(ownerId), {
+  jar.set(OWNER_COOKIE, signOwnerToken(ownerId), {
     httpOnly: true,
     sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+    secure: cookieSecure(),
     path: "/",
-    maxAge: 60 * 60 * 24 * 365,
+    maxAge: OWNER_MAX_AGE_SEC,
   });
   return ownerId;
 }
@@ -61,5 +45,5 @@ export function parseOwnerFromCookieHeader(cookieHeader: string | null): string 
   if (!authEnabled() || !cookieHeader) return null;
   const match = cookieHeader.match(new RegExp(`${OWNER_COOKIE}=([^;]+)`));
   if (!match?.[1]) return null;
-  return verify(decodeURIComponent(match[1]));
+  return verifyOwnerToken(decodeURIComponent(match[1]));
 }

@@ -5,6 +5,8 @@ import { getCurrentClimateDataVersion } from "@/climate";
 import type { RiskProfile } from "@/planning";
 import { resolveLocation } from "@/lib/resolveLocation";
 import {
+  canReadPlan,
+  canWritePlan,
   climateSnapshotForZip,
   rowToPlan,
   scheduleForPlan,
@@ -83,41 +85,11 @@ function persist(db: Database) {
   fs.writeFileSync(dbPath(), Buffer.from(db.export()));
 }
 
-function owns(row: Record<string, unknown>, ownerId?: string | null): boolean {
-  if (!ownerId) return true;
-  const rowOwner = row.owner_id ? String(row.owner_id) : null;
-  return !rowOwner || rowOwner === ownerId;
+function rowOwnerId(row: Record<string, unknown>): string | null {
+  return row.owner_id ? String(row.owner_id) : null;
 }
 
-export async function listSavedPlans(ownerId?: string | null): Promise<SavedPlan[]> {
-  const db = await getDb();
-  const result = db.exec("SELECT * FROM saved_plans ORDER BY updated_at DESC");
-  if (!result[0]) return [];
-
-  const cols = result[0].columns;
-  const plans: SavedPlan[] = [];
-  for (const values of result[0].values) {
-    const row: Record<string, unknown> = {};
-    cols.forEach((col, i) => {
-      row[col] = values[i];
-    });
-    if (!owns(row, ownerId)) continue;
-    const crops = JSON.parse(String(row.crops_json)) as string[];
-    const schedule = await scheduleForPlan(
-      String(row.zip),
-      String(row.zone),
-      crops,
-      String(row.risk_profile) as RiskProfile,
-    );
-    plans.push(rowToPlan(row, schedule));
-  }
-  return plans;
-}
-
-export async function getSavedPlan(
-  id: string,
-  ownerId?: string | null,
-): Promise<SavedPlan | null> {
+async function fetchRow(id: string): Promise<Record<string, unknown> | null> {
   const db = await getDb();
   const stmt = db.prepare("SELECT * FROM saved_plans WHERE id = ?");
   stmt.bind([id]);
@@ -127,7 +99,10 @@ export async function getSavedPlan(
   }
   const row = stmt.getAsObject() as Record<string, unknown>;
   stmt.free();
-  if (!owns(row, ownerId)) return null;
+  return row;
+}
+
+async function planFromRow(row: Record<string, unknown>): Promise<SavedPlan> {
   const crops = JSON.parse(String(row.crops_json)) as string[];
   const schedule = await scheduleForPlan(
     String(row.zip),
@@ -136,6 +111,44 @@ export async function getSavedPlan(
     String(row.risk_profile) as RiskProfile,
   );
   return rowToPlan(row, schedule);
+}
+
+export async function listSavedPlans(ownerId?: string | null): Promise<SavedPlan[]> {
+  const db = await getDb();
+  const plans: SavedPlan[] = [];
+
+  if (ownerId) {
+    const stmt = db.prepare(
+      "SELECT * FROM saved_plans WHERE owner_id = ? OR owner_id IS NULL ORDER BY updated_at DESC",
+    );
+    stmt.bind([ownerId]);
+    while (stmt.step()) {
+      plans.push(await planFromRow(stmt.getAsObject() as Record<string, unknown>));
+    }
+    stmt.free();
+    return plans;
+  }
+
+  const result = db.exec("SELECT * FROM saved_plans ORDER BY updated_at DESC");
+  if (!result[0]) return [];
+  const cols = result[0].columns;
+  for (const values of result[0].values) {
+    const row: Record<string, unknown> = {};
+    cols.forEach((col, i) => {
+      row[col] = values[i];
+    });
+    plans.push(await planFromRow(row));
+  }
+  return plans;
+}
+
+export async function getSavedPlan(
+  id: string,
+  ownerId?: string | null,
+): Promise<SavedPlan | null> {
+  const row = await fetchRow(id);
+  if (!row || !canReadPlan(rowOwnerId(row), ownerId)) return null;
+  return planFromRow(row);
 }
 
 export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan> {
@@ -194,8 +207,9 @@ export async function updateSavedPlan(
   patch: Partial<SavedPlanInput>,
   ownerId?: string | null,
 ): Promise<SavedPlan | null> {
-  const existing = await getSavedPlan(id, ownerId);
-  if (!existing) return null;
+  const row = await fetchRow(id);
+  if (!row || !canWritePlan(rowOwnerId(row), ownerId)) return null;
+  const existing = await planFromRow(row);
 
   const name = patch.name ?? existing.name;
   const crops = patch.crops ?? existing.crops;
@@ -252,8 +266,8 @@ export async function deleteSavedPlan(
   id: string,
   ownerId?: string | null,
 ): Promise<boolean> {
-  const existing = await getSavedPlan(id, ownerId);
-  if (!existing) return false;
+  const row = await fetchRow(id);
+  if (!row || !canWritePlan(rowOwnerId(row), ownerId)) return false;
   const db = await getDb();
   db.run("DELETE FROM saved_plans WHERE id = ?", [id]);
   persist(db);
