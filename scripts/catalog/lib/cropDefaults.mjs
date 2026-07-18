@@ -165,11 +165,6 @@ const DEFAULTS = {
     transplantDaysAfterFrost: 7,
     daysToHarvest: 60,
   },
-  greens: {
-    method: "direct",
-    directSowDaysBeforeFrost: 21,
-    daysToHarvest: 40,
-  },
   "asian-greens": {
     method: "direct",
     directSowDaysBeforeFrost: 14,
@@ -178,11 +173,6 @@ const DEFAULTS = {
   potato: {
     method: "direct",
     directSowDaysBeforeFrost: 14,
-    daysToHarvest: 90,
-  },
-  grain: {
-    method: "direct",
-    directSowDaysBeforeFrost: 7,
     daysToHarvest: 90,
   },
 };

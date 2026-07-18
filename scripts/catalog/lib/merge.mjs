@@ -128,16 +128,17 @@ function inferCategoryFromCropId(cropId) {
 
 const CROP_CATEGORY = {
   basil: "herb", cilantro: "herb", parsley: "herb", dill: "herb",
-  thyme: "herb", oregano: "herb", sage: "herb", mint: "herb", herb: "herb",
-  ginger: "herb", turmeric: "herb",
+  thyme: "herb", oregano: "herb", sage: "herb", mint: "herb",
+  ginger: "herb", turmeric: "herb", rosemary: "herb", chamomile: "herb",
+  "lemon-balm": "herb", marjoram: "herb", catnip: "herb", lovage: "herb",
+  shiso: "herb", dandelion: "herb", stevia: "herb", hyssop: "herb",
+  savory: "herb", borage: "herb", chervil: "herb", rue: "herb",
+  angelica: "herb", valerian: "herb", cumin: "herb", "salad-burnet": "herb",
   tomato: "fruit", pepper: "fruit", eggplant: "fruit", melon: "fruit",
   watermelon: "fruit", cantaloupe: "fruit", honeydew: "fruit",
   strawberry: "fruit", blueberry: "fruit", grape: "fruit",
   tomatillo: "fruit", "ground-cherry": "fruit",
   pumpkin: "fruit", "squash-summer": "fruit", "squash-winter": "fruit",
-  cucumber: "fruit", gourd: "fruit", luffa: "fruit",
-  grain: "grain", corn: "grain", amaranth: "grain", buckwheat: "grain",
-  quinoa: "grain", flax: "grain",
   mushroom: "mushroom",
 };
 
@@ -145,7 +146,7 @@ export { inferCategoryFromCropId };
 
 function inferFamily(cropId) {
   const legumes = ["beans", "pea", "soybean"];
-  const brassicas = ["broccoli", "kale", "cabbage", "cauliflower", "brussels-sprouts", "radish", "turnip", "asian-greens", "greens"];
+  const brassicas = ["broccoli", "kale", "cabbage", "cauliflower", "brussels-sprouts", "radish", "turnip", "asian-greens"];
   const solanaceae = ["tomato", "pepper", "eggplant"];
   const cucurbits = ["cucumber", "melon", "watermelon", "squash-summer", "squash-winter", "pumpkin"];
   if (legumes.includes(cropId)) return "legume";
@@ -153,6 +154,6 @@ function inferFamily(cropId) {
   if (solanaceae.includes(cropId)) return "solanaceae";
   if (cucurbits.includes(cropId)) return "cucurbit";
   if (cropId === "corn") return "grass";
-  if (cropId === "basil" || cropId === "herb") return "lamiaceae";
+  if (["basil", "rosemary", "mint", "thyme", "oregano", "sage"].includes(cropId)) return "lamiaceae";
   return "other";
 }

@@ -16,10 +16,11 @@ export const POPULAR_CROP_IDS = [
 
 const JUNK_CROP_IDS = new Set([
   "seed", "seeds", "organic", "red", "dry", "eco", "op", "winter", "type",
+  "herb", "greens", "grain",
 ]);
 
 /** Min varieties to appear in Browse tab */
-export const MIN_BROWSE_VARIETIES = 3;
+export const MIN_BROWSE_VARIETIES = 1;
 
 export type CropCategoryFilter = "popular" | "browse" | "vegetable" | "herb" | "fruit";
 
