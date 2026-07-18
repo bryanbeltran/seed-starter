@@ -16,7 +16,7 @@ export const POPULAR_CROP_IDS = [
 
 const JUNK_CROP_IDS = new Set([
   "seed", "seeds", "organic", "red", "dry", "eco", "op", "winter", "type",
-  "herb", "greens",
+  "herb", "greens", "grain",
 ]);
 
 /** Min varieties to appear in Browse tab */

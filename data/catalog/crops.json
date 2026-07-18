@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-18T22:00:05.556Z",
+  "generatedAt": "2026-07-18T22:09:18.344Z",
   "crops": {
     "beans": {
       "id": "beans",
@@ -9989,7 +9989,7 @@
     "amaranth": {
       "id": "amaranth",
       "name": "Amaranth",
-      "category": "grain",
+      "category": "vegetable",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -16298,66 +16298,6 @@
         }
       }
     },
-    "grain": {
-      "id": "grain",
-      "name": "Grain",
-      "category": "grain",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 7,
-      "daysToHarvest": 90,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 7
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "wheat-hard-red-winter": {
-          "id": "wheat-hard-red-winter",
-          "name": "Wheat, Hard Red Winter",
-          "daysToHarvest": 12,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/wheat-hard-red-winter-organic-shoot-seed-2162SG.html",
-          "confidence": "high"
-        },
-        "wheatgrass-shoots": {
-          "id": "wheatgrass-shoots",
-          "name": "Wheatgrass Shoots",
-          "daysToHarvest": 10,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-wheatgrass.html",
-          "confidence": "high"
-        },
-        "oats": {
-          "id": "oats",
-          "name": "Oats",
-          "daysToHarvest": 90,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-oats.html",
-          "confidence": "medium"
-        },
-        "winter-rye": {
-          "id": "winter-rye",
-          "name": "Winter Rye",
-          "daysToHarvest": 90,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-rye.html",
-          "confidence": "medium"
-        },
-        "full-pint-barley": {
-          "id": "full-pint-barley",
-          "name": "Full Pint Barley",
-          "daysToHarvest": 90,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/barley-full-pint-barley-grains",
-          "confidence": "medium"
-        }
-      }
-    },
     "stevia": {
       "id": "stevia",
       "name": "Stevia",
@@ -17013,7 +16953,7 @@
     "buckwheat": {
       "id": "buckwheat",
       "name": "Buckwheat",
-      "category": "grain",
+      "category": "vegetable",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -17382,6 +17322,46 @@
           "daysToHarvest": 240,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/garlic-early-red-italian",
+          "confidence": "medium"
+        },
+        "italian-late-garlic": {
+          "id": "italian-late-garlic",
+          "name": "Italian Late Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-italian-late",
+          "confidence": "medium"
+        },
+        "susanville-garlic": {
+          "id": "susanville-garlic",
+          "name": "Susanville Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-susanville",
+          "confidence": "medium"
+        },
+        "western-rose-garlic": {
+          "id": "western-rose-garlic",
+          "name": "Western Rose Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-western-rose",
+          "confidence": "medium"
+        },
+        "the-braiding-bunch-garlic": {
+          "id": "the-braiding-bunch-garlic",
+          "name": "The Braiding Bunch Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-the-braiding-bunch-combo",
+          "confidence": "medium"
+        },
+        "great-garlic-combo": {
+          "id": "great-garlic-combo",
+          "name": "Great Garlic Combo",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-great-combo",
           "confidence": "medium"
         }
       }
@@ -17853,7 +17833,7 @@
     "quinoa": {
       "id": "quinoa",
       "name": "Quinoa",
-      "category": "grain",
+      "category": "vegetable",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,

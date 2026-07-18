@@ -64,7 +64,6 @@ const CROP_ALIASES = {
   fennel: "fennel",
   artichoke: "artichoke",
   asparagus: "asparagus",
-  grains: "grain",
   mushrooms: "mushroom",
   rosemary: "rosemary",
   chamomile: "chamomile",

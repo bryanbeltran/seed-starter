@@ -15,10 +15,9 @@ describe("inferCategoryFromCropId", () => {
     expect(inferCategoryFromCropId("squash-summer")).toBe("fruit");
   });
 
-  it("tags grains and defaults vegetables", () => {
-    expect(inferCategoryFromCropId("grain")).toBe("grain");
+  it("defaults vegetables for former grains", () => {
+    expect(inferCategoryFromCropId("amaranth")).toBe("vegetable");
+    expect(inferCategoryFromCropId("buckwheat")).toBe("vegetable");
     expect(inferCategoryFromCropId("corn")).toBe("vegetable");
-    expect(inferCategoryFromCropId("cucumber")).toBe("vegetable");
-    expect(inferCategoryFromCropId("lettuce")).toBe("vegetable");
   });
 });

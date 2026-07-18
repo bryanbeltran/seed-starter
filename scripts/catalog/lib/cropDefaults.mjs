@@ -175,11 +175,6 @@ const DEFAULTS = {
     directSowDaysBeforeFrost: 14,
     daysToHarvest: 90,
   },
-  grain: {
-    method: "direct",
-    directSowDaysBeforeFrost: 7,
-    daysToHarvest: 90,
-  },
 };
 
 const GENERIC = {

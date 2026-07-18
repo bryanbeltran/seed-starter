@@ -139,8 +139,6 @@ const CROP_CATEGORY = {
   strawberry: "fruit", blueberry: "fruit", grape: "fruit",
   tomatillo: "fruit", "ground-cherry": "fruit",
   pumpkin: "fruit", "squash-summer": "fruit", "squash-winter": "fruit",
-  grain: "grain", amaranth: "grain", buckwheat: "grain",
-  quinoa: "grain", flax: "grain",
   mushroom: "mushroom",
 };
 

@@ -5,7 +5,7 @@ export const KNOWN_CROP_IDS = new Set([
   "tomato", "pepper", "eggplant", "lettuce", "carrot", "broccoli", "kale", "cabbage",
   "cauliflower", "cucumber", "melon", "watermelon", "squash-summer", "squash-winter",
   "pumpkin", "corn", "beans", "pea", "beet", "radish", "spinach", "onion", "leek",
-  "garlic", "basil", "asian-greens", "potato", "grain", "mushroom",
+  "garlic", "basil", "asian-greens", "potato", "mushroom",
   "artichoke", "asparagus", "okra", "celery", "kohlrabi", "fennel", "turnip", "parsnip",
   "brussels-sprouts", "microgreens", "chard", "collards", "arugula", "cilantro",
   "parsley", "dill", "thyme", "oregano", "sage", "mint", "tomatillo", "ground-cherry",
@@ -19,7 +19,7 @@ export const KNOWN_CROP_IDS = new Set([
 ]);
 
 /** Retired catch-all ids — never assign */
-export const BANNED_CROP_IDS = new Set(["herb", "greens"]);
+export const BANNED_CROP_IDS = new Set(["herb", "greens", "grain"]);
 
 const JUNK_TOKENS = new Set([
   "a", "an", "and", "de", "dry", "eco", "f1", "for", "gmo", "my", "non", "of",
@@ -143,7 +143,6 @@ const NAME_HINTS = [
   [/buckwheat/i, "buckwheat"],
   [/quinoa/i, "quinoa"],
   [/flax/i, "flax"],
-  [/\bwheat\b|\bbarley\b|\boats?\b|\brye\b|wheatgrass/i, "grain"],
   [/mushroom/i, "mushroom"],
   [/melon/i, "melon"],
 ];
@@ -215,7 +214,7 @@ export function isCollectionRecord(rec) {
 
 export function isCoverCropRecord(rec) {
   const text = `${rec.name} ${rec.cropCategory ?? ""}`;
-  return /\b(cover crop|field pea|vetch mix|rye\/hairy|peas\/oats)\b/i.test(text);
+  return /\b(cover crop|field pea|vetch mix|rye\/hairy|peas\/oats|wheat|barley|\boats?\b|\brye\b|wheatgrass)\b/i.test(text);
 }
 
 /**
