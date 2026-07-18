@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-18T22:09:18.344Z",
+  "generatedAt": "2026-07-18T22:43:05.756Z",
   "crops": {
     "beans": {
       "id": "beans",
@@ -4444,13 +4444,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 100,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -5583,14 +5583,18 @@
       "name": "Endive",
       "category": "vegetable",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 30,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": -14,
+      "daysToHarvest": 85,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 30,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -5599,7 +5603,7 @@
         "clodia": {
           "id": "clodia",
           "name": "Clodia",
-          "daysToHarvest": 60,
+          "daysToHarvest": 85,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/chicory/endive/clodia-endive-seed-111.html",
           "confidence": "medium"
@@ -5615,7 +5619,7 @@
         "sempre-bianca": {
           "id": "sempre-bianca",
           "name": "Sempre Bianca",
-          "daysToHarvest": 60,
+          "daysToHarvest": 85,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/chicory/endive/sempre-bianca-endive-seed-4265.html",
           "confidence": "medium"
@@ -5623,7 +5627,7 @@
         "bingo": {
           "id": "bingo",
           "name": "Bingo",
-          "daysToHarvest": 60,
+          "daysToHarvest": 85,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/chicory/belgian-endive-witloof/bingo-endive-seed-4899.html",
           "confidence": "medium"
@@ -6368,13 +6372,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 21,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 21
         }
       },
       "source": "catalog-etl",
@@ -7439,14 +7443,18 @@
       "name": "Kohlrabi",
       "category": "vegetable",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": -14,
+      "daysToHarvest": 55,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -7875,14 +7883,18 @@
       "name": "Celery",
       "category": "vegetable",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 70,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": -14,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 70,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -8416,13 +8428,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 21,
+      "daysToHarvest": 40,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 21
         }
       },
       "source": "catalog-etl",
@@ -8447,7 +8459,7 @@
         "scarlet-frills": {
           "id": "scarlet-frills",
           "name": "Scarlet Frills",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/scarlet-frills-mustard-green-seed-2530.html",
           "confidence": "medium"
@@ -8455,7 +8467,7 @@
         "golden-frills": {
           "id": "golden-frills",
           "name": "Golden Frills",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/golden-frills-mustard-green-seed-2738.html",
           "confidence": "medium"
@@ -8479,7 +8491,7 @@
         "red-splendor": {
           "id": "red-splendor",
           "name": "Red Splendor",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/red-splendor-mustard-green-seed-3051.html",
           "confidence": "medium"
@@ -8487,7 +8499,7 @@
         "amara": {
           "id": "amara",
           "name": "Amara",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/amara-mustard-green-seed-3147.html",
           "confidence": "medium"
@@ -8495,7 +8507,7 @@
         "miz-america": {
           "id": "miz-america",
           "name": "Miz America",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/miz-america-f1-mustard-green-seed-3749.html",
           "confidence": "medium"
@@ -8503,7 +8515,7 @@
         "wasabina": {
           "id": "wasabina",
           "name": "Wasabina",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/wasabina-mustard-green-seed-4396.html",
           "confidence": "medium"
@@ -8511,7 +8523,7 @@
         "southern-giant-curled": {
           "id": "southern-giant-curled",
           "name": "Southern Giant Curled",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/southern-giant-curled-mustard-green-seed-5526.html",
           "confidence": "medium"
@@ -8519,7 +8531,7 @@
         "moonshadow": {
           "id": "moonshadow",
           "name": "Moonshadow",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/moonshadow-mustard-green-seed-5541.html",
           "confidence": "medium"
@@ -8700,13 +8712,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 21,
+      "daysToHarvest": 45,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 21
         }
       },
       "source": "catalog-etl",
@@ -8744,13 +8756,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
+      "directSowDaysBeforeFrost": 21,
       "daysToHarvest": 60,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 21
         }
       },
       "source": "catalog-etl",
@@ -8796,13 +8808,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 28,
+      "daysToHarvest": 40,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 28
         }
       },
       "source": "catalog-etl",
@@ -8811,7 +8823,7 @@
         "arugula-40-standard-41": {
           "id": "arugula-40-standard-41",
           "name": "Arugula &#40;Standard&#41;",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/arugula-roquette/arugula-standard-salad-arugula-seed-385.html",
           "confidence": "medium"
@@ -8819,7 +8831,7 @@
         "sylvetta": {
           "id": "sylvetta",
           "name": "Sylvetta",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/arugula-roquette/sylvetta-wild-arugula-seed-398.html",
           "confidence": "medium"
@@ -8843,7 +8855,7 @@
         "bellezia": {
           "id": "bellezia",
           "name": "Bellezia",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/arugula-roquette/bellezia-wild-arugula-seed-3213.html",
           "confidence": "medium"
@@ -8883,7 +8895,7 @@
         "esmee": {
           "id": "esmee",
           "name": "Esmee",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/arugula-roquette/esmee-organic-salad-arugula-seed-3746G.html",
           "confidence": "medium"
@@ -8891,7 +8903,7 @@
         "bottle-rocket": {
           "id": "bottle-rocket",
           "name": "Bottle Rocket",
-          "daysToHarvest": 60,
+          "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/hot-peppers/bottle-rocket-organic-cayenne-pepper-seed-4437G.html",
           "confidence": "medium"
@@ -8960,13 +8972,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 21,
+      "daysToHarvest": 30,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 21
         }
       },
       "source": "catalog-etl",
@@ -9992,13 +10004,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
+      "directSowDaysBeforeFrost": 7,
       "daysToHarvest": 60,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -11287,14 +11299,18 @@
       "name": "Parsley",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": -7,
+      "daysToHarvest": 75,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -7
         }
       },
       "source": "catalog-etl",
@@ -11359,7 +11375,7 @@
         "parsley-pea": {
           "id": "parsley-pea",
           "name": "Parsley Pea",
-          "daysToHarvest": 60,
+          "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peas/greens-and-garnish-peas/parsley-pea-pea-seed-4976.html",
           "confidence": "medium"
@@ -11437,7 +11453,7 @@
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "daysToHarvest": 21,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
@@ -11499,7 +11515,7 @@
         "spicy-salad-mix-sprouting-seeds": {
           "id": "spicy-salad-mix-sprouting-seeds",
           "name": "Spicy Salad Mix Sprouting Seeds",
-          "daysToHarvest": 60,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-spicy-salad-mix-sprouting.html",
           "confidence": "medium"
@@ -11603,7 +11619,7 @@
         "spring-salad-mix-sprouting-seeds": {
           "id": "spring-salad-mix-sprouting-seeds",
           "name": "Spring Salad Mix Sprouting Seeds",
-          "daysToHarvest": 60,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-spring-salad-mix-sprouting-seeds.html",
           "confidence": "medium"
@@ -12148,13 +12164,13 @@
       "category": "fruit",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -12163,7 +12179,7 @@
         "alexandria": {
           "id": "alexandria",
           "name": "Alexandria",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/fruits/strawberry/strawberry-seeds/alexandria-strawberry-seed-697.html",
           "confidence": "medium"
@@ -12171,7 +12187,7 @@
         "elan": {
           "id": "elan",
           "name": "Elan",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/fruits/strawberry/strawberry-seeds/elan-f1-strawberry-seed-3893.html",
           "confidence": "medium"
@@ -12179,7 +12195,7 @@
         "summer-breeze-cherry-blossom": {
           "id": "summer-breeze-cherry-blossom",
           "name": "Summer Breeze Cherry Blossom",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/fruits/strawberry/strawberry-seeds/summer-breeze-cherry-blossom-f1-strawberry-seed-5076.html",
           "confidence": "medium"
@@ -12203,7 +12219,7 @@
         "rainbow-treasure-strawberry": {
           "id": "rainbow-treasure-strawberry",
           "name": "Rainbow Treasure Strawberry",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/strawberry-rainbow-treasure",
           "confidence": "medium"
@@ -12211,7 +12227,7 @@
         "italian-alpine-strawberry": {
           "id": "italian-alpine-strawberry",
           "name": "Italian Alpine Strawberry",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/berry-italian-alpine",
           "confidence": "medium"
@@ -12224,13 +12240,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 55,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -12239,7 +12255,7 @@
         "ruby-red-or-rhubarb-chard": {
           "id": "ruby-red-or-rhubarb-chard",
           "name": "Ruby Red or Rhubarb Chard",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/swiss-chard/ruby-red-or-rhubarb-chard-swiss-chard-seed-702.html",
           "confidence": "medium"
@@ -12255,7 +12271,7 @@
         "charbell": {
           "id": "charbell",
           "name": "Charbell",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/swiss-chard/charbell-f1-swiss-chard-seed-4551.html",
           "confidence": "medium"
@@ -12263,7 +12279,7 @@
         "silverado": {
           "id": "silverado",
           "name": "Silverado",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/swiss-chard/silverado-swiss-chard-seed-5278.html",
           "confidence": "medium"
@@ -12271,7 +12287,7 @@
         "firebird": {
           "id": "firebird",
           "name": "Firebird",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/swiss-chard/firebird-f1-swiss-chard-seed-5279.html",
           "confidence": "medium"
@@ -12295,7 +12311,7 @@
         "oriole": {
           "id": "oriole",
           "name": "Oriole",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/swiss-chard/oriole-organic-swiss-chard-seed-3122G.html",
           "confidence": "medium"
@@ -12319,7 +12335,7 @@
         "heart-of-gold": {
           "id": "heart-of-gold",
           "name": "Heart of Gold",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/swiss-chard/heart-of-gold-organic-swiss-chard-seed-4614G.html",
           "confidence": "medium"
@@ -12460,13 +12476,13 @@
       "category": "vegetable",
       "family": "brassica",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 21,
+      "daysToHarvest": 55,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 21
         }
       },
       "source": "catalog-etl",
@@ -14319,14 +14335,18 @@
       "name": "Lemon Balm",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -14356,13 +14376,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -14387,7 +14407,7 @@
         "orazio": {
           "id": "orazio",
           "name": "Orazio",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/fennel/orazio-f1-fennel-seed-3273.html",
           "confidence": "medium"
@@ -14395,7 +14415,7 @@
         "dragon": {
           "id": "dragon",
           "name": "Dragon",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/fennel/dragon-f1-fennel-seed-4613.html",
           "confidence": "medium"
@@ -14411,7 +14431,7 @@
         "preludio": {
           "id": "preludio",
           "name": "Preludio",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/fennel/preludio-organic-f1-fennel-seed-3272G.html",
           "confidence": "medium"
@@ -14419,7 +14439,7 @@
         "finale": {
           "id": "finale",
           "name": "Finale",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/fennel/finale-organic-fennel-seed-5977G.html",
           "confidence": "medium"
@@ -14487,14 +14507,18 @@
       "name": "Tomatillo",
       "category": "fruit",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 56,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": 14,
+      "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 56,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -14555,14 +14579,18 @@
       "name": "Mint",
       "category": "herb",
       "family": "lamiaceae",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -14595,7 +14623,7 @@
         "peppermint": {
           "id": "peppermint",
           "name": "Peppermint",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/swiss-chard/peppermint-swiss-chard-seed-3066.html",
           "confidence": "medium"
@@ -14615,14 +14643,18 @@
       "name": "Sage",
       "category": "herb",
       "family": "lamiaceae",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 56,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 80,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 56,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -14652,13 +14684,13 @@
       "category": "herb",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
+      "directSowDaysBeforeFrost": 14,
       "daysToHarvest": 60,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -14680,13 +14712,13 @@
       "category": "herb",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
+      "directSowDaysBeforeFrost": 14,
       "daysToHarvest": 60,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -14731,14 +14763,18 @@
       "name": "Hyssop",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 80,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -14763,7 +14799,7 @@
         "golden-jubilee-anise-hyssop": {
           "id": "golden-jubilee-anise-hyssop",
           "name": "Golden Jubilee Anise Hyssop",
-          "daysToHarvest": 60,
+          "daysToHarvest": 80,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/anise-hyssop-golden-jubilee",
           "confidence": "medium"
@@ -14771,7 +14807,7 @@
         "blue-anise-hyssop": {
           "id": "blue-anise-hyssop",
           "name": "Blue Anise Hyssop",
-          "daysToHarvest": 60,
+          "daysToHarvest": 80,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/anise-hyssop-blue",
           "confidence": "medium"
@@ -14784,13 +14820,13 @@
       "category": "herb",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
+      "directSowDaysBeforeFrost": 14,
       "daysToHarvest": 60,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -14811,14 +14847,18 @@
       "name": "Catnip",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -14840,13 +14880,13 @@
       "category": "herb",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 45,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -14855,7 +14895,7 @@
         "santo": {
           "id": "santo",
           "name": "Santo",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/santo-cilantro-coriander-seed-919.html",
           "confidence": "medium"
@@ -14863,7 +14903,7 @@
         "santo-monogerm": {
           "id": "santo-monogerm",
           "name": "Santo Monogerm",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/santo-monogerm-cilantro-coriander-seed-2466.html",
           "confidence": "medium"
@@ -14871,7 +14911,7 @@
         "leisure": {
           "id": "leisure",
           "name": "Leisure",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/leisure-cilantro-coriander-seed-3409.html",
           "confidence": "medium"
@@ -14879,7 +14919,7 @@
         "cruiser": {
           "id": "cruiser",
           "name": "Cruiser",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/cruiser-cilantro-coriander-seed-3755.html",
           "confidence": "medium"
@@ -14887,7 +14927,7 @@
         "calypso": {
           "id": "calypso",
           "name": "Calypso",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/calypso-cilantro-coriander-seed-3803.html",
           "confidence": "medium"
@@ -14895,7 +14935,7 @@
         "confetti": {
           "id": "confetti",
           "name": "Confetti",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/confetti-cilantro-coriander-seed-4714.html",
           "confidence": "medium"
@@ -14903,7 +14943,7 @@
         "cruiser-monogerm": {
           "id": "cruiser-monogerm",
           "name": "Cruiser Monogerm",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/cruiser-monogerm-cilantro-coriander-seed-4787.html",
           "confidence": "medium"
@@ -14927,7 +14967,7 @@
         "marino": {
           "id": "marino",
           "name": "Marino",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/marino-organic-cilantro-coriander-seed-3858G.html",
           "confidence": "medium"
@@ -14967,7 +15007,7 @@
         "coriander": {
           "id": "coriander",
           "name": "Coriander",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/coriander-cilantro",
           "confidence": "medium"
@@ -14975,7 +15015,7 @@
         "confetti-coriander-cilantro": {
           "id": "confetti-coriander-cilantro",
           "name": "Confetti Coriander/Cilantro",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/coriander-cilantro-confetti",
           "confidence": "medium"
@@ -15004,13 +15044,13 @@
       "category": "herb",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 50,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -15019,7 +15059,7 @@
         "bouquet": {
           "id": "bouquet",
           "name": "Bouquet",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/bouquet-dill-seed-920.html",
           "confidence": "medium"
@@ -15027,7 +15067,7 @@
         "fernleaf": {
           "id": "fernleaf",
           "name": "Fernleaf",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/fernleaf-dill-seed-921.html",
           "confidence": "medium"
@@ -15035,7 +15075,7 @@
         "ella": {
           "id": "ella",
           "name": "Ella",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/ella-dill-seed-3135.html",
           "confidence": "medium"
@@ -15043,7 +15083,7 @@
         "hera": {
           "id": "hera",
           "name": "Hera",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/hera-dill-seed-3149.html",
           "confidence": "medium"
@@ -15051,7 +15091,7 @@
         "thalia": {
           "id": "thalia",
           "name": "Thalia",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/thalia-dill-seed-4010.html",
           "confidence": "medium"
@@ -15059,7 +15099,7 @@
         "green-sleeves": {
           "id": "green-sleeves",
           "name": "Green Sleeves",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/green-sleeves-dill-seed-4950.html",
           "confidence": "medium"
@@ -15067,7 +15107,7 @@
         "teddy": {
           "id": "teddy",
           "name": "Teddy",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/teddy-dill-seed-5550.html",
           "confidence": "medium"
@@ -15099,7 +15139,7 @@
         "dukat-dill": {
           "id": "dukat-dill",
           "name": "Dukat Dill",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/dill-dukat",
           "confidence": "medium"
@@ -15107,7 +15147,7 @@
         "fernleaf-dill": {
           "id": "fernleaf-dill",
           "name": "Fernleaf Dill",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/dill-fernleaf",
           "confidence": "medium"
@@ -15115,7 +15155,7 @@
         "long-island-mammoth-dill": {
           "id": "long-island-mammoth-dill",
           "name": "Long Island Mammoth Dill",
-          "daysToHarvest": 60,
+          "daysToHarvest": 50,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/dill-long-island-mammoth",
           "confidence": "medium"
@@ -15135,14 +15175,18 @@
       "name": "Lovage",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -15163,14 +15207,18 @@
       "name": "Marjoram",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -15207,14 +15255,18 @@
       "name": "Oregano",
       "category": "herb",
       "family": "lamiaceae",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 80,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -15231,7 +15283,7 @@
         "oregano": {
           "id": "oregano",
           "name": "Oregano",
-          "daysToHarvest": 60,
+          "daysToHarvest": 80,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/oregano-oregano",
           "confidence": "medium"
@@ -15239,7 +15291,7 @@
         "kirigami-oregano": {
           "id": "kirigami-oregano",
           "name": "Kirigami Oregano",
-          "daysToHarvest": 60,
+          "daysToHarvest": 80,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/oregano-kirigami",
           "confidence": "medium"
@@ -15251,14 +15303,18 @@
       "name": "Rosemary",
       "category": "herb",
       "family": "lamiaceae",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 70,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 14,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 70,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -15267,7 +15323,7 @@
         "rosemary": {
           "id": "rosemary",
           "name": "Rosemary",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/rosemary/rosemary-herb-seed-932.html",
           "confidence": "medium"
@@ -15275,7 +15331,7 @@
         "primed-rosemary": {
           "id": "primed-rosemary",
           "name": "Primed Rosemary",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/rosemary/primed-rosemary-herb-seed-932E.html",
           "confidence": "medium"
@@ -15287,14 +15343,18 @@
       "name": "Savory",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -15315,14 +15375,18 @@
       "name": "Shiso",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
+      "method": "transplant",
+      "indoorSowOffsetDays": 35,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
       "daysToHarvest": 60,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 35,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -15367,14 +15431,18 @@
       "name": "Thyme",
       "category": "herb",
       "family": "lamiaceae",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 80,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -15423,7 +15491,7 @@
         "german-winter-thyme": {
           "id": "german-winter-thyme",
           "name": "German/Winter Thyme",
-          "daysToHarvest": 60,
+          "daysToHarvest": 80,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/thyme-german-or-winter",
           "confidence": "medium"
@@ -15431,7 +15499,7 @@
         "creeping-thyme": {
           "id": "creeping-thyme",
           "name": "Creeping Thyme",
-          "daysToHarvest": 60,
+          "daysToHarvest": 80,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/thyme-creeping",
           "confidence": "medium"
@@ -15444,13 +15512,13 @@
       "category": "herb",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 55,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -15459,7 +15527,7 @@
         "dandelion": {
           "id": "dandelion",
           "name": "Dandelion",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/herbs-for-salad-mix/dandelion-herb-seed-951.html",
           "confidence": "medium"
@@ -15475,7 +15543,7 @@
         "italiko-red": {
           "id": "italiko-red",
           "name": "Italiko Red",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/chicory/italian-dandelion/italiko-red-italian-dandelion-seed-3358.html",
           "confidence": "medium"
@@ -15491,7 +15559,7 @@
         "felix": {
           "id": "felix",
           "name": "Felix",
-          "daysToHarvest": 60,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/chicory/italian-dandelion/felix-organic-italian-dandelion-seed-5134G.html",
           "confidence": "medium"
@@ -15511,14 +15579,18 @@
       "name": "Rue",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 56,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 56,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -15692,13 +15764,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 110,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16219,14 +16291,18 @@
       "name": "Artichoke",
       "category": "vegetable",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 84,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": -14,
+      "daysToHarvest": 180,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 84,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -16303,14 +16379,18 @@
       "name": "Stevia",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 14,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16332,13 +16412,13 @@
       "category": "herb",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 45,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16375,14 +16455,18 @@
       "name": "Grape",
       "category": "fruit",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 70,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": 14,
+      "daysToHarvest": 300,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 70,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16404,13 +16488,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 28,
+      "daysToHarvest": 300,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 28
         }
       },
       "source": "catalog-etl",
@@ -16419,7 +16503,7 @@
         "victoria": {
           "id": "victoria",
           "name": "Victoria",
-          "daysToHarvest": 60,
+          "daysToHarvest": 300,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/fruits/rhubarb/rhubarb-seeds/victoria-rhubarb-seed-2577.html",
           "confidence": "medium"
@@ -16431,14 +16515,18 @@
       "name": "Okra",
       "category": "vegetable",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 14,
       "daysToHarvest": 60,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16507,14 +16595,18 @@
       "name": "Shallot",
       "category": "vegetable",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 56,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": -28,
+      "daysToHarvest": 100,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 56,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -28
         }
       },
       "source": "catalog-etl",
@@ -16591,14 +16683,18 @@
       "name": "Valerian",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 56,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 120,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 56,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -16607,7 +16703,7 @@
         "common-valerian": {
           "id": "common-valerian",
           "name": "Common Valerian",
-          "daysToHarvest": 60,
+          "daysToHarvest": 120,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/valerian/common-valerian-herb-seed-2734.html",
           "confidence": "medium"
@@ -16619,14 +16715,18 @@
       "name": "Cumin",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 14,
+      "daysToHarvest": 120,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16648,13 +16748,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 28,
+      "daysToHarvest": 300,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 28
         }
       },
       "source": "catalog-etl",
@@ -16663,7 +16763,7 @@
         "millennium": {
           "id": "millennium",
           "name": "Millennium",
-          "daysToHarvest": 60,
+          "daysToHarvest": 300,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/asparagus/millennium-f1-asparagus-seed-3455.html",
           "confidence": "medium"
@@ -16671,7 +16771,7 @@
         "erasmus": {
           "id": "erasmus",
           "name": "Erasmus",
-          "daysToHarvest": 60,
+          "daysToHarvest": 300,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/asparagus/erasmus-f1-asparagus-seed-4643.html",
           "confidence": "medium"
@@ -16683,14 +16783,18 @@
       "name": "Brussels Sprouts",
       "category": "vegetable",
       "family": "brassica",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 84,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": -14,
+      "daysToHarvest": 100,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 84,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -16791,14 +16895,18 @@
       "name": "Angelica",
       "category": "herb",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 56,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": -7,
+      "daysToHarvest": 120,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 56,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -7
         }
       },
       "source": "catalog-etl",
@@ -16820,13 +16928,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 120,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16848,13 +16956,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 50,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16883,14 +16991,18 @@
       "name": "Escarole",
       "category": "vegetable",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 30,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": -14,
+      "daysToHarvest": 85,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 30,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -16920,13 +17032,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 45,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -16935,7 +17047,7 @@
         "ruby-red-orach": {
           "id": "ruby-red-orach",
           "name": "Ruby Red Orach",
-          "daysToHarvest": 60,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/specialty-greens/ruby-red-orach-organic-specialty-green-seed-3999G.html",
           "confidence": "medium"
@@ -16956,13 +17068,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 7,
+      "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -16979,7 +17091,7 @@
         "common-buckwheat": {
           "id": "common-buckwheat",
           "name": "Common Buckwheat",
-          "daysToHarvest": 60,
+          "daysToHarvest": 70,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-common-buckwheat.html",
           "confidence": "medium"
@@ -16992,13 +17104,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 28,
+      "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 28
         }
       },
       "source": "catalog-etl",
@@ -17020,13 +17132,13 @@
       "category": "vegetable",
       "family": "legume",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 7,
+      "daysToHarvest": 85,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -17047,14 +17159,18 @@
       "name": "Collards",
       "category": "vegetable",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 42,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": -21,
+      "daysToHarvest": 55,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -21
         }
       },
       "source": "catalog-etl",
@@ -17091,14 +17207,18 @@
       "name": "Ground Cherry",
       "category": "fruit",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 56,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": 14,
+      "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 56,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -17592,13 +17712,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 7,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 7
         }
       },
       "source": "catalog-etl",
@@ -17607,7 +17727,7 @@
         "zohar-sunflower": {
           "id": "zohar-sunflower",
           "name": "Zohar Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-zohar",
           "confidence": "medium"
@@ -17615,7 +17735,7 @@
         "procut-white-nite-sunflower": {
           "id": "procut-white-nite-sunflower",
           "name": "Procut® White Nite Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-procut-white-nite",
           "confidence": "medium"
@@ -17623,7 +17743,7 @@
         "soraya-sunflower": {
           "id": "soraya-sunflower",
           "name": "Soraya Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-soraya",
           "confidence": "medium"
@@ -17631,7 +17751,7 @@
         "the-joker-sunflower": {
           "id": "the-joker-sunflower",
           "name": "The Joker Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-the-joker",
           "confidence": "medium"
@@ -17639,7 +17759,7 @@
         "sunrichtm-lemon-sunflower": {
           "id": "sunrichtm-lemon-sunflower",
           "name": "Sunrich™ Lemon Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-sunrich-lemon",
           "confidence": "medium"
@@ -17647,7 +17767,7 @@
         "sunseed-sunflower": {
           "id": "sunseed-sunflower",
           "name": "Sunseed Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-sunseed",
           "confidence": "medium"
@@ -17655,7 +17775,7 @@
         "floristan-sunflower": {
           "id": "floristan-sunflower",
           "name": "Floristan Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-floristan",
           "confidence": "medium"
@@ -17663,7 +17783,7 @@
         "teddy-bear-sunflower": {
           "id": "teddy-bear-sunflower",
           "name": "Teddy Bear Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-teddy-bear",
           "confidence": "medium"
@@ -17671,7 +17791,7 @@
         "red-sun-sunflower": {
           "id": "red-sun-sunflower",
           "name": "Red Sun Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-red-sun",
           "confidence": "medium"
@@ -17679,7 +17799,7 @@
         "infrared-mix-sunflower": {
           "id": "infrared-mix-sunflower",
           "name": "Infrared Mix Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-infrared",
           "confidence": "medium"
@@ -17687,7 +17807,7 @@
         "ring-of-fire-sunflower": {
           "id": "ring-of-fire-sunflower",
           "name": "Ring Of Fire Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-ring-of-fire",
           "confidence": "medium"
@@ -17695,7 +17815,7 @@
         "american-giant-sunflower": {
           "id": "american-giant-sunflower",
           "name": "American Giant Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-american-giant",
           "confidence": "medium"
@@ -17703,7 +17823,7 @@
         "snack-mix-sunflower": {
           "id": "snack-mix-sunflower",
           "name": "Snack Mix Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-snack",
           "confidence": "medium"
@@ -17711,7 +17831,7 @@
         "mongolian-giant-sunflower": {
           "id": "mongolian-giant-sunflower",
           "name": "Mongolian Giant Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-mongolian-giant",
           "confidence": "medium"
@@ -17719,7 +17839,7 @@
         "starburst-panache-sunflower": {
           "id": "starburst-panache-sunflower",
           "name": "Starburst Panache Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-starburst-panache",
           "confidence": "medium"
@@ -17727,7 +17847,7 @@
         "waooh-sunflower": {
           "id": "waooh-sunflower",
           "name": "Waooh Sunflower",
-          "daysToHarvest": 60,
+          "daysToHarvest": 90,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-waooh",
           "confidence": "medium"
@@ -17739,14 +17859,18 @@
       "name": "Honeydew",
       "category": "fruit",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 28,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 14,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 28,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -17767,14 +17891,18 @@
       "name": "Cantaloupe",
       "category": "fruit",
       "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "method": "transplant",
+      "indoorSowOffsetDays": 28,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 14,
+      "daysToHarvest": 85,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "method": "transplant",
+          "indoorSowOffsetDays": 28,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 14
         }
       },
       "source": "catalog-etl",
@@ -17836,13 +17964,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
+      "directSowDaysBeforeFrost": 7,
+      "daysToHarvest": 100,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 0
+          "directSowDaysBeforeAnchor": 7
         }
       },
       "source": "catalog-etl",

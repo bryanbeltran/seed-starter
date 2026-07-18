@@ -1,187 +1,144 @@
 /** Default spring timing by crop — confidence: low when inferred from category only */
+
+const T = (indoor, harden, after, dth) => ({
+  method: "transplant",
+  indoorSowOffsetDays: indoor,
+  hardenOffDaysBeforeTransplant: harden,
+  transplantDaysAfterFrost: after,
+  daysToHarvest: dth,
+});
+
+const D = (before, dth) => ({
+  method: "direct",
+  directSowDaysBeforeFrost: before,
+  daysToHarvest: dth,
+});
+
 const DEFAULTS = {
-  tomato: {
-    method: "transplant",
-    indoorSowOffsetDays: 56,
-    hardenOffDaysBeforeTransplant: 7,
-    transplantDaysAfterFrost: 0,
-    daysToHarvest: 75,
-  },
-  pepper: {
-    method: "transplant",
-    indoorSowOffsetDays: 56,
-    hardenOffDaysBeforeTransplant: 7,
-    transplantDaysAfterFrost: 14,
-    daysToHarvest: 70,
-  },
-  eggplant: {
-    method: "transplant",
-    indoorSowOffsetDays: 56,
-    hardenOffDaysBeforeTransplant: 7,
-    transplantDaysAfterFrost: 14,
-    daysToHarvest: 75,
-  },
-  carrot: {
-    method: "direct",
-    directSowDaysBeforeFrost: 14,
-    daysToHarvest: 70,
-  },
-  lettuce: {
-    method: "transplant",
-    indoorSowOffsetDays: 30,
-    hardenOffDaysBeforeTransplant: 5,
-    transplantDaysAfterFrost: -14,
-    daysToHarvest: 45,
-  },
-  broccoli: {
-    method: "transplant",
-    indoorSowOffsetDays: 84,
-    hardenOffDaysBeforeTransplant: 7,
-    transplantDaysAfterFrost: -14,
-    daysToHarvest: 60,
-  },
-  kale: {
-    method: "transplant",
-    indoorSowOffsetDays: 42,
-    hardenOffDaysBeforeTransplant: 5,
-    transplantDaysAfterFrost: -21,
-    daysToHarvest: 55,
-  },
-  cabbage: {
-    method: "transplant",
-    indoorSowOffsetDays: 70,
-    hardenOffDaysBeforeTransplant: 7,
-    transplantDaysAfterFrost: -14,
-    daysToHarvest: 75,
-  },
-  cauliflower: {
-    method: "transplant",
-    indoorSowOffsetDays: 70,
-    hardenOffDaysBeforeTransplant: 7,
-    transplantDaysAfterFrost: -14,
-    daysToHarvest: 70,
-  },
-  cucumber: {
-    method: "transplant",
-    indoorSowOffsetDays: 21,
-    hardenOffDaysBeforeTransplant: 5,
-    transplantDaysAfterFrost: 7,
-    daysToHarvest: 55,
-  },
-  melon: {
-    method: "transplant",
-    indoorSowOffsetDays: 28,
-    hardenOffDaysBeforeTransplant: 5,
-    transplantDaysAfterFrost: 14,
-    daysToHarvest: 85,
-  },
-  watermelon: {
-    method: "transplant",
-    indoorSowOffsetDays: 28,
-    hardenOffDaysBeforeTransplant: 5,
-    transplantDaysAfterFrost: 14,
-    daysToHarvest: 90,
-  },
-  "squash-summer": {
-    method: "direct",
-    directSowDaysBeforeFrost: 7,
-    daysToHarvest: 55,
-  },
-  "squash-winter": {
-    method: "direct",
-    directSowDaysBeforeFrost: 14,
-    daysToHarvest: 100,
-  },
-  pumpkin: {
-    method: "direct",
-    directSowDaysBeforeFrost: 14,
-    daysToHarvest: 100,
-  },
-  corn: {
-    method: "direct",
-    directSowDaysBeforeFrost: 0,
-    daysToHarvest: 75,
-  },
-  beans: {
-    method: "direct",
-    directSowDaysBeforeFrost: 0,
-    daysToHarvest: 55,
-  },
-  pea: {
-    method: "direct",
-    directSowDaysBeforeFrost: 28,
-    daysToHarvest: 60,
-  },
-  carrot: {
-    method: "direct",
-    directSowDaysBeforeFrost: 14,
-    daysToHarvest: 70,
-  },
-  beet: {
-    method: "direct",
-    directSowDaysBeforeFrost: 14,
-    daysToHarvest: 55,
-  },
-  radish: {
-    method: "direct",
-    directSowDaysBeforeFrost: 28,
-    daysToHarvest: 30,
-  },
-  spinach: {
-    method: "direct",
-    directSowDaysBeforeFrost: 42,
-    daysToHarvest: 40,
-  },
-  onion: {
-    method: "transplant",
-    indoorSowOffsetDays: 56,
-    hardenOffDaysBeforeTransplant: 7,
-    transplantDaysAfterFrost: -28,
-    daysToHarvest: 100,
-  },
-  leek: {
-    method: "transplant",
-    indoorSowOffsetDays: 70,
-    hardenOffDaysBeforeTransplant: 7,
-    transplantDaysAfterFrost: -28,
-    daysToHarvest: 120,
-  },
-  garlic: {
-    method: "direct",
-    directSowDaysBeforeFrost: 21,
-    daysToHarvest: 240,
-  },
-  basil: {
-    method: "transplant",
-    indoorSowOffsetDays: 35,
-    hardenOffDaysBeforeTransplant: 5,
-    transplantDaysAfterFrost: 7,
-    daysToHarvest: 45,
-  },
-  herb: {
-    method: "transplant",
-    indoorSowOffsetDays: 42,
-    hardenOffDaysBeforeTransplant: 5,
-    transplantDaysAfterFrost: 7,
-    daysToHarvest: 60,
-  },
-  "asian-greens": {
-    method: "direct",
-    directSowDaysBeforeFrost: 14,
-    daysToHarvest: 45,
-  },
-  potato: {
-    method: "direct",
-    directSowDaysBeforeFrost: 14,
-    daysToHarvest: 90,
-  },
+  // Solanaceae — warm, transplant after frost
+  tomato: T(56, 7, 0, 75),
+  pepper: T(56, 7, 14, 70),
+  eggplant: T(56, 7, 14, 75),
+  tomatillo: T(56, 7, 14, 70),
+  "ground-cherry": T(56, 7, 14, 70),
+  potato: D(14, 90),
+
+  // Brassicas — transplant before frost
+  broccoli: T(84, 7, -14, 60),
+  kale: T(42, 5, -21, 55),
+  cabbage: T(70, 7, -14, 75),
+  cauliflower: T(70, 7, -14, 70),
+  "brussels-sprouts": T(84, 7, -14, 100),
+  collards: T(42, 5, -21, 55),
+  "asian-greens": D(14, 45),
+  mustard: D(21, 40),
+  arugula: D(28, 40),
+  radish: D(28, 30),
+  turnip: D(21, 55),
+  rutabaga: D(21, 90),
+  kohlrabi: T(42, 5, -14, 55),
+
+  // Lettuce family
+  lettuce: T(30, 5, -14, 45),
+  endive: T(30, 5, -14, 85),
+  escarole: T(30, 5, -14, 85),
+
+  // Roots — direct, cool
+  carrot: D(14, 70),
+  beet: D(14, 55),
+  parsnip: D(14, 110),
+  spinach: D(42, 40),
+  chard: D(14, 55),
+
+  // Alliums
+  onion: T(56, 7, -28, 100),
+  leek: T(70, 7, -28, 120),
+  shallot: T(56, 7, -28, 100),
+  scallion: D(28, 70),
+  garlic: D(21, 240),
+
+  // Legumes
+  beans: D(0, 55),
+  pea: D(28, 60),
+  soybean: D(7, 85),
+  edamame: D(7, 85),
+
+  // Cucurbits
+  cucumber: T(21, 5, 7, 55),
+  melon: T(28, 5, 14, 85),
+  watermelon: T(28, 5, 14, 90),
+  cantaloupe: T(28, 5, 14, 85),
+  honeydew: T(28, 5, 14, 90),
+  "squash-summer": D(7, 55),
+  "squash-winter": D(14, 100),
+  pumpkin: D(14, 100),
+  gourd: D(14, 100),
+  luffa: D(14, 120),
+
+  // Grains / warm direct
+  corn: D(0, 75),
+  amaranth: D(7, 60),
+  buckwheat: D(7, 70),
+  quinoa: D(7, 100),
+  flax: D(14, 100),
+  sunflower: D(7, 90),
+
+  // Herbs — transplant after frost
+  basil: T(35, 5, 7, 45),
+  cilantro: D(14, 45),
+  parsley: T(42, 5, -7, 75),
+  dill: D(14, 50),
+  thyme: T(42, 5, 7, 80),
+  oregano: T(42, 5, 7, 80),
+  sage: T(56, 5, 7, 80),
+  mint: T(42, 5, 7, 90),
+  rosemary: T(70, 5, 14, 90),
+  chamomile: D(14, 60),
+  "lemon-balm": T(42, 5, 7, 70),
+  marjoram: T(42, 5, 7, 70),
+  catnip: T(42, 5, 7, 70),
+  lovage: T(42, 5, 7, 90),
+  shiso: T(35, 5, 7, 60),
+  dandelion: D(14, 55),
+  stevia: T(42, 5, 14, 90),
+  hyssop: T(42, 5, 7, 80),
+  savory: T(42, 5, 7, 70),
+  borage: D(14, 60),
+  chervil: D(14, 45),
+  rue: T(56, 5, 7, 90),
+  angelica: T(56, 5, -7, 120),
+  valerian: T(56, 5, 7, 120),
+  cumin: T(42, 5, 14, 120),
+  "salad-burnet": D(14, 60),
+  fennel: D(14, 90),
+
+  // Greens
+  cress: D(21, 30),
+  watercress: D(21, 45),
+  sorrel: D(21, 60),
+  purslane: D(14, 50),
+  orach: D(14, 45),
+  microgreens: D(0, 21),
+  celery: T(70, 7, -14, 90),
+
+  // Fruits / perennials
+  strawberry: D(14, 90),
+  blueberry: D(14, 300),
+  grape: T(70, 7, 14, 300),
+  rhubarb: D(28, 300),
+  artichoke: T(84, 7, -14, 180),
+  asparagus: D(28, 300),
+  okra: T(42, 5, 14, 60),
+
+  // Roots / specialty
+  horseradish: D(14, 300),
+  ginger: D(14, 240),
+  turmeric: D(14, 240),
+  "sweet-potato": T(42, 5, 14, 100),
+  mushroom: D(0, 60),
 };
 
-const GENERIC = {
-  method: "direct",
-  directSowDaysBeforeFrost: 0,
-  daysToHarvest: 60,
-};
+const GENERIC = D(0, 60);
 
 export function cropDefaults(cropId) {
   return DEFAULTS[cropId] ?? GENERIC;
@@ -204,3 +161,5 @@ export function springSeason(block) {
     directSowDaysBeforeAnchor: block.directSowDaysBeforeFrost ?? 0,
   };
 }
+
+export const CROP_DEFAULT_IDS = Object.keys(DEFAULTS);
