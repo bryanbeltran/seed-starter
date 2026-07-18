@@ -50,6 +50,12 @@ describe("cropCatalog", () => {
     expect(crop.indoorSowOffsetDays).toBe(30);
   });
 
+  it("uses seasons.spring timing in resolveCropRules", () => {
+    const rules = resolveCropRules("lettuce");
+    expect(rules.transplantDaysAfterFrost).toBe(-14);
+    expect(rules.seasons?.spring?.transplantDaysAfterAnchor).toBe(-14);
+  });
+
   it("every crop has spring season timing", () => {
     for (const crop of listCrops()) {
       expect(crop.seasons?.spring, crop.id).toBeDefined();
