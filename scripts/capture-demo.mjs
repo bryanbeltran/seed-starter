@@ -29,7 +29,7 @@ async function capture() {
   await page.screenshot({ path: path.join(outDir, "01-home.png") });
 
   await page.getByLabel("ZIP code").fill("55423");
-  await page.getByLabel("Tomato").click();
+  await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
   await page.getByText("Zone 5A", { exact: true }).waitFor({ timeout: 30_000 });
   await page.getByText(/Sow Tomato/i).waitFor();
@@ -38,7 +38,7 @@ async function capture() {
   await page.getByRole("button", { name: "Save plan" }).click();
   await page.getByLabel("Plan name").fill("Demo plan");
   await page.getByRole("button", { name: "Save", exact: true }).click();
-  await page.getByText(/plan saved/i).waitFor({ timeout: 10_000 });
+  await page.getByRole("status").filter({ hasText: /plan saved/i }).first().waitFor({ timeout: 10_000 });
   await page.screenshot({ path: path.join(outDir, "03-saved.png") });
 
   await browser.close();
