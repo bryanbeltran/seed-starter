@@ -123,6 +123,16 @@ describe("buildSchedule", () => {
     ).toBe(14);
   });
 
+  it("sows pumpkin after last frost", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      crops: ["pumpkin"],
+      referenceDate: ref,
+    });
+    const sow = schedule.tasks.find((t) => t.type === "direct_sow")!;
+    expect(sow.date.getTime()).toBeGreaterThan(schedule.lastFrostDate.getTime());
+  });
+
   it("differentiates crop spring timing in schedules", () => {
     const tomato = buildSchedule({
       zone: "5a",

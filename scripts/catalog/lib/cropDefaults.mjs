@@ -55,33 +55,33 @@ const DEFAULTS = {
   leek: T(70, 7, -28, 120),
   shallot: T(56, 7, -28, 100),
   scallion: D(28, 70),
-  garlic: D(21, 240),
+  garlic: D(150, 240), // ~fall plant: 150d before spring frost anchor
 
   // Legumes
   beans: D(0, 55),
   pea: D(28, 60),
-  soybean: D(7, 85),
-  edamame: D(7, 85),
+  soybean: D(-7, 85),
+  edamame: D(-7, 85),
 
-  // Cucurbits
+  // Cucurbits — warm; negative = sow after last frost
   cucumber: T(21, 5, 7, 55),
   melon: T(28, 5, 14, 85),
   watermelon: T(28, 5, 14, 90),
   cantaloupe: T(28, 5, 14, 85),
   honeydew: T(28, 5, 14, 90),
-  "squash-summer": D(7, 55),
-  "squash-winter": D(14, 100),
-  pumpkin: D(14, 100),
-  gourd: D(14, 100),
-  luffa: D(14, 120),
+  "squash-summer": D(-7, 55),
+  "squash-winter": D(-14, 100),
+  pumpkin: D(-14, 100),
+  gourd: D(-14, 100),
+  luffa: D(-14, 120),
 
   // Grains / warm direct
   corn: D(0, 75),
-  amaranth: D(7, 60),
-  buckwheat: D(7, 70),
-  quinoa: D(7, 100),
-  flax: D(14, 100),
-  sunflower: D(7, 90),
+  amaranth: D(-7, 60),
+  buckwheat: D(-7, 70),
+  quinoa: D(-7, 100),
+  flax: D(-7, 100),
+  sunflower: D(-7, 90),
 
   // Herbs — transplant after frost
   basil: T(35, 5, 7, 45),

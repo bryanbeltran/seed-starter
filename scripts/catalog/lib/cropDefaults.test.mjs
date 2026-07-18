@@ -8,10 +8,9 @@ describe("cropDefaults", () => {
     expect(missing, `missing defaults: ${missing.join(", ")}`).toEqual([]);
   });
 
-  it("differentiates warm vs cool brassica timing", () => {
-    expect(cropDefaults("tomato").transplantDaysAfterFrost).toBe(0);
-    expect(cropDefaults("broccoli").transplantDaysAfterFrost).toBe(-14);
+  it("differentiates warm vs cool direct sow", () => {
     expect(cropDefaults("carrot").directSowDaysBeforeFrost).toBe(14);
-    expect(cropDefaults("beans").directSowDaysBeforeFrost).toBe(0);
+    expect(cropDefaults("pumpkin").directSowDaysBeforeFrost).toBe(-14);
+    expect(cropDefaults("squash-summer").directSowDaysBeforeFrost).toBe(-7);
   });
 });
