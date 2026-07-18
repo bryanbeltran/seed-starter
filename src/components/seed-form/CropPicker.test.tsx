@@ -96,7 +96,7 @@ describe("CropPicker", () => {
       />,
     );
     const categories = screen.getByRole("group", { name: "Crop categories" });
-    await user.click(within(categories).getByRole("button", { name: "Browse" }));
+    await user.click(within(categories).getByRole("button", { name: "All" }));
     const available = screen.getByRole("group", { name: "Available crops" });
     expect(within(available).getByRole("checkbox", { name: "Extra 0" })).toBeInTheDocument();
   });
