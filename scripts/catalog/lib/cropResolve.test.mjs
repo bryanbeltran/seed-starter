@@ -20,6 +20,26 @@ describe("cropResolve", () => {
     expect(inferCropFromName("Provider Bush Bean")).toBe("beans");
     expect(inferCropFromName("Red Russian Kale")).toBe("kale");
     expect(inferCropFromName("Seedless Cucumber")).toBe("cucumber");
+    expect(inferCropFromName("Primed Rosemary")).toBe("rosemary");
+    expect(inferCropFromName("Honeyboat Winter Squash")).toBe("squash-winter");
+    expect(inferCropFromName("Athena Cantaloupe")).toBe("cantaloupe");
+  });
+
+  it("rejects catch-all and collection records", () => {
+    expect(
+      resolveCropRecord({
+        sourceUrl: "https://example.com/herbs/rosemary",
+        cropCategory: "herbs",
+        name: "Kitchen Herbs Organic Seed Collection",
+      }),
+    ).toBeNull();
+    expect(
+      resolveCropRecord({
+        sourceUrl: "https://example.com/greens",
+        cropCategory: "greens",
+        name: "Astro",
+      }),
+    ).toBe("arugula");
   });
 
   it("infers crop from johnnys url path", () => {
