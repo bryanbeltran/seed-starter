@@ -49,6 +49,7 @@ yarn-error.log*
 data/.cache/
 data/zctaCentroids.json
 data/ghcn/tmin-parsed.json
+docs/demo-frames/
 
 # typescript
 *.tsbuildinfo

@@ -12,7 +12,7 @@ Frost-aware garden planning for US ZIP codes. Pick crops and a risk profile, get
 - Risk profiles: conservative / balanced / aggressive (frost p90 / p50 / p10)
 - Climate data: NOAA GHCN nearest-station frost percentiles for US ZCTAs
 - Frost fallback chain: climate → station → regional → zone
-- USDA ZIP → zone via PHZM API + offline fixture
+- USDA ZIP → zone via PRISM 2023 bundled lookup + PHZM API fallback
 - Saved plans (Postgres on Vercel, sql.js locally)
 - CSV, iCalendar, and print exports
 
@@ -24,7 +24,8 @@ flowchart LR
   API --> LOC[resolveLocation]
   API --> PLAN[planning/buildSchedule]
   LOC --> FIX[zipZones fixture]
-  LOC --> PHZM[PHZM API]
+  LOC --> PHZM[zipZones-phzm PRISM]
+  LOC --> API_PHZM[PHZM API fallback]
   PLAN --> CLIM[ClimateRepository]
   PLAN --> FROST[frostResolver]
   PLAN --> CROP[cropCatalog]

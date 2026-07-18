@@ -2,6 +2,7 @@
 /** Capture README demo GIF via Playwright + ffmpeg. */
 import { spawnSync } from "child_process";
 import fs from "fs";
+import os from "os";
 import path from "path";
 import { fileURLToPath } from "url";
 import { chromium } from "@playwright/test";
@@ -12,6 +13,9 @@ const gifPath = path.join(root, "docs/demo.gif");
 const baseURL = process.env.DEMO_URL ?? "http://127.0.0.1:3000";
 
 async function capture() {
+  const demoDbDir = fs.mkdtempSync(path.join(os.tmpdir(), "seedstarter-demo-"));
+  process.env.SEEDSTARTER_DB_DIR = demoDbDir;
+
   fs.mkdirSync(outDir, { recursive: true });
   for (const f of fs.readdirSync(outDir)) {
     if (f.endsWith(".png")) fs.unlinkSync(path.join(outDir, f));
@@ -24,19 +28,21 @@ async function capture() {
   await page.waitForLoadState("networkidle");
   await page.screenshot({ path: path.join(outDir, "01-home.png") });
 
-  await page.getByLabel(/ZIP/i).fill("55423");
-  await page.getByRole("checkbox", { name: /tomato/i }).check();
-  await page.getByRole("button", { name: /calculate schedule/i }).click();
-  await page.getByText(/Zone 5A/i).waitFor({ timeout: 30_000 });
+  await page.getByLabel("ZIP code").fill("55423");
+  await page.getByLabel("Tomato").click();
+  await page.getByRole("button", { name: "Calculate schedule" }).click();
+  await page.getByText("Zone 5A", { exact: true }).waitFor({ timeout: 30_000 });
+  await page.getByText(/Sow Tomato/i).waitFor();
   await page.screenshot({ path: path.join(outDir, "02-results.png") });
 
-  await page.getByRole("button", { name: /save plan/i }).click();
-  await page.getByLabel(/plan name/i).fill("Demo plan");
-  await page.getByRole("button", { name: /^save$/i }).click();
+  await page.getByRole("button", { name: "Save plan" }).click();
+  await page.getByLabel("Plan name").fill("Demo plan");
+  await page.getByRole("button", { name: "Save", exact: true }).click();
   await page.getByText(/plan saved/i).waitFor({ timeout: 10_000 });
   await page.screenshot({ path: path.join(outDir, "03-saved.png") });
 
   await browser.close();
+  fs.rmSync(demoDbDir, { recursive: true, force: true });
 
   const frames = fs
     .readdirSync(outDir)
