@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-18T22:43:05.756Z",
+  "generatedAt": "2026-07-18T22:57:08.514Z",
   "crops": {
     "beans": {
       "id": "beans",
@@ -4444,13 +4444,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 14,
+      "directSowDaysBeforeFrost": -14,
       "daysToHarvest": 100,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 14
+          "directSowDaysBeforeAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -10004,13 +10004,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 7,
+      "directSowDaysBeforeFrost": -7,
       "daysToHarvest": 60,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 7
+          "directSowDaysBeforeAnchor": -7
         }
       },
       "source": "catalog-etl",
@@ -10072,13 +10072,13 @@
       "category": "fruit",
       "family": "cucurbit",
       "method": "direct",
-      "directSowDaysBeforeFrost": 14,
+      "directSowDaysBeforeFrost": -14,
       "daysToHarvest": 100,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 14
+          "directSowDaysBeforeAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -11728,13 +11728,13 @@
       "category": "fruit",
       "family": "cucurbit",
       "method": "direct",
-      "directSowDaysBeforeFrost": 14,
+      "directSowDaysBeforeFrost": -14,
       "daysToHarvest": 100,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 14
+          "directSowDaysBeforeAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -15856,13 +15856,13 @@
       "category": "fruit",
       "family": "cucurbit",
       "method": "direct",
-      "directSowDaysBeforeFrost": 7,
+      "directSowDaysBeforeFrost": -7,
       "daysToHarvest": 55,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 7
+          "directSowDaysBeforeAnchor": -7
         }
       },
       "source": "catalog-etl",
@@ -16928,13 +16928,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 14,
+      "directSowDaysBeforeFrost": -14,
       "daysToHarvest": 120,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 14
+          "directSowDaysBeforeAnchor": -14
         }
       },
       "source": "catalog-etl",
@@ -17068,13 +17068,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 7,
+      "directSowDaysBeforeFrost": -7,
       "daysToHarvest": 70,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 7
+          "directSowDaysBeforeAnchor": -7
         }
       },
       "source": "catalog-etl",
@@ -17132,13 +17132,13 @@
       "category": "vegetable",
       "family": "legume",
       "method": "direct",
-      "directSowDaysBeforeFrost": 7,
+      "directSowDaysBeforeFrost": -7,
       "daysToHarvest": 85,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 7
+          "directSowDaysBeforeAnchor": -7
         }
       },
       "source": "catalog-etl",
@@ -17256,13 +17256,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 21,
+      "directSowDaysBeforeFrost": 150,
       "daysToHarvest": 240,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 21
+          "directSowDaysBeforeAnchor": 150
         }
       },
       "source": "catalog-etl",
@@ -17712,13 +17712,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 7,
+      "directSowDaysBeforeFrost": -7,
       "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 7
+          "directSowDaysBeforeAnchor": -7
         }
       },
       "source": "catalog-etl",
@@ -17964,13 +17964,13 @@
       "category": "vegetable",
       "family": "other",
       "method": "direct",
-      "directSowDaysBeforeFrost": 7,
+      "directSowDaysBeforeFrost": -7,
       "daysToHarvest": 100,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
           "method": "direct",
-          "directSowDaysBeforeAnchor": 7
+          "directSowDaysBeforeAnchor": -7
         }
       },
       "source": "catalog-etl",
