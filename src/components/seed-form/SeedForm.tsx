@@ -309,20 +309,20 @@ export function SeedForm() {
   );
 
   const desktopLayout = (
-    <div className="grid gap-6 lg:grid-cols-[1fr_17rem]">
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className={cn(mobileTab !== "plan" && "hidden", "lg:block")}>
+    <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_17rem]">
+      <div className="grid min-w-0 gap-6">
+        <div className={cn(mobileTab !== "plan" && "hidden", "min-w-0 lg:block")}>
           {planForm}
         </div>
         <div
           ref={resultsRef}
           tabIndex={-1}
-          className={cn(mobileTab !== "results" && "hidden", "lg:block")}
+          className={cn(mobileTab !== "results" && "hidden", "min-w-0 lg:block")}
         >
           {resultsPanel}
         </div>
       </div>
-      <div className={cn(mobileTab !== "saved" && "hidden", "lg:block")}>
+      <div className={cn(mobileTab !== "saved" && "hidden", "min-w-0 lg:block")}>
         {savedPanel}
       </div>
     </div>

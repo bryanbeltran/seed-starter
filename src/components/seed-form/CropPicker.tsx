@@ -112,7 +112,7 @@ export function CropPicker({
       )}
       {!searching && (
         <div
-          className="flex gap-1.5 overflow-x-auto pb-1"
+          className="flex min-w-0 gap-1.5 overflow-x-auto pb-1"
           role="group"
           aria-label="Crop categories"
         >

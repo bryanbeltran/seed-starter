@@ -42,6 +42,18 @@ test("compares risk profiles", async ({ page }) => {
   await expect(page.getByRole("tab", { name: "Aggressive" })).toBeVisible();
 });
 
+test("clicks fruits category on desktop layout", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/");
+  await page.getByRole("button", { name: "Fruits", exact: true }).click();
+  await expect(page.getByRole("button", { name: "Fruits", exact: true })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(page.getByRole("checkbox", { name: "Tomato", exact: true })).toBeVisible();
+  await expect(page.getByRole("checkbox", { name: "Basil", exact: true })).not.toBeVisible();
+});
+
 test.describe("mobile", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 

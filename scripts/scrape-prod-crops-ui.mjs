@@ -49,7 +49,7 @@ async function loadAll(page) {
 }
 
 async function scrapeTab(page, tab) {
-  await page.getByRole("button", { name: tab, exact: true }).click({ force: true });
+  await page.getByRole("button", { name: tab, exact: true }).click();
   await page.waitForTimeout(300);
   const chips = await loadAll(page);
   const countText = await page.locator('[aria-live="polite"]').first().textContent();
