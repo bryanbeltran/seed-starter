@@ -47,6 +47,7 @@ yarn-error.log*
 
 # ETL cache
 data/.cache/
+data/catalog/.cache/
 data/zctaCentroids.json
 data/ghcn/tmin-parsed.json
 docs/demo-frames/
