@@ -33,6 +33,8 @@ export {
   selectFrostDate,
   shiftFrostDate,
 } from "./riskProfile";
+export type { SchedulingRules } from "./seasonRules";
+export { springRulesFromCrop } from "./seasonRules";
 export type { LegacySowDate } from "./schedule";
 export {
   buildSchedule,

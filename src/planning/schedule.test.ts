@@ -110,6 +110,19 @@ describe("buildSchedule", () => {
     expect(schedule.climateDataVersion).toMatch(/^(spike|ghcn)-/);
   });
 
+  it("transplants lettuce before last frost via seasons.spring", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      crops: ["lettuce"],
+      referenceDate: ref,
+    });
+    const transplant = schedule.tasks.find((t) => t.type === "transplant")!;
+    expect(transplant.date.getTime()).toBeLessThan(schedule.lastFrostDate.getTime());
+    expect(
+      (schedule.lastFrostDate.getTime() - transplant.date.getTime()) / 86_400_000,
+    ).toBe(14);
+  });
+
   it("shifts frost date by risk profile", () => {
     const conservative = buildSchedule({
       zone: "7b",

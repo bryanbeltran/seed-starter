@@ -4,6 +4,7 @@ import {
   type CropDefinition,
   type VarietyDefinition,
 } from "./catalogSchema";
+import { springRulesFromCrop } from "./seasonRules";
 
 export type { CropDefinition, VarietyDefinition };
 export type CropMethod = CropDefinition["method"];
@@ -45,14 +46,16 @@ export function resolveCropRules(
   varietyId?: string,
 ): CropDefinition & { varietyName?: string } {
   const base = getCropOrDefault(cropId);
+  const timing = springRulesFromCrop(base);
+  const merged = { ...base, ...timing };
   if (!varietyId || !base.varieties?.[varietyId]) {
-    return base;
+    return merged;
   }
   const variety = base.varieties[varietyId];
   return {
-    ...base,
-    indoorSowOffsetDays: variety.indoorSowOffsetDays ?? base.indoorSowOffsetDays,
-    daysToHarvest: variety.daysToHarvest ?? base.daysToHarvest,
+    ...merged,
+    indoorSowOffsetDays: variety.indoorSowOffsetDays ?? merged.indoorSowOffsetDays,
+    daysToHarvest: variety.daysToHarvest ?? merged.daysToHarvest,
     varietyName: variety.name,
   };
 }
