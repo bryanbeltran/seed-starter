@@ -92,7 +92,7 @@ function buildCatalog(seeds) {
       crops[cropId] = {
         id: cropId,
         name: displayName(cropId),
-        category: inferCategory(seed),
+        category: inferCategoryFromCropId(cropId),
         family: inferFamily(cropId),
         ...defaults,
         seasons: { spring: springSeason(defaults) },
@@ -122,15 +122,26 @@ function buildCatalog(seeds) {
   return { crops, varietyCount: seeds.length, cropCount: Object.keys(crops).length };
 }
 
-function inferCategory(seed) {
-  const c = seed.cropCategory.toLowerCase();
-  if (c.includes("herb")) return "herb";
-  if (c.includes("fruit") || ["melon", "watermelon", "strawberry"].some((x) => c.includes(x)))
-    return "fruit";
-  if (c.includes("grain")) return "grain";
-  if (c.includes("mushroom")) return "mushroom";
-  return "vegetable";
+function inferCategoryFromCropId(cropId) {
+  return CROP_CATEGORY[cropId] ?? "vegetable";
 }
+
+const CROP_CATEGORY = {
+  basil: "herb", cilantro: "herb", parsley: "herb", dill: "herb",
+  thyme: "herb", oregano: "herb", sage: "herb", mint: "herb", herb: "herb",
+  ginger: "herb", turmeric: "herb",
+  tomato: "fruit", pepper: "fruit", eggplant: "fruit", melon: "fruit",
+  watermelon: "fruit", cantaloupe: "fruit", honeydew: "fruit",
+  strawberry: "fruit", blueberry: "fruit", grape: "fruit",
+  tomatillo: "fruit", "ground-cherry": "fruit",
+  pumpkin: "fruit", "squash-summer": "fruit", "squash-winter": "fruit",
+  cucumber: "fruit", gourd: "fruit", luffa: "fruit",
+  grain: "grain", corn: "grain", amaranth: "grain", buckwheat: "grain",
+  quinoa: "grain", flax: "grain",
+  mushroom: "mushroom",
+};
+
+export { inferCategoryFromCropId };
 
 function inferFamily(cropId) {
   const legumes = ["beans", "pea", "soybean"];
