@@ -29,7 +29,7 @@ test("saves and reopens a plan", async ({ page }) => {
     .first();
   await expect(planButton).toBeVisible({ timeout: 10_000 });
   await planButton.click();
-  await expect(page.getByText(/Loaded plan/)).toBeVisible();
+  await expect(page.getByRole("status").filter({ hasText: /Loaded plan/ }).first()).toBeVisible();
 });
 
 test("compares risk profiles", async ({ page }) => {

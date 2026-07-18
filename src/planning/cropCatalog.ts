@@ -164,6 +164,10 @@ export function getCrop(cropId: string): CropDefinition | undefined {
   return crops[cropId];
 }
 
+export function getCropName(cropId: string): string {
+  return crops[cropId]?.name ?? cropId;
+}
+
 export function getCropOrDefault(cropId: string): CropDefinition {
   return (
     crops[cropId] ?? {

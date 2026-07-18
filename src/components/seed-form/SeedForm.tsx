@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Loader2 } from "lucide-react";
 import type { RiskProfile } from "@/planning";
 import { listCrops } from "@/planning/cropCatalog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
   CardContent,
@@ -22,6 +23,8 @@ import { ScheduleResultsSkeleton } from "./ScheduleResultsSkeleton";
 import { ResultsPlaceholder } from "./ResultsPlaceholder";
 import { CompareProfiles, type CompareResult } from "./CompareProfiles";
 import { SavedPlansPanel, type SavedPlanSummary } from "./SavedPlansPanel";
+import { PlannerHero } from "./PlannerHero";
+import { StatusBanner } from "./StatusBanner";
 import type { ScheduleResult } from "./types";
 import {
   cropSelectionsFromForm,
@@ -29,6 +32,7 @@ import {
   loadFormState,
   saveFormState,
 } from "./formState";
+import { cn } from "@/lib/utils";
 
 const availableCrops = listCrops();
 
@@ -43,9 +47,13 @@ export function SeedForm() {
   const [planName, setPlanName] = useState<string | undefined>();
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
+  const [statusVariant, setStatusVariant] = useState<"success" | "error">("success");
   const [zipError, setZipError] = useState<string | null>(null);
   const [cropError, setCropError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [saveOpen, setSaveOpen] = useState(false);
+  const [mobileTab, setMobileTab] = useState("plan");
+  const resultsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const saved = loadFormState();
@@ -68,6 +76,11 @@ export function SeedForm() {
     });
   }, [zip, selectedCrops, varieties, riskProfile, compareMode]);
 
+  function setStatusMessage(msg: string, variant: "success" | "error" = "success") {
+    setStatus(msg);
+    setStatusVariant(variant);
+  }
+
   function toggleCrop(cropId: string) {
     setCropError(null);
     setSelectedCrops((prev) =>
@@ -77,28 +90,38 @@ export function SeedForm() {
     );
   }
 
-  function buildPayload() {
-    const cropSelections = cropSelectionsFromForm(selectedCrops, varieties);
+  function buildPayload(
+    zipValue: string,
+    crops: string[],
+    varietyMap: Record<string, string | undefined>,
+    risk: RiskProfile,
+  ) {
+    const cropSelections = cropSelectionsFromForm(crops, varietyMap);
     return {
-      zip: zip.replace(/\D/g, ""),
-      seeds: selectedCrops,
+      zip: zipValue.replace(/\D/g, ""),
+      seeds: crops,
       cropSelections,
-      riskProfile,
+      riskProfile: risk,
     };
   }
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  async function runCalculate(
+    zipValue: string,
+    crops: string[],
+    varietyMap: Record<string, string | undefined>,
+    risk: RiskProfile,
+    compare: boolean,
+  ) {
     setError(null);
     setStatus(null);
     setZipError(null);
     setCropError(null);
 
-    if (!isValidZip(zip)) {
+    if (!isValidZip(zipValue)) {
       setZipError("Enter a valid 5-digit US ZIP code.");
       return;
     }
-    if (selectedCrops.length === 0) {
+    if (crops.length === 0) {
       setCropError("Select at least one crop.");
       return;
     }
@@ -109,8 +132,8 @@ export function SeedForm() {
     setPlanName(undefined);
 
     try {
-      const payload = buildPayload();
-      const endpoint = compareMode ? "/api/schedules/compare" : "/api/schedules";
+      const payload = buildPayload(zipValue, crops, varietyMap, risk);
+      const endpoint = compare ? "/api/schedules/compare" : "/api/schedules";
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -121,17 +144,37 @@ export function SeedForm() {
         setError(data.error ?? "Something went wrong.");
         return;
       }
-      if (compareMode) {
+      if (compare) {
         setCompared(data as CompareResult);
         setResults(data.balanced as ScheduleResult);
       } else {
         setResults(data as ScheduleResult);
       }
+      setMobileTab("results");
+      requestAnimationFrame(() => {
+        resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
     } catch {
       setError("Could not reach the server. Try again.");
     } finally {
       setLoading(false);
     }
+  }
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    await runCalculate(zip, selectedCrops, varieties, riskProfile, compareMode);
+  }
+
+  async function loadExample() {
+    const exampleZip = "55423";
+    const exampleCrops = ["tomato"];
+    setZip(exampleZip);
+    setSelectedCrops(exampleCrops);
+    setVarieties({});
+    setRiskProfile("balanced");
+    setCompareMode(false);
+    await runCalculate(exampleZip, exampleCrops, {}, "balanced", false);
   }
 
   function handleLoadPlan(plan: SavedPlanSummary) {
@@ -143,109 +186,165 @@ export function SeedForm() {
     setCompared(null);
     setPlanName(plan.name);
     setError(null);
-    setStatus(`Loaded plan "${plan.name}".`);
+    setStatusMessage(`Loaded plan "${plan.name}".`);
+    setMobileTab("results");
+    requestAnimationFrame(() => {
+      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }
+
+  const canSave = Boolean(results) && selectedCrops.length > 0 && isValidZip(zip);
 
   const resultsPanel = loading ? (
     <ScheduleResultsSkeleton />
   ) : compared ? (
     <div className="space-y-4">
-      <ScheduleResults results={results!} zip={zip} planName={planName} />
+      <ScheduleResults
+        results={results!}
+        zip={zip}
+        planName={planName}
+        onSave={() => setSaveOpen(true)}
+        canSave={canSave}
+      />
       <CompareProfiles compared={compared} baseline={riskProfile} />
     </div>
   ) : results ? (
-    <ScheduleResults results={results} zip={zip} planName={planName} />
+    <ScheduleResults
+      results={results}
+      zip={zip}
+      planName={planName}
+      onSave={() => setSaveOpen(true)}
+      canSave={canSave}
+    />
   ) : (
     <ResultsPlaceholder />
   );
 
-  return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_17rem]">
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card className="print:hidden">
-          <CardHeader>
-            <CardTitle>Your garden</CardTitle>
-            <CardDescription>
-              ZIP, crops, varieties, and frost-risk profile.
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4" id="plan-form">
-              <LocationForm
-                zip={zip}
-                loading={loading}
-                zipError={zipError}
-                onZipChange={(v) => {
-                  setZip(v);
-                  setZipError(null);
-                }}
-                onTryExample={() => setZip("55423")}
+  const planForm = (
+    <Card className="print:hidden">
+      <CardHeader>
+        <CardTitle>Your garden</CardTitle>
+        <CardDescription>
+          ZIP, crops, varieties, and frost-risk profile.
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4" id="plan-form">
+          <LocationForm
+            zip={zip}
+            loading={loading}
+            zipError={zipError}
+            onZipChange={(v) => {
+              setZip(v);
+              setZipError(null);
+            }}
+            onTryExample={() => setZip("55423")}
+          />
+          <CropPicker
+            crops={availableCrops}
+            selected={selectedCrops}
+            varieties={varieties}
+            loading={loading}
+            cropError={cropError}
+            onToggle={toggleCrop}
+            onVarietyChange={(cropId, varietyId) =>
+              setVarieties((prev) => ({ ...prev, [cropId]: varietyId }))
+            }
+          />
+          <RiskProfilePicker
+            value={riskProfile}
+            loading={loading}
+            onChange={setRiskProfile}
+          />
+          <div className="rounded-md border bg-muted/30 p-3">
+            <div className="flex items-start gap-2">
+              <Checkbox
+                id="compare-mode"
+                checked={compareMode}
+                onCheckedChange={(v) => setCompareMode(v === true)}
+                disabled={loading}
+                className="mt-0.5"
               />
-              <CropPicker
-                crops={availableCrops}
-                selected={selectedCrops}
-                varieties={varieties}
-                loading={loading}
-                cropError={cropError}
-                onToggle={toggleCrop}
-                onVarietyChange={(cropId, varietyId) =>
-                  setVarieties((prev) => ({ ...prev, [cropId]: varietyId }))
-                }
-              />
-              <RiskProfilePicker
-                value={riskProfile}
-                loading={loading}
-                onChange={setRiskProfile}
-              />
-              <div className="flex items-center gap-2">
-                <Checkbox
-                  id="compare-mode"
-                  checked={compareMode}
-                  onCheckedChange={(v) => setCompareMode(v === true)}
-                  disabled={loading}
-                />
-                <Label htmlFor="compare-mode" className="cursor-pointer font-normal">
+              <div>
+                <Label htmlFor="compare-mode" className="cursor-pointer font-medium">
                   Compare risk profiles
                 </Label>
-              </div>
-              {error && (
-                <p role="alert" className="text-sm text-destructive">
-                  {error}
+                <p className="text-muted-foreground text-xs">
+                  See conservative, balanced, and aggressive dates side by side.
                 </p>
-              )}
-              <div
-                aria-live="polite"
-                className="text-sm text-emerald-700 dark:text-emerald-400"
-              >
-                {status}
               </div>
-              <Button type="submit" className="hidden w-full md:flex" disabled={loading}>
-                {loading ? (
-                  <>
-                    <Loader2 className="animate-spin" />
-                    Building schedule…
-                  </>
-                ) : (
-                  "Calculate schedule"
-                )}
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+            </div>
+          </div>
+          {error && (
+            <p role="alert" className="text-sm text-destructive">
+              {error}
+            </p>
+          )}
+          <StatusBanner message={status} variant={statusVariant} />
+          <Button type="submit" className="hidden w-full md:flex" disabled={loading}>
+            {loading ? (
+              <>
+                <Loader2 className="animate-spin" />
+                Building schedule…
+              </>
+            ) : (
+              "Calculate schedule"
+            )}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  );
 
-        <div>{resultsPanel}</div>
+  const savedPanel = (
+    <SavedPlansPanel
+      onLoadPlan={handleLoadPlan}
+      onStatusMessage={setStatusMessage}
+      currentZip={zip}
+      currentCrops={selectedCrops}
+      currentRisk={riskProfile}
+      saveOpen={saveOpen}
+      onSaveOpenChange={setSaveOpen}
+    />
+  );
+
+  const desktopLayout = (
+    <div className="grid gap-6 lg:grid-cols-[1fr_17rem]">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className={cn(mobileTab !== "plan" && "hidden", "lg:block")}>
+          {planForm}
+        </div>
+        <div
+          ref={resultsRef}
+          tabIndex={-1}
+          className={cn(mobileTab !== "results" && "hidden", "lg:block")}
+        >
+          {resultsPanel}
+        </div>
       </div>
+      <div className={cn(mobileTab !== "saved" && "hidden", "lg:block")}>
+        {savedPanel}
+      </div>
+    </div>
+  );
 
-      <SavedPlansPanel
-        onLoadPlan={handleLoadPlan}
-        onStatusMessage={setStatus}
-        currentZip={zip}
-        currentCrops={selectedCrops}
-        currentRisk={riskProfile}
-        hasResults={!!results}
-      />
-
-      <div className="bg-background fixed inset-x-0 bottom-0 border-t p-3 md:hidden print:hidden">
+  return (
+    <>
+      <PlannerHero onExample={() => void loadExample()} loading={loading} />
+      <Tabs value={mobileTab} onValueChange={setMobileTab} className="mb-4 lg:hidden">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="plan">Plan</TabsTrigger>
+          <TabsTrigger value="results">Results</TabsTrigger>
+          <TabsTrigger value="saved">Saved</TabsTrigger>
+        </TabsList>
+      </Tabs>
+      {desktopLayout}
+      <div className="bg-background fixed inset-x-0 bottom-0 z-40 border-t p-3 lg:hidden print:hidden">
+        {status && (
+          <div className="mb-2">
+            <StatusBanner message={status} variant={statusVariant} />
+          </div>
+        )}
         <Button
           type="submit"
           form="plan-form"
@@ -262,6 +361,6 @@ export function SeedForm() {
           )}
         </Button>
       </div>
-    </div>
+    </>
   );
 }
