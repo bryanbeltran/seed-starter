@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-18T21:14:20.006Z",
+  "generatedAt": "2026-07-18T21:36:00.371Z",
   "crops": {
     "beans": {
       "id": "beans",
@@ -2461,7 +2461,7 @@
     "cucumber": {
       "id": "cucumber",
       "name": "Cucumber",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "cucurbit",
       "method": "transplant",
       "indoorSowOffsetDays": 21,
@@ -2925,7 +2925,7 @@
     "pepper": {
       "id": "pepper",
       "name": "Pepper",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "solanaceae",
       "method": "transplant",
       "indoorSowOffsetDays": 56,
@@ -3893,7 +3893,7 @@
     "corn": {
       "id": "corn",
       "name": "Corn",
-      "category": "vegetable",
+      "category": "grain",
       "family": "grass",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -4441,7 +4441,7 @@
     "gourd": {
       "id": "gourd",
       "name": "Gourd",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -7149,7 +7149,7 @@
     "basil": {
       "id": "basil",
       "name": "Basil",
-      "category": "vegetable",
+      "category": "herb",
       "family": "lamiaceae",
       "method": "transplant",
       "indoorSowOffsetDays": 35,
@@ -7761,7 +7761,7 @@
     "eggplant": {
       "id": "eggplant",
       "name": "Eggplant",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "solanaceae",
       "method": "transplant",
       "indoorSowOffsetDays": 56,
@@ -8517,7 +8517,7 @@
     "melon": {
       "id": "melon",
       "name": "Melon",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "cucurbit",
       "method": "transplant",
       "indoorSowOffsetDays": 28,
@@ -8829,7 +8829,7 @@
     "watermelon": {
       "id": "watermelon",
       "name": "Watermelon",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "cucurbit",
       "method": "transplant",
       "indoorSowOffsetDays": 28,
@@ -9529,7 +9529,7 @@
     "pumpkin": {
       "id": "pumpkin",
       "name": "Pumpkin",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "cucurbit",
       "method": "direct",
       "directSowDaysBeforeFrost": 14,
@@ -10733,7 +10733,7 @@
     "parsley": {
       "id": "parsley",
       "name": "Parsley",
-      "category": "vegetable",
+      "category": "herb",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -10865,7 +10865,7 @@
     "squash-winter": {
       "id": "squash-winter",
       "name": "Squash Winter",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "cucurbit",
       "method": "direct",
       "directSowDaysBeforeFrost": 14,
@@ -11245,7 +11245,7 @@
     "strawberry": {
       "id": "strawberry",
       "name": "Strawberry",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -11609,7 +11609,7 @@
     "tomato": {
       "id": "tomato",
       "name": "Tomato",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "solanaceae",
       "method": "transplant",
       "indoorSowOffsetDays": 56,
@@ -13449,7 +13449,7 @@
     "herb": {
       "id": "herb",
       "name": "Herb",
-      "category": "vegetable",
+      "category": "herb",
       "family": "lamiaceae",
       "method": "transplant",
       "indoorSowOffsetDays": 42,
@@ -13781,7 +13781,7 @@
     "tomatillo": {
       "id": "tomatillo",
       "name": "Tomatillo",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -13873,7 +13873,7 @@
     "mint": {
       "id": "mint",
       "name": "Mint",
-      "category": "vegetable",
+      "category": "herb",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -13925,7 +13925,7 @@
     "sage": {
       "id": "sage",
       "name": "Sage",
-      "category": "vegetable",
+      "category": "herb",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -13961,7 +13961,7 @@
     "cilantro": {
       "id": "cilantro",
       "name": "Cilantro",
-      "category": "vegetable",
+      "category": "herb",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -14101,7 +14101,7 @@
     "dill": {
       "id": "dill",
       "name": "Dill",
-      "category": "vegetable",
+      "category": "herb",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -14225,7 +14225,7 @@
     "oregano": {
       "id": "oregano",
       "name": "Oregano",
-      "category": "vegetable",
+      "category": "herb",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -14269,7 +14269,7 @@
     "thyme": {
       "id": "thyme",
       "name": "Thyme",
-      "category": "vegetable",
+      "category": "herb",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
@@ -15281,7 +15281,7 @@
     "squash-summer": {
       "id": "squash-summer",
       "name": "Squash Summer",
-      "category": "vegetable",
+      "category": "fruit",
       "family": "cucurbit",
       "method": "direct",
       "directSowDaysBeforeFrost": 7,
@@ -15801,7 +15801,7 @@
     "grain": {
       "id": "grain",
       "name": "Grain",
-      "category": "vegetable",
+      "category": "grain",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 7,
@@ -17033,7 +17033,7 @@
     "amaranth": {
       "id": "amaranth",
       "name": "Amaranth",
-      "category": "vegetable",
+      "category": "grain",
       "family": "other",
       "method": "direct",
       "directSowDaysBeforeFrost": 0,
