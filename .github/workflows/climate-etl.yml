@@ -19,3 +19,12 @@ jobs:
       - run: pnpm run etl:climate
       - run: node scripts/check-data-quality.mjs
       - run: node scripts/check-climate-drift.mjs
+      - run: node scripts/check-golden-climate.mjs
+      - name: Upload climate artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: climate-validate
+          path: |
+            data/climate-manifest.json
+            data/golden-zips.json

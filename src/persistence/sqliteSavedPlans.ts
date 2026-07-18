@@ -16,6 +16,7 @@ const MIGRATIONS = [
   "001_saved_plans.sql",
   "002_climate_version.sql",
   "003_climate_snapshot.sql",
+  "004_owner_and_frost.sql",
 ];
 
 function dbDir() {
@@ -47,11 +48,15 @@ function runMigrations(db: Database) {
     const sql = fs.readFileSync(path.join(migrationsDir, file), "utf8").trim();
     if (sql) db.run(sql);
   }
-  if (!hasColumn(db, "saved_plans", "climate_data_version")) {
-    db.run("ALTER TABLE saved_plans ADD COLUMN climate_data_version TEXT");
-  }
-  if (!hasColumn(db, "saved_plans", "climate_snapshot_id")) {
-    db.run("ALTER TABLE saved_plans ADD COLUMN climate_snapshot_id TEXT");
+  for (const col of [
+    "climate_data_version",
+    "climate_snapshot_id",
+    "owner_id",
+    "last_frost_date",
+  ]) {
+    if (!hasColumn(db, "saved_plans", col)) {
+      db.run(`ALTER TABLE saved_plans ADD COLUMN ${col} TEXT`);
+    }
   }
 }
 
@@ -78,7 +83,13 @@ function persist(db: Database) {
   fs.writeFileSync(dbPath(), Buffer.from(db.export()));
 }
 
-export async function listSavedPlans(): Promise<SavedPlan[]> {
+function owns(row: Record<string, unknown>, ownerId?: string | null): boolean {
+  if (!ownerId) return true;
+  const rowOwner = row.owner_id ? String(row.owner_id) : null;
+  return !rowOwner || rowOwner === ownerId;
+}
+
+export async function listSavedPlans(ownerId?: string | null): Promise<SavedPlan[]> {
   const db = await getDb();
   const result = db.exec("SELECT * FROM saved_plans ORDER BY updated_at DESC");
   if (!result[0]) return [];
@@ -90,6 +101,7 @@ export async function listSavedPlans(): Promise<SavedPlan[]> {
     cols.forEach((col, i) => {
       row[col] = values[i];
     });
+    if (!owns(row, ownerId)) continue;
     const crops = JSON.parse(String(row.crops_json)) as string[];
     const schedule = await scheduleForPlan(
       String(row.zip),
@@ -102,7 +114,10 @@ export async function listSavedPlans(): Promise<SavedPlan[]> {
   return plans;
 }
 
-export async function getSavedPlan(id: string): Promise<SavedPlan | null> {
+export async function getSavedPlan(
+  id: string,
+  ownerId?: string | null,
+): Promise<SavedPlan | null> {
   const db = await getDb();
   const stmt = db.prepare("SELECT * FROM saved_plans WHERE id = ?");
   stmt.bind([id]);
@@ -112,6 +127,7 @@ export async function getSavedPlan(id: string): Promise<SavedPlan | null> {
   }
   const row = stmt.getAsObject() as Record<string, unknown>;
   stmt.free();
+  if (!owns(row, ownerId)) return null;
   const crops = JSON.parse(String(row.crops_json)) as string[];
   const schedule = await scheduleForPlan(
     String(row.zip),
@@ -129,11 +145,14 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
   const riskProfile = input.riskProfile ?? "balanced";
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
+  const schedule = await scheduleForPlan(zip, zone, input.crops, riskProfile);
+  const lastFrostDate = schedule.lastFrostDate.toISOString();
+  const ownerId = input.ownerId ?? null;
 
   const db = await getDb();
   db.run(
-    `INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, climate_data_version, climate_snapshot_id, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, climate_data_version, climate_snapshot_id, owner_id, last_frost_date, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       id,
       input.name,
@@ -143,13 +162,14 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
       riskProfile,
       climateDataVersion,
       climateSnapshotId,
+      ownerId,
+      lastFrostDate,
       now,
       now,
     ],
   );
   persist(db);
 
-  const schedule = await scheduleForPlan(zip, zone, input.crops, riskProfile);
   return rowToPlan(
     {
       id,
@@ -160,6 +180,8 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
       risk_profile: riskProfile,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
+      owner_id: ownerId,
+      last_frost_date: lastFrostDate,
       created_at: now,
       updated_at: now,
     },
@@ -170,8 +192,9 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
 export async function updateSavedPlan(
   id: string,
   patch: Partial<SavedPlanInput>,
+  ownerId?: string | null,
 ): Promise<SavedPlan | null> {
-  const existing = await getSavedPlan(id);
+  const existing = await getSavedPlan(id, ownerId);
   if (!existing) return null;
 
   const name = patch.name ?? existing.name;
@@ -182,12 +205,14 @@ export async function updateSavedPlan(
   const now = new Date().toISOString();
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
+  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile);
+  const lastFrostDate = schedule.lastFrostDate.toISOString();
 
   const db = await getDb();
   db.run(
     `UPDATE saved_plans
      SET name = ?, zip = ?, zone = ?, crops_json = ?, risk_profile = ?,
-         climate_data_version = ?, climate_snapshot_id = ?, updated_at = ?
+         climate_data_version = ?, climate_snapshot_id = ?, last_frost_date = ?, updated_at = ?
      WHERE id = ?`,
     [
       name,
@@ -197,13 +222,13 @@ export async function updateSavedPlan(
       riskProfile,
       climateDataVersion,
       climateSnapshotId,
+      lastFrostDate,
       now,
       id,
     ],
   );
   persist(db);
 
-  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile);
   return rowToPlan(
     {
       id,
@@ -214,6 +239,8 @@ export async function updateSavedPlan(
       risk_profile: riskProfile,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
+      owner_id: existing.ownerId,
+      last_frost_date: lastFrostDate,
       created_at: existing.createdAt,
       updated_at: now,
     },
@@ -221,8 +248,11 @@ export async function updateSavedPlan(
   );
 }
 
-export async function deleteSavedPlan(id: string): Promise<boolean> {
-  const existing = await getSavedPlan(id);
+export async function deleteSavedPlan(
+  id: string,
+  ownerId?: string | null,
+): Promise<boolean> {
+  const existing = await getSavedPlan(id, ownerId);
   if (!existing) return false;
   const db = await getDb();
   db.run("DELETE FROM saved_plans WHERE id = ?", [id]);

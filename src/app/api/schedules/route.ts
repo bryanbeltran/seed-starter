@@ -3,8 +3,9 @@ import { parseScheduleRequest } from "@/planning/api/scheduleRequestSchema";
 import { createScheduleFromRequest } from "@/lib/createScheduleFromRequest";
 import { serializeSchedule } from "@/lib/serializeSchedule";
 import { ZoneLookupError } from "@/lib/zipToZone";
+import { apiRoute } from "@/lib/apiRoute";
 
-export async function POST(req: Request) {
+export const POST = apiRoute("schedules", async (req) => {
   let body: unknown;
   try {
     body = await req.json();
@@ -24,10 +25,6 @@ export async function POST(req: Request) {
     if (err instanceof ZoneLookupError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     }
-    console.error("Schedule calculation failed:", err);
-    return NextResponse.json(
-      { error: "Could not calculate sow dates. Try again." },
-      { status: 500 },
-    );
+    throw err;
   }
-}
+}, { limit: 30 });

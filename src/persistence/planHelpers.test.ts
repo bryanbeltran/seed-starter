@@ -31,6 +31,7 @@ describe("planHelpers", () => {
     );
     expect(plan.climateSnapshotId).toBe("outdated-snapshot");
     expect(plan.climateDataStale).toBe(true);
+    expect(plan.ownerId).toBeNull();
   });
 
   it("rowToPlan falls back to climate_data_version when snapshot missing", async () => {

@@ -19,6 +19,8 @@ type PlanRow = {
   risk_profile: string;
   climate_data_version: string | null;
   climate_snapshot_id: string | null;
+  owner_id: string | null;
+  last_frost_date: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -44,14 +46,21 @@ async function ensureMigrations() {
       risk_profile TEXT NOT NULL DEFAULT 'balanced',
       climate_data_version TEXT,
       climate_snapshot_id TEXT,
+      owner_id TEXT,
+      last_frost_date TEXT,
       created_at TIMESTAMPTZ NOT NULL,
       updated_at TIMESTAMPTZ NOT NULL
     )
   `;
-  await sql`
-    ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS climate_snapshot_id TEXT
-  `;
+  await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS climate_snapshot_id TEXT`;
+  await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS owner_id TEXT`;
+  await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS last_frost_date TEXT`;
   migrated = true;
+}
+
+function owns(row: PlanRow, ownerId?: string | null): boolean {
+  if (!ownerId) return true;
+  return !row.owner_id || row.owner_id === ownerId;
 }
 
 async function planFromRow(row: PlanRow): Promise<SavedPlan> {
@@ -65,22 +74,26 @@ async function planFromRow(row: PlanRow): Promise<SavedPlan> {
   return rowToPlan(row, schedule);
 }
 
-export async function listSavedPlans(): Promise<SavedPlan[]> {
+export async function listSavedPlans(ownerId?: string | null): Promise<SavedPlan[]> {
   await ensureMigrations();
   const sql = getSql();
   const rows = (await sql`
     SELECT * FROM saved_plans ORDER BY updated_at DESC
   `) as PlanRow[];
-  return Promise.all(rows.map(planFromRow));
+  const filtered = rows.filter((r) => owns(r, ownerId));
+  return Promise.all(filtered.map(planFromRow));
 }
 
-export async function getSavedPlan(id: string): Promise<SavedPlan | null> {
+export async function getSavedPlan(
+  id: string,
+  ownerId?: string | null,
+): Promise<SavedPlan | null> {
   await ensureMigrations();
   const sql = getSql();
   const rows = (await sql`
     SELECT * FROM saved_plans WHERE id = ${id}
   `) as PlanRow[];
-  if (!rows[0]) return null;
+  if (!rows[0] || !owns(rows[0], ownerId)) return null;
   return planFromRow(rows[0]);
 }
 
@@ -91,15 +104,17 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
   const riskProfile = input.riskProfile ?? "balanced";
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
+  const schedule = await scheduleForPlan(zip, zone, input.crops, riskProfile);
+  const lastFrostDate = schedule.lastFrostDate.toISOString();
+  const ownerId = input.ownerId ?? null;
 
   await ensureMigrations();
   const sql = getSql();
   await sql`
-    INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, climate_data_version, climate_snapshot_id, created_at, updated_at)
-    VALUES (${id}, ${input.name}, ${zip}, ${zone}, ${JSON.stringify(input.crops)}, ${riskProfile}, ${climateDataVersion}, ${climateSnapshotId}, ${now}, ${now})
+    INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, climate_data_version, climate_snapshot_id, owner_id, last_frost_date, created_at, updated_at)
+    VALUES (${id}, ${input.name}, ${zip}, ${zone}, ${JSON.stringify(input.crops)}, ${riskProfile}, ${climateDataVersion}, ${climateSnapshotId}, ${ownerId}, ${lastFrostDate}, ${now}, ${now})
   `;
 
-  const schedule = await scheduleForPlan(zip, zone, input.crops, riskProfile);
   return rowToPlan(
     {
       id,
@@ -110,6 +125,8 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
       risk_profile: riskProfile,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
+      owner_id: ownerId,
+      last_frost_date: lastFrostDate,
       created_at: now,
       updated_at: now,
     },
@@ -120,8 +137,9 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
 export async function updateSavedPlan(
   id: string,
   patch: Partial<SavedPlanInput>,
+  ownerId?: string | null,
 ): Promise<SavedPlan | null> {
-  const existing = await getSavedPlan(id);
+  const existing = await getSavedPlan(id, ownerId);
   if (!existing) return null;
 
   const name = patch.name ?? existing.name;
@@ -132,6 +150,8 @@ export async function updateSavedPlan(
   const now = new Date().toISOString();
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
+  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile);
+  const lastFrostDate = schedule.lastFrostDate.toISOString();
 
   await ensureMigrations();
   const sql = getSql();
@@ -139,11 +159,11 @@ export async function updateSavedPlan(
     UPDATE saved_plans
     SET name = ${name}, zip = ${zip}, zone = ${zone}, crops_json = ${JSON.stringify(crops)},
         risk_profile = ${riskProfile}, climate_data_version = ${climateDataVersion},
-        climate_snapshot_id = ${climateSnapshotId}, updated_at = ${now}
+        climate_snapshot_id = ${climateSnapshotId}, last_frost_date = ${lastFrostDate},
+        updated_at = ${now}
     WHERE id = ${id}
   `;
 
-  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile);
   return rowToPlan(
     {
       id,
@@ -154,6 +174,8 @@ export async function updateSavedPlan(
       risk_profile: riskProfile,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
+      owner_id: existing.ownerId,
+      last_frost_date: lastFrostDate,
       created_at: existing.createdAt,
       updated_at: now,
     },
@@ -161,8 +183,11 @@ export async function updateSavedPlan(
   );
 }
 
-export async function deleteSavedPlan(id: string): Promise<boolean> {
-  const existing = await getSavedPlan(id);
+export async function deleteSavedPlan(
+  id: string,
+  ownerId?: string | null,
+): Promise<boolean> {
+  const existing = await getSavedPlan(id, ownerId);
   if (!existing) return false;
   await ensureMigrations();
   const sql = getSql();

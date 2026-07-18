@@ -24,6 +24,8 @@ export default defineConfig({
         "src/**/*.test.ts",
         "src/**/*.test.tsx",
         "src/lib/utils.ts",
+        "src/lib/ownerAuth.ts",
+        "src/lib/observability.ts",
         "src/persistence/postgresSavedPlans.ts",
       ],
       thresholds: {

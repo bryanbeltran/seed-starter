@@ -1,0 +1,256 @@
+{
+  "description": "Golden ZIP frost eval — expected lastFrostP50 bands",
+  "toleranceDays": 14,
+  "zips": [
+    {
+      "zip": "10001",
+      "p50": "03-29",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "10019",
+      "p50": "03-29",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "10027",
+      "p50": "03-29",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "19103",
+      "p50": "03-29",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "30301",
+      "p50": "03-17",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "55401",
+      "p50": "04-25",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "55423",
+      "p50": "04-25",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "55455",
+      "p50": "04-25",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "60601",
+      "p50": "04-21",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "78701",
+      "p50": "02-29",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "80202",
+      "p50": "04-24",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "90210",
+      "p50": "03-08",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "97201",
+      "p50": "03-17",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "98101",
+      "p50": "03-04",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "02108",
+      "p50": "04-04",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "03255",
+      "p50": "05-13",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "05832",
+      "p50": "05-12",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "08690",
+      "p50": "04-08",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "12477",
+      "p50": "05-08",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "14481",
+      "p50": "04-24",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "16256",
+      "p50": "05-01",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "18464",
+      "p50": "05-17",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "21555",
+      "p50": "04-17",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "24236",
+      "p50": "05-04",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "26610",
+      "p50": "04-25",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "28740",
+      "p50": "04-13",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "30673",
+      "p50": "03-29",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "33162",
+      "p50": "06-30",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "36006",
+      "p50": "03-17",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "38333",
+      "p50": "04-04",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "40943",
+      "p50": "04-13",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "43760",
+      "p50": "04-25",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "45833",
+      "p50": "04-16",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "47994",
+      "p50": "04-24",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "49722",
+      "p50": "05-25",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "52076",
+      "p50": "05-05",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "54615",
+      "p50": "05-17",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "56303",
+      "p50": "05-05",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "58436",
+      "p50": "05-12",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "60561",
+      "p50": "04-21",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "62476",
+      "p50": "04-01",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "64493",
+      "p50": "04-20",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "67038",
+      "p50": "04-09",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "69025",
+      "p50": "05-01",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "72111",
+      "p50": "04-12",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "74427",
+      "p50": "03-29",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "76530",
+      "p50": "03-17",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "78607",
+      "p50": "03-01",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "81036",
+      "p50": "04-29",
+      "maxDistanceKm": 80
+    },
+    {
+      "zip": "84636",
+      "p50": "05-13",
+      "maxDistanceKm": 80
+    }
+  ]
+}

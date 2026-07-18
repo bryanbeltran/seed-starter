@@ -29,5 +29,7 @@ describe("serializeSchedule", () => {
     expect(json.lastFrostP50).toMatch(/2026-04-/);
     expect(json.lastFrostP90).toBeTruthy();
     expect(json.climateDataVersion).toMatch(/^(spike|ghcn)-/);
+    expect(json.climateConfidence).toMatch(/high|medium|low/);
+    expect(json.stationDistanceKm).toBeTypeOf("number");
   });
 });

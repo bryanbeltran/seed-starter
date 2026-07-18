@@ -107,6 +107,8 @@ export function buildSchedule(input: ScheduleInput): Schedule {
     frostProvenance: frostResolution.provenance,
     frostPercentiles,
     climateDataVersion: frostResolution.dataVersion,
+    climateConfidence: frostResolution.confidence,
+    stationDistanceKm: frostResolution.distanceKm,
     riskProfile,
     tasks,
   };

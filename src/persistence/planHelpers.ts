@@ -6,12 +6,14 @@ import {
 import type { RiskProfile, Schedule } from "@/planning";
 import { buildSchedule } from "@/planning";
 import { serializeSchedule } from "@/lib/serializeSchedule";
+import { diffSchedules, type ScheduleDiff } from "@/lib/scheduleDiff";
 
 export type SavedPlanInput = {
   name: string;
   zip: string;
   crops: string[];
   riskProfile?: RiskProfile;
+  ownerId?: string | null;
 };
 
 export type SavedPlan = {
@@ -21,9 +23,11 @@ export type SavedPlan = {
   zone: string;
   crops: string[];
   riskProfile: RiskProfile;
+  ownerId: string | null;
   climateDataVersion: string | null;
   climateSnapshotId: string | null;
   climateDataStale: boolean;
+  scheduleDiff: ScheduleDiff | null;
   createdAt: string;
   updatedAt: string;
   schedule: ReturnType<typeof serializeSchedule>;
@@ -47,7 +51,25 @@ export async function scheduleForPlan(
 }
 
 export function climateSnapshotForZip(zip: string): string | null {
-  return getClimateSnapshotId(zip) ?? getFileClimateRepository().getByZip(zip)?.dataVersion ?? null;
+  return (
+    getClimateSnapshotId(zip) ??
+    getFileClimateRepository().getByZip(zip)?.dataVersion ??
+    null
+  );
+}
+
+function storedScheduleStub(row: Record<string, unknown>): Schedule | null {
+  const lastFrost = row.last_frost_date ? String(row.last_frost_date) : null;
+  if (!lastFrost) return null;
+  return {
+    zone: String(row.zone),
+    zip: String(row.zip),
+    lastFrostDate: new Date(lastFrost),
+    frostSource: "climate",
+    frostProvenance: "stored snapshot",
+    riskProfile: String(row.risk_profile) as RiskProfile,
+    tasks: [],
+  };
 }
 
 export function rowToPlan(
@@ -62,6 +84,11 @@ export function rowToPlan(
     ? String(row.climate_snapshot_id)
     : storedVersion;
 
+  const stale = isClimateVersionStale(storedSnapshot ?? storedVersion);
+  const previous = storedScheduleStub(row);
+  const scheduleDiff =
+    stale && previous ? diffSchedules(previous, schedule) : null;
+
   return {
     id: String(row.id),
     name: String(row.name),
@@ -69,9 +96,11 @@ export function rowToPlan(
     zone: String(row.zone),
     crops: JSON.parse(String(row.crops_json)) as string[],
     riskProfile: String(row.risk_profile) as RiskProfile,
+    ownerId: row.owner_id ? String(row.owner_id) : null,
     climateDataVersion: storedVersion,
     climateSnapshotId: storedSnapshot,
-    climateDataStale: isClimateVersionStale(storedSnapshot ?? storedVersion),
+    climateDataStale: stale,
+    scheduleDiff,
     createdAt: String(row.created_at),
     updatedAt: String(row.updated_at),
     schedule: serializeSchedule(schedule),

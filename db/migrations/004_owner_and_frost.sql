@@ -1,0 +1,1 @@
+-- Applied via savedPlanService migration runner (idempotent ALTER).

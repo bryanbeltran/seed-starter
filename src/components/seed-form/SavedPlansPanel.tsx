@@ -26,6 +26,12 @@ export type SavedPlanSummary = {
   riskProfile: RiskProfile;
   climateDataVersion?: string | null;
   climateDataStale?: boolean;
+  scheduleDiff?: {
+    lastFrostChanged: boolean;
+    previousLastFrost: string;
+    currentLastFrost: string;
+    tasksChanged: number;
+  } | null;
   schedule: ScheduleResult;
 };
 
@@ -140,8 +146,13 @@ export function SavedPlansPanel({
                 onClick={() => {
                   onLoadPlan(plan);
                   if (plan.climateDataStale) {
+                    const diff = plan.scheduleDiff;
+                    const frostNote =
+                      diff?.lastFrostChanged
+                        ? ` Last frost moved (${new Date(diff.previousLastFrost).toLocaleDateString()} → ${new Date(diff.currentLastFrost).toLocaleDateString()}).`
+                        : "";
                     onStatusMessage(
-                      `Loaded "${plan.name}" — climate data updated since save; dates refreshed.`,
+                      `Loaded "${plan.name}" — climate data updated since save; dates refreshed.${frostNote}`,
                     );
                   }
                 }}
@@ -150,7 +161,9 @@ export function SavedPlansPanel({
                   {plan.name}
                   {plan.climateDataStale && (
                     <Badge variant="outline" className="text-xs font-normal">
-                      Stale data
+                      {plan.scheduleDiff?.lastFrostChanged
+                        ? "Frost updated"
+                        : "Stale data"}
                     </Badge>
                   )}
                 </span>

@@ -6,6 +6,8 @@ import {
   updateSavedPlan,
 } from "@/persistence/savedPlanService";
 import { ZoneLookupError } from "@/lib/zipToZone";
+import { apiRoute } from "@/lib/apiRoute";
+import { requireOwnerId } from "@/lib/ownerAuth";
 
 const patchSchema = z.object({
   name: z.string().trim().min(1).optional(),
@@ -16,55 +18,72 @@ const patchSchema = z.object({
 
 type Params = { params: Promise<{ planId: string }> };
 
-export async function GET(_req: Request, { params }: Params) {
+async function withParams(
+  req: Request,
+  params: Promise<{ planId: string }>,
+  run: (planId: string) => Promise<Response>,
+) {
   const { planId } = await params;
-  const plan = await getSavedPlan(planId);
-  if (!plan) {
-    return NextResponse.json({ error: "Plan not found." }, { status: 404 });
-  }
-  return NextResponse.json(plan);
+  return run(planId);
+}
+
+export async function GET(req: Request, { params }: Params) {
+  return apiRoute("saved-plans-get", async () =>
+    withParams(req, params, async (planId) => {
+      const ownerId = await requireOwnerId();
+      const plan = await getSavedPlan(planId, ownerId);
+      if (!plan) {
+        return NextResponse.json({ error: "Plan not found." }, { status: 404 });
+      }
+      return NextResponse.json(plan);
+    }),
+  )(req);
 }
 
 export async function PATCH(req: Request, { params }: Params) {
-  const { planId } = await params;
-  let body: unknown;
-  try {
-    body = await req.json();
-  } catch {
-    return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
-  }
+  return apiRoute("saved-plans-patch", async (r) =>
+    withParams(r, params, async (planId) => {
+      let body: unknown;
+      try {
+        body = await r.json();
+      } catch {
+        return NextResponse.json({ error: "Invalid JSON body." }, { status: 400 });
+      }
 
-  const parsed = patchSchema.safeParse(body);
-  if (!parsed.success) {
-    return NextResponse.json(
-      { error: parsed.error.issues[0]?.message ?? "Invalid request." },
-      { status: 400 },
-    );
-  }
+      const parsed = patchSchema.safeParse(body);
+      if (!parsed.success) {
+        return NextResponse.json(
+          { error: parsed.error.issues[0]?.message ?? "Invalid request." },
+          { status: 400 },
+        );
+      }
 
-  try {
-    const plan = await updateSavedPlan(planId, parsed.data);
-    if (!plan) {
-      return NextResponse.json({ error: "Plan not found." }, { status: 404 });
-    }
-    return NextResponse.json(plan);
-  } catch (err) {
-    if (err instanceof ZoneLookupError) {
-      return NextResponse.json({ error: err.message }, { status: 400 });
-    }
-    console.error("Update saved plan failed:", err);
-    return NextResponse.json(
-      { error: "Could not update plan." },
-      { status: 500 },
-    );
-  }
+      try {
+        const ownerId = await requireOwnerId();
+        const plan = await updateSavedPlan(planId, parsed.data, ownerId);
+        if (!plan) {
+          return NextResponse.json({ error: "Plan not found." }, { status: 404 });
+        }
+        return NextResponse.json(plan);
+      } catch (err) {
+        if (err instanceof ZoneLookupError) {
+          return NextResponse.json({ error: err.message }, { status: 400 });
+        }
+        throw err;
+      }
+    }),
+  )(req);
 }
 
-export async function DELETE(_req: Request, { params }: Params) {
-  const { planId } = await params;
-  const deleted = await deleteSavedPlan(planId);
-  if (!deleted) {
-    return NextResponse.json({ error: "Plan not found." }, { status: 404 });
-  }
-  return NextResponse.json({ ok: true });
+export async function DELETE(req: Request, { params }: Params) {
+  return apiRoute("saved-plans-delete", async () =>
+    withParams(req, params, async (planId) => {
+      const ownerId = await requireOwnerId();
+      const deleted = await deleteSavedPlan(planId, ownerId);
+      if (!deleted) {
+        return NextResponse.json({ error: "Plan not found." }, { status: 404 });
+      }
+      return NextResponse.json({ ok: true });
+    }),
+  )(req);
 }

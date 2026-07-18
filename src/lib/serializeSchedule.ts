@@ -11,6 +11,8 @@ export function serializeSchedule(schedule: Schedule) {
     lastFrostP50: schedule.frostPercentiles?.p50.toISOString(),
     lastFrostP90: schedule.frostPercentiles?.p90.toISOString(),
     climateDataVersion: schedule.climateDataVersion,
+    climateConfidence: schedule.climateConfidence,
+    stationDistanceKm: schedule.stationDistanceKm,
     riskProfile: schedule.riskProfile,
     tasks: schedule.tasks.map((t) => ({
       cropId: t.cropId,

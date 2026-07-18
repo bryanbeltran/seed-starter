@@ -12,11 +12,13 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check": "node scripts/check-data-quality.mjs && node scripts/check-climate-drift.mjs && pnpm run lint && pnpm exec tsc --noEmit && pnpm run test:coverage && pnpm run build",
+    "check": "node scripts/check-data-quality.mjs && node scripts/check-climate-drift.mjs && node scripts/check-golden-climate.mjs && pnpm run lint && pnpm exec tsc --noEmit && pnpm run test:coverage && pnpm run build",
     "spike:climate": "node scripts/spike-ghcn-zip-frost.mjs",
     "etl:climate": "node scripts/etl-ghcn-zip-climate.mjs",
     "etl:phzm": "node scripts/etl-phzm-zones.mjs",
-    "capture:demo": "node scripts/capture-demo.mjs"
+    "capture:demo": "node scripts/capture-demo.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "audit": "pnpm audit --prod --audit-level=high"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
@@ -33,7 +35,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.525.0",
-    "next": "15.4.10",
+    "next": "15.5.18",
     "react": "19.1.0",
     "react-csv": "^2.2.2",
     "react-dom": "19.1.0",

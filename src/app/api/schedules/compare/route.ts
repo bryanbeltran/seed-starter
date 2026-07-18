@@ -3,8 +3,9 @@ import { parseScheduleRequest } from "@/planning/api/scheduleRequestSchema";
 import { compareSchedulesFromRequest } from "@/lib/createScheduleFromRequest";
 import { serializeSchedule } from "@/lib/serializeSchedule";
 import { ZoneLookupError } from "@/lib/zipToZone";
+import { apiRoute } from "@/lib/apiRoute";
 
-export async function POST(req: Request) {
+export const POST = apiRoute("schedules-compare", async (req) => {
   let body: unknown;
   try {
     body = await req.json();
@@ -28,10 +29,6 @@ export async function POST(req: Request) {
     if (err instanceof ZoneLookupError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     }
-    console.error("Schedule compare failed:", err);
-    return NextResponse.json(
-      { error: "Could not compare schedules. Try again." },
-      { status: 500 },
-    );
+    throw err;
   }
-}
+}, { limit: 20 });

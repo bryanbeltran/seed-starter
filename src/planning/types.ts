@@ -28,6 +28,8 @@ export type PlantingTask = {
   label: string;
 };
 
+export type ClimateConfidence = "high" | "medium" | "low";
+
 export type FrostClimateRecord = {
   lastFrostP10: string;
   lastFrostP50: string;
@@ -57,6 +59,8 @@ export type Schedule = {
   frostProvenance: string;
   frostPercentiles?: FrostPercentiles;
   climateDataVersion?: string;
+  climateConfidence?: ClimateConfidence;
+  stationDistanceKm?: number;
   riskProfile: RiskProfile;
   tasks: PlantingTask[];
 };

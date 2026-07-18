@@ -59,6 +59,25 @@ export function ScheduleResults({ results, zip, planName }: Props) {
                 )}
               </TooltipContent>
             </Tooltip>
+            {results.climateConfidence && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Badge variant="outline" className="capitalize">
+                    {results.climateConfidence} confidence
+                  </Badge>
+                </TooltipTrigger>
+                <TooltipContent className="max-w-xs">
+                  <p>
+                    Station distance{" "}
+                    {results.stationDistanceKm != null
+                      ? `${results.stationDistanceKm} km`
+                      : "unknown"}
+                    . High ≤25 km, medium ≤60 km, low ≤200 km. Beyond 200 km
+                    climate tier is rejected.
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            )}
           </TooltipProvider>
         </div>
         <CardDescription className="print:text-foreground">

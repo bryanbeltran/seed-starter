@@ -49,6 +49,8 @@ describe("savedPlanService", () => {
     expect(first.climateDataVersion).toBe(getCurrentClimateDataVersion());
     expect(first.climateSnapshotId).toBeTruthy();
     expect(first.climateDataStale).toBe(false);
+    expect(first.scheduleDiff).toBeNull();
+    expect(first.ownerId).toBeNull();
     expect(second.riskProfile).toBe("balanced");
 
     const plans = await listSavedPlans();
@@ -99,8 +101,8 @@ describe("savedPlanService", () => {
     const sqlitePath = path.join(tempDir, "seedstarter.sqlite");
     const db = new SQL.Database(fs.readFileSync(sqlitePath));
     db.run(
-      "UPDATE saved_plans SET climate_data_version = ?, climate_snapshot_id = ? WHERE id = ?",
-      ["outdated-2020", "outdated-2020", plan.id],
+      "UPDATE saved_plans SET climate_data_version = ?, climate_snapshot_id = ?, last_frost_date = ? WHERE id = ?",
+      ["outdated-2020", "outdated-2020", "2020-01-01T00:00:00.000Z", plan.id],
     );
     fs.writeFileSync(sqlitePath, Buffer.from(db.export()));
     db.close();
@@ -109,6 +111,7 @@ describe("savedPlanService", () => {
     const reopened = await getSavedPlan(plan.id);
     expect(reopened?.climateDataVersion).toBe("outdated-2020");
     expect(reopened?.climateDataStale).toBe(true);
+    expect(reopened?.scheduleDiff?.lastFrostChanged).toBe(true);
     expect(reopened?.schedule.climateDataVersion).toBe(
       getCurrentClimateDataVersion(),
     );

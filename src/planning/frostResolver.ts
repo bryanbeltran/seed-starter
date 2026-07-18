@@ -1,3 +1,4 @@
+import { climateConfidence, type ClimateConfidence } from "@/lib/climateConfidence";
 import stationData from "./data/stationFrost.json";
 import regionalData from "./data/regionalFrost.json";
 import { frostDateStringForZone, nextFrostDate } from "./frost";
@@ -31,6 +32,7 @@ export type FrostResolution = {
   dataVersion?: string;
   stationId?: string;
   distanceKm?: number;
+  confidence?: ClimateConfidence;
 };
 
 function parseFrostString(mmdd: string, referenceDate: Date): Date {
@@ -60,15 +62,17 @@ export function resolveLastFrost(
     const climate = climateLookup.getByZip(input.zip);
     if (climate) {
       const p50 = parseFrostString(climate.lastFrostP50, referenceDate);
+      const confidence = climateConfidence(climate.distanceKm);
       return {
         lastFrostDate: p50,
         lastFrostP10: parseFrostString(climate.lastFrostP10, referenceDate),
         lastFrostP90: parseFrostString(climate.lastFrostP90, referenceDate),
         source: "climate",
-        provenance: `${climate.provenance} via ${climate.stationName ?? climate.stationId} (${climate.distanceKm}km)`,
+        provenance: `${climate.provenance} via ${climate.stationName ?? climate.stationId} (${climate.distanceKm}km, ${confidence} confidence)`,
         dataVersion: climate.dataVersion,
         stationId: climate.stationId,
         distanceKm: climate.distanceKm,
+        confidence,
       };
     }
   }

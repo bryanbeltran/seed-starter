@@ -17,6 +17,8 @@ export type ScheduleResult = {
   lastFrostP50?: string;
   lastFrostP90?: string;
   climateDataVersion?: string;
+  climateConfidence?: "high" | "medium" | "low";
+  stationDistanceKm?: number;
   riskProfile: RiskProfile;
   tasks: ScheduleTask[];
   sowDates: { seed: string; date: string }[];
