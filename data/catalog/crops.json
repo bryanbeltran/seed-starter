@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-18T19:03:20.207Z",
+  "generatedAt": "2026-07-18T21:10:32.099Z",
   "crops": {
     "beans": {
       "id": "beans",
@@ -483,6 +483,38 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/katrina-f1-cucumber-seed-47.html",
           "confidence": "high"
+        },
+        "marketmore-97-cucumber": {
+          "id": "marketmore-97-cucumber",
+          "name": "Marketmore 97 Cucumber",
+          "daysToHarvest": 55,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cucumber-marketmore-97",
+          "confidence": "high"
+        },
+        "wautoma-cucumber": {
+          "id": "wautoma-cucumber",
+          "name": "Wautoma Cucumber",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cucumber-wautoma",
+          "confidence": "high"
+        },
+        "armenian-cucumber": {
+          "id": "armenian-cucumber",
+          "name": "Armenian Cucumber",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cucumber-armenian",
+          "confidence": "high"
+        },
+        "double-yield-cucumber": {
+          "id": "double-yield-cucumber",
+          "name": "Double Yield Cucumber",
+          "daysToHarvest": 52,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cucumber-double-yield",
+          "confidence": "high"
         }
       }
     },
@@ -567,10 +599,10 @@
         "gourmet": {
           "id": "gourmet",
           "name": "Gourmet",
-          "daysToHarvest": 70,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-bell-peppers/gourmet-f1-bell-pepper-seed-2648.html",
-          "confidence": "medium"
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/pepper-gourmet",
+          "confidence": "high"
         },
         "capperino": {
           "id": "capperino",
@@ -616,9 +648,9 @@
           "id": "milena",
           "name": "Milena",
           "daysToHarvest": 70,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-bell-peppers/milena-f1-bell-pepper-seed-3382.html",
-          "confidence": "medium"
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/pepper-milena",
+          "confidence": "high"
         },
         "mad-hatter": {
           "id": "mad-hatter",
@@ -838,11 +870,11 @@
         },
         "early-jalapeno": {
           "id": "early-jalapeno",
-          "name": "Early Jalapeño",
-          "daysToHarvest": 70,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/hot-peppers/early-jalapen%CC%83o-organic-jalapeno-pepper-seed-586G.html",
-          "confidence": "medium"
+          "name": "Early Jalapeño",
+          "daysToHarvest": 66,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/pepper-early-jalapeno-1",
+          "confidence": "high"
         },
         "sonoma": {
           "id": "sonoma",
@@ -855,10 +887,10 @@
         "habanero": {
           "id": "habanero",
           "name": "Habanero",
-          "daysToHarvest": 70,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/hot-peppers/habanero-organic-habanero-pepper-seed-598G.html",
-          "confidence": "medium"
+          "daysToHarvest": 95,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/pepper-habanero",
+          "confidence": "high"
         },
         "amaretto": {
           "id": "amaretto",
@@ -975,18 +1007,18 @@
         "sprinter": {
           "id": "sprinter",
           "name": "Sprinter",
-          "daysToHarvest": 70,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-bell-peppers/sprinter-organic-f1-bell-pepper-seed-3186G.html",
-          "confidence": "medium"
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/pepper-sprinter",
+          "confidence": "high"
         },
         "bastan": {
           "id": "bastan",
           "name": "Bastan",
-          "daysToHarvest": 70,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/hot-peppers/bastan-organic-f1-poblano-pepper-seed-3274G.html",
-          "confidence": "medium"
+          "daysToHarvest": 65,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/pepper-bastan",
+          "confidence": "high"
         },
         "lunchbox-pepper-mix": {
           "id": "lunchbox-pepper-mix",
@@ -1159,6 +1191,14 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/lavender/ellagance-white-lavender-seed-5638.html",
           "confidence": "high"
+        },
+        "ellagance-purple-lavender": {
+          "id": "ellagance-purple-lavender",
+          "name": "Ellagance Purple Lavender",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/lavender-ellagance-purple",
+          "confidence": "medium"
         }
       }
     },
@@ -1523,10 +1563,10 @@
         "buttercrunch": {
           "id": "buttercrunch",
           "name": "Buttercrunch",
-          "daysToHarvest": 45,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/bibb-lettuce/buttercrunch-organic-lettuce-seed-435G.html",
-          "confidence": "medium"
+          "daysToHarvest": 48,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/lettuce-buttercrunch",
+          "confidence": "high"
         },
         "crispino": {
           "id": "crispino",
@@ -1919,6 +1959,30 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/bibb-lettuce/little-gem-type-trio-lettuce-seed-little_gem_trio_ps.html",
           "confidence": "medium"
+        },
+        "winter-density-lettuce": {
+          "id": "winter-density-lettuce",
+          "name": "Winter Density Lettuce",
+          "daysToHarvest": 28,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-density-lettuce.html",
+          "confidence": "high"
+        },
+        "red-oak-leaf-lettuce": {
+          "id": "red-oak-leaf-lettuce",
+          "name": "Red Oak Leaf Lettuce",
+          "daysToHarvest": 30,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-oak-leaf-lettuce.html",
+          "confidence": "high"
+        },
+        "red-salad-bowl-lettuce": {
+          "id": "red-salad-bowl-lettuce",
+          "name": "Red Salad Bowl Lettuce",
+          "daysToHarvest": 28,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-salad-bowl-lettuce.html",
+          "confidence": "high"
         }
       }
     },
@@ -3583,6 +3647,126 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/carrots/early-carrots/caravel-organic-f1-carrot-seed-5164G.html",
           "confidence": "high"
+        },
+        "bolero-carrot": {
+          "id": "bolero-carrot",
+          "name": "Bolero Carrot",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-bolero",
+          "confidence": "high"
+        },
+        "candysnax-carrot": {
+          "id": "candysnax-carrot",
+          "name": "Candysnax Carrot",
+          "daysToHarvest": 65,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-candysnax",
+          "confidence": "high"
+        },
+        "mokum-carrot": {
+          "id": "mokum-carrot",
+          "name": "Mokum Carrot",
+          "daysToHarvest": 56,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-mokum",
+          "confidence": "high"
+        },
+        "purple-sun-carrot": {
+          "id": "purple-sun-carrot",
+          "name": "Purple Sun Carrot",
+          "daysToHarvest": 90,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-purple-sun",
+          "confidence": "high"
+        },
+        "mignon-carrot": {
+          "id": "mignon-carrot",
+          "name": "Mignon Carrot",
+          "daysToHarvest": 84,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-mignon",
+          "confidence": "high"
+        },
+        "northern-lights-blend-carrot": {
+          "id": "northern-lights-blend-carrot",
+          "name": "Northern Lights Blend Carrot",
+          "daysToHarvest": 73,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-northern-lights-carrot-blend",
+          "confidence": "high"
+        },
+        "eskimo-carrot": {
+          "id": "eskimo-carrot",
+          "name": "Eskimo Carrot",
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-eskimo",
+          "confidence": "high"
+        },
+        "oxheart-carrot": {
+          "id": "oxheart-carrot",
+          "name": "Oxheart Carrot",
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-oxheart",
+          "confidence": "high"
+        },
+        "dragon-carrot": {
+          "id": "dragon-carrot",
+          "name": "Dragon Carrot",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-dragon",
+          "confidence": "high"
+        },
+        "red-samurai-carrot": {
+          "id": "red-samurai-carrot",
+          "name": "Red Samurai Carrot",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-red-samurai",
+          "confidence": "high"
+        },
+        "sugarsnax-54-carrot": {
+          "id": "sugarsnax-54-carrot",
+          "name": "Sugarsnax 54 Carrot",
+          "daysToHarvest": 68,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-sugarsnax-54",
+          "confidence": "high"
+        },
+        "purplesnax-carrot": {
+          "id": "purplesnax-carrot",
+          "name": "Purplesnax Carrot",
+          "daysToHarvest": 73,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-purplesnax",
+          "confidence": "high"
+        },
+        "romance-carrot": {
+          "id": "romance-carrot",
+          "name": "Romance Carrot",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-romance",
+          "confidence": "high"
+        },
+        "rondo-carrot": {
+          "id": "rondo-carrot",
+          "name": "Rondo Carrot",
+          "daysToHarvest": 76,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-rondo",
+          "confidence": "high"
+        },
+        "yellowstone-carrot": {
+          "id": "yellowstone-carrot",
+          "name": "Yellowstone Carrot",
+          "daysToHarvest": 70,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/carrot-yellowstone",
+          "confidence": "high"
         }
       }
     },
@@ -3979,6 +4163,134 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-popcorn-shoots-l001.html",
           "confidence": "high"
+        },
+        "golden-jubilee-corn": {
+          "id": "golden-jubilee-corn",
+          "name": "Golden Jubilee Corn",
+          "daysToHarvest": 98,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-golden-jubilee",
+          "confidence": "high"
+        },
+        "early-pink-corn": {
+          "id": "early-pink-corn",
+          "name": "Early Pink Corn",
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-early-pink",
+          "confidence": "high"
+        },
+        "allure-corn": {
+          "id": "allure-corn",
+          "name": "Allure Corn",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-allure",
+          "confidence": "high"
+        },
+        "supersweet-jubilee-corn": {
+          "id": "supersweet-jubilee-corn",
+          "name": "Supersweet Jubilee Corn",
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-supersweet-jubilee",
+          "confidence": "high"
+        },
+        "sweetness-corn": {
+          "id": "sweetness-corn",
+          "name": "Sweetness Corn",
+          "daysToHarvest": 68,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-sweetness",
+          "confidence": "high"
+        },
+        "serendipity-corn": {
+          "id": "serendipity-corn",
+          "name": "Serendipity Corn",
+          "daysToHarvest": 82,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-serendipity",
+          "confidence": "high"
+        },
+        "kandy-korn-corn": {
+          "id": "kandy-korn-corn",
+          "name": "Kandy Korn Corn",
+          "daysToHarvest": 89,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-kandy-korn",
+          "confidence": "high"
+        },
+        "sugar-buns-corn": {
+          "id": "sugar-buns-corn",
+          "name": "Sugar Buns Corn",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-sugar-buns",
+          "confidence": "high"
+        },
+        "bodacious-corn": {
+          "id": "bodacious-corn",
+          "name": "Bodacious Corn",
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-bodacious",
+          "confidence": "high"
+        },
+        "hooker-s-sweet-indian-corn": {
+          "id": "hooker-s-sweet-indian-corn",
+          "name": "Hooker's Sweet Indian Corn",
+          "daysToHarvest": 80,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-hookers-sweet-indian",
+          "confidence": "high"
+        },
+        "glass-gem-corn": {
+          "id": "glass-gem-corn",
+          "name": "Glass Gem Corn",
+          "daysToHarvest": 115,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-glass-gem",
+          "confidence": "high"
+        },
+        "silver-queen-corn": {
+          "id": "silver-queen-corn",
+          "name": "Silver Queen Corn",
+          "daysToHarvest": 88,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-silver-queen",
+          "confidence": "high"
+        },
+        "temptress-corn": {
+          "id": "temptress-corn",
+          "name": "Temptress Corn",
+          "daysToHarvest": 70,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-temptress",
+          "confidence": "high"
+        },
+        "honey-cream-corn": {
+          "id": "honey-cream-corn",
+          "name": "Honey & Cream Corn",
+          "daysToHarvest": 80,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-honey-cream",
+          "confidence": "high"
+        },
+        "delectable-corn": {
+          "id": "delectable-corn",
+          "name": "Delectable Corn",
+          "daysToHarvest": 84,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-delectable",
+          "confidence": "high"
+        },
+        "cafe-corn": {
+          "id": "cafe-corn",
+          "name": "Café Corn",
+          "daysToHarvest": 68,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/corn-cafe",
+          "confidence": "high"
         }
       }
     },
@@ -4147,6 +4459,22 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-kale-sprouting-seeds.html",
           "confidence": "medium"
+        },
+        "kosmic-kale": {
+          "id": "kosmic-kale",
+          "name": "Kosmic Kale",
+          "daysToHarvest": 55,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/kale-kosmic",
+          "confidence": "medium"
+        },
+        "improved-dwarf-siberian-kale": {
+          "id": "improved-dwarf-siberian-kale",
+          "name": "Improved Dwarf Siberian Kale",
+          "daysToHarvest": 50,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/kale-improved-dwarf-siberian",
+          "confidence": "high"
         }
       }
     },
@@ -4399,10 +4727,10 @@
         "red-veined-sorrel": {
           "id": "red-veined-sorrel",
           "name": "Red Veined Sorrel",
-          "daysToHarvest": 60,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/sorrel/red-veined-sorrel-green-seed-2827.html",
-          "confidence": "medium"
+          "daysToHarvest": 40,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/sorrel-red-veined",
+          "confidence": "high"
         }
       }
     },
@@ -7403,6 +7731,22 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/beefsteak-tomatoes/unity-organic-f1-tomato-seed-5909G.html",
           "confidence": "high"
+        },
+        "stupice": {
+          "id": "stupice",
+          "name": "Stupice",
+          "daysToHarvest": 63,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/tomato-stupice",
+          "confidence": "high"
+        },
+        "grafted-double-sungold-sweet-million": {
+          "id": "grafted-double-sungold-sweet-million",
+          "name": "Grafted Double Sungold/Sweet Million",
+          "daysToHarvest": 70,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/tomato-grafted-double-sungold-sweet-million",
+          "confidence": "high"
         }
       }
     },
@@ -7819,6 +8163,14 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-chamomile.html",
           "confidence": "high"
+        },
+        "german-chamomile": {
+          "id": "german-chamomile",
+          "name": "German Chamomile",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/chamomile-chamomile-german",
+          "confidence": "medium"
         }
       }
     },
@@ -8230,7 +8582,7 @@
         }
       },
       "source": "catalog-etl",
-      "confidence": "low",
+      "confidence": "medium",
       "varieties": {
         "bouquet": {
           "id": "bouquet",
@@ -8287,6 +8639,38 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/teddy-dill-seed-5550.html",
           "confidence": "medium"
+        },
+        "dukat-dill": {
+          "id": "dukat-dill",
+          "name": "Dukat Dill",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/dill-dukat",
+          "confidence": "medium"
+        },
+        "fernleaf-dill": {
+          "id": "fernleaf-dill",
+          "name": "Fernleaf Dill",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/dill-fernleaf",
+          "confidence": "medium"
+        },
+        "long-island-mammoth-dill": {
+          "id": "long-island-mammoth-dill",
+          "name": "Long Island Mammoth Dill",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/dill-long-island-mammoth",
+          "confidence": "medium"
+        },
+        "hera-dill": {
+          "id": "hera-dill",
+          "name": "Hera Dill",
+          "daysToHarvest": 50,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/dill-hera",
+          "confidence": "high"
         }
       }
     },
@@ -8387,6 +8771,22 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/oregano/greek-oregano-herb-seed-930.html",
           "confidence": "high"
+        },
+        "oregano": {
+          "id": "oregano",
+          "name": "Oregano",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/oregano-oregano",
+          "confidence": "medium"
+        },
+        "kirigami-oregano": {
+          "id": "kirigami-oregano",
+          "name": "Kirigami Oregano",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/oregano-kirigami",
+          "confidence": "medium"
         }
       }
     },
@@ -8422,6 +8822,14 @@
           "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/rosemary/primed-rosemary-herb-seed-932E.html",
+          "confidence": "medium"
+        },
+        "simplyherbstm-rosemary": {
+          "id": "simplyherbstm-rosemary",
+          "name": "Simplyherbs™ Rosemary",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/rosemary-simplyherbs",
           "confidence": "medium"
         }
       }
@@ -8591,6 +8999,22 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-thyme.html",
           "confidence": "high"
+        },
+        "german-winter-thyme": {
+          "id": "german-winter-thyme",
+          "name": "German/Winter Thyme",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/thyme-german-or-winter",
+          "confidence": "medium"
+        },
+        "creeping-thyme": {
+          "id": "creeping-thyme",
+          "name": "Creeping Thyme",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/thyme-creeping",
+          "confidence": "medium"
         }
       }
     },
@@ -9206,6 +9630,70 @@
           "daysToHarvest": 13,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/pac-choi-red-choi-organic-microgreen-seed-4664MG.html",
+          "confidence": "high"
+        },
+        "red-acre-cabbage-microgreens": {
+          "id": "red-acre-cabbage-microgreens",
+          "name": "Red Acre Cabbage Microgreens",
+          "daysToHarvest": 13,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-acre-cabbage-micro.html",
+          "confidence": "high"
+        },
+        "red-beet-microgreens": {
+          "id": "red-beet-microgreens",
+          "name": "Red Beet Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-beet-micro-greens.html",
+          "confidence": "high"
+        },
+        "red-chard-microgreens": {
+          "id": "red-chard-microgreens",
+          "name": "Red Chard Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-chard-micro-greens.html",
+          "confidence": "high"
+        },
+        "red-mustard-microgreens": {
+          "id": "red-mustard-microgreens",
+          "name": "Red Mustard Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-mustard-micro-greens.html",
+          "confidence": "high"
+        },
+        "red-russian-kale-microgreens": {
+          "id": "red-russian-kale-microgreens",
+          "name": "Red Russian Kale Microgreens",
+          "daysToHarvest": 13,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-russian-kale-micro.html",
+          "confidence": "high"
+        },
+        "red-lace-mustard-microgreens": {
+          "id": "red-lace-mustard-microgreens",
+          "name": "Red Lace Mustard Microgreens",
+          "daysToHarvest": 13,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-lace-mustard-microgreens.html",
+          "confidence": "high"
+        },
+        "red-carpet-mustard-microgreens": {
+          "id": "red-carpet-mustard-microgreens",
+          "name": "Red Carpet Mustard Microgreens",
+          "daysToHarvest": 13,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-carpet-microgreens-qmg.html",
+          "confidence": "high"
+        },
+        "garnet-red-amaranth-microgreens": {
+          "id": "garnet-red-amaranth-microgreens",
+          "name": "Garnet Red Amaranth Microgreens",
+          "daysToHarvest": 13,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-amaranth-microgreens-qmgl020.html",
           "confidence": "high"
         }
       }
@@ -11363,6 +11851,54 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-basil-micro-greens.html",
           "confidence": "high"
+        },
+        "aroma-ii-basil": {
+          "id": "aroma-ii-basil",
+          "name": "Aroma II Basil",
+          "daysToHarvest": 70,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/basil-aroma-ii",
+          "confidence": "high"
+        },
+        "finissimo-verde-a-palla-basil": {
+          "id": "finissimo-verde-a-palla-basil",
+          "name": "Finissimo Verde A Palla Basil",
+          "daysToHarvest": 45,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/basil-finissimo-verde-a-palla",
+          "confidence": "medium"
+        },
+        "mammoth-sweet-basil": {
+          "id": "mammoth-sweet-basil",
+          "name": "Mammoth Sweet Basil",
+          "daysToHarvest": 45,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/basil-mammoth-sweet",
+          "confidence": "medium"
+        },
+        "dolce-fresca-basil": {
+          "id": "dolce-fresca-basil",
+          "name": "Dolce Fresca Basil",
+          "daysToHarvest": 70,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/basil-dolce-fresca",
+          "confidence": "high"
+        },
+        "profumo-basil": {
+          "id": "profumo-basil",
+          "name": "Profumo Basil",
+          "daysToHarvest": 45,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/basil-profumo",
+          "confidence": "medium"
+        },
+        "everleaf-emerald-towers-basil": {
+          "id": "everleaf-emerald-towers-basil",
+          "name": "Everleaf Emerald Towers Basil",
+          "daysToHarvest": 45,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/basil-everleaf-emerald-towers",
+          "confidence": "medium"
         }
       }
     },
@@ -11563,6 +12099,14 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-chives.html",
           "confidence": "high"
+        },
+        "geisha-garlic-chives": {
+          "id": "geisha-garlic-chives",
+          "name": "Geisha Garlic Chives",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/chives-geisha-garlic",
+          "confidence": "medium"
         }
       }
     },
@@ -11671,6 +12215,14 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/celery-and-celeriac/celery/tango-organic-celery-seed-647G.html",
           "confidence": "high"
+        },
+        "tango-celery": {
+          "id": "tango-celery",
+          "name": "Tango Celery",
+          "daysToHarvest": 84,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/celery-tango",
+          "confidence": "high"
         }
       }
     },
@@ -11710,6 +12262,14 @@
           "daysToHarvest": 62,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/eggplant/petch-siam-f1-eggplant-seed-2117X.html",
+          "confidence": "high"
+        },
+        "listada-de-gandia-eggplant": {
+          "id": "listada-de-gandia-eggplant",
+          "name": "Listada De Gandia Eggplant",
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/eggplant-listada-de-gandia",
           "confidence": "high"
         }
       }
@@ -12243,6 +12803,46 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/kohlrabi/azur-star-organic-kohlrabi-seed-3642G.html",
           "confidence": "high"
+        },
+        "superschmelz-kohlrabi": {
+          "id": "superschmelz-kohlrabi",
+          "name": "Superschmelz Kohlrabi",
+          "daysToHarvest": 70,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/kohlrabi-superschmelz",
+          "confidence": "high"
+        },
+        "blaril-kohlrabi": {
+          "id": "blaril-kohlrabi",
+          "name": "Blaril Kohlrabi",
+          "daysToHarvest": 65,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/kohlrabi-blaril",
+          "confidence": "high"
+        },
+        "delicacy-white-kohlrabi": {
+          "id": "delicacy-white-kohlrabi",
+          "name": "Delicacy White Kohlrabi",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/kohlrabi-delicacy-white",
+          "confidence": "high"
+        },
+        "delicacy-purple-kohlrabi": {
+          "id": "delicacy-purple-kohlrabi",
+          "name": "Delicacy Purple Kohlrabi",
+          "daysToHarvest": 65,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/kohlrabi-delicacy-purple",
+          "confidence": "high"
+        },
+        "konan-kohlrabi": {
+          "id": "konan-kohlrabi",
+          "name": "Konan Kohlrabi",
+          "daysToHarvest": 42,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/kohlrabi-konan-kohlrabi",
+          "confidence": "high"
         }
       }
     },
@@ -12467,6 +13067,94 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
           "confidence": "high"
+        },
+        "hybrid-blend-broccoli": {
+          "id": "hybrid-blend-broccoli",
+          "name": "Hybrid Blend Broccoli",
+          "daysToHarvest": 78,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-hybrid-blend",
+          "confidence": "high"
+        },
+        "belstar-broccoli": {
+          "id": "belstar-broccoli",
+          "name": "Belstar Broccoli",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-belstar",
+          "confidence": "high"
+        },
+        "sorrento-raab-broccoli": {
+          "id": "sorrento-raab-broccoli",
+          "name": "Sorrento Raab Broccoli",
+          "daysToHarvest": 40,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-sorrento-raab",
+          "confidence": "high"
+        },
+        "purple-sprouting-broccoli": {
+          "id": "purple-sprouting-broccoli",
+          "name": "Purple Sprouting Broccoli",
+          "daysToHarvest": 220,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-purple-sprouting",
+          "confidence": "high"
+        },
+        "rudolph-broccoli": {
+          "id": "rudolph-broccoli",
+          "name": "Rudolph Broccoli",
+          "daysToHarvest": 150,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-rudolph",
+          "confidence": "high"
+        },
+        "umpqua-broccoli": {
+          "id": "umpqua-broccoli",
+          "name": "Umpqua Broccoli",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-umpqua",
+          "confidence": "high"
+        },
+        "fiesta-broccoli": {
+          "id": "fiesta-broccoli",
+          "name": "Fiesta Broccoli",
+          "daysToHarvest": 65,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-fiesta",
+          "confidence": "high"
+        },
+        "gypsy-broccoli": {
+          "id": "gypsy-broccoli",
+          "name": "Gypsy Broccoli",
+          "daysToHarvest": 65,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-gypsy",
+          "confidence": "high"
+        },
+        "aspabroc-broccoli": {
+          "id": "aspabroc-broccoli",
+          "name": "Aspabroc Broccoli",
+          "daysToHarvest": 56,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-aspabroc",
+          "confidence": "high"
+        },
+        "de-ciccio-broccoli": {
+          "id": "de-ciccio-broccoli",
+          "name": "De Ciccio Broccoli",
+          "daysToHarvest": 65,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-de-cicco",
+          "confidence": "high"
+        },
+        "emerald-crown-broccoli": {
+          "id": "emerald-crown-broccoli",
+          "name": "Emerald Crown Broccoli",
+          "daysToHarvest": 65,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/broccoli-emerald-crown",
+          "confidence": "high"
         }
       }
     },
@@ -12526,9 +13214,9 @@
         }
       }
     },
-    "red": {
-      "id": "red",
-      "name": "Red",
+    "red-clover-sprouting": {
+      "id": "red-clover-sprouting",
+      "name": "Red Clover Sprouting",
       "category": "vegetable",
       "family": "other",
       "method": "direct",
@@ -12542,7 +13230,7 @@
         }
       },
       "source": "catalog-etl",
-      "confidence": "medium",
+      "confidence": "low",
       "varieties": {
         "red-clover-sprouting-seeds": {
           "id": "red-clover-sprouting-seeds",
@@ -12551,214 +13239,6 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-clover-sprouting-seeds.html",
           "confidence": "medium"
-        },
-        "red-acre-cabbage-microgreens": {
-          "id": "red-acre-cabbage-microgreens",
-          "name": "Red Acre Cabbage Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-acre-cabbage-micro.html",
-          "confidence": "high"
-        },
-        "red-ace-f1-beet": {
-          "id": "red-ace-f1-beet",
-          "name": "Red Ace F1 Beet",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-ace-f1-beet.html",
-          "confidence": "high"
-        },
-        "red-beet-microgreens": {
-          "id": "red-beet-microgreens",
-          "name": "Red Beet Microgreens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-beet-micro-greens.html",
-          "confidence": "high"
-        },
-        "red-cored-chantenay-carrot": {
-          "id": "red-cored-chantenay-carrot",
-          "name": "Red Cored Chantenay Carrot",
-          "daysToHarvest": 65,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-core-chantenay-carrot.html",
-          "confidence": "high"
-        },
-        "red-chard-microgreens": {
-          "id": "red-chard-microgreens",
-          "name": "Red Chard Microgreens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-chard-micro-greens.html",
-          "confidence": "high"
-        },
-        "red-express-cabbage": {
-          "id": "red-express-cabbage",
-          "name": "Red Express Cabbage",
-          "daysToHarvest": 62,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-express-cabbage.html",
-          "confidence": "high"
-        },
-        "red-giant-mustard-greens": {
-          "id": "red-giant-mustard-greens",
-          "name": "Red Giant Mustard Greens",
-          "daysToHarvest": 23,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-giant-mustard-greens.html",
-          "confidence": "high"
-        },
-        "red-mustard-microgreens": {
-          "id": "red-mustard-microgreens",
-          "name": "Red Mustard Microgreens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-mustard-micro-greens.html",
-          "confidence": "high"
-        },
-        "red-russian-kale": {
-          "id": "red-russian-kale",
-          "name": "Red Russian Kale",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-russian-kale.html",
-          "confidence": "high"
-        },
-        "red-russian-kale-microgreens": {
-          "id": "red-russian-kale-microgreens",
-          "name": "Red Russian Kale Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-russian-kale-micro.html",
-          "confidence": "high"
-        },
-        "red-planet-lettuce-blend": {
-          "id": "red-planet-lettuce-blend",
-          "name": "Red Planet Lettuce Blend",
-          "daysToHarvest": 28,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-planet-lettuce-blend.html",
-          "confidence": "high"
-        },
-        "red-oak-leaf-lettuce": {
-          "id": "red-oak-leaf-lettuce",
-          "name": "Red Oak Leaf Lettuce",
-          "daysToHarvest": 30,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-oak-leaf-lettuce.html",
-          "confidence": "high"
-        },
-        "red-salad-bowl-lettuce": {
-          "id": "red-salad-bowl-lettuce",
-          "name": "Red Salad Bowl Lettuce",
-          "daysToHarvest": 28,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-salad-bowl-lettuce.html",
-          "confidence": "high"
-        },
-        "red-carpet-f1-onion": {
-          "id": "red-carpet-f1-onion",
-          "name": "Red Carpet F1 Onion",
-          "daysToHarvest": 116,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-carpet-f1-onion.html",
-          "confidence": "high"
-        },
-        "red-baron-bunching-onion": {
-          "id": "red-baron-bunching-onion",
-          "name": "Red Baron Bunching Onion",
-          "daysToHarvest": 115,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-baron-onion.html",
-          "confidence": "high"
-        },
-        "red-kuri-winter-squash": {
-          "id": "red-kuri-winter-squash",
-          "name": "Red Kuri Winter Squash",
-          "daysToHarvest": 95,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-kuri-winter-squash.html",
-          "confidence": "high"
-        },
-        "red-scarlet-zinnia": {
-          "id": "red-scarlet-zinnia",
-          "name": "Red Scarlet Zinnia",
-          "daysToHarvest": 85,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-scarlet-zinnia.html",
-          "confidence": "high"
-        },
-        "red-chieftain-potato": {
-          "id": "red-chieftain-potato",
-          "name": "Red Chieftain Potato",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-chieftan-potato.html",
-          "confidence": "medium"
-        },
-        "red-long-of-florence-onion": {
-          "id": "red-long-of-florence-onion",
-          "name": "Red Long of Florence Onion",
-          "daysToHarvest": 115,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-long-of-florence-onion-e.html",
-          "confidence": "high"
-        },
-        "red-geneva-onion": {
-          "id": "red-geneva-onion",
-          "name": "Red Geneva Onion",
-          "daysToHarvest": 105,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-geneva-onion.html",
-          "confidence": "high"
-        },
-        "red-lace-mustard-greens": {
-          "id": "red-lace-mustard-greens",
-          "name": "Red Lace Mustard Greens",
-          "daysToHarvest": 20,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-lace-mustard-greens.html",
-          "confidence": "high"
-        },
-        "red-lace-mustard-microgreens": {
-          "id": "red-lace-mustard-microgreens",
-          "name": "Red Lace Mustard Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-lace-mustard-microgreens.html",
-          "confidence": "high"
-        },
-        "red-ember-f1-cayenne-pepper": {
-          "id": "red-ember-f1-cayenne-pepper",
-          "name": "Red Ember F1 Cayenne Pepper",
-          "daysToHarvest": 55,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-ember-f1-cayenne-pepper.html",
-          "confidence": "high"
-        },
-        "red-carpet-mustard-greens": {
-          "id": "red-carpet-mustard-greens",
-          "name": "Red Carpet Mustard Greens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-carpet-mustard-greens.html",
-          "confidence": "high"
-        },
-        "red-carpet-mustard-microgreens": {
-          "id": "red-carpet-mustard-microgreens",
-          "name": "Red Carpet Mustard Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-carpet-microgreens-qmg.html",
-          "confidence": "high"
-        },
-        "garnet-red-amaranth-microgreens": {
-          "id": "garnet-red-amaranth-microgreens",
-          "name": "Garnet Red Amaranth Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-amaranth-microgreens-qmgl020.html",
-          "confidence": "high"
         }
       }
     },
@@ -13906,6 +14386,34 @@
         }
       }
     },
+    "red-ace-f1-beet": {
+      "id": "red-ace-f1-beet",
+      "name": "Red Ace F1 Beet",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-ace-f1-beet": {
+          "id": "red-ace-f1-beet",
+          "name": "Red Ace F1 Beet",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-ace-f1-beet.html",
+          "confidence": "high"
+        }
+      }
+    },
     "touchstone": {
       "id": "touchstone",
       "name": "Touchstone",
@@ -14398,6 +14906,34 @@
           "daysToHarvest": 77,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-veronica-f1-romanesco.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-cored-chantenay-carrot": {
+      "id": "red-cored-chantenay-carrot",
+      "name": "Red Cored Chantenay Carrot",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-cored-chantenay-carrot": {
+          "id": "red-cored-chantenay-carrot",
+          "name": "Red Cored Chantenay Carrot",
+          "daysToHarvest": 65,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-core-chantenay-carrot.html",
           "confidence": "high"
         }
       }
@@ -15134,6 +15670,34 @@
           "daysToHarvest": 63,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-farao-f1-cabbage.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-express-cabbage": {
+      "id": "red-express-cabbage",
+      "name": "Red Express Cabbage",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-express-cabbage": {
+          "id": "red-express-cabbage",
+          "name": "Red Express Cabbage",
+          "daysToHarvest": 62,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-express-cabbage.html",
           "confidence": "high"
         }
       }
@@ -16482,6 +17046,34 @@
         }
       }
     },
+    "red-giant-mustard-greens": {
+      "id": "red-giant-mustard-greens",
+      "name": "Red Giant Mustard Greens",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-giant-mustard-greens": {
+          "id": "red-giant-mustard-greens",
+          "name": "Red Giant Mustard Greens",
+          "daysToHarvest": 23,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-giant-mustard-greens.html",
+          "confidence": "high"
+        }
+      }
+    },
     "tat": {
       "id": "tat",
       "name": "Tat",
@@ -16830,6 +17422,34 @@
         }
       }
     },
+    "red-russian-kale": {
+      "id": "red-russian-kale",
+      "name": "Red Russian Kale",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-russian-kale": {
+          "id": "red-russian-kale",
+          "name": "Red Russian Kale",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-russian-kale.html",
+          "confidence": "high"
+        }
+      }
+    },
     "siberian": {
       "id": "siberian",
       "name": "Siberian",
@@ -17078,66 +17698,6 @@
           "daysToHarvest": 50,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-kweik-lettuce.html",
-          "confidence": "high"
-        }
-      }
-    },
-    "winter": {
-      "id": "winter",
-      "name": "Winter",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "winter-density-lettuce": {
-          "id": "winter-density-lettuce",
-          "name": "Winter Density Lettuce",
-          "daysToHarvest": 28,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-density-lettuce.html",
-          "confidence": "high"
-        },
-        "winter-luxury-pumpkin": {
-          "id": "winter-luxury-pumpkin",
-          "name": "Winter Luxury Pumpkin",
-          "daysToHarvest": 105,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-luxury-pumpkin.html",
-          "confidence": "high"
-        },
-        "winter-rye": {
-          "id": "winter-rye",
-          "name": "Winter Rye",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-rye.html",
-          "confidence": "medium"
-        },
-        "winter-rye-hairy-vetch-mix": {
-          "id": "winter-rye-hairy-vetch-mix",
-          "name": "Winter Rye/Hairy Vetch Mix",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-rye-vetch-mix.html",
-          "confidence": "medium"
-        },
-        "winter-sweet-f1-winter-squash": {
-          "id": "winter-sweet-f1-winter-squash",
-          "name": "Winter Sweet F1 Winter Squash",
-          "daysToHarvest": 95,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-sweet-f1-winter-squash.html",
           "confidence": "high"
         }
       }
@@ -17414,6 +17974,34 @@
           "daysToHarvest": 28,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-yankee-hardy-bl-lettuce.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-planet-lettuce-blend": {
+      "id": "red-planet-lettuce-blend",
+      "name": "Red Planet Lettuce Blend",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-planet-lettuce-blend": {
+          "id": "red-planet-lettuce-blend",
+          "name": "Red Planet Lettuce Blend",
+          "daysToHarvest": 28,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-planet-lettuce-blend.html",
           "confidence": "high"
         }
       }
@@ -18238,6 +18826,34 @@
         }
       }
     },
+    "red-carpet-f1-onion": {
+      "id": "red-carpet-f1-onion",
+      "name": "Red Carpet F1 Onion",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-carpet-f1-onion": {
+          "id": "red-carpet-f1-onion",
+          "name": "Red Carpet F1 Onion",
+          "daysToHarvest": 116,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-carpet-f1-onion.html",
+          "confidence": "high"
+        }
+      }
+    },
     "gladstone": {
       "id": "gladstone",
       "name": "Gladstone",
@@ -18346,6 +18962,34 @@
           "daysToHarvest": 106,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-monastrell-f1-onion.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-baron-bunching-onion": {
+      "id": "red-baron-bunching-onion",
+      "name": "Red Baron Bunching Onion",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-baron-bunching-onion": {
+          "id": "red-baron-bunching-onion",
+          "name": "Red Baron Bunching Onion",
+          "daysToHarvest": 115,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-baron-onion.html",
           "confidence": "high"
         }
       }
@@ -19250,6 +19894,34 @@
           "daysToHarvest": 90,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-cider-jack-f1-pumpkin.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "winter-luxury-pumpkin": {
+      "id": "winter-luxury-pumpkin",
+      "name": "Winter Luxury Pumpkin",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "winter-luxury-pumpkin": {
+          "id": "winter-luxury-pumpkin",
+          "name": "Winter Luxury Pumpkin",
+          "daysToHarvest": 105,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-luxury-pumpkin.html",
           "confidence": "high"
         }
       }
@@ -20247,6 +20919,46 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-sweet-alyssum-e.html",
           "confidence": "high"
+        },
+        "old-spice-mix-sweet-pea": {
+          "id": "old-spice-mix-sweet-pea",
+          "name": "Old Spice Mix Sweet Pea",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/sweet-pea-old-spice",
+          "confidence": "medium"
+        },
+        "mammoth-choice-mix-sweet-pea": {
+          "id": "mammoth-choice-mix-sweet-pea",
+          "name": "Mammoth Choice Mix Sweet Pea",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/sweet-pea-mammoth-choice",
+          "confidence": "medium"
+        },
+        "late-spencer-choice-mix-sweet-pea": {
+          "id": "late-spencer-choice-mix-sweet-pea",
+          "name": "Late Spencer Choice Mix Sweet Pea",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/sweet-pea-late-spencer-choice",
+          "confidence": "medium"
+        },
+        "king-size-navy-blue-sweet-pea": {
+          "id": "king-size-navy-blue-sweet-pea",
+          "name": "King Size Navy Blue Sweet Pea",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/sweet-pea-king-size-navy-blue",
+          "confidence": "medium"
+        },
+        "fragrantissima-sweet-pea": {
+          "id": "fragrantissima-sweet-pea",
+          "name": "Fragrantissima Sweet Pea",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/sweet-pea-fragrantissima",
+          "confidence": "medium"
         }
       }
     },
@@ -20414,6 +21126,34 @@
           "daysToHarvest": 80,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-bush-delicata-squash.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-kuri-winter-squash": {
+      "id": "red-kuri-winter-squash",
+      "name": "Red Kuri Winter Squash",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-kuri-winter-squash": {
+          "id": "red-kuri-winter-squash",
+          "name": "Red Kuri Winter Squash",
+          "daysToHarvest": 95,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-kuri-winter-squash.html",
           "confidence": "high"
         }
       }
@@ -21043,10 +21783,10 @@
         "german-butterball-potato": {
           "id": "german-butterball-potato",
           "name": "German Butterball Potato",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-german-butterball-potato.html",
-          "confidence": "medium"
+          "daysToHarvest": 123,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/german-butterball",
+          "confidence": "high"
         }
       }
     },
@@ -21863,6 +22603,22 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-echinacea-purpurea.html",
           "confidence": "high"
+        },
+        "powwow-wild-berry-echinacea": {
+          "id": "powwow-wild-berry-echinacea",
+          "name": "Powwow® Wild Berry Echinacea",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/echinacea-powwow-wild-berry",
+          "confidence": "medium"
+        },
+        "cheyenne-spirit-echinacea": {
+          "id": "cheyenne-spirit-echinacea",
+          "name": "Cheyenne Spirit Echinacea",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/echinacea-cheyenne-spirit",
+          "confidence": "medium"
         }
       }
     },
@@ -22171,6 +22927,54 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-nasturtium-blend.html",
           "confidence": "high"
+        },
+        "tip-top-alaska-nasturtium": {
+          "id": "tip-top-alaska-nasturtium",
+          "name": "Tip Top Alaska Nasturtium",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/nasturtium-tip-top-alaska",
+          "confidence": "medium"
+        },
+        "empress-of-india-nasturtium": {
+          "id": "empress-of-india-nasturtium",
+          "name": "Empress Of India Nasturtium",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/nasturtium-empress-of-india",
+          "confidence": "medium"
+        },
+        "jewel-mix-nasturtium": {
+          "id": "jewel-mix-nasturtium",
+          "name": "Jewel Mix Nasturtium",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/nasturtium-jewel",
+          "confidence": "medium"
+        },
+        "night-and-day-nasturtium": {
+          "id": "night-and-day-nasturtium",
+          "name": "Night And Day Nasturtium",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/nasturtium-night-and-day",
+          "confidence": "medium"
+        },
+        "black-velvet-nasturtium": {
+          "id": "black-velvet-nasturtium",
+          "name": "Black Velvet Nasturtium",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/nasturtium-black-velvet",
+          "confidence": "medium"
+        },
+        "tall-trailing-mix-nasturtium": {
+          "id": "tall-trailing-mix-nasturtium",
+          "name": "Tall Trailing Mix Nasturtium",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/nasturtium-tall-trailing",
+          "confidence": "medium"
         }
       }
     },
@@ -22254,6 +23058,34 @@
           "daysToHarvest": 75,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-planete-rouge-du-jura-poppy.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-scarlet-zinnia": {
+      "id": "red-scarlet-zinnia",
+      "name": "Red Scarlet Zinnia",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-scarlet-zinnia": {
+          "id": "red-scarlet-zinnia",
+          "name": "Red Scarlet Zinnia",
+          "daysToHarvest": 85,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-scarlet-zinnia.html",
           "confidence": "high"
         }
       }
@@ -22366,6 +23198,34 @@
           "daysToHarvest": 60,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-oats.html",
+          "confidence": "medium"
+        }
+      }
+    },
+    "winter-rye": {
+      "id": "winter-rye",
+      "name": "Winter Rye",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "winter-rye": {
+          "id": "winter-rye",
+          "name": "Winter Rye",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-rye.html",
           "confidence": "medium"
         }
       }
@@ -22498,6 +23358,34 @@
         }
       }
     },
+    "winter-rye-hairy-vetch-mix": {
+      "id": "winter-rye-hairy-vetch-mix",
+      "name": "Winter Rye Hairy Vetch Mix",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "winter-rye-hairy-vetch-mix": {
+          "id": "winter-rye-hairy-vetch-mix",
+          "name": "Winter Rye/Hairy Vetch Mix",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-rye-vetch-mix.html",
+          "confidence": "medium"
+        }
+      }
+    },
     "bmr": {
       "id": "bmr",
       "name": "Bmr",
@@ -22582,6 +23470,34 @@
         }
       }
     },
+    "red-chieftain-potato": {
+      "id": "red-chieftain-potato",
+      "name": "Red Chieftain Potato",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "red-chieftain-potato": {
+          "id": "red-chieftain-potato",
+          "name": "Red Chieftain Potato",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-chieftan-potato.html",
+          "confidence": "medium"
+        }
+      }
+    },
     "amarosa": {
       "id": "amarosa",
       "name": "Amarosa",
@@ -22631,10 +23547,10 @@
         "yukon-gold-potato": {
           "id": "yukon-gold-potato",
           "name": "Yukon Gold Potato",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-yukon-gold-potato.html",
-          "confidence": "medium"
+          "daysToHarvest": 80,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/yukon-gold",
+          "confidence": "high"
         },
         "yukon-gem-potato": {
           "id": "yukon-gem-potato",
@@ -23262,6 +24178,34 @@
         }
       }
     },
+    "red-long-of-florence-onion": {
+      "id": "red-long-of-florence-onion",
+      "name": "Red Long Of Florence Onion",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-long-of-florence-onion": {
+          "id": "red-long-of-florence-onion",
+          "name": "Red Long of Florence Onion",
+          "daysToHarvest": 115,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-long-of-florence-onion-e.html",
+          "confidence": "high"
+        }
+      }
+    },
     "ss": {
       "id": "ss",
       "name": "Ss",
@@ -23586,15 +24530,15 @@
         }
       },
       "source": "catalog-etl",
-      "confidence": "low",
+      "confidence": "medium",
       "varieties": {
         "adirondack-blue-potato": {
           "id": "adirondack-blue-potato",
           "name": "Adirondack Blue Potato",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-adirondack-blue-potato.html",
-          "confidence": "medium"
+          "daysToHarvest": 83,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/adirondack-blue",
+          "confidence": "high"
         },
         "adirondack-red-potato": {
           "id": "adirondack-red-potato",
@@ -23918,6 +24862,34 @@
           "daysToHarvest": 13,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-silk-road-mix-microgreens.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-geneva-onion": {
+      "id": "red-geneva-onion",
+      "name": "Red Geneva Onion",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-geneva-onion": {
+          "id": "red-geneva-onion",
+          "name": "Red Geneva Onion",
+          "daysToHarvest": 105,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-geneva-onion.html",
           "confidence": "high"
         }
       }
@@ -24342,6 +25314,34 @@
         }
       }
     },
+    "red-lace-mustard-greens": {
+      "id": "red-lace-mustard-greens",
+      "name": "Red Lace Mustard Greens",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-lace-mustard-greens": {
+          "id": "red-lace-mustard-greens",
+          "name": "Red Lace Mustard Greens",
+          "daysToHarvest": 20,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-lace-mustard-greens.html",
+          "confidence": "high"
+        }
+      }
+    },
     "wasabina": {
       "id": "wasabina",
       "name": "Wasabina",
@@ -24590,15 +25590,15 @@
         }
       },
       "source": "catalog-etl",
-      "confidence": "low",
+      "confidence": "medium",
       "varieties": {
         "huckleberry-gold-potato": {
           "id": "huckleberry-gold-potato",
           "name": "Huckleberry Gold Potato",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-huckleberry-gold-potato.html",
-          "confidence": "medium"
+          "daysToHarvest": 100,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/huckleberry-gold",
+          "confidence": "high"
         }
       }
     },
@@ -24906,6 +25906,34 @@
           "daysToHarvest": 65,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-primero-red-f1-habanero-pepper.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-ember-f1-cayenne-pepper": {
+      "id": "red-ember-f1-cayenne-pepper",
+      "name": "Red Ember F1 Cayenne Pepper",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-ember-f1-cayenne-pepper": {
+          "id": "red-ember-f1-cayenne-pepper",
+          "name": "Red Ember F1 Cayenne Pepper",
+          "daysToHarvest": 55,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-ember-f1-cayenne-pepper.html",
           "confidence": "high"
         }
       }
@@ -25222,6 +26250,34 @@
           "daysToHarvest": 20,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-bopak-f1-pac-choy.html",
+          "confidence": "high"
+        }
+      }
+    },
+    "red-carpet-mustard-greens": {
+      "id": "red-carpet-mustard-greens",
+      "name": "Red Carpet Mustard Greens",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "red-carpet-mustard-greens": {
+          "id": "red-carpet-mustard-greens",
+          "name": "Red Carpet Mustard Greens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-carpet-mustard-greens.html",
           "confidence": "high"
         }
       }
@@ -25730,6 +26786,34 @@
         }
       }
     },
+    "winter-sweet-f1-winter-squash": {
+      "id": "winter-sweet-f1-winter-squash",
+      "name": "Winter Sweet F1 Winter Squash",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "winter-sweet-f1-winter-squash": {
+          "id": "winter-sweet-f1-winter-squash",
+          "name": "Winter Sweet F1 Winter Squash",
+          "daysToHarvest": 95,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-winter-sweet-f1-winter-squash.html",
+          "confidence": "high"
+        }
+      }
+    },
     "cubalibre": {
       "id": "cubalibre",
       "name": "Cubalibre",
@@ -25898,9 +26982,9 @@
         }
       }
     },
-    "seed": {
-      "id": "seed",
-      "name": "Seed",
+    "artichoke": {
+      "id": "artichoke",
+      "name": "Artichoke",
       "category": "vegetable",
       "family": "other",
       "method": "direct",
@@ -25924,6 +27008,14 @@
           "sourceUrl": "https://territorialseed.com/products/artichoke-green-globe",
           "confidence": "high"
         },
+        "imperial-star-artichoke": {
+          "id": "imperial-star-artichoke",
+          "name": "Imperial Star Artichoke",
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/artichoke-imperial-star",
+          "confidence": "high"
+        },
         "cardoon-artichoke": {
           "id": "cardoon-artichoke",
           "name": "Cardoon Artichoke",
@@ -25931,7 +27023,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/artichoke-cardoon",
           "confidence": "high"
-        },
+        }
+      }
+    },
+    "bean": {
+      "id": "bean",
+      "name": "Bean",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
         "hickok": {
           "id": "hickok",
           "name": "Hickok",
@@ -25940,12 +27052,36 @@
           "sourceUrl": "https://territorialseed.com/products/bean-hickok",
           "confidence": "high"
         },
+        "capitano": {
+          "id": "capitano",
+          "name": "Capitano",
+          "daysToHarvest": 62,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-capitano",
+          "confidence": "high"
+        },
         "monte-gusto": {
           "id": "monte-gusto",
           "name": "Monte Gusto",
           "daysToHarvest": 55,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/bean-monte-gusto",
+          "confidence": "high"
+        },
+        "blue-lake-bush-274": {
+          "id": "blue-lake-bush-274",
+          "name": "Blue Lake Bush 274",
+          "daysToHarvest": 66,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-blue-lake-bush-274",
+          "confidence": "high"
+        },
+        "blue-lake-pole": {
+          "id": "blue-lake-pole",
+          "name": "Blue Lake Pole",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-blue-lake-pole",
           "confidence": "high"
         },
         "scarlet-emperor": {
@@ -25988,6 +27124,30 @@
           "sourceUrl": "https://territorialseed.com/products/bean-maxibel",
           "confidence": "high"
         },
+        "dragon-tongue": {
+          "id": "dragon-tongue",
+          "name": "Dragon Tongue",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-dragon-tongue",
+          "confidence": "high"
+        },
+        "musica": {
+          "id": "musica",
+          "name": "Musica",
+          "daysToHarvest": 67,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-musica",
+          "confidence": "high"
+        },
+        "black-coco": {
+          "id": "black-coco",
+          "name": "Black Coco",
+          "daysToHarvest": 95,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-black-coco",
+          "confidence": "high"
+        },
         "red-noodle": {
           "id": "red-noodle",
           "name": "Red Noodle",
@@ -26012,12 +27172,28 @@
           "sourceUrl": "https://territorialseed.com/products/bean-sayamusume",
           "confidence": "high"
         },
+        "helda": {
+          "id": "helda",
+          "name": "Helda",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-helda",
+          "confidence": "high"
+        },
         "wyatt": {
           "id": "wyatt",
           "name": "Wyatt",
           "daysToHarvest": 54,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/bean-wyatt",
+          "confidence": "high"
+        },
+        "yin-yang": {
+          "id": "yin-yang",
+          "name": "Yin Yang",
+          "daysToHarvest": 75,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-yin-yang",
           "confidence": "high"
         },
         "golden-gate": {
@@ -26036,12 +27212,36 @@
           "sourceUrl": "https://territorialseed.com/products/bean-cannellini-lingot",
           "confidence": "high"
         },
+        "cranberry": {
+          "id": "cranberry",
+          "name": "Cranberry",
+          "daysToHarvest": 90,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-cranberry",
+          "confidence": "high"
+        },
         "mascotte": {
           "id": "mascotte",
           "name": "Mascotte",
           "daysToHarvest": 50,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/bean-mascotte",
+          "confidence": "high"
+        },
+        "limka": {
+          "id": "limka",
+          "name": "Limka",
+          "daysToHarvest": 78,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-limka",
+          "confidence": "high"
+        },
+        "seychelles": {
+          "id": "seychelles",
+          "name": "Seychelles",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/bean-seychelles",
           "confidence": "high"
         },
         "jade": {
@@ -26051,71 +27251,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/bean-jade",
           "confidence": "high"
-        },
-        "hybrid-blend-broccoli": {
-          "id": "hybrid-blend-broccoli",
-          "name": "Hybrid Blend Broccoli",
-          "daysToHarvest": 78,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-hybrid-blend",
-          "confidence": "high"
-        },
-        "sorrento-raab-broccoli": {
-          "id": "sorrento-raab-broccoli",
-          "name": "Sorrento Raab Broccoli",
-          "daysToHarvest": 40,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-sorrento-raab",
-          "confidence": "high"
-        },
-        "purple-sprouting-broccoli": {
-          "id": "purple-sprouting-broccoli",
-          "name": "Purple Sprouting Broccoli",
-          "daysToHarvest": 220,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-purple-sprouting",
-          "confidence": "high"
-        },
-        "rudolph-broccoli": {
-          "id": "rudolph-broccoli",
-          "name": "Rudolph Broccoli",
-          "daysToHarvest": 150,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-rudolph",
-          "confidence": "high"
-        },
-        "gypsy-broccoli": {
-          "id": "gypsy-broccoli",
-          "name": "Gypsy Broccoli",
-          "daysToHarvest": 65,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-gypsy",
-          "confidence": "high"
-        },
-        "aspabroc-broccoli": {
-          "id": "aspabroc-broccoli",
-          "name": "Aspabroc Broccoli",
-          "daysToHarvest": 56,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-aspabroc",
-          "confidence": "high"
-        },
-        "de-ciccio-broccoli": {
-          "id": "de-ciccio-broccoli",
-          "name": "De Ciccio Broccoli",
-          "daysToHarvest": 65,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-de-cicco",
-          "confidence": "high"
-        },
-        "emerald-crown-broccoli": {
-          "id": "emerald-crown-broccoli",
-          "name": "Emerald Crown Broccoli",
-          "daysToHarvest": 65,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-emerald-crown",
-          "confidence": "high"
-        },
+        }
+      }
+    },
+    "brussels": {
+      "id": "brussels",
+      "name": "Brussels",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
         "rubine-brussels-sprout": {
           "id": "rubine-brussels-sprout",
           "name": "Rubine Brussels Sprout",
@@ -26130,6 +27286,14 @@
           "daysToHarvest": 125,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/brussels-sprout-franklin",
+          "confidence": "high"
+        },
+        "nautic-brussels-sprout": {
+          "id": "nautic-brussels-sprout",
+          "name": "Nautic Brussels Sprout",
+          "daysToHarvest": 150,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/brussels-sprout-nautic",
           "confidence": "high"
         },
         "roodnerf-brussels-sprout": {
@@ -26163,6 +27327,42 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/brussels-sprout-snowdrop",
           "confidence": "high"
+        }
+      }
+    },
+    "beet": {
+      "id": "beet",
+      "name": "Beet",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 55,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 14
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "early-wonder-tall-top-beet": {
+          "id": "early-wonder-tall-top-beet",
+          "name": "Early Wonder Tall Top Beet",
+          "daysToHarvest": 45,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/beet-early-wonder-tall-top",
+          "confidence": "high"
+        },
+        "boldor-beet": {
+          "id": "boldor-beet",
+          "name": "Boldor Beet",
+          "daysToHarvest": 51,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/beet-boldor",
+          "confidence": "high"
         },
         "red-ace-beet": {
           "id": "red-ace-beet",
@@ -26180,12 +27380,36 @@
           "sourceUrl": "https://territorialseed.com/products/beet-autumn-harvest-blend",
           "confidence": "high"
         },
+        "cylindra-beet": {
+          "id": "cylindra-beet",
+          "name": "Cylindra Beet",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/beet-cylindra",
+          "confidence": "high"
+        },
         "touchstone-gold-beet": {
           "id": "touchstone-gold-beet",
           "name": "Touchstone Gold Beet",
           "daysToHarvest": 53,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/beet-touchstone-gold",
+          "confidence": "high"
+        },
+        "boro-beet": {
+          "id": "boro-beet",
+          "name": "Boro Beet",
+          "daysToHarvest": 51,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/beet-boro",
+          "confidence": "high"
+        },
+        "merlin-beet": {
+          "id": "merlin-beet",
+          "name": "Merlin Beet",
+          "daysToHarvest": 55,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/beet-merlin",
           "confidence": "high"
         },
         "spring-color-blend-beet": {
@@ -26203,7 +27427,31 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/beet-avalanche",
           "confidence": "high"
-        },
+        }
+      }
+    },
+    "cabbage": {
+      "id": "cabbage",
+      "name": "Cabbage",
+      "category": "vegetable",
+      "family": "brassica",
+      "method": "transplant",
+      "indoorSowOffsetDays": 70,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": -14,
+      "daysToHarvest": 75,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 70,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -14
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
         "charmant-cabbage": {
           "id": "charmant-cabbage",
           "name": "Charmant Cabbage",
@@ -26252,12 +27500,52 @@
           "sourceUrl": "https://territorialseed.com/products/cabbage-kalibos",
           "confidence": "high"
         },
+        "tiara-cabbage": {
+          "id": "tiara-cabbage",
+          "name": "Tiara Cabbage",
+          "daysToHarvest": 58,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cabbage-tiara",
+          "confidence": "high"
+        },
         "omero-cabbage": {
           "id": "omero-cabbage",
           "name": "Omero Cabbage",
           "daysToHarvest": 75,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/cabbage-omero",
+          "confidence": "high"
+        }
+      }
+    },
+    "cauliflower": {
+      "id": "cauliflower",
+      "name": "Cauliflower",
+      "category": "vegetable",
+      "family": "brassica",
+      "method": "transplant",
+      "indoorSowOffsetDays": 70,
+      "hardenOffDaysBeforeTransplant": 7,
+      "transplantDaysAfterFrost": -14,
+      "daysToHarvest": 70,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 70,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -14
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "veronica-cauliflower": {
+          "id": "veronica-cauliflower",
+          "name": "Veronica Cauliflower",
+          "daysToHarvest": 85,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cauliflower-veronica",
           "confidence": "high"
         },
         "snow-crown-cauliflower": {
@@ -26284,6 +27572,14 @@
           "sourceUrl": "https://territorialseed.com/products/cauliflower-amazing",
           "confidence": "high"
         },
+        "skywalker-cauliflower": {
+          "id": "skywalker-cauliflower",
+          "name": "Skywalker Cauliflower",
+          "daysToHarvest": 80,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cauliflower-skywalker",
+          "confidence": "high"
+        },
         "flame-star-cauliflower": {
           "id": "flame-star-cauliflower",
           "name": "Flame Star Cauliflower",
@@ -26292,6 +27588,34 @@
           "sourceUrl": "https://territorialseed.com/products/cauliflower-flame-star",
           "confidence": "high"
         },
+        "adona-cauliflower": {
+          "id": "adona-cauliflower",
+          "name": "Adona Cauliflower",
+          "daysToHarvest": 68,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cauliflower-adona",
+          "confidence": "high"
+        }
+      }
+    },
+    "celeriac": {
+      "id": "celeriac",
+      "name": "Celeriac",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
         "brilliant-celeriac": {
           "id": "brilliant-celeriac",
           "name": "Brilliant Celeriac",
@@ -26299,119 +27623,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/celeriac-brilliant",
           "confidence": "high"
-        },
-        "golden-jubilee-corn": {
-          "id": "golden-jubilee-corn",
-          "name": "Golden Jubilee Corn",
-          "daysToHarvest": 98,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-golden-jubilee",
-          "confidence": "high"
-        },
-        "early-pink-corn": {
-          "id": "early-pink-corn",
-          "name": "Early Pink Corn",
-          "daysToHarvest": 85,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-early-pink",
-          "confidence": "high"
-        },
-        "allure-corn": {
-          "id": "allure-corn",
-          "name": "Allure Corn",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-allure",
-          "confidence": "high"
-        },
-        "supersweet-jubilee-corn": {
-          "id": "supersweet-jubilee-corn",
-          "name": "Supersweet Jubilee Corn",
-          "daysToHarvest": 85,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-supersweet-jubilee",
-          "confidence": "high"
-        },
-        "sweetness-corn": {
-          "id": "sweetness-corn",
-          "name": "Sweetness Corn",
-          "daysToHarvest": 68,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-sweetness",
-          "confidence": "high"
-        },
-        "serendipity-corn": {
-          "id": "serendipity-corn",
-          "name": "Serendipity Corn",
-          "daysToHarvest": 82,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-serendipity",
-          "confidence": "high"
-        },
-        "kandy-korn-corn": {
-          "id": "kandy-korn-corn",
-          "name": "Kandy Korn Corn",
-          "daysToHarvest": 89,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-kandy-korn",
-          "confidence": "high"
-        },
-        "sugar-buns-corn": {
-          "id": "sugar-buns-corn",
-          "name": "Sugar Buns Corn",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-sugar-buns",
-          "confidence": "high"
-        },
-        "bodacious-corn": {
-          "id": "bodacious-corn",
-          "name": "Bodacious Corn",
-          "daysToHarvest": 85,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-bodacious",
-          "confidence": "high"
-        },
-        "silver-queen-corn": {
-          "id": "silver-queen-corn",
-          "name": "Silver Queen Corn",
-          "daysToHarvest": 88,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-silver-queen",
-          "confidence": "high"
-        },
-        "temptress-corn": {
-          "id": "temptress-corn",
-          "name": "Temptress Corn",
-          "daysToHarvest": 70,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-temptress",
-          "confidence": "high"
-        },
-        "honey-cream-corn": {
-          "id": "honey-cream-corn",
-          "name": "Honey & Cream Corn",
-          "daysToHarvest": 80,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-honey-cream",
-          "confidence": "high"
-        },
-        "delectable-corn": {
-          "id": "delectable-corn",
-          "name": "Delectable Corn",
-          "daysToHarvest": 84,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-delectable",
-          "confidence": "high"
-        },
-        "cafe-corn": {
-          "id": "cafe-corn",
-          "name": "Café Corn",
-          "daysToHarvest": 68,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-cafe",
-          "confidence": "high"
-        },
+        }
+      }
+    },
+    "collard": {
+      "id": "collard",
+      "name": "Collard",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
         "flash-collard": {
           "id": "flash-collard",
           "name": "Flash Collard",
@@ -26419,71 +27651,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/collard-flash",
           "confidence": "high"
-        },
-        "candysnax-carrot": {
-          "id": "candysnax-carrot",
-          "name": "Candysnax Carrot",
-          "daysToHarvest": 65,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-candysnax",
-          "confidence": "high"
-        },
-        "mignon-carrot": {
-          "id": "mignon-carrot",
-          "name": "Mignon Carrot",
-          "daysToHarvest": 84,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-mignon",
-          "confidence": "high"
-        },
-        "northern-lights-blend-carrot": {
-          "id": "northern-lights-blend-carrot",
-          "name": "Northern Lights Blend Carrot",
-          "daysToHarvest": 73,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-northern-lights-carrot-blend",
-          "confidence": "high"
-        },
-        "eskimo-carrot": {
-          "id": "eskimo-carrot",
-          "name": "Eskimo Carrot",
-          "daysToHarvest": 85,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-eskimo",
-          "confidence": "high"
-        },
-        "oxheart-carrot": {
-          "id": "oxheart-carrot",
-          "name": "Oxheart Carrot",
-          "daysToHarvest": 85,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-oxheart",
-          "confidence": "high"
-        },
-        "dragon-carrot": {
-          "id": "dragon-carrot",
-          "name": "Dragon Carrot",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-dragon",
-          "confidence": "high"
-        },
-        "red-samurai-carrot": {
-          "id": "red-samurai-carrot",
-          "name": "Red Samurai Carrot",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-red-samurai",
-          "confidence": "high"
-        },
-        "rondo-carrot": {
-          "id": "rondo-carrot",
-          "name": "Rondo Carrot",
-          "daysToHarvest": 76,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-rondo",
-          "confidence": "high"
-        },
+        }
+      }
+    },
+    "celosia": {
+      "id": "celosia",
+      "name": "Celosia",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "celway-red-celosia": {
           "id": "celway-red-celosia",
           "name": "Celway Red Celosia",
@@ -26507,7 +27695,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/celosia-celway-white",
           "confidence": "medium"
-        },
+        }
+      }
+    },
+    "cosmos": {
+      "id": "cosmos",
+      "name": "Cosmos",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "double-click-mix-cosmos": {
           "id": "double-click-mix-cosmos",
           "name": "Double Click Mix Cosmos",
@@ -26547,7 +27755,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/cosmos-xsenia",
           "confidence": "medium"
-        },
+        }
+      }
+    },
+    "feverfew": {
+      "id": "feverfew",
+      "name": "Feverfew",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "vegmo-sunny-ball-feverfew": {
           "id": "vegmo-sunny-ball-feverfew",
           "name": "Vegmo Sunny Ball Feverfew",
@@ -26563,7 +27791,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/feverfew-vegmo-snowball-extra",
           "confidence": "medium"
-        },
+        }
+      }
+    },
+    "mix": {
+      "id": "mix",
+      "name": "Mix",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "bohemian-rhapsody-mix": {
           "id": "bohemian-rhapsody-mix",
           "name": "Bohemian Rhapsody Mix",
@@ -26636,22 +27884,78 @@
           "sourceUrl": "https://territorialseed.com/products/mix-monarch-butterfly-garden",
           "confidence": "medium"
         },
-        "powwow-wild-berry-echinacea": {
-          "id": "powwow-wild-berry-echinacea",
-          "name": "Powwow® Wild Berry Echinacea",
+        "pnw-native-wildflower-mix": {
+          "id": "pnw-native-wildflower-mix",
+          "name": "PNW Native Wildflower Mix",
           "daysToHarvest": 60,
           "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/echinacea-powwow-wild-berry",
+          "sourceUrl": "https://territorialseed.com/products/mix-pnw-native-wildflower-mix",
           "confidence": "medium"
-        },
-        "cheyenne-spirit-echinacea": {
-          "id": "cheyenne-spirit-echinacea",
-          "name": "Cheyenne Spirit Echinacea",
+        }
+      }
+    },
+    "larkspur": {
+      "id": "larkspur",
+      "name": "Larkspur",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "galilee-white-larkspur": {
+          "id": "galilee-white-larkspur",
+          "name": "Galilee White Larkspur",
           "daysToHarvest": 60,
           "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/echinacea-cheyenne-spirit",
+          "sourceUrl": "https://territorialseed.com/products/larkspur-galilee-white",
           "confidence": "medium"
         },
+        "galilee-pink-perfection-larkspur": {
+          "id": "galilee-pink-perfection-larkspur",
+          "name": "Galilee Pink Perfection Larkspur",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/larkspur-galilee-pink-perfection",
+          "confidence": "medium"
+        },
+        "galilee-lilac-larkspur": {
+          "id": "galilee-lilac-larkspur",
+          "name": "Galilee Lilac Larkspur",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/larkspur-galilee-lilac",
+          "confidence": "medium"
+        }
+      }
+    },
+    "marigold": {
+      "id": "marigold",
+      "name": "Marigold",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "brocade-mix-marigold": {
           "id": "brocade-mix-marigold",
           "name": "Brocade Mix Marigold",
@@ -26699,7 +28003,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/marigold-tangerine-gem",
           "confidence": "medium"
-        },
+        }
+      }
+    },
+    "morning": {
+      "id": "morning",
+      "name": "Morning",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "heavenly-blue-morning-glory": {
           "id": "heavenly-blue-morning-glory",
           "name": "Heavenly Blue Morning Glory",
@@ -26707,55 +28031,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/morning-glory-heavenly-blue",
           "confidence": "medium"
-        },
-        "tip-top-alaska-nasturtium": {
-          "id": "tip-top-alaska-nasturtium",
-          "name": "Tip Top Alaska Nasturtium",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/nasturtium-tip-top-alaska",
-          "confidence": "medium"
-        },
-        "empress-of-india-nasturtium": {
-          "id": "empress-of-india-nasturtium",
-          "name": "Empress Of India Nasturtium",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/nasturtium-empress-of-india",
-          "confidence": "medium"
-        },
-        "jewel-mix-nasturtium": {
-          "id": "jewel-mix-nasturtium",
-          "name": "Jewel Mix Nasturtium",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/nasturtium-jewel",
-          "confidence": "medium"
-        },
-        "night-and-day-nasturtium": {
-          "id": "night-and-day-nasturtium",
-          "name": "Night And Day Nasturtium",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/nasturtium-night-and-day",
-          "confidence": "medium"
-        },
-        "black-velvet-nasturtium": {
-          "id": "black-velvet-nasturtium",
-          "name": "Black Velvet Nasturtium",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/nasturtium-black-velvet",
-          "confidence": "medium"
-        },
-        "tall-trailing-mix-nasturtium": {
-          "id": "tall-trailing-mix-nasturtium",
-          "name": "Tall Trailing Mix Nasturtium",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/nasturtium-tall-trailing",
-          "confidence": "medium"
-        },
+        }
+      }
+    },
+    "nigella": {
+      "id": "nigella",
+      "name": "Nigella",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "persian-jewels-nigella": {
           "id": "persian-jewels-nigella",
           "name": "Persian Jewels Nigella",
@@ -26764,6 +28060,34 @@
           "sourceUrl": "https://territorialseed.com/products/nigella-persian-jewels",
           "confidence": "medium"
         },
+        "nigella-sativa": {
+          "id": "nigella-sativa",
+          "name": "Nigella Sativa",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/nigella-sativa",
+          "confidence": "medium"
+        }
+      }
+    },
+    "petunia": {
+      "id": "petunia",
+      "name": "Petunia",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "loopytunia-mix-petunia": {
           "id": "loopytunia-mix-petunia",
           "name": "Loopytunia Mix Petunia",
@@ -26771,7 +28095,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/petunia-loopytunia-mix",
           "confidence": "medium"
-        },
+        }
+      }
+    },
+    "poppy": {
+      "id": "poppy",
+      "name": "Poppy",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "california-mission-bells-poppy": {
           "id": "california-mission-bells-poppy",
           "name": "California Mission Bells Poppy",
@@ -26820,6 +28164,50 @@
           "sourceUrl": "https://territorialseed.com/products/poppy-falling-in-love",
           "confidence": "medium"
         },
+        "jimi-s-flag-mix-poppy": {
+          "id": "jimi-s-flag-mix-poppy",
+          "name": "Jimi's Flag Mix Poppy",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/poppy-jimis-flag-mix",
+          "confidence": "medium"
+        },
+        "jimi-s-snowflakes-poppy": {
+          "id": "jimi-s-snowflakes-poppy",
+          "name": "Jimi's Snowflakes Poppy",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/poppy-jimis-snowflakes",
+          "confidence": "medium"
+        },
+        "jimi-s-purple-haze-poppy": {
+          "id": "jimi-s-purple-haze-poppy",
+          "name": "Jimi's Purple Haze Poppy",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/poppy-jimis-purple-haze",
+          "confidence": "medium"
+        }
+      }
+    },
+    "rudbeckia": {
+      "id": "rudbeckia",
+      "name": "Rudbeckia",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "prairie-sun-rudbeckia": {
           "id": "prairie-sun-rudbeckia",
           "name": "Prairie Sun Rudbeckia",
@@ -26835,7 +28223,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/rudbeckia-cappuccino",
           "confidence": "medium"
-        },
+        }
+      }
+    },
+    "snapdragon": {
+      "id": "snapdragon",
+      "name": "Snapdragon",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "potomactm-appleblossom-snapdragon": {
           "id": "potomactm-appleblossom-snapdragon",
           "name": "Potomac™ Appleblossom Snapdragon",
@@ -26859,13 +28267,61 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/snapdragon-potomac-red",
           "confidence": "medium"
-        },
+        }
+      }
+    },
+    "strawflower": {
+      "id": "strawflower",
+      "name": "Strawflower",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "tall-choice-double-mix-strawflower": {
           "id": "tall-choice-double-mix-strawflower",
           "name": "Tall Choice Double Mix Strawflower",
           "daysToHarvest": 60,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/strawflower-tall-choice-double",
+          "confidence": "medium"
+        }
+      }
+    },
+    "sunflower": {
+      "id": "sunflower",
+      "name": "Sunflower",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "zohar-sunflower": {
+          "id": "zohar-sunflower",
+          "name": "Zohar Sunflower",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/sunflower-zohar",
           "confidence": "medium"
         },
         "procut-white-nite-sunflower": {
@@ -26987,55 +28443,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/sunflower-waooh",
           "confidence": "medium"
-        },
-        "old-spice-mix-sweet-pea": {
-          "id": "old-spice-mix-sweet-pea",
-          "name": "Old Spice Mix Sweet Pea",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/sweet-pea-old-spice",
-          "confidence": "medium"
-        },
-        "mammoth-choice-mix-sweet-pea": {
-          "id": "mammoth-choice-mix-sweet-pea",
-          "name": "Mammoth Choice Mix Sweet Pea",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/sweet-pea-mammoth-choice",
-          "confidence": "medium"
-        },
-        "late-spencer-choice-mix-sweet-pea": {
-          "id": "late-spencer-choice-mix-sweet-pea",
-          "name": "Late Spencer Choice Mix Sweet Pea",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/sweet-pea-late-spencer-choice",
-          "confidence": "medium"
-        },
-        "king-size-navy-blue-sweet-pea": {
-          "id": "king-size-navy-blue-sweet-pea",
-          "name": "King Size Navy Blue Sweet Pea",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/sweet-pea-king-size-navy-blue",
-          "confidence": "medium"
-        },
-        "fragrantissima-sweet-pea": {
-          "id": "fragrantissima-sweet-pea",
-          "name": "Fragrantissima Sweet Pea",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/sweet-pea-fragrantissima",
-          "confidence": "medium"
-        },
-        "pnw-native-wildflower-mix": {
-          "id": "pnw-native-wildflower-mix",
-          "name": "PNW Native Wildflower Mix",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/mix-pnw-native-wildflower-mix",
-          "confidence": "medium"
-        },
+        }
+      }
+    },
+    "zinnia": {
+      "id": "zinnia",
+      "name": "Zinnia",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
         "swizzle-cherry-ivory-zinnia": {
           "id": "swizzle-cherry-ivory-zinnia",
           "name": "Swizzle Cherry & Ivory Zinnia",
@@ -27171,7 +28599,27 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/zinnia-zahara-double-salmon-rose",
           "confidence": "medium"
-        },
+        }
+      }
+    },
+    "gourd": {
+      "id": "gourd",
+      "name": "Gourd",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
         "small-ornamental-gourds": {
           "id": "small-ornamental-gourds",
           "name": "Small Ornamental Gourds",
@@ -27187,85 +28635,61 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/gourd-autumn-wings-gourds-medium",
           "confidence": "high"
-        },
-        "golden-jubilee-anise-hyssop": {
-          "id": "golden-jubilee-anise-hyssop",
-          "name": "Golden Jubilee Anise Hyssop",
+        }
+      }
+    },
+    "collection": {
+      "id": "collection",
+      "name": "Collection",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "herb-disk-collection": {
+          "id": "herb-disk-collection",
+          "name": "Herb Disk Collection",
           "daysToHarvest": 60,
           "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/anise-hyssop-golden-jubilee",
+          "sourceUrl": "https://territorialseed.com/products/collection-herb-collection",
           "confidence": "medium"
-        },
-        "blue-anise-hyssop": {
-          "id": "blue-anise-hyssop",
-          "name": "Blue Anise Hyssop",
+        }
+      }
+    },
+    "coriander": {
+      "id": "coriander",
+      "name": "Coriander",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "coriander": {
+          "id": "coriander",
+          "name": "Coriander",
           "daysToHarvest": 60,
           "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/anise-hyssop-blue",
-          "confidence": "medium"
-        },
-        "finissimo-verde-a-palla-basil": {
-          "id": "finissimo-verde-a-palla-basil",
-          "name": "Finissimo Verde A Palla Basil",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/basil-finissimo-verde-a-palla",
-          "confidence": "medium"
-        },
-        "mammoth-sweet-basil": {
-          "id": "mammoth-sweet-basil",
-          "name": "Mammoth Sweet Basil",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/basil-mammoth-sweet",
-          "confidence": "medium"
-        },
-        "dolce-fresca-basil": {
-          "id": "dolce-fresca-basil",
-          "name": "Dolce Fresca Basil",
-          "daysToHarvest": 70,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/basil-dolce-fresca",
-          "confidence": "high"
-        },
-        "profumo-basil": {
-          "id": "profumo-basil",
-          "name": "Profumo Basil",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/basil-profumo",
-          "confidence": "medium"
-        },
-        "everleaf-emerald-towers-basil": {
-          "id": "everleaf-emerald-towers-basil",
-          "name": "Everleaf Emerald Towers Basil",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/basil-everleaf-emerald-towers",
-          "confidence": "medium"
-        },
-        "variegated-cat-grass": {
-          "id": "variegated-cat-grass",
-          "name": "Variegated Cat Grass",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cat-grass-variegated-cat-grass",
-          "confidence": "medium"
-        },
-        "german-chamomile": {
-          "id": "german-chamomile",
-          "name": "German Chamomile",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/chamomile-chamomile-german",
-          "confidence": "medium"
-        },
-        "geisha-garlic-chives": {
-          "id": "geisha-garlic-chives",
-          "name": "Geisha Garlic Chives",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/chives-geisha-garlic",
+          "sourceUrl": "https://territorialseed.com/products/coriander-cilantro",
           "confidence": "medium"
         },
         "confetti-coriander-cilantro": {
@@ -27291,632 +28715,12 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/coriander-cilantro-calypso",
           "confidence": "high"
-        },
-        "cumin": {
-          "id": "cumin",
-          "name": "Cumin",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cumin-cumin",
-          "confidence": "medium"
-        },
-        "dukat-dill": {
-          "id": "dukat-dill",
-          "name": "Dukat Dill",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/dill-dukat",
-          "confidence": "medium"
-        },
-        "fernleaf-dill": {
-          "id": "fernleaf-dill",
-          "name": "Fernleaf Dill",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/dill-fernleaf",
-          "confidence": "medium"
-        },
-        "long-island-mammoth-dill": {
-          "id": "long-island-mammoth-dill",
-          "name": "Long Island Mammoth Dill",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/dill-long-island-mammoth",
-          "confidence": "medium"
-        },
-        "ellagance-purple-lavender": {
-          "id": "ellagance-purple-lavender",
-          "name": "Ellagance Purple Lavender",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/lavender-ellagance-purple",
-          "confidence": "medium"
-        },
-        "sweet-marjoram": {
-          "id": "sweet-marjoram",
-          "name": "Sweet Marjoram",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/marjoram-sweet",
-          "confidence": "medium"
-        },
-        "greek-oregano": {
-          "id": "greek-oregano",
-          "name": "Greek Oregano",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/oregano-greek",
-          "confidence": "medium"
-        },
-        "kirigami-oregano": {
-          "id": "kirigami-oregano",
-          "name": "Kirigami Oregano",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/oregano-kirigami",
-          "confidence": "medium"
-        },
-        "creeping-thyme": {
-          "id": "creeping-thyme",
-          "name": "Creeping Thyme",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/thyme-creeping",
-          "confidence": "medium"
-        },
-        "delicacy-white-kohlrabi": {
-          "id": "delicacy-white-kohlrabi",
-          "name": "Delicacy White Kohlrabi",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/kohlrabi-delicacy-white",
-          "confidence": "high"
         }
       }
     },
-    "organic": {
-      "id": "organic",
-      "name": "Organic",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "stupice": {
-          "id": "stupice",
-          "name": "Stupice",
-          "daysToHarvest": 63,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/tomato-stupice",
-          "confidence": "high"
-        },
-        "imperial-star-artichoke": {
-          "id": "imperial-star-artichoke",
-          "name": "Imperial Star Artichoke",
-          "daysToHarvest": 85,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/artichoke-imperial-star",
-          "confidence": "high"
-        },
-        "capitano": {
-          "id": "capitano",
-          "name": "Capitano",
-          "daysToHarvest": 62,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-capitano",
-          "confidence": "high"
-        },
-        "blue-lake-bush-274": {
-          "id": "blue-lake-bush-274",
-          "name": "Blue Lake Bush 274",
-          "daysToHarvest": 66,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-blue-lake-bush-274",
-          "confidence": "high"
-        },
-        "blue-lake-pole": {
-          "id": "blue-lake-pole",
-          "name": "Blue Lake Pole",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-blue-lake-pole",
-          "confidence": "high"
-        },
-        "dragon-tongue": {
-          "id": "dragon-tongue",
-          "name": "Dragon Tongue",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-dragon-tongue",
-          "confidence": "high"
-        },
-        "musica": {
-          "id": "musica",
-          "name": "Musica",
-          "daysToHarvest": 67,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-musica",
-          "confidence": "high"
-        },
-        "black-coco": {
-          "id": "black-coco",
-          "name": "Black Coco",
-          "daysToHarvest": 95,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-black-coco",
-          "confidence": "high"
-        },
-        "helda": {
-          "id": "helda",
-          "name": "Helda",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-helda",
-          "confidence": "high"
-        },
-        "yin-yang": {
-          "id": "yin-yang",
-          "name": "Yin Yang",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-yin-yang",
-          "confidence": "high"
-        },
-        "cranberry": {
-          "id": "cranberry",
-          "name": "Cranberry",
-          "daysToHarvest": 90,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-cranberry",
-          "confidence": "high"
-        },
-        "limka": {
-          "id": "limka",
-          "name": "Limka",
-          "daysToHarvest": 78,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-limka",
-          "confidence": "high"
-        },
-        "seychelles": {
-          "id": "seychelles",
-          "name": "Seychelles",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/bean-seychelles",
-          "confidence": "high"
-        },
-        "belstar-broccoli": {
-          "id": "belstar-broccoli",
-          "name": "Belstar Broccoli",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-belstar",
-          "confidence": "high"
-        },
-        "umpqua-broccoli": {
-          "id": "umpqua-broccoli",
-          "name": "Umpqua Broccoli",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-umpqua",
-          "confidence": "high"
-        },
-        "fiesta-broccoli": {
-          "id": "fiesta-broccoli",
-          "name": "Fiesta Broccoli",
-          "daysToHarvest": 65,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/broccoli-fiesta",
-          "confidence": "high"
-        },
-        "nautic-brussels-sprout": {
-          "id": "nautic-brussels-sprout",
-          "name": "Nautic Brussels Sprout",
-          "daysToHarvest": 150,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/brussels-sprout-nautic",
-          "confidence": "high"
-        },
-        "early-wonder-tall-top-beet": {
-          "id": "early-wonder-tall-top-beet",
-          "name": "Early Wonder Tall Top Beet",
-          "daysToHarvest": 45,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/beet-early-wonder-tall-top",
-          "confidence": "high"
-        },
-        "cylindra-beet": {
-          "id": "cylindra-beet",
-          "name": "Cylindra Beet",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/beet-cylindra",
-          "confidence": "high"
-        },
-        "boro-beet": {
-          "id": "boro-beet",
-          "name": "Boro Beet",
-          "daysToHarvest": 51,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/beet-boro",
-          "confidence": "high"
-        },
-        "merlin-beet": {
-          "id": "merlin-beet",
-          "name": "Merlin Beet",
-          "daysToHarvest": 55,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/beet-merlin",
-          "confidence": "high"
-        },
-        "tiara-cabbage": {
-          "id": "tiara-cabbage",
-          "name": "Tiara Cabbage",
-          "daysToHarvest": 58,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cabbage-tiara",
-          "confidence": "high"
-        },
-        "veronica-cauliflower": {
-          "id": "veronica-cauliflower",
-          "name": "Veronica Cauliflower",
-          "daysToHarvest": 85,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cauliflower-veronica",
-          "confidence": "high"
-        },
-        "skywalker-cauliflower": {
-          "id": "skywalker-cauliflower",
-          "name": "Skywalker Cauliflower",
-          "daysToHarvest": 80,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cauliflower-skywalker",
-          "confidence": "high"
-        },
-        "adona-cauliflower": {
-          "id": "adona-cauliflower",
-          "name": "Adona Cauliflower",
-          "daysToHarvest": 68,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cauliflower-adona",
-          "confidence": "high"
-        },
-        "tango-celery": {
-          "id": "tango-celery",
-          "name": "Tango Celery",
-          "daysToHarvest": 84,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/celery-tango",
-          "confidence": "high"
-        },
-        "hooker-s-sweet-indian-corn": {
-          "id": "hooker-s-sweet-indian-corn",
-          "name": "Hooker's Sweet Indian Corn",
-          "daysToHarvest": 80,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-hookers-sweet-indian",
-          "confidence": "high"
-        },
-        "glass-gem-corn": {
-          "id": "glass-gem-corn",
-          "name": "Glass Gem Corn",
-          "daysToHarvest": 115,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/corn-glass-gem",
-          "confidence": "high"
-        },
-        "yellowstone-carrot": {
-          "id": "yellowstone-carrot",
-          "name": "Yellowstone Carrot",
-          "daysToHarvest": 70,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-yellowstone",
-          "confidence": "high"
-        },
-        "marketmore-97-cucumber": {
-          "id": "marketmore-97-cucumber",
-          "name": "Marketmore 97 Cucumber",
-          "daysToHarvest": 55,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cucumber-marketmore-97",
-          "confidence": "high"
-        },
-        "wautoma-cucumber": {
-          "id": "wautoma-cucumber",
-          "name": "Wautoma Cucumber",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cucumber-wautoma",
-          "confidence": "high"
-        },
-        "armenian-cucumber": {
-          "id": "armenian-cucumber",
-          "name": "Armenian Cucumber",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cucumber-armenian",
-          "confidence": "high"
-        },
-        "double-yield-cucumber": {
-          "id": "double-yield-cucumber",
-          "name": "Double Yield Cucumber",
-          "daysToHarvest": 52,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cucumber-double-yield",
-          "confidence": "high"
-        },
-        "listada-de-gandia-eggplant": {
-          "id": "listada-de-gandia-eggplant",
-          "name": "Listada De Gandia Eggplant",
-          "daysToHarvest": 85,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/eggplant-listada-de-gandia",
-          "confidence": "high"
-        },
-        "galilee-white-larkspur": {
-          "id": "galilee-white-larkspur",
-          "name": "Galilee White Larkspur",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/larkspur-galilee-white",
-          "confidence": "medium"
-        },
-        "galilee-pink-perfection-larkspur": {
-          "id": "galilee-pink-perfection-larkspur",
-          "name": "Galilee Pink Perfection Larkspur",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/larkspur-galilee-pink-perfection",
-          "confidence": "medium"
-        },
-        "galilee-lilac-larkspur": {
-          "id": "galilee-lilac-larkspur",
-          "name": "Galilee Lilac Larkspur",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/larkspur-galilee-lilac",
-          "confidence": "medium"
-        },
-        "jimi-s-flag-mix-poppy": {
-          "id": "jimi-s-flag-mix-poppy",
-          "name": "Jimi's Flag Mix Poppy",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/poppy-jimis-flag-mix",
-          "confidence": "medium"
-        },
-        "jimi-s-snowflakes-poppy": {
-          "id": "jimi-s-snowflakes-poppy",
-          "name": "Jimi's Snowflakes Poppy",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/poppy-jimis-snowflakes",
-          "confidence": "medium"
-        },
-        "jimi-s-purple-haze-poppy": {
-          "id": "jimi-s-purple-haze-poppy",
-          "name": "Jimi's Purple Haze Poppy",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/poppy-jimis-purple-haze",
-          "confidence": "medium"
-        },
-        "zohar-sunflower": {
-          "id": "zohar-sunflower",
-          "name": "Zohar Sunflower",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/sunflower-zohar",
-          "confidence": "medium"
-        },
-        "aroma-ii-basil": {
-          "id": "aroma-ii-basil",
-          "name": "Aroma II Basil",
-          "daysToHarvest": 70,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/basil-aroma-ii",
-          "confidence": "high"
-        },
-        "hera-dill": {
-          "id": "hera-dill",
-          "name": "Hera Dill",
-          "daysToHarvest": 50,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/dill-hera",
-          "confidence": "high"
-        },
-        "lemon-balm": {
-          "id": "lemon-balm",
-          "name": "Lemon Balm",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/lemon-balm-lemon-balm",
-          "confidence": "medium"
-        },
-        "nigella-sativa": {
-          "id": "nigella-sativa",
-          "name": "Nigella Sativa",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/nigella-sativa",
-          "confidence": "medium"
-        },
-        "oregano": {
-          "id": "oregano",
-          "name": "Oregano",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/oregano-oregano",
-          "confidence": "medium"
-        },
-        "stevia": {
-          "id": "stevia",
-          "name": "Stevia",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/stevia-stevia",
-          "confidence": "medium"
-        },
-        "mexican-tarragon": {
-          "id": "mexican-tarragon",
-          "name": "Mexican Tarragon",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/tarragon-mexican-tarragon",
-          "confidence": "medium"
-        },
-        "german-winter-thyme": {
-          "id": "german-winter-thyme",
-          "name": "German/Winter Thyme",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/thyme-german-or-winter",
-          "confidence": "medium"
-        },
-        "superschmelz-kohlrabi": {
-          "id": "superschmelz-kohlrabi",
-          "name": "Superschmelz Kohlrabi",
-          "daysToHarvest": 70,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/kohlrabi-superschmelz",
-          "confidence": "high"
-        },
-        "blaril-kohlrabi": {
-          "id": "blaril-kohlrabi",
-          "name": "Blaril Kohlrabi",
-          "daysToHarvest": 65,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/kohlrabi-blaril",
-          "confidence": "high"
-        }
-      }
-    },
-    "pelleted": {
-      "id": "pelleted",
-      "name": "Pelleted",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "boldor-beet": {
-          "id": "boldor-beet",
-          "name": "Boldor Beet",
-          "daysToHarvest": 51,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/beet-boldor",
-          "confidence": "high"
-        },
-        "bolero-carrot": {
-          "id": "bolero-carrot",
-          "name": "Bolero Carrot",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-bolero",
-          "confidence": "high"
-        },
-        "mokum-carrot": {
-          "id": "mokum-carrot",
-          "name": "Mokum Carrot",
-          "daysToHarvest": 56,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-mokum",
-          "confidence": "high"
-        },
-        "purple-sun-carrot": {
-          "id": "purple-sun-carrot",
-          "name": "Purple Sun Carrot",
-          "daysToHarvest": 90,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-purple-sun",
-          "confidence": "high"
-        },
-        "sugarsnax-54-carrot": {
-          "id": "sugarsnax-54-carrot",
-          "name": "Sugarsnax 54 Carrot",
-          "daysToHarvest": 68,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-sugarsnax-54",
-          "confidence": "high"
-        },
-        "purplesnax-carrot": {
-          "id": "purplesnax-carrot",
-          "name": "Purplesnax Carrot",
-          "daysToHarvest": 73,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-purplesnax",
-          "confidence": "high"
-        },
-        "romance-carrot": {
-          "id": "romance-carrot",
-          "name": "Romance Carrot",
-          "daysToHarvest": 75,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/carrot-romance",
-          "confidence": "high"
-        },
-        "simplyherbstm-rosemary": {
-          "id": "simplyherbstm-rosemary",
-          "name": "Simplyherbs™ Rosemary",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/rosemary-simplyherbs",
-          "confidence": "medium"
-        }
-      }
-    },
-    "grafted-transplant": {
-      "id": "grafted-transplant",
-      "name": "Grafted Transplant",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 0,
-      "daysToHarvest": 60,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 0
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "grafted-double-sungold-sweet-million": {
-          "id": "grafted-double-sungold-sweet-million",
-          "name": "Grafted Double Sungold/Sweet Million",
-          "daysToHarvest": 70,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/tomato-grafted-double-sungold-sweet-million",
-          "confidence": "high"
-        }
-      }
-    },
-    "seed-disk": {
-      "id": "seed-disk",
-      "name": "Seed Disk",
+    "anise": {
+      "id": "anise",
+      "name": "Anise",
       "category": "vegetable",
       "family": "other",
       "method": "direct",
@@ -27932,20 +28736,104 @@
       "source": "catalog-etl",
       "confidence": "low",
       "varieties": {
-        "herb-disk-collection": {
-          "id": "herb-disk-collection",
-          "name": "Herb Disk Collection",
+        "golden-jubilee-anise-hyssop": {
+          "id": "golden-jubilee-anise-hyssop",
+          "name": "Golden Jubilee Anise Hyssop",
           "daysToHarvest": 60,
           "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/collection-herb-collection",
+          "sourceUrl": "https://territorialseed.com/products/anise-hyssop-golden-jubilee",
           "confidence": "medium"
         },
-        "coriander": {
-          "id": "coriander",
-          "name": "Coriander",
+        "blue-anise-hyssop": {
+          "id": "blue-anise-hyssop",
+          "name": "Blue Anise Hyssop",
           "daysToHarvest": 60,
           "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/coriander-cilantro",
+          "sourceUrl": "https://territorialseed.com/products/anise-hyssop-blue",
+          "confidence": "medium"
+        }
+      }
+    },
+    "cat": {
+      "id": "cat",
+      "name": "Cat",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "variegated-cat-grass": {
+          "id": "variegated-cat-grass",
+          "name": "Variegated Cat Grass",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cat-grass-variegated-cat-grass",
+          "confidence": "medium"
+        }
+      }
+    },
+    "cumin": {
+      "id": "cumin",
+      "name": "Cumin",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "cumin": {
+          "id": "cumin",
+          "name": "Cumin",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cumin-cumin",
+          "confidence": "medium"
+        }
+      }
+    },
+    "tarragon": {
+      "id": "tarragon",
+      "name": "Tarragon",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 0,
+      "daysToHarvest": 60,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 0
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "mexican-tarragon": {
+          "id": "mexican-tarragon",
+          "name": "Mexican Tarragon",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/tarragon-mexican-tarragon",
           "confidence": "medium"
         }
       }

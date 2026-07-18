@@ -28,6 +28,9 @@ const crops = [
     method: "direct" as const,
     daysToHarvest: 40,
     category: "vegetable" as const,
+    varieties: Object.fromEntries(
+      Array.from({ length: 5 }, (_, j) => [`v${j}`, { id: `v${j}`, name: `V${j}` }]),
+    ),
   })),
 ];
 
@@ -93,7 +96,7 @@ describe("CropPicker", () => {
       />,
     );
     const categories = screen.getByRole("group", { name: "Crop categories" });
-    await user.click(within(categories).getByRole("button", { name: "All" }));
+    await user.click(within(categories).getByRole("button", { name: "Browse" }));
     const available = screen.getByRole("group", { name: "Available crops" });
     expect(within(available).getByRole("checkbox", { name: "Extra 0" })).toBeInTheDocument();
   });

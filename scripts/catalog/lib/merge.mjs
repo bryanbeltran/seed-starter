@@ -50,12 +50,29 @@ export function parseDays(text) {
   return Math.round((a + b) / 2);
 }
 
-/** @typedef {{ source: string, sourceUrl: string, name: string, cropCategory: string, daysToHarvest?: number, sku?: string, confidence: string, tags?: string[] }} RawSeed */
+/** Tags/labels that must not become crop ids */
+const JUNK_CROP_IDS = new Set([
+  "seed", "seeds", "organic", "red", "dry", "eco", "op", "winter", "type",
+]);
+
+export function isJunkCropId(cropId) {
+  return !cropId || JUNK_CROP_IDS.has(cropId);
+}
+
+export function resolveCropId(rec) {
+  let cropId = cropIdFromCategory(rec.cropCategory);
+  if (isJunkCropId(cropId)) {
+    const fromName = cropIdFromCategory(rec.name.replace(/\s+seeds?$/i, ""));
+    cropId = isJunkCropId(fromName) ? cropIdFromCategory(rec.name.split(/\s+/).pop() ?? "") : fromName;
+  }
+  return isJunkCropId(cropId) ? null : cropId;
+}
 
 export function mergeRecords(records, { target = 2000 } = {}) {
   const byKey = new Map();
   for (const rec of records) {
-    const cropId = cropIdFromCategory(rec.cropCategory);
+    const cropId = resolveCropId(rec);
+    if (!cropId) continue;
     const vid = varietyId(rec.name, cropId);
     const key = `${cropId}::${slugify(rec.name)}`;
     const existing = byKey.get(key);

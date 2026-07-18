@@ -105,6 +105,11 @@ export function CropPicker({
         aria-label="Search crops"
         className="h-9"
       />
+      {!searching && category === "popular" && (
+        <p className="text-muted-foreground text-xs">
+          Common MN garden crops. Search or browse for more.
+        </p>
+      )}
       {!searching && (
         <div
           className="flex gap-1.5 overflow-x-auto pb-1"
