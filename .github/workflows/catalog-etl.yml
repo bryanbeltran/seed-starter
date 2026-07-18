@@ -1,0 +1,52 @@
+name: Catalog ETL
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 14 * * 2"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  publish-etl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Rebuild seed catalog
+        run: pnpm run etl:catalog -- --write
+      - run: pnpm run check:catalog
+      - name: Upload catalog artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-etl
+          path: |
+            data/catalog/crops.json
+            data/catalog/sources.json
+      - name: Open PR if catalog changed
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(catalog): refresh seed catalog"
+          branch: chore/catalog-etl
+          delete-branch: true
+          title: "chore(catalog): refresh seed catalog"
+          body: |
+            Automated weekly catalog ETL (`pnpm run etl:catalog -- --write`).
+
+            - Regenerates `data/catalog/crops.json` + `data/catalog/sources.json`
+            - Passed `pnpm run check:catalog`
+
+            Review crop/variety count deltas before merge.
+          add-paths: |
+            data/catalog/crops.json
+            data/catalog/sources.json
