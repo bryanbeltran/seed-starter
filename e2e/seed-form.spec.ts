@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 test("calculates schedule from fixture zip", async ({ page }) => {
   await page.goto("/");
   await page.getByLabel("ZIP code").fill("55423");
-  await page.getByLabel("Tomato").click();
+  await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
   await expect(page.getByText("Zone 5A", { exact: true })).toBeVisible();
   await expect(page.getByText(/Sow Tomato/i)).toBeVisible();
@@ -14,7 +14,7 @@ test("saves and reopens a plan", async ({ page }) => {
   const planName = `E2E bed ${Date.now()}`;
   await page.goto("/");
   await page.getByLabel("ZIP code").fill("55423");
-  await page.getByLabel("Lettuce").click();
+  await page.getByRole("checkbox", { name: "Lettuce", exact: true }).click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
   await expect(page.getByText("Zone 5A", { exact: true })).toBeVisible();
 
@@ -35,7 +35,7 @@ test("saves and reopens a plan", async ({ page }) => {
 test("compares risk profiles", async ({ page }) => {
   await page.goto("/");
   await page.getByLabel("ZIP code").fill("55423");
-  await page.getByLabel("Tomato").click();
+  await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
   await page.getByLabel("Compare risk profiles").click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
   await expect(page.getByRole("tab", { name: "Conservative" })).toBeVisible();
