@@ -123,6 +123,24 @@ describe("buildSchedule", () => {
     ).toBe(14);
   });
 
+  it("differentiates crop spring timing in schedules", () => {
+    const tomato = buildSchedule({
+      zone: "5a",
+      crops: ["tomato"],
+      referenceDate: ref,
+    });
+    const broccoli = buildSchedule({
+      zone: "5a",
+      crops: ["broccoli"],
+      referenceDate: ref,
+    });
+    const frost = tomato.lastFrostDate;
+    const tomatoTx = tomato.tasks.find((t) => t.type === "transplant")!;
+    const broccoliTx = broccoli.tasks.find((t) => t.type === "transplant")!;
+    expect(tomatoTx.date.getTime()).toBeGreaterThanOrEqual(frost.getTime());
+    expect(broccoliTx.date.getTime()).toBeLessThan(frost.getTime());
+  });
+
   it("shifts frost date by risk profile", () => {
     const conservative = buildSchedule({
       zone: "7b",
