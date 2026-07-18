@@ -42,8 +42,7 @@ export async function fetchRecord(root, url) {
   const daysToHarvest = dtm ? parseDays(dtm[0]) : undefined;
 
   const slug = url.split("/").pop().replace(".html", "");
-  const cropPart = slug.replace(/^organic-non-gmo-/, "").replace(/-[a-z0-9]+$/i, "");
-  const cropCategory = cropPart.split("-")[0] ?? "vegetable";
+  const cropCategory = name;
 
   return {
     source: meta.id,

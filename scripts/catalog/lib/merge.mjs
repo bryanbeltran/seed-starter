@@ -1,5 +1,6 @@
 import { cropDefaults, springSeason } from "./cropDefaults.mjs";
-import { cropIdFromCategory, displayName, slugify, varietyId } from "./slug.mjs";
+import { resolveCropRecord } from "./cropResolve.mjs";
+import { displayName, slugify, varietyId } from "./slug.mjs";
 
 const EDIBLE_PREFIXES = [
   "/vegetables/",
@@ -50,29 +51,17 @@ export function parseDays(text) {
   return Math.round((a + b) / 2);
 }
 
-/** Tags/labels that must not become crop ids */
-const JUNK_CROP_IDS = new Set([
-  "seed", "seeds", "organic", "red", "dry", "eco", "op", "winter", "type",
-]);
-
-export function isJunkCropId(cropId) {
-  return !cropId || JUNK_CROP_IDS.has(cropId);
-}
-
-export function resolveCropId(rec) {
-  let cropId = cropIdFromCategory(rec.cropCategory);
-  if (isJunkCropId(cropId)) {
-    const fromName = cropIdFromCategory(rec.name.replace(/\s+seeds?$/i, ""));
-    cropId = isJunkCropId(fromName) ? cropIdFromCategory(rec.name.split(/\s+/).pop() ?? "") : fromName;
-  }
-  return isJunkCropId(cropId) ? null : cropId;
-}
+/** @typedef {{ source: string, sourceUrl: string, name: string, cropCategory: string, daysToHarvest?: number, sku?: string, confidence: string, tags?: string[] }} RawSeed */
 
 export function mergeRecords(records, { target = 2000 } = {}) {
   const byKey = new Map();
+  let dropped = 0;
   for (const rec of records) {
-    const cropId = resolveCropId(rec);
-    if (!cropId) continue;
+    const cropId = resolveCropRecord(rec);
+    if (!cropId) {
+      dropped++;
+      continue;
+    }
     const vid = varietyId(rec.name, cropId);
     const key = `${cropId}::${slugify(rec.name)}`;
     const existing = byKey.get(key);
@@ -85,6 +74,7 @@ export function mergeRecords(records, { target = 2000 } = {}) {
 
   let merged = [...byKey.values()];
   if (merged.length > target) merged = merged.slice(0, target);
+  if (dropped) console.log(`  dropped ${dropped} unresolvable records`);
   return buildCatalog(merged);
 }
 

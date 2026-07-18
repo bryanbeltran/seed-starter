@@ -13,7 +13,7 @@ describe("cropCatalog", () => {
   it("loads extensive catalog from JSON", () => {
     const meta = catalogMeta();
     expect(meta.version).toBe(1);
-    expect(cropIds.length).toBeGreaterThanOrEqual(200);
+    expect(cropIds.length).toBeGreaterThanOrEqual(50);
     expect(listCrops().length).toBe(cropIds.length);
     expect(varietyCount()).toBeGreaterThanOrEqual(2000);
   });

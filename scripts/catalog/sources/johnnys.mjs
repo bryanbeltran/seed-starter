@@ -25,8 +25,8 @@ export async function fetchRecord(root, url) {
 
   const crumbs = [...html.matchAll(/"name":\s*"([^"]+)"[^}]*"@id":\s*"https:\/\/www\.johnnyseeds\.com\/vegetables/g)]
     .map((m) => m[1]);
-  const breadcrumb = html.match(/"category":\s*"([^"]+)"/)?.[1];
-  const cropCategory = crumbs.at(-1) ?? breadcrumb?.split("/").pop() ?? "vegetable";
+  const pathCrop = url.match(/\/vegetables\/([a-z0-9-]+)/i)?.[1];
+  const cropCategory = pathCrop ?? crumbs.at(-1) ?? "vegetable";
 
   let daysToHarvest;
   const facts = [...html.matchAll(

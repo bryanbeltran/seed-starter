@@ -11,15 +11,15 @@ export const POPULAR_CROP_IDS = [
   "pea",
   "kale",
   "basil",
-  "smooth-leaf-spinach",
+  "spinach",
 ] as const;
 
 const JUNK_CROP_IDS = new Set([
   "seed", "seeds", "organic", "red", "dry", "eco", "op", "winter", "type",
 ]);
 
-/** Min varieties to appear in Browse (avoids subcategory noise) */
-export const MIN_BROWSE_VARIETIES = 5;
+/** Min varieties to appear in Browse tab */
+export const MIN_BROWSE_VARIETIES = 3;
 
 export type CropCategoryFilter = "popular" | "browse" | "vegetable" | "herb" | "fruit";
 
