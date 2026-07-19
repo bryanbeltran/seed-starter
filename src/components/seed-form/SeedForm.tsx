@@ -254,6 +254,7 @@ export function SeedForm() {
         results={results!}
         zip={zip}
         planName={planName}
+        varieties={varieties}
         onSave={() => setSaveOpen(true)}
         canSave={canSave}
       />
@@ -264,6 +265,7 @@ export function SeedForm() {
       results={results}
       zip={zip}
       planName={planName}
+      varieties={varieties}
       onSave={() => setSaveOpen(true)}
       canSave={canSave}
     />

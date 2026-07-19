@@ -17,6 +17,10 @@ type Props = {
   onChange: (varietyId: string | undefined) => void;
 };
 
+function varietyLabel(name: string, daysToHarvest?: number) {
+  return daysToHarvest != null ? `${name} · ${daysToHarvest}d` : name;
+}
+
 export function VarietySelect({ crop, value, disabled, onChange }: Props) {
   const varieties = Object.values(crop.varieties ?? {});
   if (varieties.length === 0) return null;
@@ -35,10 +39,12 @@ export function VarietySelect({ crop, value, disabled, onChange }: Props) {
           <SelectValue placeholder="Default" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="default">Default</SelectItem>
+          <SelectItem value="default">
+            Default · {crop.daysToHarvest}d
+          </SelectItem>
           {varieties.map((v) => (
             <SelectItem key={v.id} value={v.id}>
-              {v.name}
+              {varietyLabel(v.name, v.daysToHarvest)}
             </SelectItem>
           ))}
         </SelectContent>
