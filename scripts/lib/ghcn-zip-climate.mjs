@@ -38,6 +38,10 @@ export function stationHasFrostTmin(stationId, tminByStation) {
   return lastFrostMmDdPerYear(stationId, tminByStation).length > 0;
 }
 
+export function stationHasFallFrostTmin(stationId, tminByStation) {
+  return firstFallFrostMmDdPerYear(stationId, tminByStation).length > 0;
+}
+
 export function normalizeTminCache(raw) {
   const out = {};
   for (const [id, data] of Object.entries(raw)) {
@@ -321,9 +325,21 @@ export async function fetchStationFrostSummary(stationId, retries = 2) {
 }
 
 export async function fetchBundledStationTmin(stationIds, options = {}) {
-  const { concurrency = 6, onProgress, onBatch, batchSize = 50, seed = {} } = options;
+  const {
+    concurrency = 6,
+    onProgress,
+    onBatch,
+    batchSize = 50,
+    seed = {},
+    /** When true, re-fetch stations that have spring history but no firstFallFrost. */
+    requireFall = false,
+  } = options;
   const tminByStation = normalizeTminCache(seed);
-  const queue = stationIds.filter((id) => !stationHasFrostTmin(id, tminByStation));
+  const queue = stationIds.filter((id) =>
+    requireFall
+      ? !stationHasFallFrostTmin(id, tminByStation)
+      : !stationHasFrostTmin(id, tminByStation),
+  );
   let batchCount = 0;
 
   async function worker() {

@@ -5,47 +5,35 @@ Accepted
 
 ## Context
 ADR 004 committed the MVP to a single frost anchor — the last spring frost.
-Fall planting requires a symmetric anchor: the **first fall frost**. We need
-to introduce a second season without duplicating the resolver, risk model, or
-schedule builder.
+Fall planting requires a symmetric anchor: the **first fall frost**.
 
 ## Decision
-- Introduce a `GardenSeason` type (`"spring" | "fall"`, plus reserved
-  `"summer"`) that flows through `ScheduleInput`, the request schema, the
-  crop-rule resolver, the frost resolver, and the risk model.
-- `FrostClimateRecord` gains optional `firstFallFrostP10/P50/P90` fields. When
-  absent, the resolver falls back through the same chain used for spring:
-  climate → station → regional → zone median (with a `fallFrostDates.json`
-  companion to `frostDates.json`).
-- `resolveFrost({season})` is the generalized entry point. `resolveLastFrost`
-  and a new `resolveFirstFallFrost` are thin season-bound wrappers.
-- Risk-profile mapping inverts for fall:
-  - Spring: conservative → p90 (later frost), aggressive → p10 (earlier).
-  - Fall: conservative → p10 (earlier frost), aggressive → p90 (later).
-  The intent is unchanged — conservative always chooses the risk-averse anchor;
-  the p-value flips because fall risk means the *first* frost, not the last.
-- Schedule builder emits a `fall_sow` task type for the direct-sow branch when
-  `season === "fall"`. The transplant branch keeps `indoor_sow → harden_off →
-  transplant` (still anchored to fall frost, offsets typically negative).
-- `nextFrostDate` handles year rollover identically for fall MM-DD strings.
+- `GardenSeason` (`"spring" | "fall"`, reserved `"summer"`) flows through
+  `ScheduleInput`, request schema, crop rules, frost resolver, risk model, UI,
+  and saved plans.
+- `FrostClimateRecord` / `ClimateRecord` include optional
+  `firstFallFrostP10/P50/P90`. Resolver chain: climate → station → regional →
+  zone (`fallFrostDates.json`).
+- `resolveFrost({season})` is the entry point; `resolveLastFrost` /
+  `resolveFirstFallFrost` are wrappers.
+- Fall risk inversion: conservative → p10 (earlier first frost); aggressive →
+  p90 (later).
+- Direct-sow fall tasks emit `fall_sow`; transplant path unchanged
+  (`indoor_sow → harden_off → transplant`).
 
-Explicit non-goals in this ADR:
-- Populating `crops.json` with per-crop `seasons.fall` rules.
-- Full GHCN ETL for fall percentiles.
-- UI for season toggling.
+## Done (shipped with fall feature)
+- Catalog `seasons.fall` for fall-capable crops
+- Season UI + saved-plan `season` column
+- GHCN ETL parse/emit for fall percentiles (`--refetch-missing-fall`)
 
-These land in follow-up work; the planning core is prepared for them.
+## Non-goals
+- Soil temp / GDD
+- Multi-year succession optimization UI
+- Summer season rules (see `docs/plans/summer-season.md`)
 
 ## Consequences
-- Schedule shape gains `season` and `frostAnchorDate`. `lastFrostDate` is
-  retained as an alias for backwards compatibility with serialization and
-  persistence.
-- Callers that supply neither `season` nor fall data behave unchanged.
-- Fall schedules without catalog `seasons.fall` fall back to flat crop offsets;
-  they still schedule, but the offsets are the same shape as spring.
-- GHCN ETL code now parses fall frost dates and, when a station has fall
-  history, emits `firstFallFrostP10/P50/P90` into `zipClimate.json`. The
-  nationwide regeneration is a follow-up CI run — the shipped bundle keeps its
-  current spring-only data until that job lands. The per-ZIP cache format is
-  back-compatible: legacy spring-only entries `{year,lastFrost}[]` continue to
-  drive spring percentiles and simply omit fall percentiles.
+- Nationwide `zipClimate.json` must be regenerated after ETL gains fall support
+  (see `docs/plans/gap-01-nationwide-fall-climate.md`). Until then, fall
+  schedules fall back to station/regional/zone.
+- Legacy spring-only TMIN summaries stay valid for spring; they omit fall
+  percentiles until re-fetched.

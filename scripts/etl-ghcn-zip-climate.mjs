@@ -5,6 +5,7 @@
  *   pnpm run etl:climate
  *   pnpm run etl:climate -- --write
  *   pnpm run etl:climate -- --fetch-stations --fetch-daily-needed --full --write
+ *   pnpm run etl:climate -- --refetch-missing-fall --full --write
  */
 
 import fs from "fs";
@@ -20,6 +21,7 @@ import {
   mergeTminCaches,
   normalizeTminCache,
   selectRepresentativeStations,
+  stationHasFallFrostTmin,
   tryLoadJson,
 } from "./lib/ghcn-zip-climate.mjs";
 
@@ -30,6 +32,7 @@ const fetchCentroids = process.argv.includes("--fetch-centroids");
 const fetchDaily = process.argv.includes("--fetch-daily");
 const fetchDailyNeeded = process.argv.includes("--fetch-daily-needed");
 const fetchDailyRepresentative = process.argv.includes("--fetch-daily-representative");
+const refetchMissingFall = process.argv.includes("--refetch-missing-fall");
 const full = process.argv.includes("--full");
 
 const cellDegArg = process.argv.find((a) => a.startsWith("--cell-deg="));
@@ -82,14 +85,32 @@ async function main() {
     existingTmin = normalizeTminCache(loadJson(root, "data/ghcn/tmin-parsed.json"));
   }
 
-  if (fetchDailyNeeded || fetchDailyRepresentative || fetchDaily) {
+  if (
+    fetchDailyNeeded ||
+    fetchDailyRepresentative ||
+    fetchDaily ||
+    refetchMissingFall
+  ) {
     const stationPool =
       stationsOverride ??
       (fs.existsSync(usTminPath) ? loadJson(root, "data/ghcn/stations-us-tmin.json") : null) ??
       loadJson(root, "data/ghcn/stations.json");
 
     let idsToFetch;
-    if (fetchDailyRepresentative) {
+    if (refetchMissingFall) {
+      const climatePath = path.join(root, "data/zipClimate.json");
+      const used = fs.existsSync(climatePath)
+        ? [
+            ...new Set(
+              Object.values(loadJson(root, "data/zipClimate.json")).map((r) => r.stationId),
+            ),
+          ]
+        : stationPool.map((s) => s.id);
+      idsToFetch = used.filter((id) => !stationHasFallFrostTmin(id, existingTmin));
+      console.log(
+        `Refetch missing fall frost: ${idsToFetch.length}/${used.length} stations`,
+      );
+    } else if (fetchDailyRepresentative) {
       const reps = selectRepresentativeStations(stationPool, cellDeg);
       idsToFetch = reps.map((s) => s.id).filter((id) => !stationHasFrostInCache(id, existingTmin));
       console.log(
@@ -114,6 +135,7 @@ async function main() {
     const fetched = await fetchBundledStationTmin(idsToFetch, {
       concurrency: 8,
       seed: existingTmin,
+      requireFall: refetchMissingFall,
       batchSize: 40,
       onProgress: (id, status) => {
         if (status === "ok") process.stdout.write(`  ✓ ${id}\n`);
@@ -143,7 +165,7 @@ async function main() {
     full,
     dataVersion,
     provenance:
-      fetchDaily || fetchDailyNeeded || fetchDailyRepresentative
+      fetchDaily || fetchDailyNeeded || fetchDailyRepresentative || refetchMissingFall
         ? "NOAA GHCN-Daily parsed TMIN"
         : "NOAA GHCN-Daily nearest-station median",
   });
@@ -175,7 +197,8 @@ async function main() {
         !fetchCentroids &&
         !fetchDaily &&
         !fetchDailyNeeded &&
-        !fetchDailyRepresentative));
+        !fetchDailyRepresentative &&
+        !refetchMissingFall));
 
   if (writeClimate) {
     const outPath = path.join(root, "data/zipClimate.json");
