@@ -45,6 +45,7 @@ export {
   firstFallFrostDateForZone,
   frostDateStringForZone,
   frostDateStringForZoneBySeason,
+  frostPercentileDates,
   lastFrostDateForZone,
   nextFrostDate,
 } from "./frost";
