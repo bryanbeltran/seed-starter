@@ -62,6 +62,7 @@ async function ensureMigrations() {
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS climate_snapshot_id TEXT`;
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS owner_id TEXT`;
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS last_frost_date TEXT`;
+  await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS season TEXT NOT NULL DEFAULT 'spring'`;
   await sql`CREATE INDEX IF NOT EXISTS saved_plans_owner_id_idx ON saved_plans (owner_id)`;
   migrated = true;
 }
@@ -160,12 +161,13 @@ export async function updateSavedPlan(
   const name = patch.name ?? existing.name;
   const crops = patch.crops ?? existing.crops;
   const riskProfile = patch.riskProfile ?? existing.riskProfile;
+  const season = patch.season ?? existing.season;
   const zip = patch.zip ?? existing.zip;
   const { zone } = await resolveLocation(zip);
   const now = new Date().toISOString();
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
-  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile);
+  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile, season);
   const lastFrostDate = schedule.lastFrostDate.toISOString();
 
   await ensureMigrations();
@@ -173,7 +175,8 @@ export async function updateSavedPlan(
   await sql`
     UPDATE saved_plans
     SET name = ${name}, zip = ${zip}, zone = ${zone}, crops_json = ${JSON.stringify(crops)},
-        risk_profile = ${riskProfile}, climate_data_version = ${climateDataVersion},
+        risk_profile = ${riskProfile}, season = ${season},
+        climate_data_version = ${climateDataVersion},
         climate_snapshot_id = ${climateSnapshotId}, last_frost_date = ${lastFrostDate},
         updated_at = ${now}
     WHERE id = ${id}
@@ -187,6 +190,7 @@ export async function updateSavedPlan(
       zone,
       crops_json: JSON.stringify(crops),
       risk_profile: riskProfile,
+      season,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
       owner_id: existing.ownerId,

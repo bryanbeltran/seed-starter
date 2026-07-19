@@ -3,7 +3,7 @@ import {
   getFileClimateRepository,
   isClimateVersionStale,
 } from "@/climate";
-import type { RiskProfile, Schedule } from "@/planning";
+import type { GardenSeason, RiskProfile, Schedule } from "@/planning";
 import { buildSchedule } from "@/planning";
 import { serializeSchedule } from "@/lib/serializeSchedule";
 import { diffSchedules, type ScheduleDiff } from "@/lib/scheduleDiff";
@@ -13,6 +13,7 @@ export type SavedPlanInput = {
   zip: string;
   crops: string[];
   riskProfile?: RiskProfile;
+  season?: GardenSeason;
   ownerId?: string | null;
 };
 
@@ -41,6 +42,7 @@ export type SavedPlan = {
   zone: string;
   crops: string[];
   riskProfile: RiskProfile;
+  season: GardenSeason;
   ownerId: string | null;
   climateDataVersion: string | null;
   climateSnapshotId: string | null;
@@ -58,12 +60,14 @@ export async function scheduleForPlan(
   zone: string,
   crops: string[],
   riskProfile: RiskProfile,
+  season: GardenSeason = "spring",
 ): Promise<Schedule> {
   return buildSchedule({
     zone,
     zip,
     crops,
     riskProfile,
+    season,
     climateRepository,
   });
 }
@@ -82,7 +86,7 @@ function storedScheduleStub(row: Record<string, unknown>): Schedule | null {
   return {
     zone: String(row.zone),
     zip: String(row.zip),
-    season: "spring",
+    season: (row.season ? String(row.season) : "spring") as GardenSeason,
     lastFrostDate: new Date(lastFrost),
     frostSource: "climate",
     frostProvenance: "stored snapshot",
@@ -115,6 +119,7 @@ export function rowToPlan(
     zone: String(row.zone),
     crops: JSON.parse(String(row.crops_json)) as string[],
     riskProfile: String(row.risk_profile) as RiskProfile,
+    season: (row.season ? String(row.season) : "spring") as GardenSeason,
     ownerId: row.owner_id ? String(row.owner_id) : null,
     climateDataVersion: storedVersion,
     climateSnapshotId: storedSnapshot,

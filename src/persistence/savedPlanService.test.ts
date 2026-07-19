@@ -51,10 +51,27 @@ describe("savedPlanService", () => {
     expect(first.climateDataStale).toBe(false);
     expect(first.scheduleDiff).toBeNull();
     expect(first.ownerId).toBeNull();
+    expect(first.season).toBe("spring");
     expect(second.riskProfile).toBe("balanced");
 
     const plans = await listSavedPlans();
     expect(plans).toHaveLength(2);
+  });
+
+  it("persists season on create and update", async () => {
+    const plan = await createSavedPlan({
+      name: "Fall bed",
+      zip: "55423",
+      crops: ["carrot"],
+      season: "fall",
+    });
+    expect(plan.season).toBe("fall");
+    expect(plan.schedule.season).toBe("fall");
+    expect(plan.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(true);
+
+    const flipped = await updateSavedPlan(plan.id, { season: "spring" });
+    expect(flipped?.season).toBe("spring");
+    expect(flipped?.schedule.season).toBe("spring");
   });
 
   it("updates and deletes plans", async () => {

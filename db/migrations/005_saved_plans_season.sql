@@ -1,0 +1,3 @@
+-- Applied via savedPlanService migration runner (idempotent ALTER).
+-- Intended shape (Postgres + SQLite compatible):
+--   ALTER TABLE saved_plans ADD COLUMN season TEXT NOT NULL DEFAULT 'spring';
