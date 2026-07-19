@@ -1,38 +1,48 @@
 # Polish 01: Merge fall PR #18
 
 **Roadmap slot:** 1  
-**Status:** Ready  
+**Status:** Ready (amended after plan audit)  
 **PR:** https://github.com/bryanbeltran/seed-starter/pull/18  
-**Branch:** `cursor/fall-season-3c56` → `main`
+**Branch:** `cursor/fall-season-3c56` → `main`  
+**Audit:** [polish-01-03-audit.md](./polish-01-03-audit.md)
 
 ## Goal
 Land fall season + climate regen + audit fixes on `main` so prod and portfolio reflect the work.
 
 ## Preconditions
-- [ ] CI `check` green on latest commit
-- [ ] CI `postgres` green (or known skip)
-- [ ] Vercel preview healthy
-- [ ] Working tree clean on branch (or only intentional docs)
-- [ ] No open blocker comments
+- [ ] GitHub check rollup on **remote** HEAD is green (`check` + `postgres` SUCCESS) — not merely `mergeable`
+- [ ] Vercel preview deploy SUCCESS for that commit
+- [ ] PR undrafted / ready to merge
+- [ ] No open blocker review comments
+- [ ] Ignore local untracked noise (`.agents/`); only remote branch matters
 
 ## Steps
-1. Wait for in-flight CI on HEAD to finish green.
-2. Skim final diff once: season persistence, `UnsupportedSeasonCropError`, zipClimate size OK.
-3. Merge PR #18 into `main` (GitHub UI merge or squash — match repo norm; prior PRs used merge commits).
-4. Confirm `main` HEAD includes fall commits: `git fetch origin main && git log -1 --oneline origin/main`.
-5. Confirm Vercel production deploy starts for `main`.
-6. Hand off immediately to [polish-02](./polish-02-prod-fall-smoke.md) — do not start new features until smoke passes.
+1. Wait until `gh pr checks 18` (or UI) shows all required checks green on latest commit.
+2. Skim final diff once: season persistence, `UnsupportedSeasonCropError`, climate data present.
+3. Merge with a **merge commit** (match prior repo history; keep fall/climate commit narrative). Avoid squash.
+4. Confirm:
+   ```bash
+   git fetch origin main
+   git log -1 --oneline origin/main
+   # fall frost present on main:
+   git grep -l firstFallFrostP50 origin/main -- data/zipClimate.json
+   git show origin/main:docs/adrs/006-multi-season-frost.md | head -5
+   ```
+5. Confirm Vercel production deploy for `main` starts.
+6. Hand off to [polish-02](./polish-02-prod-fall-smoke.md). No new features until smoke passes.
 
 ## Out of scope
 - Demo GIF (slot 5)
 - Frost-aware default season (slot 6)
-- Any follow-up code on the fall branch after merge
+- Further commits on the fall branch after merge (unless hotfix)
 
 ## Acceptance
 - [ ] PR #18 state = MERGED
-- [ ] `origin/main` contains ADR 006 + `seasons.fall` + `firstFallFrostP*` in zipClimate
-- [ ] Production deploy queued/succeeded (Vercel)
-- [ ] Ready for prod smoke (plan 02)
+- [ ] `origin/main` has ADR 006 + `firstFallFrostP50` in zipClimate
+- [ ] Production deploy queued/succeeded
+- [ ] Ready for polish-02
 
 ## Rollback
-If prod smoke fails hard: revert merge commit on `main` or hotfix; do not pile polish on a broken deploy.
+1. `git revert -m 1 <merge_commit>` on `main` (or GitHub revert).
+2. Wait for deploy; `health.commit` should leave the fall SHA.
+3. Hotfix on a new `cursor/…` branch from the reverted `main`; do not pile polish on a broken deploy.

@@ -21,6 +21,8 @@
 | 2 | [polish-02-prod-fall-smoke.md](./polish-02-prod-fall-smoke.md) |
 | 3 | [polish-03-readme-eval.md](./polish-03-readme-eval.md) |
 
+Plan audit: [polish-01-03-audit.md](./polish-01-03-audit.md) (amendments folded into 01–03).
+
 ## Fall gaps / fixes
 
 Gaps 01–04, 07 done. Fixes 01–07 done on #18.  
