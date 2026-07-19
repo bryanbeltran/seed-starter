@@ -4,7 +4,8 @@ import {
   type CropDefinition,
   type VarietyDefinition,
 } from "./catalogSchema";
-import { springRulesFromCrop } from "./seasonRules";
+import { rulesFromCrop } from "./seasonRules";
+import type { GardenSeason } from "./types";
 
 export type { CropDefinition, VarietyDefinition };
 export type CropMethod = CropDefinition["method"];
@@ -44,9 +45,10 @@ export function getCropOrDefault(cropId: string): CropDefinition {
 export function resolveCropRules(
   cropId: string,
   varietyId?: string,
+  season: GardenSeason = "spring",
 ): CropDefinition & { varietyName?: string } {
   const base = getCropOrDefault(cropId);
-  const timing = springRulesFromCrop(base);
+  const timing = rulesFromCrop(base, season);
   const merged = { ...base, ...timing };
   if (!varietyId || !base.varieties?.[varietyId]) {
     return merged;

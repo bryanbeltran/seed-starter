@@ -82,6 +82,7 @@ function storedScheduleStub(row: Record<string, unknown>): Schedule | null {
   return {
     zone: String(row.zone),
     zip: String(row.zip),
+    season: "spring",
     lastFrostDate: new Date(lastFrost),
     frostSource: "climate",
     frostProvenance: "stored snapshot",

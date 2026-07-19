@@ -1,10 +1,18 @@
 import { addDays, subDays } from "date-fns";
 import { resolveCropRules } from "./cropCatalog";
-import { resolveLastFrost } from "./frostResolver";
+import { resolveFrost } from "./frostResolver";
 import { selectFrostDate } from "./riskProfile";
-import type { CropSelection, PlantingTask, RiskProfile, Schedule, ScheduleInput } from "./types";
+import type {
+  CropSelection,
+  GardenSeason,
+  PlantingTask,
+  RiskProfile,
+  Schedule,
+  ScheduleInput,
+} from "./types";
 
 const DEFAULT_RISK_PROFILE: RiskProfile = "balanced";
+const DEFAULT_SEASON: GardenSeason = "spring";
 
 function cropLabel(cropId: string, varietyName?: string): string {
   const base = cropId.charAt(0).toUpperCase() + cropId.slice(1);
@@ -14,10 +22,12 @@ function cropLabel(cropId: string, varietyName?: string): string {
 function tasksForCrop(
   crop: CropSelection,
   anchorFrost: Date,
+  season: GardenSeason,
 ): PlantingTask[] {
-  const rules = resolveCropRules(crop.cropId, crop.varietyId);
+  const rules = resolveCropRules(crop.cropId, crop.varietyId, season);
   const label = cropLabel(rules.id, rules.varietyName);
   const tasks: PlantingTask[] = [];
+  const isFall = season === "fall";
 
   if (rules.method === "transplant") {
     const indoorSow = subDays(anchorFrost, rules.indoorSowOffsetDays ?? 30);
@@ -54,9 +64,9 @@ function tasksForCrop(
   const directSow = subDays(anchorFrost, rules.directSowDaysBeforeFrost ?? 0);
   tasks.push({
     cropId: crop.cropId,
-    type: "direct_sow",
+    type: isFall ? "fall_sow" : "direct_sow",
     date: directSow,
-    label: `Direct sow ${label}`,
+    label: `${isFall ? "Sow" : "Direct sow"} ${label}${isFall ? " for fall harvest" : ""}`,
   });
   tasks.push({
     cropId: crop.cropId,
@@ -74,6 +84,7 @@ export function buildSchedule(input: ScheduleInput): Schedule {
     cropSelections,
     zip,
     riskProfile = DEFAULT_RISK_PROFILE,
+    season = DEFAULT_SEASON,
     referenceDate = new Date(),
     climateRepository,
   } = input;
@@ -82,13 +93,13 @@ export function buildSchedule(input: ScheduleInput): Schedule {
     cropSelections ??
     crops.map((cropId) => ({ cropId }));
 
-  const frostResolution = resolveLastFrost(
-    { zone, zip, referenceDate },
+  const frostResolution = resolveFrost(
+    { zone, zip, referenceDate, season },
     climateRepository,
   );
-  const lastFrostDate = selectFrostDate(frostResolution, riskProfile);
+  const anchorFrost = selectFrostDate(frostResolution, riskProfile, season);
 
-  const tasks = selections.flatMap((crop) => tasksForCrop(crop, lastFrostDate));
+  const tasks = selections.flatMap((crop) => tasksForCrop(crop, anchorFrost, season));
 
   const frostPercentiles =
     frostResolution.lastFrostP10 && frostResolution.lastFrostP90
@@ -102,7 +113,8 @@ export function buildSchedule(input: ScheduleInput): Schedule {
   return {
     zone,
     zip,
-    lastFrostDate,
+    season,
+    lastFrostDate: anchorFrost,
     frostSource: frostResolution.source,
     frostProvenance: frostResolution.provenance,
     frostPercentiles,
@@ -118,7 +130,9 @@ export type LegacySowDate = { seed: string; date: Date };
 
 export function sowDatesFromSchedule(schedule: Schedule): LegacySowDate[] {
   return schedule.tasks
-    .filter((t) => t.type === "indoor_sow" || t.type === "direct_sow")
+    .filter(
+      (t) => t.type === "indoor_sow" || t.type === "direct_sow" || t.type === "fall_sow",
+    )
     .map((t) => ({ seed: t.cropId, date: t.date }));
 }
 

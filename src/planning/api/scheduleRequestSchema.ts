@@ -7,6 +7,8 @@ export const riskProfileSchema = z.enum([
   "aggressive",
 ]);
 
+export const gardenSeasonSchema = z.enum(["spring", "fall", "summer"]);
+
 const cropSelectionSchema = z.object({
   cropId: z.string(),
   varietyId: z.string().optional(),
@@ -25,6 +27,7 @@ export const scheduleRequestSchema = z.object({
     .transform((seeds) => [...new Set(seeds)]),
   cropSelections: z.array(cropSelectionSchema).optional(),
   riskProfile: riskProfileSchema.optional(),
+  season: gardenSeasonSchema.optional(),
 });
 
 export type ScheduleRequest = z.infer<typeof scheduleRequestSchema>;

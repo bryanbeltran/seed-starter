@@ -1,5 +1,7 @@
 export type RiskProfile = "conservative" | "balanced" | "aggressive";
 
+export type GardenSeason = "spring" | "fall" | "summer";
+
 export type FrostModelSource = "climate" | "station" | "regional" | "zone";
 
 export type Location = {
@@ -34,6 +36,9 @@ export type FrostClimateRecord = {
   lastFrostP10: string;
   lastFrostP50: string;
   lastFrostP90: string;
+  firstFallFrostP10?: string;
+  firstFallFrostP50?: string;
+  firstFallFrostP90?: string;
   provenance: string;
   dataVersion: string;
   stationId?: string;
@@ -54,6 +59,8 @@ export type FrostPercentiles = {
 export type Schedule = {
   zone: string;
   zip?: string;
+  season: GardenSeason;
+  /** Season anchor date: last spring frost or first fall frost. */
   lastFrostDate: Date;
   frostSource: FrostModelSource;
   frostProvenance: string;
@@ -71,6 +78,7 @@ export type ScheduleInput = {
   crops: string[];
   cropSelections?: CropSelection[];
   riskProfile?: RiskProfile;
+  season?: GardenSeason;
   referenceDate?: Date;
   climateRepository?: FrostClimateLookup;
 };

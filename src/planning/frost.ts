@@ -1,11 +1,27 @@
-import frostDatesData from "./frostDates.json";
+import springFrostData from "./frostDates.json";
+import fallFrostData from "./fallFrostDates.json";
+import type { GardenSeason } from "./types";
 
-const frostDates: Record<string, string> = frostDatesData;
+const springFrostDates: Record<string, string> = springFrostData;
+const fallFrostDates: Record<string, string> = fallFrostData;
 
 const DEFAULT_ZONE = "4a";
 
 export function frostDateStringForZone(zone: string): string {
-  return frostDates[zone] ?? frostDates[DEFAULT_ZONE];
+  return springFrostDates[zone] ?? springFrostDates[DEFAULT_ZONE];
+}
+
+export function fallFrostDateStringForZone(zone: string): string {
+  return fallFrostDates[zone] ?? fallFrostDates[DEFAULT_ZONE];
+}
+
+export function frostDateStringForZoneBySeason(
+  zone: string,
+  season: GardenSeason,
+): string {
+  return season === "fall"
+    ? fallFrostDateStringForZone(zone)
+    : frostDateStringForZone(zone);
 }
 
 export function nextFrostDate(
@@ -26,5 +42,13 @@ export function lastFrostDateForZone(
   referenceDate: Date = new Date(),
 ): Date {
   const [month, day] = frostDateStringForZone(zone).split("-").map(Number);
+  return nextFrostDate(month, day, referenceDate);
+}
+
+export function firstFallFrostDateForZone(
+  zone: string,
+  referenceDate: Date = new Date(),
+): Date {
+  const [month, day] = fallFrostDateStringForZone(zone).split("-").map(Number);
   return nextFrostDate(month, day, referenceDate);
 }

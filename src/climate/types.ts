@@ -7,6 +7,9 @@ export type ClimateRecord = {
   lastFrostP10: string;
   lastFrostP50: string;
   lastFrostP90: string;
+  firstFallFrostP10?: string;
+  firstFallFrostP50?: string;
+  firstFallFrostP90?: string;
   yearsSampled: number;
   provenance: string;
   dataVersion: string;
