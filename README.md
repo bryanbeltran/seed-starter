@@ -50,7 +50,7 @@ Domain logic lives in `src/planning/` (framework-free). ADRs:
 | [006](docs/adrs/006-multi-season-frost.md) | Multi-season frost (spring + fall) |
 | [Threat model](docs/threat-model.md) | Cookie, share links, rate limits |
 
-Next builds: [plans](docs/plans/) — fall season, summer season, variety timing.
+Next builds: [FAANG polish](docs/plans/faang-polish.md) · [plans index](docs/plans/).
 
 ### Failure modes
 
