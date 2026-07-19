@@ -29,4 +29,4 @@ Plan audit: [polish-01-03-audit.md](./polish-01-03-audit.md) (amendments folded 
 Gaps 01–04, 07 done. Fixes 01–07 done on #18.  
 Remaining: [gap-05](./gap-05-catalog-fall-coverage.md) (#9), [gap-06](./gap-06-default-season-heuristic.md) (#6), [gap-08](./gap-08-fall-fallback-fixtures.md) (#10).
 
-After polish: [native plants by ZIP](./native-plants-by-zip.md) ([audit](./native-plants-plan-audit.md); ADR 007).
+After polish: [native plants by ZIP](./native-plants-by-zip.md) ([audit](./native-plants-plan-audit.md); [data sources](./native-plants-data-sources.md); ADR 007).

@@ -5,7 +5,8 @@
 **Depends on:** ZIP → zone + frost resolve (done); **ADR 007 first**  
 **Does not replace:** Vegetable/herb catalog scheduling  
 **PR:** [#25](https://github.com/bryanbeltran/seed-starter/pull/25) (this plan)  
-**Audit:** [native-plants-plan-audit.md](./native-plants-plan-audit.md) — amendments folded below
+**Audit:** [native-plants-plan-audit.md](./native-plants-plan-audit.md) — amendments folded below  
+**Data sources:** [native-plants-data-sources.md](./native-plants-data-sources.md) — **where data comes from**
 
 ## Goal
 
@@ -33,7 +34,7 @@ Interview signal: spatial ecology join + frost scheduling reuse — not another 
 | 3 | **Timing = frost offsets** (ADR 004). No soil temp / GDD. **v1 frost anchor = p50 only** (explicit); `?riskProfile=` optional stretch — not required for v1 ship. |
 | 4 | **Parallel product surface** — `/natives` + `/api/natives`. Do not merge into veg CropPicker. Do **not** reuse schedule `LocationForm` (season-coupled); share `isValidZip` only. |
 | 5 | **Curated depth:** v1 ship = **ecoregion 51 ≥15 cited species**. Second (arid/contrast) L3 = Phase 5 stretch, not a v1 gate. |
-| 6 | **ADR 007** before any nativity claims in UI/API. Licenses locked in ADR before Phase 2 curation. |
+| 6 | **ADR 007** before any nativity claims in UI/API. Licenses locked in ADR before Phase 2 curation. Stack: **EPA L3 + Census centroids** (join), **USDA PLANTS** (nativity), **NRCS/BWSR + frost** (timing). See [data sources](./native-plants-data-sources.md). **No BONAP dump.** |
 | 7 | Saved “native meadow plans” deferred; deep-link `?zip=` is the bookmark. |
 
 ### Rejected
@@ -109,7 +110,7 @@ Uncovered ecoregion: show name + “Catalog coming” + link to veg planner. `ca
 ### Phase 0 — ADR (docs PR)
 
 - Write `docs/adrs/007-native-ecoregion.md`
-- Lock: L3 key, p50-only timing, pilot 51, Phase 5 contrast candidate, **allowed citation sources / license**, non-goals
+- Lock: L3 key, p50-only timing, pilot 51, Phase 5 contrast candidate, **data stack from [native-plants-data-sources.md](./native-plants-data-sources.md)** (PLANTS / EPA / no BONAP), non-goals
 - Link plans index + data-sources stub
 
 **Exit:** ADR merged.
@@ -244,6 +245,7 @@ Does **not** block open polish PRs. Phase 1 does **not** wait on species license
 
 ## Related
 
+- [Data sources](./native-plants-data-sources.md)  
 - [Audit](./native-plants-plan-audit.md)  
 - [ADR 003](../adrs/003-climate-nearest-station.md) — frost percentiles  
 - [ADR 004](../adrs/004-frost-first-mvp.md) — frost-first non-goals  
