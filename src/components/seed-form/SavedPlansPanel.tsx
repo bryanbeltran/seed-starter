@@ -176,6 +176,9 @@ export function SavedPlansPanel({
               >
                 <span className="flex items-center gap-2 font-medium">
                   {plan.name}
+                  <Badge variant="outline" className="text-xs font-normal">
+                    {plan.season === "fall" ? "Fall" : "Spring"}
+                  </Badge>
                   {plan.climateDataStale && (
                     <Badge variant="outline" className="text-xs font-normal">
                       {plan.scheduleDiff?.lastFrostChanged

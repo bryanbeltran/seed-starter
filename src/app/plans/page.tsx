@@ -52,7 +52,11 @@ export default async function PlanPage({ searchParams }: Props) {
         <Link href="/" className="text-muted-foreground mb-4 inline-block text-sm print:hidden">
           ← Back to planner
         </Link>
-        <PlanShareBar planId={plan.id} planName={plan.name} />
+        <PlanShareBar
+          planId={plan.id}
+          planName={plan.name}
+          season={plan.season ?? plan.schedule.season}
+        />
         <ScheduleResults
           results={plan.schedule}
           zip={plan.zip}

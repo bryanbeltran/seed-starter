@@ -8,7 +8,18 @@ describe("buildICS", () => {
       "55423",
     );
     expect(ics).toContain("BEGIN:VCALENDAR");
-    expect(ics).toContain("Sow Tomato indoors");
+    expect(ics).toContain("[Spring] Sow Tomato indoors");
+    expect(ics).toContain("X-WR-CALNAME:Seed Starter Spring (55423)");
     expect(ics).toContain("END:VCALENDAR");
+  });
+
+  it("prefixes fall season on events", () => {
+    const ics = buildICS(
+      [{ label: "Sow Carrot for fall harvest", date: "2026-08-01T12:00:00.000Z" }],
+      "55423",
+      "fall",
+    );
+    expect(ics).toContain("[Fall] Sow Carrot for fall harvest");
+    expect(ics).toContain("X-WR-CALNAME:Seed Starter Fall (55423)");
   });
 });
