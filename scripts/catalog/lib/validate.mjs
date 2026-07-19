@@ -26,6 +26,12 @@ export function validateCatalog(catalog) {
       errors.push(`${cropId}: invalid daysToHarvest`);
     }
     if (!crop.seasons?.spring) errors.push(`${cropId}: missing seasons.spring`);
+    if (crop.seasons?.spring && crop.seasons.spring.anchor !== "lastSpringFrost") {
+      errors.push(`${cropId}: seasons.spring.anchor must be lastSpringFrost`);
+    }
+    if (crop.seasons?.fall && crop.seasons.fall.anchor !== "firstFallFrost") {
+      errors.push(`${cropId}: seasons.fall.anchor must be firstFallFrost`);
+    }
     const vars = Object.values(crop.varieties ?? {});
     varieties += vars.length;
     for (const v of vars) {

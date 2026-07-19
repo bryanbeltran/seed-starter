@@ -144,8 +144,7 @@ export function cropDefaults(cropId) {
   return DEFAULTS[cropId] ?? GENERIC;
 }
 
-export function springSeason(block) {
-  const anchor = "lastSpringFrost";
+function seasonFor(anchor, block) {
   if (block.method === "transplant") {
     return {
       anchor,
@@ -162,4 +161,56 @@ export function springSeason(block) {
   };
 }
 
+export function springSeason(block) {
+  return seasonFor("lastSpringFrost", block);
+}
+
+export function fallSeason(block) {
+  return seasonFor("firstFallFrost", block);
+}
+
+/**
+ * Fall timing offsets are relative to the first fall frost.
+ * - direct `before` = days before first fall frost.
+ * - transplant `after` is typically negative (transplant before frost).
+ */
+const FALL_DEFAULTS = {
+  spinach: D(42, 40),
+  lettuce: T(30, 5, -28, 45),
+  kale: T(42, 5, -42, 55),
+  broccoli: T(56, 7, -70, 60),
+  cabbage: T(70, 7, -84, 75),
+  cauliflower: T(70, 7, -70, 70),
+  "brussels-sprouts": T(84, 7, -100, 100),
+  collards: T(42, 5, -55, 55),
+
+  radish: D(35, 30),
+  arugula: D(45, 40),
+  mustard: D(45, 40),
+  "asian-greens": D(45, 45),
+  turnip: D(60, 55),
+
+  carrot: D(75, 70),
+  beet: D(60, 55),
+  chard: D(60, 55),
+
+  garlic: D(21, 240),
+
+  pea: D(65, 60),
+  cilantro: D(50, 45),
+  parsley: T(42, 5, -42, 75),
+  dill: D(55, 50),
+  scallion: D(70, 70),
+  kohlrabi: T(42, 5, -55, 55),
+  endive: T(30, 5, -55, 85),
+  escarole: T(30, 5, -55, 85),
+  rutabaga: D(95, 90),
+};
+
+export function cropFallDefaults(cropId) {
+  return FALL_DEFAULTS[cropId];
+}
+
 export const CROP_DEFAULT_IDS = Object.keys(DEFAULTS);
+export const CROP_FALL_DEFAULT_IDS = Object.keys(FALL_DEFAULTS);
+export { FALL_DEFAULTS };
