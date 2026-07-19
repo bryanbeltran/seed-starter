@@ -33,13 +33,20 @@ async function capture() {
   await page.getByRole("button", { name: "Calculate schedule" }).click();
   await page.getByText("Zone 5A", { exact: true }).waitFor({ timeout: 30_000 });
   await page.getByText(/Sow Tomato/i).waitFor();
-  await page.screenshot({ path: path.join(outDir, "02-results.png") });
+  await page.screenshot({ path: path.join(outDir, "02-spring.png") });
+
+  await page.locator("#season-fall").click();
+  await page.getByRole("checkbox", { name: "Lettuce", exact: true }).click();
+  await page.getByRole("button", { name: "Calculate schedule" }).click();
+  await page.getByText(/First fall frost/i).waitFor({ timeout: 30_000 });
+  await page.getByText(/Sow Lettuce|Transplant Lettuce|fall/i).first().waitFor();
+  await page.screenshot({ path: path.join(outDir, "03-fall.png") });
 
   await page.getByRole("button", { name: "Save plan" }).click();
-  await page.getByLabel("Plan name").fill("Demo plan");
+  await page.getByLabel("Plan name").fill("Fall demo");
   await page.getByRole("button", { name: "Save", exact: true }).click();
   await page.getByRole("status").filter({ hasText: /plan saved/i }).first().waitFor({ timeout: 10_000 });
-  await page.screenshot({ path: path.join(outDir, "03-saved.png") });
+  await page.screenshot({ path: path.join(outDir, "04-saved.png") });
 
   await browser.close();
   fs.rmSync(demoDbDir, { recursive: true, force: true });
