@@ -1,0 +1,17 @@
+{
+  "description": "Golden ZIP → EPA Level III ecoregion (exact id match).",
+  "minMatchRate": 0.9,
+  "zips": [
+    { "zip": "55423", "ecoregionId": "51" },
+    { "zip": "55401", "ecoregionId": "51" },
+    { "zip": "10001", "ecoregionId": "59" },
+    { "zip": "02108", "ecoregionId": "59" },
+    { "zip": "80202", "ecoregionId": "25" },
+    { "zip": "78701", "ecoregionId": "32" },
+    { "zip": "90210", "ecoregionId": "85" },
+    { "zip": "98101", "ecoregionId": "2" },
+    { "zip": "60601", "ecoregionId": "54" },
+    { "zip": "97201", "ecoregionId": "3" },
+    { "zip": "19103", "ecoregionId": "63" }
+  ]
+}

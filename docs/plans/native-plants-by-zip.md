@@ -1,6 +1,6 @@
 # Plan: Native plants by ZIP
 
-**Status:** Executable with amendments (see [audit](./native-plants-plan-audit.md))  
+**Status:** Implementing on `cursor/native-plants-impl-3c56` (see [impl audit](./native-plants-impl-audit.md))  
 **Priority:** After FAANG polish 1–10  
 **Depends on:** ZIP → zone + frost resolve (done); **ADR 007 first**  
 **Does not replace:** Vegetable/herb catalog scheduling  

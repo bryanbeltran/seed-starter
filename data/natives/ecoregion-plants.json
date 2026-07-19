@@ -1,0 +1,27 @@
+{
+  "ecoregions": {
+    "51": {
+      "ecoregionId": "51",
+      "name": "North Central Hardwood Forests",
+      "plantIds": [
+        "echinacea-purpurea",
+        "ratibida-pinnata",
+        "monarda-fistulosa",
+        "asclepias-syriaca",
+        "asclepias-incarnata",
+        "rudbeckia-hirta",
+        "solidago-rigida",
+        "lupinus-perennis",
+        "schizachyrium-scoparium",
+        "andropogon-gerardii",
+        "bouteloua-curtipendula",
+        "panicum-virgatum",
+        "sporobolus-heterolepis",
+        "aquilegia-canadensis",
+        "coreopsis-lanceolata",
+        "penstemon-digitalis"
+      ],
+      "provenance": "Hand-curated MN/Upper Midwest prairie–woodland natives; PLANTS-native in MN. ADR 007."
+    }
+  }
+}

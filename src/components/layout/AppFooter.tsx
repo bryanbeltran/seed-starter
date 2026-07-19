@@ -12,6 +12,9 @@ export function AppFooter() {
         .
       </p>
       <p className="mt-2 space-x-3">
+        <Link href="/natives" className="underline">
+          Natives
+        </Link>
         <Link href="/coverage" className="underline">
           Coverage
         </Link>

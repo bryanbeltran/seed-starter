@@ -42,3 +42,13 @@ Station pool: `data/ghcn/stations-us-tmin.json` (US inventory filter). TMIN cach
 
 - Climate ETL: weekly (see `.github/workflows/climate-etl.yml`)
 - PHZM zone lookup: 24h HTTP cache
+
+## Native plants (EPA Level III)
+
+| Layer | Source |
+|-------|--------|
+| ZIP → ecoregion | Census ZCTA centroids × EPA L3 shapefile → `data/natives/zip-ecoregion.json` (`pnpm run etl:natives-ecoregion -- --write`) |
+| Species nativity | USDA PLANTS (hand-curated lists per ecoregion) |
+| Seed timing | GHCN last-spring-frost p50 + NRCS / regional guidelines |
+
+See [ADR 007](adrs/007-native-ecoregion.md) and [native-plants-data-sources.md](plans/native-plants-data-sources.md).

@@ -5,7 +5,7 @@
 | [Fall season](./fall-season.md) | P0 | Implemented (#18) — **merge first** |
 | [FAANG polish](./faang-polish.md) | **Next** | Ordered 1→10 |
 | [Variety timing](./variety-timing.md) | Slot 7 | After merge; ∥ default season |
-| [Native plants by ZIP](./native-plants-by-zip.md) | After polish | Executable w/ amendments — [audit](./native-plants-plan-audit.md) |
+| [Native plants by ZIP](./native-plants-by-zip.md) | Building | Impl branch — [audit](./native-plants-plan-audit.md) · [impl log](./native-plants-impl-audit.md) |
 | [Summer season](./summer-season.md) | Defer | Low signal |
 
 ## Polish order (summary)
