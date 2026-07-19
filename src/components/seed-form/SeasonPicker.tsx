@@ -1,7 +1,6 @@
 "use client";
 
 import type { GardenSeason } from "@/planning";
-import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const seasons: { id: GardenSeason; label: string; hint: string }[] = [
@@ -17,28 +16,40 @@ type Props = {
 
 export function SeasonPicker({ value, loading, onChange }: Props) {
   return (
-    <div className="space-y-2">
-      <Label id="season-label">Season</Label>
+    <fieldset className="space-y-2" disabled={loading}>
+      <legend id="season-label" className="text-sm font-medium">
+        Season
+      </legend>
       <RadioGroup
         value={value}
         onValueChange={(v) => onChange(v as GardenSeason)}
-        disabled={loading}
         aria-labelledby="season-label"
         className="grid grid-cols-2 gap-2"
       >
         {seasons.map((s) => (
           <label
             key={s.id}
-            className="flex cursor-pointer items-start gap-2 rounded-md border p-3 has-[:checked]:border-primary"
+            htmlFor={`season-${s.id}`}
+            className="flex min-h-11 cursor-pointer items-start gap-2 rounded-md border p-3 has-[:checked]:border-primary focus-within:ring-2 focus-within:ring-ring"
           >
-            <RadioGroupItem value={s.id} id={`season-${s.id}`} className="mt-0.5" />
+            <RadioGroupItem
+              value={s.id}
+              id={`season-${s.id}`}
+              className="mt-0.5"
+              aria-describedby={`season-${s.id}-hint`}
+            />
             <span>
               <span className="text-sm font-medium">{s.label}</span>
-              <span className="block text-xs text-muted-foreground">{s.hint}</span>
+              <span
+                id={`season-${s.id}-hint`}
+                className="block text-xs text-muted-foreground"
+              >
+                {s.hint}
+              </span>
             </span>
           </label>
         ))}
       </RadioGroup>
-    </div>
+    </fieldset>
   );
 }

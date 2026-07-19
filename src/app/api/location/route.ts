@@ -27,11 +27,15 @@ export const GET = apiRoute("location", async (req) => {
   try {
     const { zone } = await resolveLocation(zip);
     const frost = resolveFrost({ zone, zip, season }, climateRepository);
+    const spring = resolveFrost({ zone, zip, season: "spring" }, climateRepository);
+    const fall = resolveFrost({ zone, zip, season: "fall" }, climateRepository);
     return Response.json({
       zip,
       zone,
       season,
       lastFrostP50: format(frost.lastFrostDate, "yyyy-MM-dd"),
+      lastSpringFrostP50: format(spring.lastFrostDate, "yyyy-MM-dd"),
+      firstFallFrostP50: format(fall.lastFrostDate, "yyyy-MM-dd"),
       frostSource: frost.source,
       climateConfidence: frost.confidence ?? null,
       stationDistanceKm: frost.distanceKm ?? null,

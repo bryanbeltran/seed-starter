@@ -10,6 +10,8 @@ import { isValidZip } from "./formState";
 export type LocationPreview = {
   zone: string;
   lastFrostP50: string;
+  lastSpringFrostP50?: string;
+  firstFallFrostP50?: string;
   frostSource: string;
   climateConfidence: string | null;
 };
@@ -21,6 +23,7 @@ type Props = {
   season?: GardenSeason;
   onZipChange: (zip: string) => void;
   onTryExample?: () => void;
+  onPreview?: (preview: LocationPreview) => void;
 };
 
 export function LocationForm({
@@ -30,6 +33,7 @@ export function LocationForm({
   season = "spring",
   onZipChange,
   onTryExample,
+  onPreview,
 }: Props) {
   const [preview, setPreview] = useState<LocationPreview | null>(null);
   const [previewError, setPreviewError] = useState<string | null>(null);
@@ -59,7 +63,9 @@ export function LocationForm({
         setPreviewError(data.error ?? "Could not look up ZIP.");
         return;
       }
-      setPreview(data as LocationPreview);
+      const next = data as LocationPreview;
+      setPreview(next);
+      onPreview?.(next);
     } catch {
       setPreview(null);
       setPreviewError("Could not look up ZIP.");
