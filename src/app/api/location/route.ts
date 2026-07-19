@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { getFileClimateRepository } from "@/climate";
-import { resolveLastFrost } from "@/planning";
+import { resolveFrost, type GardenSeason } from "@/planning";
 import { apiRoute } from "@/lib/apiRoute";
 import { resolveLocation } from "@/lib/resolveLocation";
 import { normalizeZip, ZoneLookupError } from "@/lib/zipToZone";
@@ -8,7 +8,12 @@ import { normalizeZip, ZoneLookupError } from "@/lib/zipToZone";
 const climateRepository = getFileClimateRepository();
 
 export const GET = apiRoute("location", async (req) => {
-  const raw = new URL(req.url).searchParams.get("zip") ?? "";
+  const params = new URL(req.url).searchParams;
+  const raw = params.get("zip") ?? "";
+  const seasonParam = params.get("season");
+  const season: GardenSeason =
+    seasonParam === "fall" || seasonParam === "summer" ? seasonParam : "spring";
+
   let zip: string;
   try {
     zip = normalizeZip(raw);
@@ -21,10 +26,11 @@ export const GET = apiRoute("location", async (req) => {
 
   try {
     const { zone } = await resolveLocation(zip);
-    const frost = resolveLastFrost({ zone, zip }, climateRepository);
+    const frost = resolveFrost({ zone, zip, season }, climateRepository);
     return Response.json({
       zip,
       zone,
+      season,
       lastFrostP50: format(frost.lastFrostDate, "yyyy-MM-dd"),
       frostSource: frost.source,
       climateConfidence: frost.confidence ?? null,

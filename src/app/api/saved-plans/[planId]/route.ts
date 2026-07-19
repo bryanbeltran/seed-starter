@@ -14,6 +14,7 @@ const patchSchema = z.object({
   zip: z.string().trim().min(1).optional(),
   crops: z.array(z.string()).min(1).optional(),
   riskProfile: z.enum(["conservative", "balanced", "aggressive"]).optional(),
+  season: z.enum(["spring", "fall", "summer"]).optional(),
 });
 
 type Params = { params: Promise<{ planId: string }> };

@@ -13,6 +13,7 @@ const createSchema = z.object({
   zip: z.string().trim().min(1),
   crops: z.array(z.string()).min(1),
   riskProfile: z.enum(["conservative", "balanced", "aggressive"]).optional(),
+  season: z.enum(["spring", "fall", "summer"]).optional(),
 });
 
 export const GET = apiRoute("saved-plans-list", async () => {

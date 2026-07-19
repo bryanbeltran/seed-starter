@@ -190,6 +190,11 @@ export const openApiSpec = {
             type: "string",
             enum: ["conservative", "balanced", "aggressive"],
           },
+          season: {
+            type: "string",
+            enum: ["spring", "fall", "summer"],
+            description: "Garden season. Defaults to spring.",
+          },
         },
       },
       SavedPlanInput: {
@@ -203,13 +208,26 @@ export const openApiSpec = {
             type: "string",
             enum: ["conservative", "balanced", "aggressive"],
           },
+          season: {
+            type: "string",
+            enum: ["spring", "fall", "summer"],
+          },
         },
       },
       Schedule: {
         type: "object",
         properties: {
           zone: { type: "string" },
-          lastFrostDate: { type: "string", format: "date-time" },
+          season: {
+            type: "string",
+            enum: ["spring", "fall", "summer"],
+          },
+          lastFrostDate: {
+            type: "string",
+            format: "date-time",
+            description:
+              "Season anchor date: last spring frost or first fall frost.",
+          },
           frostSource: {
             type: "string",
             enum: ["climate", "station", "regional", "zone"],
