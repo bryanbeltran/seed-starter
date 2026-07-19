@@ -9,13 +9,13 @@
 Strict sequence where deps matter. Parallel where noted.
 
 ```text
-1 Merge #18
-2 Prod Fall smoke          ┐
-3 README eval narrative    ├─ same day; 3 needs no code
-4 Cross-year frost test    ┘  ← before default-season
-5 Demo GIF (Fall beat)       after smoke; parallel OK with 3–4
+1 Merge #18                    → docs/plans/polish-01-merge-fall-pr.md
+2 Prod Fall smoke              → docs/plans/polish-02-prod-fall-smoke.md
+3 README eval narrative        → docs/plans/polish-03-readme-eval.md
+4 Cross-year frost test        ← before default-season
+5 Demo GIF (Fall beat)           after smoke; parallel OK with 3–4
 6 Frost-aware default season + SeasonPicker a11y (one PR)
-7 Variety timing honesty     independent of 6; can start in parallel
+7 Variety timing honesty         independent of 6; can start in parallel
 8 Season on share / print / plan list
 9 Fall catalog → ~40–50 crops
 10 Thicken fall zone/regional fallbacks

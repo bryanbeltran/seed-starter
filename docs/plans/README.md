@@ -13,6 +13,14 @@
 
 **Critical:** do **4 before 6**. Do **7 before 9**.
 
+### Top 3 — detailed plans
+
+| # | Plan |
+|---|------|
+| 1 | [polish-01-merge-fall-pr.md](./polish-01-merge-fall-pr.md) |
+| 2 | [polish-02-prod-fall-smoke.md](./polish-02-prod-fall-smoke.md) |
+| 3 | [polish-03-readme-eval.md](./polish-03-readme-eval.md) |
+
 ## Fall gaps / fixes
 
 Gaps 01–04, 07 done. Fixes 01–07 done on #18.  
