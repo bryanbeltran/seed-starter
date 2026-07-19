@@ -1,4 +1,4 @@
-import type { RiskProfile } from "@/planning";
+import type { GardenSeason, RiskProfile } from "@/planning";
 
 export type ScheduleTask = {
   cropId: string;
@@ -10,6 +10,7 @@ export type ScheduleTask = {
 export type ScheduleResult = {
   zone: string;
   zip?: string;
+  season?: GardenSeason;
   lastFrostDate: string;
   frostSource: string;
   frostProvenance: string;

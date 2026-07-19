@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import initSqlJs, { type Database } from "sql.js";
 import { getCurrentClimateDataVersion } from "@/climate";
-import type { RiskProfile } from "@/planning";
+import type { GardenSeason, RiskProfile } from "@/planning";
 import { resolveLocation } from "@/lib/resolveLocation";
 import {
   canReadPlan,
@@ -19,6 +19,7 @@ const MIGRATIONS = [
   "002_climate_version.sql",
   "003_climate_snapshot.sql",
   "004_owner_and_frost.sql",
+  "005_saved_plans_season.sql",
 ];
 
 function dbDir() {
@@ -59,6 +60,11 @@ function runMigrations(db: Database) {
     if (!hasColumn(db, "saved_plans", col)) {
       db.run(`ALTER TABLE saved_plans ADD COLUMN ${col} TEXT`);
     }
+  }
+  if (!hasColumn(db, "saved_plans", "season")) {
+    db.run(
+      "ALTER TABLE saved_plans ADD COLUMN season TEXT NOT NULL DEFAULT 'spring'",
+    );
   }
 }
 
@@ -104,11 +110,13 @@ async function fetchRow(id: string): Promise<Record<string, unknown> | null> {
 
 async function planFromRow(row: Record<string, unknown>): Promise<SavedPlan> {
   const crops = JSON.parse(String(row.crops_json)) as string[];
+  const season = (row.season ? String(row.season) : "spring") as GardenSeason;
   const schedule = await scheduleForPlan(
     String(row.zip),
     String(row.zone),
     crops,
     String(row.risk_profile) as RiskProfile,
+    season,
   );
   return rowToPlan(row, schedule);
 }
@@ -156,16 +164,17 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   const riskProfile = input.riskProfile ?? "balanced";
+  const season = input.season ?? "spring";
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
-  const schedule = await scheduleForPlan(zip, zone, input.crops, riskProfile);
+  const schedule = await scheduleForPlan(zip, zone, input.crops, riskProfile, season);
   const lastFrostDate = schedule.lastFrostDate.toISOString();
   const ownerId = input.ownerId ?? null;
 
   const db = await getDb();
   db.run(
-    `INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, climate_data_version, climate_snapshot_id, owner_id, last_frost_date, created_at, updated_at)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, season, climate_data_version, climate_snapshot_id, owner_id, last_frost_date, created_at, updated_at)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       id,
       input.name,
@@ -173,6 +182,7 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
       zone,
       JSON.stringify(input.crops),
       riskProfile,
+      season,
       climateDataVersion,
       climateSnapshotId,
       ownerId,
@@ -191,6 +201,7 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
       zone,
       crops_json: JSON.stringify(input.crops),
       risk_profile: riskProfile,
+      season,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
       owner_id: ownerId,
@@ -214,18 +225,19 @@ export async function updateSavedPlan(
   const name = patch.name ?? existing.name;
   const crops = patch.crops ?? existing.crops;
   const riskProfile = patch.riskProfile ?? existing.riskProfile;
+  const season = patch.season ?? existing.season;
   const zip = patch.zip ?? existing.zip;
   const { zone } = await resolveLocation(zip);
   const now = new Date().toISOString();
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
-  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile);
+  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile, season);
   const lastFrostDate = schedule.lastFrostDate.toISOString();
 
   const db = await getDb();
   db.run(
     `UPDATE saved_plans
-     SET name = ?, zip = ?, zone = ?, crops_json = ?, risk_profile = ?,
+     SET name = ?, zip = ?, zone = ?, crops_json = ?, risk_profile = ?, season = ?,
          climate_data_version = ?, climate_snapshot_id = ?, last_frost_date = ?, updated_at = ?
      WHERE id = ?`,
     [
@@ -234,6 +246,7 @@ export async function updateSavedPlan(
       zone,
       JSON.stringify(crops),
       riskProfile,
+      season,
       climateDataVersion,
       climateSnapshotId,
       lastFrostDate,
@@ -251,6 +264,7 @@ export async function updateSavedPlan(
       zone,
       crops_json: JSON.stringify(crops),
       risk_profile: riskProfile,
+      season,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
       owner_id: existing.ownerId,

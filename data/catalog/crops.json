@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-18T22:57:08.514Z",
+  "generatedAt": "2026-07-19T02:16:58.930Z",
   "crops": {
     "beans": {
       "id": "beans",
@@ -471,6 +471,13 @@
           "indoorSowOffsetDays": 30,
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 30,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -28
         }
       },
       "source": "catalog-etl",
@@ -2131,6 +2138,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 60
         }
       },
       "source": "catalog-etl",
@@ -5139,6 +5151,13 @@
           "indoorSowOffsetDays": 70,
           "hardenOffDaysBeforeTransplant": 7,
           "transplantDaysAfterAnchor": -14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 70,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -84
         }
       },
       "source": "catalog-etl",
@@ -5595,6 +5614,13 @@
           "indoorSowOffsetDays": 30,
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 30,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -55
         }
       },
       "source": "catalog-etl",
@@ -5683,6 +5709,13 @@
           "indoorSowOffsetDays": 84,
           "hardenOffDaysBeforeTransplant": 7,
           "transplantDaysAfterAnchor": -14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 56,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -70
         }
       },
       "source": "catalog-etl",
@@ -6055,6 +6088,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 45
         }
       },
       "source": "catalog-etl",
@@ -6379,6 +6417,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 21
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 95
         }
       },
       "source": "catalog-etl",
@@ -6431,6 +6474,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 75
         }
       },
       "source": "catalog-etl",
@@ -7455,6 +7503,13 @@
           "indoorSowOffsetDays": 42,
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -55
         }
       },
       "source": "catalog-etl",
@@ -7975,6 +8030,13 @@
           "indoorSowOffsetDays": 42,
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -21
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -42
         }
       },
       "source": "catalog-etl",
@@ -8435,6 +8497,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 21
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 45
         }
       },
       "source": "catalog-etl",
@@ -8815,6 +8882,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 28
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 45
         }
       },
       "source": "catalog-etl",
@@ -9527,6 +9599,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 28
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 65
         }
       },
       "source": "catalog-etl",
@@ -10619,6 +10696,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 28
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 35
         }
       },
       "source": "catalog-etl",
@@ -11063,6 +11145,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 42
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 42
         }
       },
       "source": "catalog-etl",
@@ -11311,6 +11398,13 @@
           "indoorSowOffsetDays": 42,
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -7
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -42
         }
       },
       "source": "catalog-etl",
@@ -12247,6 +12341,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 60
         }
       },
       "source": "catalog-etl",
@@ -12483,6 +12582,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 21
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 60
         }
       },
       "source": "catalog-etl",
@@ -14887,6 +14991,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 50
         }
       },
       "source": "catalog-etl",
@@ -15051,6 +15160,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 55
         }
       },
       "source": "catalog-etl",
@@ -16795,6 +16909,13 @@
           "indoorSowOffsetDays": 84,
           "hardenOffDaysBeforeTransplant": 7,
           "transplantDaysAfterAnchor": -14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 84,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -100
         }
       },
       "source": "catalog-etl",
@@ -17003,6 +17124,13 @@
           "indoorSowOffsetDays": 30,
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 30,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -55
         }
       },
       "source": "catalog-etl",
@@ -17111,6 +17239,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 28
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 70
         }
       },
       "source": "catalog-etl",
@@ -17171,6 +17304,13 @@
           "indoorSowOffsetDays": 42,
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -21
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 42,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": -55
         }
       },
       "source": "catalog-etl",
@@ -17263,6 +17403,11 @@
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": 150
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 21
         }
       },
       "source": "catalog-etl",
@@ -17643,6 +17788,13 @@
           "indoorSowOffsetDays": 70,
           "hardenOffDaysBeforeTransplant": 7,
           "transplantDaysAfterAnchor": -14
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 70,
+          "hardenOffDaysBeforeTransplant": 7,
+          "transplantDaysAfterAnchor": -70
         }
       },
       "source": "catalog-etl",

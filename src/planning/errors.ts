@@ -14,3 +14,15 @@ export class UnknownCropError extends PlanningError {
     this.cropId = cropId;
   }
 }
+
+export class UnsupportedSeasonCropError extends PlanningError {
+  readonly cropIds: string[];
+  readonly season: string;
+
+  constructor(cropIds: string[], season: string) {
+    super(`Crops not available for ${season}: ${cropIds.join(", ")}`);
+    this.name = "UnsupportedSeasonCropError";
+    this.cropIds = cropIds;
+    this.season = season;
+  }
+}

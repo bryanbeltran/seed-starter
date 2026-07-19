@@ -23,6 +23,7 @@ export async function createScheduleFromRequest(
     crops: data.seeds,
     cropSelections,
     riskProfile: data.riskProfile,
+    season: data.season,
     climateRepository,
   });
 }
@@ -39,6 +40,7 @@ export async function compareSchedulesFromRequest(
     zip,
     crops: data.seeds,
     cropSelections,
+    season: data.season,
     climateRepository,
   });
 }

@@ -51,10 +51,39 @@ describe("savedPlanService", () => {
     expect(first.climateDataStale).toBe(false);
     expect(first.scheduleDiff).toBeNull();
     expect(first.ownerId).toBeNull();
+    expect(first.season).toBe("spring");
     expect(second.riskProfile).toBe("balanced");
 
     const plans = await listSavedPlans();
     expect(plans).toHaveLength(2);
+  });
+
+  it("persists season on create and update", async () => {
+    const plan = await createSavedPlan({
+      name: "Fall bed",
+      zip: "55423",
+      crops: ["carrot"],
+      season: "fall",
+    });
+    expect(plan.season).toBe("fall");
+    expect(plan.schedule.season).toBe("fall");
+    expect(plan.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(true);
+
+    const reloaded = await getSavedPlan(plan.id);
+    expect(reloaded?.season).toBe("fall");
+    expect(reloaded?.schedule.season).toBe("fall");
+    expect(reloaded?.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(true);
+
+    await updateSavedPlan(plan.id, { season: "spring" });
+    const flipped = await getSavedPlan(plan.id);
+    expect(flipped?.season).toBe("spring");
+    expect(flipped?.schedule.season).toBe("spring");
+    expect(flipped?.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(false);
+
+    await updateSavedPlan(plan.id, { season: "fall" });
+    const back = await getSavedPlan(plan.id);
+    expect(back?.season).toBe("fall");
+    expect(back?.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(true);
   });
 
   it("updates and deletes plans", async () => {

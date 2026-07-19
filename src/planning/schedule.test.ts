@@ -171,6 +171,112 @@ describe("buildSchedule", () => {
   });
 });
 
+describe("buildSchedule (fall season)", () => {
+  it("emits fall_sow for direct crops when season is fall", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      crops: ["carrot"],
+      season: "fall",
+      referenceDate: ref,
+    });
+    const types = schedule.tasks.map((t) => t.type);
+    expect(types).toContain("fall_sow");
+    expect(types).not.toContain("direct_sow");
+    expect(schedule.season).toBe("fall");
+  });
+
+  it("keeps indoor_sow for transplant crops in fall", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      crops: ["lettuce"],
+      season: "fall",
+      referenceDate: ref,
+    });
+    const types = schedule.tasks.map((t) => t.type);
+    expect(types).toContain("indoor_sow");
+    expect(types).toContain("transplant");
+    expect(types).not.toContain("fall_sow");
+  });
+
+  it("rejects crops without seasons.fall", () => {
+    expect(() =>
+      buildSchedule({
+        zone: "5a",
+        crops: ["tomato"],
+        season: "fall",
+        referenceDate: ref,
+      }),
+    ).toThrow(/not available for fall/);
+  });
+
+  it("orders indoor ≤ harden ≤ transplant for fall lettuce", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      zip: "55423",
+      crops: ["lettuce"],
+      season: "fall",
+      referenceDate: ref,
+    });
+    const indoor = schedule.tasks.find((t) => t.type === "indoor_sow")!;
+    const harden = schedule.tasks.find((t) => t.type === "harden_off")!;
+    const transplant = schedule.tasks.find((t) => t.type === "transplant")!;
+    expect(indoor.date.getTime()).toBeLessThanOrEqual(harden.date.getTime());
+    expect(harden.date.getTime()).toBeLessThanOrEqual(transplant.date.getTime());
+  });
+
+  it("anchors fall schedule on first-fall-frost fallback", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      crops: ["carrot"],
+      season: "fall",
+      referenceDate: ref,
+    });
+    expect(schedule.lastFrostDate.getMonth()).toBeGreaterThanOrEqual(8);
+  });
+
+  it("uses station fall frost for known zip", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      zip: "55423",
+      crops: ["carrot"],
+      season: "fall",
+      referenceDate: ref,
+    });
+    expect(schedule.frostSource).toBe("station");
+    expect(schedule.lastFrostDate).toEqual(new Date(2026, 9, 5));
+  });
+
+  it("inverts risk profile for fall (conservative → earlier anchor)", () => {
+    const conservative = buildSchedule({
+      zone: "7b",
+      crops: ["carrot"],
+      riskProfile: "conservative",
+      season: "fall",
+      referenceDate: ref,
+    });
+    const aggressive = buildSchedule({
+      zone: "7b",
+      crops: ["carrot"],
+      riskProfile: "aggressive",
+      season: "fall",
+      referenceDate: ref,
+    });
+    expect(conservative.lastFrostDate.getTime()).toBeLessThan(
+      aggressive.lastFrostDate.getTime(),
+    );
+  });
+
+  it("includes fall_sow tasks in legacy sowDates", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      crops: ["carrot"],
+      season: "fall",
+      referenceDate: ref,
+    });
+    expect(sowDatesFromSchedule(schedule)[0].seed).toBe("carrot");
+  });
+});
+
 describe("compareSchedules", () => {
   it("returns all three risk profiles", () => {
     const compared = compareSchedules({

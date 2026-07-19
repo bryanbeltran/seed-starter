@@ -1,12 +1,16 @@
 import { describe, expect, it } from "vitest";
 import {
   computeNeededStationIds,
+  fallFrostPercentiles,
+  firstFallFrostMmDdPerYear,
   frostPercentiles,
+  frostSummaryFromParsedTmin,
   lastFrostMmDdPerYear,
   nearestStationWithTmin,
   parseGhcndDailyTmin,
   parseGhcndInventory,
   parsePhzmZipCsv,
+  percentilesFromDates,
   selectRepresentativeStations,
   stationHasFrostTmin,
 } from "../../scripts/lib/ghcn-zip-climate.mjs";
@@ -82,5 +86,86 @@ describe("GHCN ETL helpers", () => {
     });
     const p = frostPercentiles(byYear);
     expect(p.p50).toMatch(/^\d{2}-\d{2}$/);
+  });
+
+  it("parses TMIN across all months (fall included)", () => {
+    const line =
+      "USW00014922202410TMIN-9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999   -9999    -17  0";
+    const byYear = parseGhcndDailyTmin(line) as Record<string, [string, string, number][]>;
+    expect(byYear["2024"]?.some(([m]: [string, string, number]) => m === "10")).toBe(true);
+  });
+
+  it("summarizes spring lastFrost and fall firstFallFrost from a year", () => {
+    const summary = frostSummaryFromParsedTmin({
+      "2024": [
+        ["03", "10", -2],
+        ["04", "15", -1],
+        ["05", "20", 2],
+        ["09", "05", 3],
+        ["10", "12", -1],
+        ["11", "05", -3],
+      ],
+    }) as { year: number; lastFrost?: string; firstFallFrost?: string }[];
+    expect(summary).toEqual([
+      { year: 2024, lastFrost: "04-15", firstFallFrost: "10-12" },
+    ]);
+  });
+
+  it("splits summary into spring and fall accessors", () => {
+    const tmin = {
+      S: {
+        "2024": [
+          ["04", "10", -1],
+          ["10", "20", -1],
+        ],
+        "2025": [["04", "12", -1]],
+      },
+    };
+    expect(lastFrostMmDdPerYear("S", tmin)).toEqual([
+      { year: 2024, lastFrost: "04-10", firstFallFrost: "10-20" },
+      { year: 2025, lastFrost: "04-12" },
+    ]);
+    expect(firstFallFrostMmDdPerYear("S", tmin)).toEqual([
+      { year: 2024, lastFrost: "04-10", firstFallFrost: "10-20" },
+    ]);
+  });
+
+  it("derives fall frost percentiles", () => {
+    const byYear = firstFallFrostMmDdPerYear("S", {
+      S: {
+        "2020": [["10", "05", -1]],
+        "2021": [["10", "12", -2]],
+        "2022": [["10", "20", -1]],
+      },
+    });
+    const p = fallFrostPercentiles(byYear);
+    expect(p).not.toBeNull();
+    expect(p!.p50).toMatch(/^\d{2}-\d{2}$/);
+  });
+
+  it("stays back-compat with legacy spring-only cache arrays", () => {
+    const tmin = { S: [{ year: 2020, lastFrost: "04-10" }] };
+    expect(lastFrostMmDdPerYear("S", tmin)).toEqual([
+      { year: 2020, lastFrost: "04-10" },
+    ]);
+    expect(firstFallFrostMmDdPerYear("S", tmin)).toEqual([]);
+  });
+
+  it("keeps p10 ≤ p50 ≤ p90 for small-n date sets", () => {
+    const one = percentilesFromDates(["10-06"]);
+    expect(one.p10).toBe("10-06");
+    expect(one.p50).toBe("10-06");
+    expect(one.p90).toBe("10-06");
+
+    const two = percentilesFromDates(["10-06", "12-20"]);
+    expect(two.p10).toBeTruthy();
+    expect(two.p50).toBeTruthy();
+    expect(two.p90).toBeTruthy();
+    const doy = (s: string) => {
+      const [m, d] = s.split("-").map(Number);
+      return Math.floor((Date.UTC(2024, m - 1, d) - Date.UTC(2024, 0, 0)) / 86_400_000);
+    };
+    expect(doy(two.p10!)).toBeLessThanOrEqual(doy(two.p50!));
+    expect(doy(two.p50!)).toBeLessThanOrEqual(doy(two.p90!));
   });
 });

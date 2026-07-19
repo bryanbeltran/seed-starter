@@ -1,6 +1,6 @@
 import { neon } from "@neondatabase/serverless";
 import { getCurrentClimateDataVersion } from "@/climate";
-import type { RiskProfile } from "@/planning";
+import type { GardenSeason, RiskProfile } from "@/planning";
 import { resolveLocation } from "@/lib/resolveLocation";
 import {
   canReadPlan,
@@ -19,6 +19,7 @@ type PlanRow = {
   zone: string;
   crops_json: string;
   risk_profile: string;
+  season?: string | null;
   climate_data_version: string | null;
   climate_snapshot_id: string | null;
   owner_id: string | null;
@@ -62,6 +63,7 @@ async function ensureMigrations() {
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS climate_snapshot_id TEXT`;
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS owner_id TEXT`;
   await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS last_frost_date TEXT`;
+  await sql`ALTER TABLE saved_plans ADD COLUMN IF NOT EXISTS season TEXT NOT NULL DEFAULT 'spring'`;
   await sql`CREATE INDEX IF NOT EXISTS saved_plans_owner_id_idx ON saved_plans (owner_id)`;
   migrated = true;
 }
@@ -76,11 +78,13 @@ async function fetchRow(id: string): Promise<PlanRow | null> {
 
 async function planFromRow(row: PlanRow): Promise<SavedPlan> {
   const crops = JSON.parse(row.crops_json) as string[];
+  const season = (row.season || "spring") as GardenSeason;
   const schedule = await scheduleForPlan(
     row.zip,
     row.zone,
     crops,
     row.risk_profile as RiskProfile,
+    season,
   );
   return rowToPlan(row, schedule);
 }
@@ -115,17 +119,18 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
   const id = crypto.randomUUID();
   const now = new Date().toISOString();
   const riskProfile = input.riskProfile ?? "balanced";
+  const season = input.season ?? "spring";
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
-  const schedule = await scheduleForPlan(zip, zone, input.crops, riskProfile);
+  const schedule = await scheduleForPlan(zip, zone, input.crops, riskProfile, season);
   const lastFrostDate = schedule.lastFrostDate.toISOString();
   const ownerId = input.ownerId ?? null;
 
   await ensureMigrations();
   const sql = getSql();
   await sql`
-    INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, climate_data_version, climate_snapshot_id, owner_id, last_frost_date, created_at, updated_at)
-    VALUES (${id}, ${input.name}, ${zip}, ${zone}, ${JSON.stringify(input.crops)}, ${riskProfile}, ${climateDataVersion}, ${climateSnapshotId}, ${ownerId}, ${lastFrostDate}, ${now}, ${now})
+    INSERT INTO saved_plans (id, name, zip, zone, crops_json, risk_profile, season, climate_data_version, climate_snapshot_id, owner_id, last_frost_date, created_at, updated_at)
+    VALUES (${id}, ${input.name}, ${zip}, ${zone}, ${JSON.stringify(input.crops)}, ${riskProfile}, ${season}, ${climateDataVersion}, ${climateSnapshotId}, ${ownerId}, ${lastFrostDate}, ${now}, ${now})
   `;
 
   return rowToPlan(
@@ -136,6 +141,7 @@ export async function createSavedPlan(input: SavedPlanInput): Promise<SavedPlan>
       zone,
       crops_json: JSON.stringify(input.crops),
       risk_profile: riskProfile,
+      season,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
       owner_id: ownerId,
@@ -160,12 +166,13 @@ export async function updateSavedPlan(
   const name = patch.name ?? existing.name;
   const crops = patch.crops ?? existing.crops;
   const riskProfile = patch.riskProfile ?? existing.riskProfile;
+  const season = patch.season ?? existing.season;
   const zip = patch.zip ?? existing.zip;
   const { zone } = await resolveLocation(zip);
   const now = new Date().toISOString();
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
-  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile);
+  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile, season);
   const lastFrostDate = schedule.lastFrostDate.toISOString();
 
   await ensureMigrations();
@@ -173,7 +180,8 @@ export async function updateSavedPlan(
   await sql`
     UPDATE saved_plans
     SET name = ${name}, zip = ${zip}, zone = ${zone}, crops_json = ${JSON.stringify(crops)},
-        risk_profile = ${riskProfile}, climate_data_version = ${climateDataVersion},
+        risk_profile = ${riskProfile}, season = ${season},
+        climate_data_version = ${climateDataVersion},
         climate_snapshot_id = ${climateSnapshotId}, last_frost_date = ${lastFrostDate},
         updated_at = ${now}
     WHERE id = ${id}
@@ -187,6 +195,7 @@ export async function updateSavedPlan(
       zone,
       crops_json: JSON.stringify(crops),
       risk_profile: riskProfile,
+      season,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
       owner_id: existing.ownerId,

@@ -3,12 +3,14 @@
     "name": "Minneapolis-St Paul",
     "zips": ["55401", "55423", "55455"],
     "lastFrost": "04-25",
+    "firstFallFrost": "10-05",
     "provenance": "NOAA GHCN-D fixture"
   },
   "KNYC": {
     "name": "New York Central Park",
     "zips": ["10001", "10019", "10027"],
     "lastFrost": "04-08",
+    "firstFallFrost": "11-05",
     "provenance": "NOAA GHCN-D fixture"
   }
 }

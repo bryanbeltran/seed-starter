@@ -1,4 +1,4 @@
-import { cropDefaults, springSeason } from "./cropDefaults.mjs";
+import { cropDefaults, cropFallDefaults, fallSeason, springSeason } from "./cropDefaults.mjs";
 import { resolveCropRecord } from "./cropResolve.mjs";
 import { displayName, slugify, varietyId } from "./slug.mjs";
 
@@ -89,13 +89,17 @@ function buildCatalog(seeds) {
     const { cropId } = seed;
     if (!crops[cropId]) {
       const defaults = cropDefaults(cropId);
+      const fall = cropFallDefaults(cropId);
       crops[cropId] = {
         id: cropId,
         name: displayName(cropId),
         category: inferCategoryFromCropId(cropId),
         family: inferFamily(cropId),
         ...defaults,
-        seasons: { spring: springSeason(defaults) },
+        seasons: {
+          spring: springSeason(defaults),
+          ...(fall ? { fall: fallSeason(fall) } : {}),
+        },
         source: "catalog-etl",
         confidence: "low",
         varieties: {},

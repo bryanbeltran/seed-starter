@@ -19,6 +19,8 @@ const golden = readJson("data/golden-zips.json");
 const climate = readJson("data/zipClimate.json");
 const errors = [];
 
+let fallChecked = 0;
+
 for (const entry of golden.zips) {
   const record = climate[entry.zip];
   if (!record) {
@@ -36,6 +38,19 @@ for (const entry of golden.zips) {
       `${entry.zip}: p50 ${record.lastFrostP50} vs expected ${entry.p50} (Δ${delta}d > ${golden.toleranceDays}d)`,
     );
   }
+  if (entry.fallP50) {
+    fallChecked++;
+    if (!record.firstFallFrostP50) {
+      errors.push(`${entry.zip}: missing firstFallFrostP50 (expected fallP50 ${entry.fallP50})`);
+    } else {
+      const fallDelta = Math.abs(doy(record.firstFallFrostP50) - doy(entry.fallP50));
+      if (fallDelta > golden.toleranceDays) {
+        errors.push(
+          `${entry.zip}: fallP50 ${record.firstFallFrostP50} vs expected ${entry.fallP50} (Δ${fallDelta}d > ${golden.toleranceDays}d)`,
+        );
+      }
+    }
+  }
 }
 
 if (errors.length) {
@@ -43,4 +58,7 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`Golden climate OK: ${golden.zips.length} ZIPs within ±${golden.toleranceDays}d`);
+console.log(
+  `Golden climate OK: ${golden.zips.length} ZIPs within ±${golden.toleranceDays}d` +
+    (fallChecked ? ` (${fallChecked} with fallP50)` : ""),
+);

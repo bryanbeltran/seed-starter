@@ -4,7 +4,8 @@ import {
   type CropDefinition,
   type VarietyDefinition,
 } from "./catalogSchema";
-import { springRulesFromCrop } from "./seasonRules";
+import { rulesFromCrop } from "./seasonRules";
+import type { GardenSeason } from "./types";
 
 export type { CropDefinition, VarietyDefinition };
 export type CropMethod = CropDefinition["method"];
@@ -44,9 +45,10 @@ export function getCropOrDefault(cropId: string): CropDefinition {
 export function resolveCropRules(
   cropId: string,
   varietyId?: string,
+  season: GardenSeason = "spring",
 ): CropDefinition & { varietyName?: string } {
   const base = getCropOrDefault(cropId);
-  const timing = springRulesFromCrop(base);
+  const timing = rulesFromCrop(base, season);
   const merged = { ...base, ...timing };
   if (!varietyId || !base.varieties?.[varietyId]) {
     return merged;
@@ -62,6 +64,26 @@ export function resolveCropRules(
 
 export function listCrops(): CropDefinition[] {
   return Object.values(crops);
+}
+
+/**
+ * Whether a crop can be planted in a given season.
+ * Spring is permissive (any catalog crop); other seasons require an
+ * explicit `seasons[season]` entry.
+ */
+export function cropSupportsSeason(
+  crop: CropDefinition,
+  season: GardenSeason,
+): boolean {
+  if (season === "spring") return true;
+  return Boolean(crop.seasons?.[season]);
+}
+
+/** Catalog crop ids that support a given season. */
+export function cropIdsForSeason(season: GardenSeason): string[] {
+  return listCrops()
+    .filter((c) => cropSupportsSeason(c, season))
+    .map((c) => c.id);
 }
 
 export function varietyCount(): number {

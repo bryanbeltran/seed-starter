@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { parseScheduleRequest } from "@/planning/api/scheduleRequestSchema";
 import { compareSchedulesFromRequest } from "@/lib/createScheduleFromRequest";
 import { serializeSchedule } from "@/lib/serializeSchedule";
+import { UnsupportedSeasonCropError } from "@/planning";
 import { ZoneLookupError } from "@/lib/zipToZone";
 import { apiRoute } from "@/lib/apiRoute";
 
@@ -26,7 +27,7 @@ export const POST = apiRoute("schedules-compare", async (req) => {
       aggressive: serializeSchedule(compared.aggressive),
     });
   } catch (err) {
-    if (err instanceof ZoneLookupError) {
+    if (err instanceof ZoneLookupError || err instanceof UnsupportedSeasonCropError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     }
     throw err;

@@ -4,6 +4,7 @@ export function serializeSchedule(schedule: Schedule) {
   return {
     zone: schedule.zone,
     zip: schedule.zip,
+    season: schedule.season,
     lastFrostDate: schedule.lastFrostDate.toISOString(),
     frostSource: schedule.frostSource,
     frostProvenance: schedule.frostProvenance,
@@ -21,7 +22,12 @@ export function serializeSchedule(schedule: Schedule) {
       label: t.label,
     })),
     sowDates: schedule.tasks
-      .filter((t) => t.type === "indoor_sow" || t.type === "direct_sow")
+      .filter(
+        (t) =>
+          t.type === "indoor_sow" ||
+          t.type === "direct_sow" ||
+          t.type === "fall_sow",
+      )
       .map((t) => ({ seed: t.cropId, date: t.date.toISOString() })),
   };
 }

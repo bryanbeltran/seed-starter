@@ -8,6 +8,11 @@ function readJson(relPath) {
   return JSON.parse(fs.readFileSync(path.join(root, relPath), "utf8"));
 }
 
+function doy(mmdd) {
+  const [mo, d] = mmdd.split("-").map(Number);
+  return Math.floor((Date.UTC(2024, mo - 1, d) - Date.UTC(2024, 0, 0)) / 86_400_000);
+}
+
 const THRESHOLDS = {
   minZipCount: 30_000,
   maxSkipped: 800,
@@ -39,6 +44,26 @@ if (m.p95DistanceKm > THRESHOLDS.maxP95DistanceKm) {
 }
 if (m.tminStationCount < THRESHOLDS.minTminStations) {
   errors.push(`tminStationCount ${m.tminStationCount} < ${THRESHOLDS.minTminStations}`);
+}
+
+const climate = readJson("data/zipClimate.json");
+let badSpring = 0;
+let badFall = 0;
+for (const r of Object.values(climate)) {
+  if (doy(r.lastFrostP10) > doy(r.lastFrostP50) || doy(r.lastFrostP50) > doy(r.lastFrostP90)) {
+    badSpring++;
+  }
+  if (r.firstFallFrostP10 && r.firstFallFrostP50 && r.firstFallFrostP90) {
+    if (
+      doy(r.firstFallFrostP10) > doy(r.firstFallFrostP50) ||
+      doy(r.firstFallFrostP50) > doy(r.firstFallFrostP90)
+    ) {
+      badFall++;
+    }
+  }
+}
+if (badSpring || badFall) {
+  errors.push(`non-monotonic percentiles: spring=${badSpring}, fall=${badFall}`);
 }
 
 if (errors.length) {

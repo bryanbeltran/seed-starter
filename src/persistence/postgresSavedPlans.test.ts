@@ -70,4 +70,29 @@ describe.skipIf(!hasDb)("postgresSavedPlans", () => {
     expect(await deleteSavedPlan(orphan.id)).toBe(true);
     created.pop();
   });
+
+  it("persists season on create, get, and list", async () => {
+    const plan = await createSavedPlan({
+      name: `ci-fall-${Date.now()}`,
+      zip: "55423",
+      crops: ["carrot"],
+      season: "fall",
+      ownerId: "owner-fall",
+    });
+    created.push(plan.id);
+
+    expect(plan.season).toBe("fall");
+    expect(plan.schedule.season).toBe("fall");
+    expect(plan.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(true);
+
+    const fetched = await getSavedPlan(plan.id, "owner-fall");
+    expect(fetched?.season).toBe("fall");
+    expect(fetched?.schedule.season).toBe("fall");
+    expect(fetched?.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(true);
+
+    const listed = await listSavedPlans("owner-fall");
+    const row = listed.find((p) => p.id === plan.id);
+    expect(row?.season).toBe("fall");
+    expect(row?.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(true);
+  });
 });

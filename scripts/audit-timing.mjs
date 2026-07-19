@@ -6,7 +6,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { cropDefaults } from "./catalog/lib/cropDefaults.mjs";
+import { cropDefaults, cropFallDefaults } from "./catalog/lib/cropDefaults.mjs";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const { crops } = JSON.parse(fs.readFileSync(path.join(root, "data/catalog/crops.json"), "utf8"));
@@ -76,6 +76,32 @@ function auditCrop(id, crop) {
   }
   if (PERENNIAL.has(id)) warnings.push(`${id}: perennial — harvest date is establishment proxy`);
   if (id === "microgreens") warnings.push(`${id}: frost model N/A`);
+
+  auditFall(id, crop);
+}
+
+function auditFall(id, crop) {
+  const f = crop.seasons?.fall;
+  const d = cropFallDefaults(id);
+  if (!f && !d) return;
+  if (!f && d) {
+    warnings.push(`${id}: FALL_DEFAULTS exist but catalog has no seasons.fall`);
+    return;
+  }
+  if (f.anchor !== "firstFallFrost") errors.push(`${id}: fall anchor ${f.anchor} != firstFallFrost`);
+  if (f.method === "transplant") {
+    const tx = f.transplantDaysAfterAnchor ?? 0;
+    const indoor = f.indoorSowOffsetDays;
+    if (indoor == null || indoor < 14) warnings.push(`${id}: fall indoor sow ${indoor}d seems short`);
+    if (tx > 0) warnings.push(`${id}: fall transplant ${tx}d after frost — usually before`);
+    if (tx < -150) warnings.push(`${id}: fall transplant ${tx}d before frost — very early`);
+  } else {
+    const sow = f.directSowDaysBeforeAnchor ?? 0;
+    if (sow < 0 && id !== "garlic") {
+      warnings.push(`${id}: fall direct sow ${fmtDirect(sow)} — unusual for fall`);
+    }
+    if (sow > 200) warnings.push(`${id}: fall direct sow ${sow}d before frost — very early`);
+  }
 }
 
 for (const [id, crop] of Object.entries(crops).sort((a, b) => a[0].localeCompare(b[0]))) {

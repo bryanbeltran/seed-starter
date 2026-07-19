@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Loader2 } from "lucide-react";
-import type { RiskProfile } from "@/planning";
-import { listCrops } from "@/planning/cropCatalog";
+import type { GardenSeason, RiskProfile } from "@/planning";
+import { cropIdsForSeason, listCrops } from "@/planning/cropCatalog";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -18,6 +18,7 @@ import {
 import { CropPicker } from "./CropPicker";
 import { LocationForm } from "./LocationForm";
 import { RiskProfilePicker } from "./RiskProfilePicker";
+import { SeasonPicker } from "./SeasonPicker";
 import { ScheduleResults } from "./ScheduleResults";
 import { ScheduleResultsSkeleton } from "./ScheduleResultsSkeleton";
 import { ResultsPlaceholder } from "./ResultsPlaceholder";
@@ -28,6 +29,7 @@ import { StatusBanner } from "./StatusBanner";
 import type { ScheduleResult } from "./types";
 import {
   cropSelectionsFromForm,
+  defaultSeasonForDate,
   isValidZip,
   loadFormState,
   saveFormState,
@@ -41,6 +43,7 @@ export function SeedForm() {
   const [selectedCrops, setSelectedCrops] = useState<string[]>([]);
   const [varieties, setVarieties] = useState<Record<string, string | undefined>>({});
   const [riskProfile, setRiskProfile] = useState<RiskProfile>("balanced");
+  const [season, setSeason] = useState<GardenSeason>(() => defaultSeasonForDate());
   const [compareMode, setCompareMode] = useState(false);
   const [results, setResults] = useState<ScheduleResult | null>(null);
   const [compared, setCompared] = useState<CompareResult | null>(null);
@@ -62,6 +65,7 @@ export function SeedForm() {
       if (saved.selectedCrops) setSelectedCrops(saved.selectedCrops);
       if (saved.varieties) setVarieties(saved.varieties);
       if (saved.riskProfile) setRiskProfile(saved.riskProfile);
+      if (saved.season) setSeason(saved.season);
       if (saved.compareMode) setCompareMode(saved.compareMode);
     }
   }, []);
@@ -72,9 +76,10 @@ export function SeedForm() {
       selectedCrops,
       varieties,
       riskProfile,
+      season,
       compareMode,
     });
-  }, [zip, selectedCrops, varieties, riskProfile, compareMode]);
+  }, [zip, selectedCrops, varieties, riskProfile, season, compareMode]);
 
   function setStatusMessage(msg: string, variant: "success" | "error" = "success") {
     setStatus(msg);
@@ -95,6 +100,7 @@ export function SeedForm() {
     crops: string[],
     varietyMap: Record<string, string | undefined>,
     risk: RiskProfile,
+    seasonValue: GardenSeason,
   ) {
     const cropSelections = cropSelectionsFromForm(crops, varietyMap);
     return {
@@ -102,7 +108,21 @@ export function SeedForm() {
       seeds: crops,
       cropSelections,
       riskProfile: risk,
+      season: seasonValue,
     };
+  }
+
+  function handleSeasonChange(next: GardenSeason) {
+    setSeason(next);
+    const allowed = new Set(cropIdsForSeason(next));
+    setSelectedCrops((prev) => prev.filter((id) => allowed.has(id)));
+    setVarieties((prev) => {
+      const filtered: Record<string, string | undefined> = {};
+      for (const [k, v] of Object.entries(prev)) {
+        if (allowed.has(k)) filtered[k] = v;
+      }
+      return filtered;
+    });
   }
 
   async function runCalculate(
@@ -111,6 +131,7 @@ export function SeedForm() {
     varietyMap: Record<string, string | undefined>,
     risk: RiskProfile,
     compare: boolean,
+    seasonValue: GardenSeason,
   ) {
     setError(null);
     setStatus(null);
@@ -132,7 +153,7 @@ export function SeedForm() {
     setPlanName(undefined);
 
     try {
-      const payload = buildPayload(zipValue, crops, varietyMap, risk);
+      const payload = buildPayload(zipValue, crops, varietyMap, risk, seasonValue);
       const endpoint = compare ? "/api/schedules/compare" : "/api/schedules";
       const res = await fetch(endpoint, {
         method: "POST",
@@ -163,7 +184,7 @@ export function SeedForm() {
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    await runCalculate(zip, selectedCrops, varieties, riskProfile, compareMode);
+    await runCalculate(zip, selectedCrops, varieties, riskProfile, compareMode, season);
   }
 
   async function loadExample() {
@@ -173,8 +194,9 @@ export function SeedForm() {
     setSelectedCrops(exampleCrops);
     setVarieties({});
     setRiskProfile("balanced");
+    setSeason("spring");
     setCompareMode(false);
-    await runCalculate(exampleZip, exampleCrops, {}, "balanced", false);
+    await runCalculate(exampleZip, exampleCrops, {}, "balanced", false, "spring");
   }
 
   function handleLoadPlan(plan: SavedPlanSummary) {
@@ -182,6 +204,7 @@ export function SeedForm() {
     setSelectedCrops(plan.crops);
     setVarieties({});
     setRiskProfile(plan.riskProfile);
+    if (plan.season) setSeason(plan.season);
     setResults(plan.schedule);
     setCompared(null);
     setPlanName(plan.name);
@@ -234,11 +257,17 @@ export function SeedForm() {
             zip={zip}
             loading={loading}
             zipError={zipError}
+            season={season}
             onZipChange={(v) => {
               setZip(v);
               setZipError(null);
             }}
             onTryExample={() => setZip("55423")}
+          />
+          <SeasonPicker
+            value={season}
+            loading={loading}
+            onChange={handleSeasonChange}
           />
           <CropPicker
             crops={availableCrops}
@@ -246,6 +275,7 @@ export function SeedForm() {
             varieties={varieties}
             loading={loading}
             cropError={cropError}
+            season={season}
             onToggle={toggleCrop}
             onVarietyChange={(cropId, varietyId) =>
               setVarieties((prev) => ({ ...prev, [cropId]: varietyId }))
@@ -303,6 +333,7 @@ export function SeedForm() {
       currentZip={zip}
       currentCrops={selectedCrops}
       currentRisk={riskProfile}
+      currentSeason={season}
       saveOpen={saveOpen}
       onSaveOpenChange={setSaveOpen}
     />

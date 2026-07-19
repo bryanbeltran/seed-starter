@@ -1,4 +1,4 @@
-import type { RiskProfile } from "@/planning";
+import type { GardenSeason, RiskProfile } from "@/planning";
 
 export type CropSelection = {
   cropId: string;
@@ -10,8 +10,15 @@ export type FormState = {
   selectedCrops: string[];
   varieties: Record<string, string | undefined>;
   riskProfile: RiskProfile;
+  season: GardenSeason;
   compareMode: boolean;
 };
+
+/** Default to spring until frost-aware heuristic (gap-06) ships. */
+export function defaultSeasonForDate(_now?: Date): GardenSeason {
+  void _now;
+  return "spring";
+}
 
 export const FORM_STORAGE_KEY = "seedstarter-form";
 

@@ -38,6 +38,10 @@ export function stationHasFrostTmin(stationId, tminByStation) {
   return lastFrostMmDdPerYear(stationId, tminByStation).length > 0;
 }
 
+export function stationHasFallFrostTmin(stationId, tminByStation) {
+  return firstFallFrostMmDdPerYear(stationId, tminByStation).length > 0;
+}
+
 export function normalizeTminCache(raw) {
   const out = {};
   for (const [id, data] of Object.entries(raw)) {
@@ -76,11 +80,22 @@ export function frostSummaryFromParsedTmin(parsedByYear) {
   const results = [];
   for (const [year, rows] of Object.entries(parsedByYear)) {
     let lastFrost = null;
+    let firstFallFrost = null;
     for (const [mm, dd, tmin] of rows) {
-      if (Number(mm) > 7) continue;
-      if (tmin < 0) lastFrost = `${mm}-${dd}`;
+      const month = Number(mm);
+      if (tmin >= 0) continue;
+      if (month <= 7) {
+        lastFrost = `${mm}-${dd}`;
+      } else if (month >= 8 && firstFallFrost === null) {
+        firstFallFrost = `${mm}-${dd}`;
+      }
     }
-    if (lastFrost) results.push({ year: Number(year), lastFrost });
+    if (lastFrost || firstFallFrost) {
+      const entry = { year: Number(year) };
+      if (lastFrost) entry.lastFrost = lastFrost;
+      if (firstFallFrost) entry.firstFallFrost = firstFallFrost;
+      results.push(entry);
+    }
   }
   return results;
 }
@@ -88,32 +103,72 @@ export function frostSummaryFromParsedTmin(parsedByYear) {
 export function lastFrostMmDdPerYear(stationId, tminByStation) {
   const data = tminByStation[stationId];
   if (!data) return [];
-  if (Array.isArray(data)) return data;
-
-  return frostSummaryFromParsedTmin(data);
+  const summary = Array.isArray(data) ? data : frostSummaryFromParsedTmin(data);
+  return summary.filter((r) => r.lastFrost);
 }
 
-function medianMmDd(mmddList) {
-  const doys = mmddList.map((s) => {
-    const [m, d] = s.split("-").map(Number);
-    return new Date(2024, m - 1, d);
-  });
-  doys.sort((a, b) => a - b);
-  const mid = doys[Math.floor(doys.length / 2)];
-  const mm = String(mid.getMonth() + 1).padStart(2, "0");
-  const dd = String(mid.getDate()).padStart(2, "0");
+export function firstFallFrostMmDdPerYear(stationId, tminByStation) {
+  const data = tminByStation[stationId];
+  if (!data) return [];
+  const summary = Array.isArray(data) ? data : frostSummaryFromParsedTmin(data);
+  return summary.filter((r) => r.firstFallFrost);
+}
+
+function mmDdToDoy(mmdd) {
+  const [m, d] = mmdd.split("-").map(Number);
+  return Math.floor((Date.UTC(2024, m - 1, d) - Date.UTC(2024, 0, 0)) / 86_400_000);
+}
+
+function doyToMmDd(doy) {
+  const dt = new Date(Date.UTC(2024, 0, doy));
+  const mm = String(dt.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(dt.getUTCDate()).padStart(2, "0");
   return `${mm}-${dd}`;
 }
 
-export function frostPercentiles(byYear) {
-  const dates = byYear.map((r) => r.lastFrost).sort();
-  const pick = (p) =>
-    dates[Math.min(dates.length - 1, Math.floor(p * (dates.length - 1)))];
-  return {
-    p10: pick(0.1),
-    p50: medianMmDd(dates),
-    p90: pick(0.9),
+function medianMmDd(mmddList) {
+  const doys = mmddList.map(mmDdToDoy).sort((a, b) => a - b);
+  const mid = doys[Math.floor(doys.length / 2)];
+  return doyToMmDd(mid);
+}
+
+/** Nearest-rank percentiles with p10 ≤ p50 ≤ p90 (by day-of-year). */
+export function percentilesFromDates(dates) {
+  if (!dates.length) {
+    return { p10: null, p50: null, p90: null };
+  }
+  const sorted = [...dates].sort((a, b) => mmDdToDoy(a) - mmDdToDoy(b));
+  const pick = (p) => {
+    const idx = Math.min(
+      sorted.length - 1,
+      Math.max(0, Math.ceil(p * sorted.length) - 1),
+    );
+    return sorted[idx];
   };
+  let p10 = pick(0.1);
+  let p50 = medianMmDd(sorted);
+  let p90 = pick(0.9);
+  // Enforce monotonicity for small-n edge cases.
+  const d10 = mmDdToDoy(p10);
+  let d50 = mmDdToDoy(p50);
+  let d90 = mmDdToDoy(p90);
+  if (d50 < d10) {
+    p50 = p10;
+    d50 = d10;
+  }
+  if (d90 < d50) {
+    p90 = p50;
+  }
+  return { p10, p50, p90 };
+}
+
+export function frostPercentiles(byYear) {
+  return percentilesFromDates(byYear.map((r) => r.lastFrost).filter(Boolean));
+}
+
+export function fallFrostPercentiles(byYear) {
+  const dates = byYear.map((r) => r.firstFallFrost).filter(Boolean);
+  return dates.length ? percentilesFromDates(dates) : null;
 }
 
 export function parseGhcndStations(text) {
@@ -265,7 +320,6 @@ export function parseGhcndDailyTmin(text) {
     if (element !== "TMIN") continue;
     const year = line.slice(11, 15).trim();
     const month = line.slice(15, 17).trim();
-    if (Number(month) > 7) continue;
     if (!byYear[year]) byYear[year] = [];
 
     for (let day = 1, pos = 21; day <= 31 && pos + 5 <= line.length; day++) {
@@ -296,9 +350,21 @@ export async function fetchStationFrostSummary(stationId, retries = 2) {
 }
 
 export async function fetchBundledStationTmin(stationIds, options = {}) {
-  const { concurrency = 6, onProgress, onBatch, batchSize = 50, seed = {} } = options;
+  const {
+    concurrency = 6,
+    onProgress,
+    onBatch,
+    batchSize = 50,
+    seed = {},
+    /** When true, re-fetch stations that have spring history but no firstFallFrost. */
+    requireFall = false,
+  } = options;
   const tminByStation = normalizeTminCache(seed);
-  const queue = stationIds.filter((id) => !stationHasFrostTmin(id, tminByStation));
+  const queue = stationIds.filter((id) =>
+    requireFall
+      ? !stationHasFallFrostTmin(id, tminByStation)
+      : !stationHasFrostTmin(id, tminByStation),
+  );
   let batchCount = 0;
 
   async function worker() {
@@ -411,6 +477,8 @@ export function buildZipClimate(root, options = {}) {
 
     const byYear = lastFrostMmDdPerYear(station.id, tminByStation);
     const percentiles = frostPercentiles(byYear);
+    const fallByYear = firstFallFrostMmDdPerYear(station.id, tminByStation);
+    const fallPercentiles = fallFrostPercentiles(fallByYear);
     const zone = fixtureZone || phzmZones[zip] || undefined;
 
     output[zip] = {
@@ -422,6 +490,13 @@ export function buildZipClimate(root, options = {}) {
       lastFrostP10: percentiles.p10,
       lastFrostP50: percentiles.p50,
       lastFrostP90: percentiles.p90,
+      ...(fallPercentiles
+        ? {
+            firstFallFrostP10: fallPercentiles.p10,
+            firstFallFrostP50: fallPercentiles.p50,
+            firstFallFrostP90: fallPercentiles.p90,
+          }
+        : {}),
       yearsSampled: byYear.length,
       provenance,
       dataVersion,

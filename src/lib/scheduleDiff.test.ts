@@ -6,6 +6,7 @@ function stub(lastFrost: string, label: string, date: string): Schedule {
   return {
     zone: "5a",
     zip: "55423",
+    season: "spring",
     lastFrostDate: new Date(lastFrost),
     frostSource: "climate",
     frostProvenance: "test",
