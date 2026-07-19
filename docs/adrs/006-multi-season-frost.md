@@ -43,3 +43,9 @@ These land in follow-up work; the planning core is prepared for them.
 - Callers that supply neither `season` nor fall data behave unchanged.
 - Fall schedules without catalog `seasons.fall` fall back to flat crop offsets;
   they still schedule, but the offsets are the same shape as spring.
+- GHCN ETL code now parses fall frost dates and, when a station has fall
+  history, emits `firstFallFrostP10/P50/P90` into `zipClimate.json`. The
+  nationwide regeneration is a follow-up CI run — the shipped bundle keeps its
+  current spring-only data until that job lands. The per-ZIP cache format is
+  back-compatible: legacy spring-only entries `{year,lastFrost}[]` continue to
+  drive spring percentiles and simply omit fall percentiles.
