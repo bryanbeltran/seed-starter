@@ -1,6 +1,6 @@
 {
   "version": "2026-07-19",
-  "provenance": "Hand-curated for EPA L3 51. Nativity verified via USDA PLANTS (cite). Timing from NRCS Plant Guides / MN BWSR establishment guidance + frost offsets. See ADR 007.",
+  "provenance": "Hand-curated for EPA L3 51 + 25. Nativity via USDA PLANTS. Timing: NRCS / regional guidelines + frost offsets. ADR 007.",
   "plants": {
     "echinacea-purpurea": {
       "id": "echinacea-purpurea",
@@ -25,6 +25,7 @@
       "method": "direct",
       "stratificationDays": 60,
       "needsStratification": true,
+      "fallDormant": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RAPI",
       "confidence": "high"
     },
@@ -38,6 +39,7 @@
       "method": "direct",
       "stratificationDays": 30,
       "needsStratification": true,
+      "fallDormant": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MOFI",
       "confidence": "high"
     },
@@ -51,6 +53,7 @@
       "method": "direct",
       "stratificationDays": 30,
       "needsStratification": true,
+      "fallDormant": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASSY",
       "confidence": "high"
     },
@@ -207,8 +210,145 @@
       "method": "direct",
       "stratificationDays": 60,
       "needsStratification": true,
+      "fallDormant": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PEDI",
       "confidence": "high"
+    },
+    "bouteloua-gracilis": {
+      "id": "bouteloua-gracilis",
+      "commonName": "Blue grama",
+      "scientificName": "Bouteloua gracilis",
+      "habit": "grass",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -21,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=BOGR2",
+      "confidence": "high"
+    },
+    "ratibida-columnifera": {
+      "id": "ratibida-columnifera",
+      "commonName": "Prairie coneflower",
+      "scientificName": "Ratibida columnifera",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -7,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RACO3",
+      "confidence": "high"
+    },
+    "linum-lewisii": {
+      "id": "linum-lewisii",
+      "commonName": "Blue flax",
+      "scientificName": "Linum lewisii",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LILE3",
+      "confidence": "high"
+    },
+    "gaillardia-aristata": {
+      "id": "gaillardia-aristata",
+      "commonName": "Blanketflower",
+      "scientificName": "Gaillardia aristata",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -14,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=GAAR",
+      "confidence": "high"
+    },
+    "asclepias-speciosa": {
+      "id": "asclepias-speciosa",
+      "commonName": "Showy milkweed",
+      "scientificName": "Asclepias speciosa",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASSP",
+      "confidence": "high"
+    },
+    "penstemon-strictus": {
+      "id": "penstemon-strictus",
+      "commonName": "Rocky Mountain penstemon",
+      "scientificName": "Penstemon strictus",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PEST2",
+      "confidence": "high"
+    },
+    "dalea-purpurea": {
+      "id": "dalea-purpurea",
+      "commonName": "Purple prairie clover",
+      "scientificName": "Dalea purpurea",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=DAPU5",
+      "confidence": "high"
+    },
+    "artemisia-frigida": {
+      "id": "artemisia-frigida",
+      "commonName": "Fringed sagebrush",
+      "scientificName": "Artemisia frigida",
+      "habit": "shrub",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -14,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ARFR4",
+      "confidence": "medium"
+    },
+    "eriogonum-umbellatum": {
+      "id": "eriogonum-umbellatum",
+      "commonName": "Sulphur-flower buckwheat",
+      "scientificName": "Eriogonum umbellatum",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ERUM",
+      "confidence": "high"
+    },
+    "oenothera-missouriensis": {
+      "id": "oenothera-missouriensis",
+      "commonName": "Missouri evening primrose",
+      "scientificName": "Oenothera macrocarpa",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=OEMA2",
+      "confidence": "medium"
     }
   }
 }

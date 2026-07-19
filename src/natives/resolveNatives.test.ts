@@ -29,10 +29,24 @@ describe("resolveNatives", () => {
     expect(ratibida.tasks[0].date.getTime()).toBeLessThan(echinacea.tasks[0].date.getTime());
   });
 
-  it("returns none coverage for mapped ecoregion without catalog", () => {
+  it("returns High Plains catalog for 80202", () => {
     const result = resolveNatives({ zip: "80202", zone: "5b", referenceDate: ref });
     expect(result.ecoregion?.id).toBe("25");
-    expect(result.catalogCoverage).toBe("none");
-    expect(result.plants).toEqual([]);
+    expect(result.catalogCoverage).toBe("full");
+    expect(result.plants.length).toBeGreaterThanOrEqual(15);
+    expect(result.plants.some((p) => p.id === "bouteloua-gracilis")).toBe(true);
+  });
+
+  it("emits fall dormant sow when season is fall", () => {
+    const result = resolveNatives({
+      zip: "55423",
+      zone: "5a",
+      season: "fall",
+      referenceDate: ref,
+    });
+    expect(result.season).toBe("fall");
+    expect(result.plants.length).toBeGreaterThan(0);
+    expect(result.plants.every((p) => p.tasks[0].type === "fall_sow")).toBe(true);
+    expect(result.plants.some((p) => /Fall dormant/i.test(p.tasks[0].label))).toBe(true);
   });
 });

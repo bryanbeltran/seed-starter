@@ -22,6 +22,29 @@
         "penstemon-digitalis"
       ],
       "provenance": "Hand-curated MN/Upper Midwest prairie–woodland natives; PLANTS-native in MN. ADR 007."
+    },
+    "25": {
+      "ecoregionId": "25",
+      "name": "High Plains",
+      "plantIds": [
+        "bouteloua-gracilis",
+        "bouteloua-curtipendula",
+        "schizachyrium-scoparium",
+        "andropogon-gerardii",
+        "panicum-virgatum",
+        "ratibida-columnifera",
+        "linum-lewisii",
+        "gaillardia-aristata",
+        "asclepias-speciosa",
+        "penstemon-strictus",
+        "dalea-purpurea",
+        "artemisia-frigida",
+        "eriogonum-umbellatum",
+        "oenothera-missouriensis",
+        "rudbeckia-hirta",
+        "echinacea-purpurea"
+      ],
+      "provenance": "Hand-curated High Plains / Front Range natives; PLANTS-native in CO/region. ADR 007 Phase 5."
     }
   }
 }

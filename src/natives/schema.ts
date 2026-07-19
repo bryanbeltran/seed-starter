@@ -9,6 +9,9 @@ export const nativePlantSchema = z.object({
   moisture: z.enum(["dry", "medium", "wet"]).optional(),
   needsStratification: z.boolean().optional(),
   stratificationDays: z.number().optional(),
+  /** Prefer fall-dormant sow when season=fall (uses first fall frost). */
+  fallDormant: z.boolean().optional(),
+  fallSowDaysBeforeFrost: z.number().optional(),
   method: z.enum(["direct", "transplant"]),
   indoorSowOffsetDays: z.number().optional(),
   transplantDaysAfterFrost: z.number().optional(),

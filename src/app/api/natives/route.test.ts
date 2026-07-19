@@ -17,12 +17,22 @@ describe("GET /api/natives", () => {
     expect(res.status).toBe(400);
   });
 
-  it("returns none coverage for High Plains without catalog", async () => {
+  it("returns High Plains plants for 80202", async () => {
     const res = await GET(new Request("http://localhost/api/natives?zip=80202"));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.ecoregion.id).toBe("25");
-    expect(body.catalogCoverage).toBe("none");
-    expect(body.plants).toEqual([]);
+    expect(body.catalogCoverage).toBe("full");
+    expect(body.plants.length).toBeGreaterThanOrEqual(15);
+  });
+
+  it("supports fall season dormant sow", async () => {
+    const res = await GET(
+      new Request("http://localhost/api/natives?zip=55423&season=fall"),
+    );
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.season).toBe("fall");
+    expect(body.plants[0].tasks[0].type).toBe("fall_sow");
   });
 });

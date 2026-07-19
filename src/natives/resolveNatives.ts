@@ -8,13 +8,13 @@ import {
   type NativePlant,
 } from "./schema";
 import { resolveFrost } from "@/planning/frostResolver";
-import type { FrostClimateLookup } from "@/planning/types";
+import type { FrostClimateLookup, GardenSeason } from "@/planning/types";
 
 const plantsFile = nativesFileSchema.parse(plantsData);
 const ecoregionFile = ecoregionPlantsFileSchema.parse(ecoregionPlantsData);
 
 export type NativeTask = {
-  type: "direct_sow" | "indoor_sow" | "transplant";
+  type: "direct_sow" | "indoor_sow" | "transplant" | "fall_sow";
   date: Date;
   label: string;
 };
@@ -26,6 +26,7 @@ export type NativePlantResult = NativePlant & {
 export type ResolveNativesResult = {
   zip: string;
   zone: string;
+  season: GardenSeason;
   ecoregion: EcoregionRef | null;
   lastFrostDate: Date;
   frostSource: string;
@@ -34,7 +35,25 @@ export type ResolveNativesResult = {
   catalogCoverage: "full" | "none" | "unknown";
 };
 
-function tasksForPlant(plant: NativePlant, frost: Date): NativeTask[] {
+function tasksForPlant(
+  plant: NativePlant,
+  frost: Date,
+  season: GardenSeason,
+): NativeTask[] {
+  if (season === "fall") {
+    if (!plant.fallDormant && !plant.needsStratification) {
+      return [];
+    }
+    const before = plant.fallSowDaysBeforeFrost ?? 14;
+    return [
+      {
+        type: "fall_sow",
+        date: subDays(frost, before),
+        label: `Fall dormant sow ${plant.commonName}`,
+      },
+    ];
+  }
+
   const tasks: NativeTask[] = [];
   if (plant.method === "transplant") {
     const transplant = addDays(frost, plant.transplantDaysAfterFrost ?? 0);
@@ -73,28 +92,35 @@ function tasksForPlant(plant: NativePlant, frost: Date): NativeTask[] {
 export function resolveNatives(input: {
   zip: string;
   zone: string;
+  season?: GardenSeason;
   referenceDate?: Date;
   climateLookup?: FrostClimateLookup;
 }): ResolveNativesResult {
+  const season: GardenSeason = input.season === "fall" ? "fall" : "spring";
   const ecoregion = lookupZipEcoregion(input.zip);
   const frost = resolveFrost(
     {
       zone: input.zone,
       zip: input.zip,
       referenceDate: input.referenceDate,
-      season: "spring",
+      season,
     },
     input.climateLookup,
   );
 
+  const base = {
+    zip: input.zip,
+    zone: input.zone,
+    season,
+    lastFrostDate: frost.lastFrostDate,
+    frostSource: frost.source,
+    frostProvenance: frost.provenance,
+  };
+
   if (!ecoregion) {
     return {
-      zip: input.zip,
-      zone: input.zone,
+      ...base,
       ecoregion: null,
-      lastFrostDate: frost.lastFrostDate,
-      frostSource: frost.source,
-      frostProvenance: frost.provenance,
       plants: [],
       catalogCoverage: "unknown",
     };
@@ -103,12 +129,8 @@ export function resolveNatives(input: {
   const listing = ecoregionFile.ecoregions[ecoregion.id];
   if (!listing?.plantIds.length) {
     return {
-      zip: input.zip,
-      zone: input.zone,
+      ...base,
       ecoregion: { id: ecoregion.id, name: ecoregion.name },
-      lastFrostDate: frost.lastFrostDate,
-      frostSource: frost.source,
-      frostProvenance: frost.provenance,
       plants: [],
       catalogCoverage: "none",
     };
@@ -119,16 +141,13 @@ export function resolveNatives(input: {
     .filter(Boolean)
     .map((plant) => ({
       ...plant,
-      tasks: tasksForPlant(plant, frost.lastFrostDate),
-    }));
+      tasks: tasksForPlant(plant, frost.lastFrostDate, season),
+    }))
+    .filter((p) => p.tasks.length > 0);
 
   return {
-    zip: input.zip,
-    zone: input.zone,
+    ...base,
     ecoregion: { id: ecoregion.id, name: listing.name || ecoregion.name },
-    lastFrostDate: frost.lastFrostDate,
-    frostSource: frost.source,
-    frostProvenance: frost.provenance,
     plants,
     catalogCoverage: "full",
   };

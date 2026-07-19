@@ -47,3 +47,12 @@
 | `?zip=` deep-link | Yes |
 
 **Verdict:** Ship; Playwright optional follow-up.
+
+## Phase 5 — Expand (this pass)
+
+| Item | Result |
+|------|--------|
+| Lint CI | Fixed `<a href="/">` → `Link` |
+| Contrast L3 25 High Plains | 16 plants; 80202 full coverage |
+| Fall dormant | `?season=fall` → `fall_sow` vs first fall frost |
+| e2e | `e2e/natives.spec.ts` |
