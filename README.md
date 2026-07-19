@@ -49,6 +49,8 @@ Domain logic lives in `src/planning/` (framework-free). ADRs:
 | [005](docs/adrs/005-owner-cookie-auth.md) | Owner cookie auth |
 | [Threat model](docs/threat-model.md) | Cookie, share links, rate limits |
 
+Next builds: [plans](docs/plans/) — fall season, summer season, variety timing.
+
 ### Failure modes
 
 | Failure | Behavior |
