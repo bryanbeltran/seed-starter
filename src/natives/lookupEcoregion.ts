@@ -3,11 +3,14 @@ import zipEcoregionData from "../../data/natives/zip-ecoregion.json";
 export type EcoregionRef = { id: string; name: string };
 
 type ZipEcoregionFile = {
-  zips: Record<string, EcoregionRef>;
+  names: Record<string, string>;
+  zips: Record<string, string>;
 };
 
 const file = zipEcoregionData as ZipEcoregionFile;
 
 export function lookupZipEcoregion(zip: string): EcoregionRef | null {
-  return file.zips[zip] ?? null;
+  const id = file.zips[zip];
+  if (!id) return null;
+  return { id, name: file.names[id] ?? id };
 }

@@ -130,13 +130,15 @@ async function main() {
   const regions = await loadEcoregions(shpPath);
   console.log(`Loaded ${regions.length} polygon rings`);
 
-  const byZip = {};
+  const zips = {};
+  const names = {};
   let hit = 0;
   let miss = 0;
   for (const [zip, c] of Object.entries(centroids)) {
     const found = findEcoregion(c.lon, c.lat, regions);
     if (found) {
-      byZip[zip] = found;
+      zips[zip] = found.id;
+      names[found.id] = found.name;
       hit++;
     } else {
       miss++;
@@ -148,14 +150,15 @@ async function main() {
     provenance:
       "ZCTA centroid × EPA Level III ecoregions (US public domain). See ADR 007.",
     generatedAt: new Date().toISOString().slice(0, 10),
-    zipCount: Object.keys(byZip).length,
+    zipCount: Object.keys(zips).length,
     missCount: miss,
-    zips: byZip,
+    names,
+    zips,
   };
 
   console.log(`Matched ${hit} ZIPs; missed ${miss}`);
-  if (byZip["55423"]) {
-    console.log(`55423 → ${byZip["55423"].id} ${byZip["55423"].name}`);
+  if (zips["55423"]) {
+    console.log(`55423 → ${zips["55423"]} ${names[zips["55423"]]}`);
   }
 
   if (!write) {

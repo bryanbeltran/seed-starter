@@ -21,10 +21,11 @@ let ok = 0;
 const failures = [];
 for (const row of golden.zips) {
   const got = map.zips?.[row.zip];
-  if (got?.id === row.ecoregionId) {
+  const gotId = typeof got === "string" ? got : got?.id;
+  if (gotId === row.ecoregionId) {
     ok++;
   } else {
-    failures.push(`${row.zip}: expected ${row.ecoregionId}, got ${got?.id ?? "missing"}`);
+    failures.push(`${row.zip}: expected ${row.ecoregionId}, got ${gotId ?? "missing"}`);
   }
 }
 

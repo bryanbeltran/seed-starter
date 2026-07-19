@@ -56,3 +56,4 @@
 | Contrast L3 25 High Plains | 16 plants; 80202 full coverage |
 | Fall dormant | `?season=fall` → `fall_sow` vs first fall frost |
 | e2e | `e2e/natives.spec.ts` |
+| Artifact size | Compacted zip→id + names map (~415KB vs 1.6MB) for CI/runtime |
