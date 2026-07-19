@@ -10,6 +10,7 @@ import {
   parseGhcndDailyTmin,
   parseGhcndInventory,
   parsePhzmZipCsv,
+  percentilesFromDates,
   selectRepresentativeStations,
   stationHasFrostTmin,
 } from "../../scripts/lib/ghcn-zip-climate.mjs";
@@ -148,5 +149,23 @@ describe("GHCN ETL helpers", () => {
       { year: 2020, lastFrost: "04-10" },
     ]);
     expect(firstFallFrostMmDdPerYear("S", tmin)).toEqual([]);
+  });
+
+  it("keeps p10 ≤ p50 ≤ p90 for small-n date sets", () => {
+    const one = percentilesFromDates(["10-06"]);
+    expect(one.p10).toBe("10-06");
+    expect(one.p50).toBe("10-06");
+    expect(one.p90).toBe("10-06");
+
+    const two = percentilesFromDates(["10-06", "12-20"]);
+    expect(two.p10).toBeTruthy();
+    expect(two.p50).toBeTruthy();
+    expect(two.p90).toBeTruthy();
+    const doy = (s: string) => {
+      const [m, d] = s.split("-").map(Number);
+      return Math.floor((Date.UTC(2024, m - 1, d) - Date.UTC(2024, 0, 0)) / 86_400_000);
+    };
+    expect(doy(two.p10!)).toBeLessThanOrEqual(doy(two.p50!));
+    expect(doy(two.p50!)).toBeLessThanOrEqual(doy(two.p90!));
   });
 });

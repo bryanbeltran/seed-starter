@@ -47,6 +47,7 @@ Domain logic lives in `src/planning/` (framework-free). ADRs:
 | [003](docs/adrs/003-climate-nearest-station.md) | GHCN nearest-station model |
 | [004](docs/adrs/004-frost-first-mvp.md) | Frost-first scope |
 | [005](docs/adrs/005-owner-cookie-auth.md) | Owner cookie auth |
+| [006](docs/adrs/006-multi-season-frost.md) | Multi-season frost (spring + fall) |
 | [Threat model](docs/threat-model.md) | Cookie, share links, rate limits |
 
 Next builds: [plans](docs/plans/) — fall season, summer season, variety timing.

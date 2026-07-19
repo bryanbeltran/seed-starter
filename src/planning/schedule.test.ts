@@ -188,7 +188,7 @@ describe("buildSchedule (fall season)", () => {
   it("keeps indoor_sow for transplant crops in fall", () => {
     const schedule = buildSchedule({
       zone: "5a",
-      crops: ["tomato"],
+      crops: ["lettuce"],
       season: "fall",
       referenceDate: ref,
     });
@@ -196,6 +196,32 @@ describe("buildSchedule (fall season)", () => {
     expect(types).toContain("indoor_sow");
     expect(types).toContain("transplant");
     expect(types).not.toContain("fall_sow");
+  });
+
+  it("rejects crops without seasons.fall", () => {
+    expect(() =>
+      buildSchedule({
+        zone: "5a",
+        crops: ["tomato"],
+        season: "fall",
+        referenceDate: ref,
+      }),
+    ).toThrow(/not available for fall/);
+  });
+
+  it("orders indoor ≤ harden ≤ transplant for fall lettuce", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      zip: "55423",
+      crops: ["lettuce"],
+      season: "fall",
+      referenceDate: ref,
+    });
+    const indoor = schedule.tasks.find((t) => t.type === "indoor_sow")!;
+    const harden = schedule.tasks.find((t) => t.type === "harden_off")!;
+    const transplant = schedule.tasks.find((t) => t.type === "transplant")!;
+    expect(indoor.date.getTime()).toBeLessThanOrEqual(harden.date.getTime());
+    expect(harden.date.getTime()).toBeLessThanOrEqual(transplant.date.getTime());
   });
 
   it("anchors fall schedule on first-fall-frost fallback", () => {

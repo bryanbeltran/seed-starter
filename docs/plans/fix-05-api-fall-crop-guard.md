@@ -1,7 +1,7 @@
 # Fix 5: Reject fall schedules for crops without seasons.fall
 
 **Severity:** Should-fix  
-**Status:** Ready to build  
+**Status:** Implemented  
 
 ## Problem
 UI filters via `cropSupportsSeason`. API/`buildSchedule` still accepts any crop + `season:"fall"`. Missing fall rules → `fallRulesFromCrop` → `flatRules` (spring top-level offsets) on first-fall-frost anchor → nonsense dates.

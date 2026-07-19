@@ -1,7 +1,7 @@
 # Fix 4: Transplant task order (harden before indoor sow)
 
 **Severity:** Should-fix  
-**Status:** Ready to build  
+**Status:** Implemented  
 
 ## Problem
 `tasksForCrop` (transplant branch) computes:

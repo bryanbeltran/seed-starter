@@ -1,7 +1,7 @@
 # Fix 6: Safer default season (stop Jul→Fall blind flip)
 
 **Severity:** Should-fix  
-**Status:** Ready to build  
+**Status:** Implemented  
 **Related:** `docs/plans/gap-06-default-season-heuristic.md` (full frost-aware version)
 
 ## Problem

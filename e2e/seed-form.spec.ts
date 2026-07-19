@@ -1,13 +1,7 @@
 import { test, expect } from "@playwright/test";
 
-async function selectSpring(page: import("@playwright/test").Page) {
-  // Month≥Jul defaults to Fall; spring tests need an explicit switch.
-  await page.locator("#season-spring").click();
-}
-
 test("calculates schedule from fixture zip", async ({ page }) => {
   await page.goto("/");
-  await selectSpring(page);
   await page.getByLabel("ZIP code").fill("55423");
   await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
@@ -19,7 +13,6 @@ test("calculates schedule from fixture zip", async ({ page }) => {
 test("saves and reopens a plan", async ({ page }) => {
   const planName = `E2E bed ${Date.now()}`;
   await page.goto("/");
-  await selectSpring(page);
   await page.getByLabel("ZIP code").fill("55423");
   await page.getByRole("checkbox", { name: "Lettuce", exact: true }).click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
@@ -41,7 +34,6 @@ test("saves and reopens a plan", async ({ page }) => {
 
 test("compares risk profiles", async ({ page }) => {
   await page.goto("/");
-  await selectSpring(page);
   await page.getByLabel("ZIP code").fill("55423");
   await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
   await page.getByLabel("Compare risk profiles").click();
@@ -53,7 +45,6 @@ test("compares risk profiles", async ({ page }) => {
 test("clicks fruits category on desktop layout", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/");
-  await selectSpring(page);
   await page.getByRole("button", { name: "Fruits", exact: true }).click();
   await expect(page.getByRole("button", { name: "Fruits", exact: true })).toHaveAttribute(
     "aria-pressed",

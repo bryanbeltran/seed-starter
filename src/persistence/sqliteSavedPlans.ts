@@ -225,18 +225,19 @@ export async function updateSavedPlan(
   const name = patch.name ?? existing.name;
   const crops = patch.crops ?? existing.crops;
   const riskProfile = patch.riskProfile ?? existing.riskProfile;
+  const season = patch.season ?? existing.season;
   const zip = patch.zip ?? existing.zip;
   const { zone } = await resolveLocation(zip);
   const now = new Date().toISOString();
   const climateDataVersion = getCurrentClimateDataVersion();
   const climateSnapshotId = climateSnapshotForZip(zip) ?? climateDataVersion;
-  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile);
+  const schedule = await scheduleForPlan(zip, zone, crops, riskProfile, season);
   const lastFrostDate = schedule.lastFrostDate.toISOString();
 
   const db = await getDb();
   db.run(
     `UPDATE saved_plans
-     SET name = ?, zip = ?, zone = ?, crops_json = ?, risk_profile = ?,
+     SET name = ?, zip = ?, zone = ?, crops_json = ?, risk_profile = ?, season = ?,
          climate_data_version = ?, climate_snapshot_id = ?, last_frost_date = ?, updated_at = ?
      WHERE id = ?`,
     [
@@ -245,6 +246,7 @@ export async function updateSavedPlan(
       zone,
       JSON.stringify(crops),
       riskProfile,
+      season,
       climateDataVersion,
       climateSnapshotId,
       lastFrostDate,
@@ -262,6 +264,7 @@ export async function updateSavedPlan(
       zone,
       crops_json: JSON.stringify(crops),
       risk_profile: riskProfile,
+      season,
       climate_data_version: climateDataVersion,
       climate_snapshot_id: climateSnapshotId,
       owner_id: existing.ownerId,

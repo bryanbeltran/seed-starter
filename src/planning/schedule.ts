@@ -1,5 +1,6 @@
 import { addDays, subDays } from "date-fns";
-import { resolveCropRules } from "./cropCatalog";
+import { cropSupportsSeason, getCropOrDefault, resolveCropRules } from "./cropCatalog";
+import { UnsupportedSeasonCropError } from "./errors";
 import { resolveFrost } from "./frostResolver";
 import { selectFrostDate } from "./riskProfile";
 import type {
@@ -30,20 +31,25 @@ function tasksForCrop(
   const isFall = season === "fall";
 
   if (rules.method === "transplant") {
-    const indoorSow = subDays(anchorFrost, rules.indoorSowOffsetDays ?? 30);
+    const hardenDays = rules.hardenOffDaysBeforeTransplant ?? 7;
+    const transplant = addDays(anchorFrost, rules.transplantDaysAfterFrost ?? 0);
+    const harden = subDays(transplant, hardenDays);
+    let indoorSow = subDays(anchorFrost, rules.indoorSowOffsetDays ?? 30);
+    // Preserve harden window: pull indoor sow earlier if needed (clamp B).
+    if (harden.getTime() < indoorSow.getTime()) {
+      indoorSow = subDays(harden, 1);
+    }
+
     tasks.push({
       cropId: crop.cropId,
       type: "indoor_sow",
       date: indoorSow,
       label: `Sow ${label} indoors`,
     });
-
-    const hardenDays = rules.hardenOffDaysBeforeTransplant ?? 7;
-    const transplant = addDays(anchorFrost, rules.transplantDaysAfterFrost ?? 0);
     tasks.push({
       cropId: crop.cropId,
       type: "harden_off",
-      date: subDays(transplant, hardenDays),
+      date: harden,
       label: `Start hardening off ${label}`,
     });
     tasks.push({
@@ -77,6 +83,19 @@ function tasksForCrop(
   return tasks;
 }
 
+function assertCropsSupportSeason(
+  selections: CropSelection[],
+  season: GardenSeason,
+) {
+  if (season === "spring") return;
+  const unsupported = selections
+    .map((s) => s.cropId)
+    .filter((id) => !cropSupportsSeason(getCropOrDefault(id), season));
+  if (unsupported.length) {
+    throw new UnsupportedSeasonCropError(unsupported, season);
+  }
+}
+
 export function buildSchedule(input: ScheduleInput): Schedule {
   const {
     zone,
@@ -92,6 +111,8 @@ export function buildSchedule(input: ScheduleInput): Schedule {
   const selections: CropSelection[] =
     cropSelections ??
     crops.map((cropId) => ({ cropId }));
+
+  assertCropsSupportSeason(selections, season);
 
   const frostResolution = resolveFrost(
     { zone, zip, referenceDate, season },

@@ -1,7 +1,7 @@
 # Fix 3: Monotonic frost percentiles (small-n)
 
 **Severity:** Should-fix  
-**Status:** Ready to build  
+**Status:** Implemented  
 **Scope:** ETL math + regen or post-pass clamp
 
 ## Problem

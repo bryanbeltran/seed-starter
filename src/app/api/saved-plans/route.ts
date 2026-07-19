@@ -4,6 +4,7 @@ import {
   createSavedPlan,
   listSavedPlans,
 } from "@/persistence/savedPlanService";
+import { UnsupportedSeasonCropError } from "@/planning";
 import { ZoneLookupError } from "@/lib/zipToZone";
 import { apiRoute } from "@/lib/apiRoute";
 import { requireOwnerId } from "@/lib/ownerAuth";
@@ -43,7 +44,7 @@ export const POST = apiRoute("saved-plans-create", async (req) => {
     const plan = await createSavedPlan({ ...parsed.data, ownerId });
     return NextResponse.json(plan, { status: 201 });
   } catch (err) {
-    if (err instanceof ZoneLookupError) {
+    if (err instanceof ZoneLookupError || err instanceof UnsupportedSeasonCropError) {
       return NextResponse.json({ error: err.message }, { status: 400 });
     }
     throw err;

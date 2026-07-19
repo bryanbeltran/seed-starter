@@ -17,7 +17,11 @@ export type {
   TaskType,
 } from "./types";
 
-export { PlanningError, UnknownCropError } from "./errors";
+export {
+  PlanningError,
+  UnknownCropError,
+  UnsupportedSeasonCropError,
+} from "./errors";
 export type { CropDefinition, VarietyDefinition } from "./cropCatalog";
 export {
   cropIds,

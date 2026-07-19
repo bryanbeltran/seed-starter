@@ -44,8 +44,8 @@ describe("formState", () => {
     expect(loadFormState()).toBeNull();
   });
 
-  it("defaults season by month heuristic", () => {
+  it("defaults season to spring", () => {
     expect(defaultSeasonForDate(new Date(2026, 2, 15))).toBe("spring");
-    expect(defaultSeasonForDate(new Date(2026, 7, 15))).toBe("fall");
+    expect(defaultSeasonForDate(new Date(2026, 7, 15))).toBe("spring");
   });
 });

@@ -1,7 +1,7 @@
 # Fix 2: SQLite saved-plan season on update
 
 **Severity:** Blocker (local + any sqlite path)  
-**Status:** Ready to build  
+**Status:** Implemented  
 **Depends on:** Same season contract as fix 1
 
 ## Problem

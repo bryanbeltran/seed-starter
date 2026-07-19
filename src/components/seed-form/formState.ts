@@ -14,12 +14,10 @@ export type FormState = {
   compareMode: boolean;
 };
 
-/**
- * Temporary MVP heuristic: assume fall planning from July onward.
- * TODO: swap for a proper user-set default once fall catalog data lands.
- */
-export function defaultSeasonForDate(now: Date = new Date()): GardenSeason {
-  return now.getMonth() >= 6 ? "fall" : "spring";
+/** Default to spring until frost-aware heuristic (gap-06) ships. */
+export function defaultSeasonForDate(_now?: Date): GardenSeason {
+  void _now;
+  return "spring";
 }
 
 export const FORM_STORAGE_KEY = "seedstarter-form";

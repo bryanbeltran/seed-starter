@@ -1,7 +1,7 @@
 # Fix 7: Docs sync (fall plan + ADR index)
 
 **Severity:** Should-fix (docs only)  
-**Status:** Ready to build  
+**Status:** Implemented  
 
 ## Problem
 - `docs/plans/fall-season.md` still says **Ready to build** with unchecked acceptance

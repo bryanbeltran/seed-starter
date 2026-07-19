@@ -1,7 +1,7 @@
 # Fix 1: Postgres saved-plan season create/load
 
 **Severity:** Blocker  
-**Status:** Ready to build  
+**Status:** Implemented  
 **PR:** #18 follow-up
 
 ## Problem

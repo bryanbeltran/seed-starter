@@ -114,27 +114,52 @@ export function firstFallFrostMmDdPerYear(stationId, tminByStation) {
   return summary.filter((r) => r.firstFallFrost);
 }
 
-function medianMmDd(mmddList) {
-  const doys = mmddList.map((s) => {
-    const [m, d] = s.split("-").map(Number);
-    return new Date(2024, m - 1, d);
-  });
-  doys.sort((a, b) => a - b);
-  const mid = doys[Math.floor(doys.length / 2)];
-  const mm = String(mid.getMonth() + 1).padStart(2, "0");
-  const dd = String(mid.getDate()).padStart(2, "0");
+function mmDdToDoy(mmdd) {
+  const [m, d] = mmdd.split("-").map(Number);
+  return Math.floor((Date.UTC(2024, m - 1, d) - Date.UTC(2024, 0, 0)) / 86_400_000);
+}
+
+function doyToMmDd(doy) {
+  const dt = new Date(Date.UTC(2024, 0, doy));
+  const mm = String(dt.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(dt.getUTCDate()).padStart(2, "0");
   return `${mm}-${dd}`;
 }
 
-function percentilesFromDates(dates) {
-  const sorted = [...dates].sort();
-  const pick = (p) =>
-    sorted[Math.min(sorted.length - 1, Math.floor(p * (sorted.length - 1)))];
-  return {
-    p10: pick(0.1),
-    p50: medianMmDd(sorted),
-    p90: pick(0.9),
+function medianMmDd(mmddList) {
+  const doys = mmddList.map(mmDdToDoy).sort((a, b) => a - b);
+  const mid = doys[Math.floor(doys.length / 2)];
+  return doyToMmDd(mid);
+}
+
+/** Nearest-rank percentiles with p10 ≤ p50 ≤ p90 (by day-of-year). */
+export function percentilesFromDates(dates) {
+  if (!dates.length) {
+    return { p10: null, p50: null, p90: null };
+  }
+  const sorted = [...dates].sort((a, b) => mmDdToDoy(a) - mmDdToDoy(b));
+  const pick = (p) => {
+    const idx = Math.min(
+      sorted.length - 1,
+      Math.max(0, Math.ceil(p * sorted.length) - 1),
+    );
+    return sorted[idx];
   };
+  let p10 = pick(0.1);
+  let p50 = medianMmDd(sorted);
+  let p90 = pick(0.9);
+  // Enforce monotonicity for small-n edge cases.
+  const d10 = mmDdToDoy(p10);
+  let d50 = mmDdToDoy(p50);
+  let d90 = mmDdToDoy(p90);
+  if (d50 < d10) {
+    p50 = p10;
+    d50 = d10;
+  }
+  if (d90 < d50) {
+    p90 = p50;
+  }
+  return { p10, p50, p90 };
 }
 
 export function frostPercentiles(byYear) {
