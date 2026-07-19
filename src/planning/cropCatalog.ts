@@ -66,6 +66,26 @@ export function listCrops(): CropDefinition[] {
   return Object.values(crops);
 }
 
+/**
+ * Whether a crop can be planted in a given season.
+ * Spring is permissive (any catalog crop); other seasons require an
+ * explicit `seasons[season]` entry.
+ */
+export function cropSupportsSeason(
+  crop: CropDefinition,
+  season: GardenSeason,
+): boolean {
+  if (season === "spring") return true;
+  return Boolean(crop.seasons?.[season]);
+}
+
+/** Catalog crop ids that support a given season. */
+export function cropIdsForSeason(season: GardenSeason): string[] {
+  return listCrops()
+    .filter((c) => cropSupportsSeason(c, season))
+    .map((c) => c.id);
+}
+
 export function varietyCount(): number {
   return listCrops().reduce(
     (n, c) => n + Object.keys(c.varieties ?? {}).length,

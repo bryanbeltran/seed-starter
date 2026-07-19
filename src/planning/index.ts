@@ -21,6 +21,8 @@ export { PlanningError, UnknownCropError } from "./errors";
 export type { CropDefinition, VarietyDefinition } from "./cropCatalog";
 export {
   cropIds,
+  cropIdsForSeason,
+  cropSupportsSeason,
   getCrop,
   getCropName,
   getCropOrDefault,

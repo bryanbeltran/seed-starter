@@ -35,4 +35,23 @@ describe("parseScheduleRequest", () => {
       expect(result.data.seeds).toEqual(["tomato"]);
     }
   });
+
+  it("accepts fall season", () => {
+    const result = parseScheduleRequest({
+      zip: "55423",
+      seeds: ["carrot"],
+      season: "fall",
+    });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.season).toBe("fall");
+  });
+
+  it("rejects unknown season", () => {
+    const result = parseScheduleRequest({
+      zip: "55423",
+      seeds: ["tomato"],
+      season: "winter",
+    });
+    expect(result.success).toBe(false);
+  });
 });
