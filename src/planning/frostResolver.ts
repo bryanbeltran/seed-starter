@@ -1,7 +1,7 @@
 import { climateConfidence, type ClimateConfidence } from "@/lib/climateConfidence";
 import stationData from "./data/stationFrost.json";
 import regionalData from "./data/regionalFrost.json";
-import { frostDateStringForZoneBySeason, nextFrostDate } from "./frost";
+import { frostDateStringForZoneBySeason, frostPercentileDates, nextFrostDate } from "./frost";
 import type { FrostClimateLookup, FrostModelSource, GardenSeason } from "./types";
 
 type StationRecord = {
@@ -76,12 +76,17 @@ export function resolveFrost(
       const p50Str = isFall ? climate.firstFallFrostP50 : climate.lastFrostP50;
       const p90Str = isFall ? climate.firstFallFrostP90 : climate.lastFrostP90;
       if (p10Str && p50Str && p90Str) {
-        const p50 = parseFrostString(p50Str, referenceDate);
+        const { p10, p50, p90 } = frostPercentileDates(
+          p10Str,
+          p50Str,
+          p90Str,
+          referenceDate,
+        );
         const confidence = climateConfidence(climate.distanceKm);
         return {
           lastFrostDate: p50,
-          lastFrostP10: parseFrostString(p10Str, referenceDate),
-          lastFrostP90: parseFrostString(p90Str, referenceDate),
+          lastFrostP10: p10,
+          lastFrostP90: p90,
           source: "climate",
           provenance: `${climate.provenance} via ${climate.stationName ?? climate.stationId} (${climate.distanceKm}km, ${confidence} confidence)`,
           season,
