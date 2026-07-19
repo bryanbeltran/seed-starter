@@ -5,7 +5,7 @@
 | [Fall season](./fall-season.md) | P0 | Implemented (#18) — **merge first** |
 | [FAANG polish](./faang-polish.md) | **Next** | Ordered 1→10 |
 | [Variety timing](./variety-timing.md) | Slot 7 | After merge; ∥ default season |
-| [Native plants by ZIP](./native-plants-by-zip.md) | After polish | Ecoregion natives + frost sow dates |
+| [Native plants by ZIP](./native-plants-by-zip.md) | After polish | Ready to build — ADR 007 → phases 0–4 |
 | [Summer season](./summer-season.md) | Defer | Low signal |
 
 ## Polish order (summary)
