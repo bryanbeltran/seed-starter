@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import {
   cropSelectionsFromForm,
+  defaultSeasonForDate,
   FORM_STORAGE_KEY,
   isValidZip,
   loadFormState,
@@ -23,20 +24,28 @@ describe("formState", () => {
     ).toEqual([{ cropId: "tomato", varietyId: "cherry" }]);
   });
 
-  it("persists and loads form state", () => {
+  it("persists and loads form state including season", () => {
     saveFormState({
       zip: "55423",
       selectedCrops: ["tomato"],
       varieties: {},
       riskProfile: "balanced",
+      season: "fall",
       compareMode: false,
     });
-    expect(loadFormState()?.zip).toBe("55423");
+    const loaded = loadFormState();
+    expect(loaded?.zip).toBe("55423");
+    expect(loaded?.season).toBe("fall");
     expect(sessionStorage.getItem(FORM_STORAGE_KEY)).toBeTruthy();
   });
 
   it("returns null for invalid stored state", () => {
     sessionStorage.setItem(FORM_STORAGE_KEY, "{not json");
     expect(loadFormState()).toBeNull();
+  });
+
+  it("defaults season by month heuristic", () => {
+    expect(defaultSeasonForDate(new Date(2026, 2, 15))).toBe("spring");
+    expect(defaultSeasonForDate(new Date(2026, 7, 15))).toBe("fall");
   });
 });

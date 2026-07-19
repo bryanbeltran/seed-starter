@@ -3,6 +3,7 @@
 import {
   Flower2,
   Home,
+  Leaf,
   Shovel,
   Sprout,
   Sun,
@@ -25,6 +26,7 @@ const taskIcons: Record<string, LucideIcon> = {
   harden_off: Sun,
   transplant: Shovel,
   direct_sow: Sprout,
+  fall_sow: Leaf,
   harvest: Flower2,
 };
 

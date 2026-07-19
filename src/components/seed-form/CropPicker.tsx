@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { CropDefinition } from "@/planning";
+import type { CropDefinition, GardenSeason } from "@/planning";
+import { cropSupportsSeason } from "@/planning/cropCatalog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -18,6 +19,7 @@ type Props = {
   varieties: Record<string, string | undefined>;
   loading: boolean;
   cropError?: string | null;
+  season?: GardenSeason;
   onToggle: (cropId: string) => void;
   onVarietyChange: (cropId: string, varietyId: string | undefined) => void;
 };
@@ -59,6 +61,7 @@ export function CropPicker({
   varieties,
   loading,
   cropError,
+  season = "spring",
   onToggle,
   onVarietyChange,
 }: Props) {
@@ -68,9 +71,14 @@ export function CropPicker({
 
   const searching = query.trim().length > 0;
 
+  const seasonScopedCrops = useMemo(
+    () => crops.filter((c) => cropSupportsSeason(c, season)),
+    [crops, season],
+  );
+
   const { visible, total, hasMore } = useMemo(
-    () => filterCrops({ crops, query, category, page }),
-    [crops, query, category, page],
+    () => filterCrops({ crops: seasonScopedCrops, query, category, page }),
+    [seasonScopedCrops, query, category, page],
   );
 
   const visibleIds = useMemo(() => new Set(visible.map((c) => c.id)), [visible]);

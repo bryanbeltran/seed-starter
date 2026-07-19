@@ -1,4 +1,4 @@
-import type { RiskProfile } from "@/planning";
+import type { GardenSeason, RiskProfile } from "@/planning";
 
 export type CropSelection = {
   cropId: string;
@@ -10,8 +10,17 @@ export type FormState = {
   selectedCrops: string[];
   varieties: Record<string, string | undefined>;
   riskProfile: RiskProfile;
+  season: GardenSeason;
   compareMode: boolean;
 };
+
+/**
+ * Temporary MVP heuristic: assume fall planning from July onward.
+ * TODO: swap for a proper user-set default once fall catalog data lands.
+ */
+export function defaultSeasonForDate(now: Date = new Date()): GardenSeason {
+  return now.getMonth() >= 6 ? "fall" : "spring";
+}
 
 export const FORM_STORAGE_KEY = "seedstarter-form";
 

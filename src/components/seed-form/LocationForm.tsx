@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import type { GardenSeason } from "@/planning";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ type Props = {
   zip: string;
   loading: boolean;
   zipError?: string | null;
+  season?: GardenSeason;
   onZipChange: (zip: string) => void;
   onTryExample?: () => void;
 };
@@ -25,12 +27,14 @@ export function LocationForm({
   zip,
   loading,
   zipError,
+  season = "spring",
   onZipChange,
   onTryExample,
 }: Props) {
   const [preview, setPreview] = useState<LocationPreview | null>(null);
   const [previewError, setPreviewError] = useState<string | null>(null);
   const showZipHint = zip.length > 0 && !isValidZip(zip);
+  const frostLabel = season === "fall" ? "first fall frost" : "last spring frost";
 
   useEffect(() => {
     if (!isValidZip(zip)) {
@@ -39,12 +43,16 @@ export function LocationForm({
     }
   }, [zip]);
 
+  useEffect(() => {
+    setPreview(null);
+  }, [season]);
+
   async function loadPreview() {
     if (!isValidZip(zip)) return;
     const normalized = zip.replace(/\D/g, "");
     setPreviewError(null);
     try {
-      const res = await fetch(`/api/location?zip=${normalized}`);
+      const res = await fetch(`/api/location?zip=${normalized}&season=${season}`);
       const data = await res.json();
       if (!res.ok) {
         setPreview(null);
@@ -85,7 +93,7 @@ export function LocationForm({
       )}
       {preview && !zipError && (
         <p id="zip-preview" className="text-sm text-muted-foreground">
-          Zone {preview.zone.toUpperCase()} · last frost ~{" "}
+          Zone {preview.zone.toUpperCase()} · {frostLabel} ~{" "}
           {new Date(`${preview.lastFrostP50}T12:00:00`).toLocaleDateString(undefined, {
             month: "short",
             day: "numeric",

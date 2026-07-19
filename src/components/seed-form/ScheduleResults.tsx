@@ -37,6 +37,8 @@ export function ScheduleResults({
   canSave,
 }: Props) {
   const generatedAt = format(new Date(), "MMM d, yyyy h:mm a");
+  const isFall = results.season === "fall";
+  const frostLabel = isFall ? "First fall frost" : "Last spring frost";
   const confidenceLine =
     results.climateConfidence && results.stationDistanceKm != null
       ? `${results.climateConfidence} confidence · station ${results.stationDistanceKm} km away`
@@ -112,7 +114,7 @@ export function ScheduleResults({
         </div>
         <CardDescription className="print:text-foreground">
           {planName && <span className="block font-medium">{planName}</span>}
-          Last frost: {format(parseISO(results.lastFrostDate), "MMM d, yyyy")} ·{" "}
+          {frostLabel}: {format(parseISO(results.lastFrostDate), "MMM d, yyyy")} ·{" "}
           <span className="capitalize">{results.riskProfile}</span> profile
           {confidenceLine && (
             <span className="mt-1 block text-xs">{confidenceLine}</span>

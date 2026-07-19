@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { RiskProfile } from "@/planning";
+import type { GardenSeason, RiskProfile } from "@/planning";
 import { ShareLinkButton } from "./ShareLinkButton";
 import type { ScheduleResult } from "./types";
 import type { CropSelection } from "./formState";
@@ -25,6 +25,7 @@ export type SavedPlanSummary = {
   zone: string;
   crops: string[];
   riskProfile: RiskProfile;
+  season?: GardenSeason;
   climateDataVersion?: string | null;
   climateDataStale?: boolean;
   scheduleDiff?: {
@@ -42,6 +43,7 @@ type Props = {
   currentZip: string;
   currentCrops: string[];
   currentRisk: RiskProfile;
+  currentSeason: GardenSeason;
   saveOpen: boolean;
   onSaveOpenChange: (open: boolean) => void;
 };
@@ -52,6 +54,7 @@ export function SavedPlansPanel({
   currentZip,
   currentCrops,
   currentRisk,
+  currentSeason,
   saveOpen,
   onSaveOpenChange,
 }: Props) {
@@ -91,6 +94,7 @@ export function SavedPlansPanel({
           zip: currentZip,
           crops: currentCrops,
           riskProfile: currentRisk,
+          season: currentSeason,
         }),
       });
       if (!res.ok) {
