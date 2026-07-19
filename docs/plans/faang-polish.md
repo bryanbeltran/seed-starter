@@ -104,6 +104,12 @@ Strict sequence where deps matter. Parallel where noted.
 | Baker Creek scrape | SPA stub |
 | Redesign theater | Don’t purple-gradient it |
 
+## After polish (queued)
+
+| Item | Plan | Why after 1–10 |
+|------|------|----------------|
+| Native plants by ZIP | [native-plants-by-zip.md](./native-plants-by-zip.md) | Needs ADR 007 (ecoregion ≠ zone); reuses frost sow model; don’t dilute veg Fall polish |
+
 ## Interview talking points
 
 1. Fallback chain: climate → station → regional → zone  
