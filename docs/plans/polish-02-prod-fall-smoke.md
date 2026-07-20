@@ -1,7 +1,7 @@
 # Polish 02: Prod Fall smoke
 
 **Roadmap slot:** 2  
-**Status:** Ready (amended after plan audit)  
+**Status:** Complete  
 **Depends on:** [polish-01](./polish-01-merge-fall-pr.md) merged + prod deploy  
 **Blocks:** Demo GIF (slot 5); confidence for default-season work  
 **Audit:** [polish-01-03-audit.md](./polish-01-03-audit.md)

@@ -49,7 +49,7 @@ Make variety selection **honest and useful**: harvest dates reflect variety DTM,
 2. Prefer re-resolve crop over inventing variety sow fields
 3. Document DTM semantics: schedule adds DTH after transplant/direct sow (vendor “days to maturity” may differ)
 
-**Done:** resolver prefers `/microgreens/`, `/tomatoes/`, kalettes→brussels; drops garlic chives + cardoon; artichoke DTH 90; angelica 365; scrapes DTH `<21` discarded; audit allowlists overwinter broccoli + Tundra cabbage.
+**Done:** resolver prefers `/microgreens/`, `/tomatoes/`, kalettes→brussels; drops garlic chives + cardoon; artichoke DTH 90; angelica 365; scrapes DTH `<21` discarded; audit allowlists overwinter broccoli + Tundra cabbage. Saved plans persist `varieties` map and rebuild harvest from variety DTH.
 
 ### Phase D — Optional curated sow overrides
 

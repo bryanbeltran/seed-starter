@@ -1,6 +1,6 @@
 # Gap 6: Frost-aware default season
 
-**Status:** Planned (not in this slice)  
+**Status:** Implemented  
 **Priority:** P2  
 **Depends on:** Gap 1 (climate fall percentiles)
 
@@ -15,5 +15,5 @@ UI defaults Fall when `month >= 7`. Ignores ZIP frost dates / “too late to pla
 4. Unit tests for heuristic table.
 
 ## Acceptance
-- [ ] Default matches frost windows for golden ZIPs across sample dates
-- [ ] Override still works
+- [x] Default matches frost windows for golden ZIPs across sample dates
+- [x] Override still works

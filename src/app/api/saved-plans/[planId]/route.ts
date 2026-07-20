@@ -14,6 +14,7 @@ const patchSchema = z.object({
   name: z.string().trim().min(1).optional(),
   zip: z.string().trim().min(1).optional(),
   crops: z.array(z.string()).min(1).optional(),
+  varieties: z.record(z.string(), z.string()).optional(),
   riskProfile: z.enum(["conservative", "balanced", "aggressive"]).optional(),
   season: z.enum(["spring", "fall", "summer"]).optional(),
 });

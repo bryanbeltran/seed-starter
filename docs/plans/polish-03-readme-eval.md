@@ -1,7 +1,7 @@
 # Polish 03: README climate eval narrative
 
 **Roadmap slot:** 3  
-**Status:** Ready (amended after plan audit)  
+**Status:** Complete  
 **Depends on:** [polish-01](./polish-01-merge-fall-pr.md); prefer after [polish-02](./polish-02-prod-fall-smoke.md) so README doesn’t over-claim prod Fall  
 **Effort:** small docs PR  
 **Audit:** [polish-01-03-audit.md](./polish-01-03-audit.md)

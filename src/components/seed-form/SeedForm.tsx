@@ -227,7 +227,7 @@ export function SeedForm() {
   function handleLoadPlan(plan: SavedPlanSummary) {
     setZip(plan.zip);
     setSelectedCrops(plan.crops);
-    setVarieties({});
+    setVarieties(plan.varieties ?? {});
     setRiskProfile(plan.riskProfile);
     if (plan.season) {
       setSeason(plan.season);
@@ -368,6 +368,7 @@ export function SeedForm() {
       onStatusMessage={setStatusMessage}
       currentZip={zip}
       currentCrops={selectedCrops}
+      currentVarieties={varieties}
       currentRisk={riskProfile}
       currentSeason={season}
       saveOpen={saveOpen}
