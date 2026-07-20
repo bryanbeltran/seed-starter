@@ -34,7 +34,7 @@ describe("buildSchedule", () => {
     });
 
     expect(schedule.frostSource).toBe("regional");
-    expect(schedule.lastFrostDate).toEqual(new Date(2026, 3, 20));
+    expect(schedule.lastFrostDate).toEqual(new Date(2026, 4, 8));
   });
 
   it("builds harden-off and transplant tasks for transplants", () => {

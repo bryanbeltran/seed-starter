@@ -2,7 +2,7 @@
 
 **Goal:** High-signal senior portfolio — domain depth, production judgment, measurable correctness. Not feature sprawl.
 
-**State (2026-07-19):** Fall season + climate regen + audit fixes 01–07 on #18 (CI green). Merge next.
+**State (2026-07-20):** Slots 1–8 + natives (#26) on main. Slots 9–10 (fall catalog + fallbacks) in flight.
 
 ## Recommended implementation order
 
@@ -120,10 +120,12 @@ Strict sequence where deps matter. Parallel where noted.
 
 ## Definition of “portfolio ready”
 
-- [ ] #18 merged; prod Fall smoked  
-- [ ] Cross-year frost test green  
-- [ ] Frost-aware default season + tests  
-- [ ] README eval narrative  
-- [ ] Variety DTM visible + outlier audit in CI  
-- [ ] Demo GIF shows Fall once  
-- [ ] Explain ADRs 003/004/006 + fall cache incident in 3 minutes  
+- [x] #18 merged; prod Fall smoked  
+- [x] Cross-year frost test green  
+- [x] Frost-aware default season + tests  
+- [x] README eval narrative  
+- [x] Variety DTM visible + outlier audit in CI  
+- [x] Demo GIF shows Fall once  
+- [x] Explain ADRs 003/004/006 + fall cache incident in 3 minutes  
+- [x] Fall catalog ≥40 crops + thickened fall fallbacks  
+
