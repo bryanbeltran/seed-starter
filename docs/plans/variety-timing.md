@@ -72,6 +72,8 @@ indoorSowOffsetDays?: number  // already in schema
 - [x] No blanket per-variety spring seasons in catalog
 - [x] Outlier list triaged or threshold justified
 
+## Out of scope
+
 - Scraping sow/transplant offsets from vendor pages
 - Per-variety `seasons.spring|summer|fall`
 - Inferring indoor sow from DTM
