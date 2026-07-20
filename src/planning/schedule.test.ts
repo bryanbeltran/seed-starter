@@ -94,6 +94,29 @@ describe("buildSchedule", () => {
     expect(transplant.date.getTime()).toBeGreaterThan(sow.date.getTime());
   });
 
+  it("shifts harvest when variety daysToHarvest differs from crop", () => {
+    const base = buildSchedule({
+      zone: "5a",
+      crops: ["pepper"],
+      referenceDate: ref,
+    });
+    const variety = buildSchedule({
+      zone: "5a",
+      crops: ["pepper"],
+      cropSelections: [{ cropId: "pepper", varietyId: "habanero" }],
+      referenceDate: ref,
+    });
+    const baseHarvest = base.tasks.find((t) => t.type === "harvest")!;
+    const varietyHarvest = variety.tasks.find((t) => t.type === "harvest")!;
+    const baseTx = base.tasks.find((t) => t.type === "transplant")!;
+    const varietyTx = variety.tasks.find((t) => t.type === "transplant")!;
+    expect(varietyTx.date.getTime()).toBe(baseTx.date.getTime());
+    const deltaDays =
+      (varietyHarvest.date.getTime() - baseHarvest.date.getTime()) /
+      (24 * 60 * 60 * 1000);
+    expect(deltaDays).toBe(25); // pepper 70 → habanero 95
+  });
+
   it("uses climate percentiles when repository is provided", () => {
     const schedule = buildSchedule({
       zone: "5a",

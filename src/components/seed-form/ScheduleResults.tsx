@@ -2,6 +2,7 @@
 
 import { format, parseISO } from "date-fns";
 import { Bookmark } from "lucide-react";
+import { getCrop } from "@/planning";
 import {
   Card,
   CardContent,
@@ -25,14 +26,64 @@ type Props = {
   results: ScheduleResult;
   zip: string;
   planName?: string;
+  varieties?: Record<string, string | undefined>;
   onSave?: () => void;
   canSave?: boolean;
 };
+
+function VarietyDtmNotes({
+  cropIds,
+  varieties,
+}: {
+  cropIds: string[];
+  varieties?: Record<string, string | undefined>;
+}) {
+  if (!varieties) return null;
+  const notes = cropIds.flatMap((cropId) => {
+    const varietyId = varieties[cropId];
+    if (!varietyId) return [];
+    const crop = getCrop(cropId);
+    const variety = crop?.varieties?.[varietyId];
+    if (!variety?.daysToHarvest) return [];
+    return [
+      {
+        cropId,
+        name: variety.name,
+        days: variety.daysToHarvest,
+        sourceUrl: variety.sourceUrl,
+      },
+    ];
+  });
+  if (notes.length === 0) return null;
+  return (
+    <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
+      {notes.map((n) => (
+        <li key={n.cropId}>
+          {n.name}: {n.days} days to harvest
+          {n.sourceUrl && (
+            <>
+              {" · "}
+              <a
+                href={n.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2"
+              >
+                source
+              </a>
+            </>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export function ScheduleResults({
   results,
   zip,
   planName,
+  varieties,
   onSave,
   canSave,
 }: Props) {
@@ -45,6 +96,8 @@ export function ScheduleResults({
       : results.climateConfidence
         ? `${results.climateConfidence} confidence`
         : null;
+  const cropIds = [...new Set(results.tasks.map((t) => t.cropId))];
+  const seasonLabel = isFall ? "Fall" : "Spring";
 
   return (
     <Card className="print:shadow-none print:border-none">
@@ -54,6 +107,7 @@ export function ScheduleResults({
             <CardTitle className="print:text-xl">
               Zone {results.zone.toUpperCase()}
             </CardTitle>
+            <Badge variant="outline">{seasonLabel}</Badge>
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -119,6 +173,7 @@ export function ScheduleResults({
           {confidenceLine && (
             <span className="mt-1 block text-xs">{confidenceLine}</span>
           )}
+          <VarietyDtmNotes cropIds={cropIds} varieties={varieties} />
           <span className="print:block text-xs">Generated {generatedAt}</span>
         </CardDescription>
       </CardHeader>

@@ -104,8 +104,22 @@ function auditFall(id, crop) {
   }
 }
 
+const DTM_WARN = 60;
+const DTM_FAIL = 250;
+
+function auditVarietyDtm(id, crop) {
+  for (const v of Object.values(crop.varieties ?? {})) {
+    if (v.daysToHarvest == null) continue;
+    const delta = Math.abs(v.daysToHarvest - crop.daysToHarvest);
+    const msg = `${id}/${v.id}: |ΔDTH|=${delta} (crop ${crop.daysToHarvest} vs variety ${v.daysToHarvest})`;
+    if (delta >= DTM_FAIL) errors.push(msg);
+    else if (delta >= DTM_WARN) warnings.push(msg);
+  }
+}
+
 for (const [id, crop] of Object.entries(crops).sort((a, b) => a[0].localeCompare(b[0]))) {
   auditCrop(id, crop);
+  auditVarietyDtm(id, crop);
 }
 
 const profiles = new Map();
