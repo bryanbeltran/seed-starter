@@ -2,7 +2,8 @@ import { test, expect, type Page } from "@playwright/test";
 
 async function zipAndLockSpring(page: Page) {
   await page.getByLabel("ZIP code").fill("55423");
-  // ZIP preview may auto-suggest Fall mid-year; lock Spring for warm-crop tests.
+  // Wait for frost-aware suggest (often Fall mid-year), then lock Spring.
+  await expect(page.locator("#zip-preview")).toBeVisible({ timeout: 10_000 });
   await page.locator("#season-spring").click();
   await expect(page.locator("#season-spring")).toBeChecked();
 }
