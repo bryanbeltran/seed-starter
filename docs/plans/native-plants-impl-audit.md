@@ -57,3 +57,4 @@
 | Fall dormant | `?season=fall` → `fall_sow` vs first fall frost |
 | e2e | `e2e/natives.spec.ts` |
 | Artifact size | Compacted zip→id + names map (~415KB vs 1.6MB) for CI/runtime |
+| CI e2e | Strict-mode: `getByText("Purple coneflower")` matched name + task — use `exact: true` |
