@@ -54,7 +54,8 @@ export const openApiSpec = {
         ],
         responses: {
           "200": {
-            description: "Ecoregion natives with frost-anchored sow tasks",
+            description:
+              "Ecoregion natives with frost-anchored sow tasks; includes county overlay (context) and riskProfile",
           },
           "400": { description: "Invalid ZIP" },
           "429": { description: "Rate limited" },

@@ -56,10 +56,9 @@ function tasksForPlant(
   season: GardenSeason,
 ): NativeTask[] {
   if (season === "fall") {
-    if (!plant.fallDormant && !plant.needsStratification) {
-      return [];
-    }
-    const before = plant.fallSowDaysBeforeFrost ?? 14;
+    if (!plant.fallDormant) return [];
+    const before =
+      plant.fallSowDaysBeforeFrost ?? plant.stratificationDays ?? 14;
     return [
       {
         type: "fall_sow",

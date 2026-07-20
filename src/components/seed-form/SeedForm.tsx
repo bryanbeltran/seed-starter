@@ -320,6 +320,7 @@ export function SeedForm() {
             value={riskProfile}
             loading={loading}
             onChange={setRiskProfile}
+            season={season}
           />
           <div className="rounded-md border bg-muted/30 p-3">
             <div className="flex items-start gap-2">

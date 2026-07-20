@@ -1,12 +1,11 @@
 # Plan: Native plants by ZIP
 
-**Status:** Implementing on `cursor/native-plants-impl-3c56` (see [impl audit](./native-plants-impl-audit.md))  
-**Priority:** After FAANG polish 1–10  
-**Depends on:** ZIP → zone + frost resolve (done); **ADR 007 first**  
+**Status:** Implemented through Phase 5 (#26, #29; audit fixes)  
+**Priority:** Done  
+**Depends on:** ZIP → zone + frost resolve (done); ADR 007  
 **Does not replace:** Vegetable/herb catalog scheduling  
-**PR:** [#25](https://github.com/bryanbeltran/seed-starter/pull/25) (this plan)  
-**Audit:** [native-plants-plan-audit.md](./native-plants-plan-audit.md) — amendments folded below  
-**Data sources:** [native-plants-data-sources.md](./native-plants-data-sources.md) — **where data comes from**
+**Audit:** [native-plants-plan-audit.md](./native-plants-plan-audit.md) · [impl audit](./native-plants-impl-audit.md)  
+**Data sources:** [native-plants-data-sources.md](./native-plants-data-sources.md)
 
 ## Goal
 
@@ -30,12 +29,12 @@ Interview signal: spatial ecology join + frost scheduling reuse — not another 
 | # | Decision |
 |---|----------|
 | 1 | **Native key = EPA Level III ecoregion**, not hardiness zone. Zone 5a MN ≠ 5a CO. |
-| 2 | **ZIP → ZCTA centroid → ecoregion id** precomputed into `data/natives/zip-ecoregion.json`. Never mutate `zipClimate.json`. County refine = later. |
-| 3 | **Timing = frost offsets** (ADR 004). No soil temp / GDD. **v1 frost anchor = p50 only** (explicit); `?riskProfile=` optional stretch — not required for v1 ship. |
+| 2 | **ZIP → ZCTA centroid → ecoregion id** precomputed into `data/natives/zip-ecoregion.json`. Never mutate `zipClimate.json`. County = Census overlay (`zip-county.json`) for context only. |
+| 3 | **Timing = frost offsets** (ADR 004). No soil temp / GDD. `?riskProfile=` (default balanced / p50); same spring/fall invert as veg planner. |
 | 4 | **Parallel product surface** — `/natives` + `/api/natives`. Do not merge into veg CropPicker. Do **not** reuse schedule `LocationForm` (season-coupled); share `isValidZip` only. |
-| 5 | **Curated depth:** v1 ship = **ecoregion 51 ≥15 cited species**. Second (arid/contrast) L3 = Phase 5 stretch, not a v1 gate. |
+| 5 | **Curated depth:** L3 **51**, **25**, **59**, **54** each ≥15 cited species. Uncovered L3 → `catalogCoverage: "none"`. |
 | 6 | **ADR 007** before any nativity claims in UI/API. Licenses locked in ADR before Phase 2 curation. Stack: **EPA L3 + Census centroids** (join), **USDA PLANTS** (nativity), **NRCS/BWSR + frost** (timing). See [data sources](./native-plants-data-sources.md). **No BONAP dump.** |
-| 7 | Saved “native meadow plans” deferred; deep-link `?zip=` is the bookmark. |
+| 7 | Saved “native meadow plans” deferred; deep-link `?zip=&season=&riskProfile=` is the bookmark. |
 
 ### Rejected
 
@@ -193,8 +192,8 @@ Uncovered ecoregion: show name + “Catalog coming” + link to veg planner. `ca
 | Area | Path |
 |------|------|
 | ADR | `docs/adrs/007-native-ecoregion.md` |
-| Data | `data/natives/{plants,ecoregion-plants,zip-ecoregion,golden-zips}.json` |
-| Domain | `src/natives/resolveNatives.ts`, `lookupEcoregion.ts` |
+| Data | `data/natives/{plants,ecoregion-plants,zip-ecoregion,zip-county,golden-zips}.json` |
+| Domain | `src/natives/resolveNatives.ts`, `lookupEcoregion.ts`, `lookupCounty.ts` |
 | API | `src/app/api/natives/route.ts` |
 | UI | `src/app/natives/page.tsx`, `src/components/natives/*` |
 | Nav | `AppHeader`, `AppFooter` |
@@ -203,15 +202,15 @@ Uncovered ecoregion: show name + “Catalog coming” + link to veg planner. `ca
 
 ## Acceptance (v1 ship)
 
-- [ ] ADR 007 accepted (licenses + p50-only + pilot 51)
-- [ ] Golden ZIP → ecoregion **exact id** ≥90%
-- [ ] Ecoregion 51: ≥15 cited natives with frost rules
-- [ ] `GET /api/natives?zip=55423` returns plants + dates
-- [ ] `/natives` UI: ZIP → list + start dates + provenance
-- [ ] Uncovered ecoregion does not invent species
-- [ ] Eval script in `pnpm run check`
-- [ ] No zone-only nativity claims in copy
-- [ ] Contrast second L3 **not** required for v1
+- [x] ADR 007 accepted (licenses + timing + pilot 51)
+- [x] Golden ZIP → ecoregion **exact id** ≥90%
+- [x] Ecoregion 51: ≥15 cited natives with frost rules
+- [x] `GET /api/natives?zip=55423` returns plants + dates
+- [x] `/natives` UI: ZIP → list + start dates + provenance
+- [x] Uncovered ecoregion does not invent species
+- [x] Eval script in `pnpm run check`
+- [x] No zone-only nativity claims in copy
+- [x] Contrast second L3 **not** required for v1 (shipped in Phase 5 anyway)
 
 ## Out of scope
 

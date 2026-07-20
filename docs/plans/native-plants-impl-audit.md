@@ -63,3 +63,4 @@
 | Artifact size | Compacted zip→id + names map (~415KB); zip-county ~645KB |
 | CI e2e | Strict-mode: `getByText("Purple coneflower")` matched name + task — use `exact: true` |
 | Saved lists | Deferred (deep-link bookmark) |
+| Audit fix | SeedForm passes `season` to RiskProfilePicker; fall gate = `fallDormant`; strat days for fall offset |
