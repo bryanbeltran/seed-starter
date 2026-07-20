@@ -76,12 +76,12 @@ curl -sS "$BASE/api/location?zip=55423&season=fall" | jq .
 5. Flip **Spring** → Tomato available.
 
 ## Acceptance
-- [ ] health.commit matches `origin/main` (after poll)
-- [ ] `smoke:prod` green
-- [ ] Fall lettuce + carrot API checks pass
-- [ ] Fall + tomato → 400
-- [ ] Location fall returns autumn anchor in `lastFrostP50`
-- [ ] UI save/reload keeps Fall
+- [x] health.commit matches `origin/main` (after poll)
+- [x] `smoke:prod` green
+- [x] Fall lettuce + carrot API checks pass
+- [x] Fall + tomato → 400
+- [x] Location fall returns autumn anchor in `lastFrostP50`
+- [x] UI save/reload keeps Fall
 
 ## Severity for handoff
 | Failure | Block polish-03? |

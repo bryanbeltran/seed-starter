@@ -26,9 +26,9 @@ Offsets are horticulturally plausible; **emit order / clamping** is wrong for th
 5. Optional: audit catalog fall transplant blocks where `indoorSowOffsetDays < |transplantDaysAfterAnchor| + harden` and fix defaults if absurd.
 
 ## Acceptance
-- [ ] No transplant schedule emits harden before indoor sow
-- [ ] Unit test locks ordering invariant
-- [ ] Spring schedules unchanged for well-ordered crops (tomato etc.)
+- [x] No transplant schedule emits harden before indoor sow
+- [x] Unit test locks ordering invariant
+- [x] Spring schedules unchanged for well-ordered crops (tomato etc.)
 
 ## Files
 `src/planning/schedule.ts`, `src/planning/schedule.test.ts`, optionally `scripts/catalog/lib/cropDefaults.mjs`

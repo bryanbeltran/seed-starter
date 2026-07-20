@@ -29,10 +29,10 @@ Observed after fall regen: **~206** fall + **~202** spring ZIPs with non-monoton
 4. Add CI assertion in `check-climate-drift.mjs` or golden helper: fail if any ZIP has p10 > p50 or p50 > p90 (spring + fall when present).
 
 ## Acceptance
-- [ ] Unit tests cover small-n monotonicity
-- [ ] `zipClimate` fall+spring: 0 non-monotonic rows
-- [ ] Golden check still green
-- [ ] No full GHCN re-fetch required (rebuild from summaries)
+- [x] Unit tests cover small-n monotonicity
+- [x] `zipClimate` fall+spring: 0 non-monotonic rows
+- [x] Golden check still green
+- [x] No full GHCN re-fetch required (rebuild from summaries)
 
 ## Files
 `scripts/lib/ghcn-zip-climate.mjs`, `src/climate/ghcnEtl.test.ts`, `scripts/check-climate-drift.mjs` (or new check), `data/zipClimate.json` (regen)

@@ -21,10 +21,10 @@ Ship a **conservative default** without waiting on full frost heuristic:
 Full frost-window flip dates (needs location resolve before default — race with ZIP). Keep that in gap-06.
 
 ## Acceptance
-- [ ] Cold load in July shows Spring selected
-- [ ] Session/restored fall still wins over default
-- [ ] Fall e2e still passes
-- [ ] formState unit tests updated
+- [x] Cold load in July shows Spring selected
+- [x] Session/restored fall still wins over default
+- [x] Fall e2e still passes
+- [x] formState unit tests updated
 
 ## Files
 `src/components/seed-form/formState.ts`, `formState.test.ts`, `e2e/seed-form.spec.ts` (simplify if possible)
