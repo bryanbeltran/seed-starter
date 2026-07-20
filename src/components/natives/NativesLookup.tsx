@@ -131,7 +131,7 @@ export function NativesLookup() {
               aria-invalid={!!error}
             />
             <Button type="submit" disabled={loading}>
-              {loading ? "Looking up…" : "Find natives"}
+              {loading ? "Looking up…" : "Find native plants"}
             </Button>
           </div>
         </div>
@@ -155,7 +155,7 @@ export function NativesLookup() {
               className="flex min-h-11 cursor-pointer items-center gap-2 rounded-md border p-3 has-[:checked]:border-primary"
             >
               <RadioGroupItem value="fall" id="natives-season-fall" />
-              <span className="text-sm">Fall dormant</span>
+              <span className="text-sm">Fall dormant sowing</span>
             </label>
           </RadioGroup>
         </fieldset>
@@ -204,16 +204,16 @@ export function NativesLookup() {
             </p>
             <p className="text-muted-foreground text-xs">
               Native to this EPA Level III ecoregion — not a guarantee for your
-              yard. County is Census overlay context only. Nativity: USDA
-              PLANTS. Timing: frost percentiles + curated offsets (
-              {data.riskProfile ?? "balanced"}).
+              yard. County shown for context; plants are matched by ecoregion.
+              Nativity: USDA PLANTS. Timing: frost percentiles + curated offsets
+              ({data.riskProfile ?? "balanced"}).
               {isFall && " Fall list shows species suited to dormant sowing."}
             </p>
           </header>
 
           {data.catalogCoverage === "none" && (
             <p className="text-sm">
-              Ecoregion mapped; plant catalog coming. Meanwhile use the{" "}
+              No native plant list for this ecoregion yet. Meanwhile use the{" "}
               <Link href="/" className="underline">
                 vegetable planner
               </Link>

@@ -25,8 +25,8 @@ export function PlanShareBar({ planId, planName, season }: Props) {
         Shared plan: {planName} · {seasonLabel}
       </p>
       <p className="text-muted-foreground mt-1 text-xs">
-        Anyone with this link can view the schedule. Editing still requires your
-        browser cookie on the main planner.
+        Anyone with this link can view the schedule. Only the original browser
+        can edit or delete this plan.
       </p>
       <div className="mt-2">
         <ShareLinkButton url={url} />

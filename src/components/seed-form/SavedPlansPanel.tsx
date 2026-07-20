@@ -173,7 +173,7 @@ export function SavedPlansPanel({
                     const diff = plan.scheduleDiff;
                     const frostNote =
                       diff?.lastFrostChanged
-                        ? ` Last frost moved (${new Date(diff.previousLastFrost).toLocaleDateString()} → ${new Date(diff.currentLastFrost).toLocaleDateString()}).`
+                        ? ` Frost anchor moved (${new Date(diff.previousLastFrost).toLocaleDateString()} → ${new Date(diff.currentLastFrost).toLocaleDateString()}).`
                         : "";
                     onStatusMessage(
                       `Loaded "${plan.name}" — climate data updated since save; dates refreshed.${frostNote}`,
@@ -204,7 +204,10 @@ export function SavedPlansPanel({
                 </span>
               </button>
               <div className="flex items-center gap-1">
-                <ShareLinkButton url={shareUrl(plan.id)} label="Copy" />
+                <ShareLinkButton
+                  url={shareUrl(plan.id)}
+                  label="Copy share link"
+                />
                 <Button
                   type="button"
                   variant="ghost"
@@ -225,7 +228,7 @@ export function SavedPlansPanel({
           <DialogHeader>
             <DialogTitle>Save plan</DialogTitle>
             <DialogDescription>
-              Store this ZIP, crops, and risk profile for your account.
+              Save this ZIP, season, crops, varieties, and risk profile.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-2">

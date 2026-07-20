@@ -15,7 +15,7 @@ test("natives fall dormant filters to fall sow tasks", async ({ page }) => {
   await page.goto("/natives");
   await page.getByLabel("ZIP code").fill("55423");
   await page.locator("#natives-season-fall").click();
-  await page.getByRole("button", { name: "Find natives" }).click();
+  await page.getByRole("button", { name: "Find native plants" }).click();
 
   await expect(page.getByText("North Central Hardwood Forests")).toBeVisible({
     timeout: 30_000,

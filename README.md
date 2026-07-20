@@ -1,6 +1,6 @@
 # Seed Starter
 
-Frost-aware garden planning for US ZIP codes. Pick crops and a risk profile, get a full planting timeline (sow, harden, transplant, harvest), and export CSV, calendar, or print-friendly schedules.
+Frost-aware garden planning for US ZIP codes. Pick a season, crops, varieties, and a risk profile, get a full planting timeline (sow, harden, transplant, harvest), and export CSV, calendar, or print-friendly schedules.
 
 **[Live demo](https://seed-starter.vercel.app)** · [Coverage](https://seed-starter.vercel.app/coverage) · [API docs](https://seed-starter.vercel.app/docs) · [Data sources](docs/data-sources.md)
 
@@ -8,7 +8,7 @@ Frost-aware garden planning for US ZIP codes. Pick crops and a risk profile, get
 
 ## Features
 
-- 90 crops, 2000 varieties from Johnny's, High Mowing, Territorial, and Fedco
+- 88 crops, 2000 varieties from Johnny's, High Mowing, Territorial, and Fedco
 - Crop picker: Popular / All / Vegetables / Herbs / Fruits + search
 - Risk profiles: conservative / balanced / aggressive (frost p90 / p50 / p10)
 - Climate data: NOAA GHCN nearest-station frost percentiles for ~33k US ZCTAs

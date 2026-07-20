@@ -115,7 +115,7 @@ export function CropPicker({
       />
       {!searching && category === "popular" && (
         <p className="text-muted-foreground text-xs">
-          Common MN garden crops. Search or see all crops.
+          Common garden crops. Search or see all crops.
         </p>
       )}
       {!searching && (

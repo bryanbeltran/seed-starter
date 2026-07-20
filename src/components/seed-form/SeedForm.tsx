@@ -278,7 +278,7 @@ export function SeedForm() {
       <CardHeader>
         <CardTitle>Your garden</CardTitle>
         <CardDescription>
-          ZIP, crops, varieties, and frost-risk profile.
+          ZIP, season, crops, varieties, and frost-risk profile.
         </CardDescription>
       </CardHeader>
       <CardContent>
