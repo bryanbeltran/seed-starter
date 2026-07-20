@@ -25,6 +25,10 @@
 # local cursor config (not for GitHub)
 .cursor/
 
+# local agent skill installs
+.agents/
+skills-lock.json
+
 # misc
 .DS_Store
 *.pem
