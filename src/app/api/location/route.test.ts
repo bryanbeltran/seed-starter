@@ -8,6 +8,8 @@ describe("GET /api/location", () => {
     const body = await res.json();
     expect(body.zone).toBe("5a");
     expect(body.lastFrostP50).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(body.lastSpringFrostP50).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(body.firstFallFrostP50).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(body.frostSource).toBeTruthy();
   });
 

@@ -28,12 +28,17 @@ import { PlannerHero } from "./PlannerHero";
 import { StatusBanner } from "./StatusBanner";
 import type { ScheduleResult } from "./types";
 import {
+  parseIsoDateLocal,
+  suggestSeasonFromFrost,
+} from "./defaultSeason";
+import {
   cropSelectionsFromForm,
   defaultSeasonForDate,
   isValidZip,
   loadFormState,
   saveFormState,
 } from "./formState";
+import type { LocationPreview } from "./LocationForm";
 import { cn } from "@/lib/utils";
 
 const availableCrops = listCrops();
@@ -44,6 +49,7 @@ export function SeedForm() {
   const [varieties, setVarieties] = useState<Record<string, string | undefined>>({});
   const [riskProfile, setRiskProfile] = useState<RiskProfile>("balanced");
   const [season, setSeason] = useState<GardenSeason>(() => defaultSeasonForDate());
+  const [seasonLocked, setSeasonLocked] = useState(false);
   const [compareMode, setCompareMode] = useState(false);
   const [results, setResults] = useState<ScheduleResult | null>(null);
   const [compared, setCompared] = useState<CompareResult | null>(null);
@@ -65,7 +71,10 @@ export function SeedForm() {
       if (saved.selectedCrops) setSelectedCrops(saved.selectedCrops);
       if (saved.varieties) setVarieties(saved.varieties);
       if (saved.riskProfile) setRiskProfile(saved.riskProfile);
-      if (saved.season) setSeason(saved.season);
+      if (saved.season) {
+        setSeason(saved.season);
+        setSeasonLocked(true);
+      }
       if (saved.compareMode) setCompareMode(saved.compareMode);
     }
   }, []);
@@ -112,7 +121,7 @@ export function SeedForm() {
     };
   }
 
-  function handleSeasonChange(next: GardenSeason) {
+  function applySeason(next: GardenSeason) {
     setSeason(next);
     const allowed = new Set(cropIdsForSeason(next));
     setSelectedCrops((prev) => prev.filter((id) => allowed.has(id)));
@@ -123,6 +132,22 @@ export function SeedForm() {
       }
       return filtered;
     });
+  }
+
+  function handleSeasonChange(next: GardenSeason) {
+    setSeasonLocked(true);
+    applySeason(next);
+  }
+
+  function handleLocationPreview(preview: LocationPreview) {
+    if (seasonLocked || !preview.lastSpringFrostP50) return;
+    const suggested = suggestSeasonFromFrost({
+      lastSpringFrostP50: parseIsoDateLocal(preview.lastSpringFrostP50),
+      firstFallFrostP50: preview.firstFallFrostP50
+        ? parseIsoDateLocal(preview.firstFallFrostP50)
+        : null,
+    });
+    if (suggested !== season) applySeason(suggested);
   }
 
   async function runCalculate(
@@ -204,7 +229,10 @@ export function SeedForm() {
     setSelectedCrops(plan.crops);
     setVarieties({});
     setRiskProfile(plan.riskProfile);
-    if (plan.season) setSeason(plan.season);
+    if (plan.season) {
+      setSeason(plan.season);
+      setSeasonLocked(true);
+    }
     setResults(plan.schedule);
     setCompared(null);
     setPlanName(plan.name);
@@ -261,8 +289,13 @@ export function SeedForm() {
             onZipChange={(v) => {
               setZip(v);
               setZipError(null);
+              setSeasonLocked(false);
             }}
-            onTryExample={() => setZip("55423")}
+            onTryExample={() => {
+              setSeasonLocked(false);
+              setZip("55423");
+            }}
+            onPreview={handleLocationPreview}
           />
           <SeasonPicker
             value={season}

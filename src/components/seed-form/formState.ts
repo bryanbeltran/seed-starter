@@ -14,7 +14,7 @@ export type FormState = {
   compareMode: boolean;
 };
 
-/** Default to spring until frost-aware heuristic (gap-06) ships. */
+/** First paint before ZIP resolve. Frost-aware suggest runs on location preview. */
 export function defaultSeasonForDate(_now?: Date): GardenSeason {
   void _now;
   return "spring";
