@@ -1,8 +1,26 @@
 import { describe, expect, it } from "vitest";
 import type { FrostClimateLookup } from "./types";
+import regionalFrost from "./data/regionalFrost.json";
+import fallFrostDates from "./fallFrostDates.json";
 import { resolveFirstFallFrost, resolveLastFrost } from "./frostResolver";
 
 const ref = new Date(2026, 0, 15);
+
+describe("fall fallback fixtures", () => {
+  it("has ≥6 regional bands with firstFallFrost", () => {
+    const withFall = Object.values(regionalFrost).filter((r) => r.firstFallFrost);
+    expect(withFall.length).toBeGreaterThanOrEqual(6);
+  });
+
+  it("zone fall table covers 3a–11b", () => {
+    for (const z of [
+      "3a", "3b", "4a", "4b", "5a", "5b", "6a", "6b",
+      "7a", "7b", "8a", "8b", "9a", "9b", "10a", "10b", "11a", "11b",
+    ]) {
+      expect(fallFrostDates[z as keyof typeof fallFrostDates]).toMatch(/^\d{2}-\d{2}$/);
+    }
+  });
+});
 
 describe("resolveLastFrost", () => {
   it("prefers station model for known zips", () => {

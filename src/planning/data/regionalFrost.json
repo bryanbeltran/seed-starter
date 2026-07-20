@@ -1,23 +1,51 @@
 {
+  "northern-plains": {
+    "name": "Northern Plains",
+    "zones": ["3a", "3b", "4a"],
+    "lastFrost": "05-15",
+    "firstFallFrost": "10-02",
+    "provenance": "climate aggregate median by zone band (ghcn-2026-07-19)"
+  },
   "upper-midwest": {
     "name": "Upper Midwest",
-    "zones": ["3a", "3b", "4a", "4b", "5a"],
-    "lastFrost": "04-20",
-    "firstFallFrost": "09-30",
-    "provenance": "regional probability fixture"
+    "zones": ["4b", "5a"],
+    "lastFrost": "05-08",
+    "firstFallFrost": "10-11",
+    "provenance": "climate aggregate median by zone band (ghcn-2026-07-19)"
   },
   "northeast": {
     "name": "Northeast",
-    "zones": ["5b", "6a", "6b", "7a", "7b"],
+    "zones": ["5b", "6a"],
+    "lastFrost": "04-28",
+    "firstFallFrost": "10-22",
+    "provenance": "climate aggregate median by zone band (ghcn-2026-07-19)"
+  },
+  "ohio-valley": {
+    "name": "Ohio Valley",
+    "zones": ["6b", "7a"],
+    "lastFrost": "04-18",
+    "firstFallFrost": "11-02",
+    "provenance": "climate aggregate median by zone band (ghcn-2026-07-19)"
+  },
+  "mid-atlantic": {
+    "name": "Mid-Atlantic",
+    "zones": ["7b", "8a"],
     "lastFrost": "04-05",
-    "firstFallFrost": "10-20",
-    "provenance": "regional probability fixture"
+    "firstFallFrost": "11-12",
+    "provenance": "climate aggregate median by zone band (ghcn-2026-07-19)"
   },
   "southeast": {
     "name": "Southeast",
-    "zones": ["8a", "8b", "9a", "9b"],
-    "lastFrost": "03-01",
-    "firstFallFrost": "11-25",
-    "provenance": "regional probability fixture"
+    "zones": ["8b", "9a"],
+    "lastFrost": "03-10",
+    "firstFallFrost": "11-22",
+    "provenance": "climate aggregate median by zone band (ghcn-2026-07-19)"
+  },
+  "gulf-south": {
+    "name": "Gulf South",
+    "zones": ["9b"],
+    "lastFrost": "02-20",
+    "firstFallFrost": "12-09",
+    "provenance": "climate aggregate median by zone band (ghcn-2026-07-19)"
   }
 }

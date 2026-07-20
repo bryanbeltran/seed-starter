@@ -173,6 +173,11 @@ export function fallSeason(block) {
  * Fall timing offsets are relative to the first fall frost.
  * - direct `before` = days before first fall frost.
  * - transplant `after` is typically negative (transplant before frost).
+ *
+ * Inclusion: cool-season veg/herbs that finish before frost or tolerate light frost;
+ * fall-planted overwinter alliums (garlic/onion/shallot). Exclude warm solanaceae,
+ * cucurbits, corn/beans, and heat herbs (basil, rosemary, etc.).
+ * Offsets ≈ daysToHarvest (+small buffer) for direct; transplants count back indoor+harden.
  */
 const FALL_DEFAULTS = {
   spinach: D(42, 40),
@@ -193,8 +198,13 @@ const FALL_DEFAULTS = {
   carrot: D(75, 70),
   beet: D(60, 55),
   chard: D(60, 55),
+  parsnip: D(110, 110),
+  potato: D(90, 90),
 
   garlic: D(21, 240),
+  onion: D(28, 240),
+  shallot: D(28, 100),
+  leek: T(70, 7, -100, 120),
 
   pea: D(65, 60),
   cilantro: D(50, 45),
@@ -205,6 +215,24 @@ const FALL_DEFAULTS = {
   endive: T(30, 5, -55, 85),
   escarole: T(30, 5, -55, 85),
   rutabaga: D(95, 90),
+  celery: T(70, 7, -90, 90),
+  fennel: D(80, 90),
+
+  chervil: D(50, 45),
+  chamomile: D(55, 60),
+  borage: D(55, 60),
+  lovage: T(42, 5, -55, 90),
+  angelica: T(56, 5, -70, 120),
+  dandelion: D(50, 55),
+  "salad-burnet": D(50, 60),
+
+  cress: D(35, 30),
+  watercress: D(40, 45),
+  sorrel: D(50, 60),
+  orach: D(45, 45),
+  microgreens: D(21, 21),
+
+  strawberry: D(45, 90),
 };
 
 export function cropFallDefaults(cropId) {

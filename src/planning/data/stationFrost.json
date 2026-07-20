@@ -12,5 +12,19 @@
     "lastFrost": "04-08",
     "firstFallFrost": "11-05",
     "provenance": "NOAA GHCN-D fixture"
+  },
+  "KDEN": {
+    "name": "Denver International",
+    "zips": ["80202", "80209", "80220"],
+    "lastFrost": "05-05",
+    "firstFallFrost": "10-01",
+    "provenance": "NOAA GHCN-D fixture"
+  },
+  "KSEA": {
+    "name": "Seattle Tacoma",
+    "zips": ["98101", "98109", "98115"],
+    "lastFrost": "03-20",
+    "firstFallFrost": "11-15",
+    "provenance": "NOAA GHCN-D fixture"
   }
 }
