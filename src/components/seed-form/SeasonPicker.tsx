@@ -37,6 +37,7 @@ export function SeasonPicker({ value, loading, onChange }: Props) {
               id={`season-${s.id}`}
               className="mt-0.5"
               aria-describedby={`season-${s.id}-hint`}
+              onClick={() => onChange(s.id)}
             />
             <span>
               <span className="text-sm font-medium">{s.label}</span>
