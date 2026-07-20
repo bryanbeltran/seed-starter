@@ -107,13 +107,7 @@ export function ScheduleResults({
             <CardTitle className="print:text-xl">
               Zone {results.zone.toUpperCase()}
             </CardTitle>
-<<<<<<< HEAD
             <Badge variant="outline">{seasonLabel}</Badge>
-=======
-            <Badge variant="outline">
-              {results.season === "fall" ? "Fall" : "Spring"}
-            </Badge>
->>>>>>> 11c07c8 (feat(ui): season on share, print, plan list)
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
