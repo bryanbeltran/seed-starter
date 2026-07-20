@@ -1,6 +1,7 @@
 import { addDays, subDays } from "date-fns";
 import plantsData from "../../data/natives/plants.json";
 import ecoregionPlantsData from "../../data/natives/ecoregion-plants.json";
+import { lookupZipCounty } from "./lookupCounty";
 import { lookupZipEcoregion, type EcoregionRef } from "./lookupEcoregion";
 import {
   ecoregionPlantsFileSchema,
@@ -8,7 +9,8 @@ import {
   type NativePlant,
 } from "./schema";
 import { resolveFrost } from "@/planning/frostResolver";
-import type { FrostClimateLookup, GardenSeason } from "@/planning/types";
+import { selectFrostDate } from "@/planning/riskProfile";
+import type { FrostClimateLookup, GardenSeason, RiskProfile } from "@/planning/types";
 
 const plantsFile = nativesFileSchema.parse(plantsData);
 const ecoregionFile = ecoregionPlantsFileSchema.parse(ecoregionPlantsData);
@@ -23,17 +25,30 @@ export type NativePlantResult = NativePlant & {
   tasks: NativeTask[];
 };
 
+export type CountyOverlay = {
+  fips: string;
+  name: string;
+  state: string;
+};
+
 export type ResolveNativesResult = {
   zip: string;
   zone: string;
   season: GardenSeason;
+  riskProfile: RiskProfile;
   ecoregion: EcoregionRef | null;
+  county: CountyOverlay | null;
   lastFrostDate: Date;
   frostSource: string;
   frostProvenance: string;
   plants: NativePlantResult[];
   catalogCoverage: "full" | "none" | "unknown";
 };
+
+function parseRiskProfile(raw?: RiskProfile | string | null): RiskProfile {
+  if (raw === "conservative" || raw === "aggressive") return raw;
+  return "balanced";
+}
 
 function tasksForPlant(
   plant: NativePlant,
@@ -93,12 +108,15 @@ export function resolveNatives(input: {
   zip: string;
   zone: string;
   season?: GardenSeason;
+  riskProfile?: RiskProfile | string | null;
   referenceDate?: Date;
   climateLookup?: FrostClimateLookup;
 }): ResolveNativesResult {
   const season: GardenSeason = input.season === "fall" ? "fall" : "spring";
+  const riskProfile = parseRiskProfile(input.riskProfile);
   const ecoregion = lookupZipEcoregion(input.zip);
-  const frost = resolveFrost(
+  const county = lookupZipCounty(input.zip);
+  const frostResolution = resolveFrost(
     {
       zone: input.zone,
       zip: input.zip,
@@ -107,14 +125,17 @@ export function resolveNatives(input: {
     },
     input.climateLookup,
   );
+  const lastFrostDate = selectFrostDate(frostResolution, riskProfile, season);
 
   const base = {
     zip: input.zip,
     zone: input.zone,
     season,
-    lastFrostDate: frost.lastFrostDate,
-    frostSource: frost.source,
-    frostProvenance: frost.provenance,
+    riskProfile,
+    county,
+    lastFrostDate,
+    frostSource: frostResolution.source,
+    frostProvenance: frostResolution.provenance,
   };
 
   if (!ecoregion) {
@@ -141,7 +162,7 @@ export function resolveNatives(input: {
     .filter(Boolean)
     .map((plant) => ({
       ...plant,
-      tasks: tasksForPlant(plant, frost.lastFrostDate, season),
+      tasks: tasksForPlant(plant, lastFrostDate, season),
     }))
     .filter((p) => p.tasks.length > 0);
 

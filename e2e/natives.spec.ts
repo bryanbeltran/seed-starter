@@ -22,3 +22,21 @@ test("natives fall dormant filters to fall sow tasks", async ({ page }) => {
   });
   await expect(page.getByText(/Fall dormant sow/i).first()).toBeVisible();
 });
+
+test("natives shows county overlay and risk profile", async ({ page }) => {
+  await page.goto("/natives?zip=55423&riskProfile=conservative");
+
+  await expect(page.getByText("Hennepin County, MN")).toBeVisible({
+    timeout: 30_000,
+  });
+  await expect(page.getByText("conservative", { exact: true }).first()).toBeVisible();
+});
+
+test("natives expands to Northeastern Coastal Zone", async ({ page }) => {
+  await page.goto("/natives?zip=10001");
+
+  await expect(page.getByText("Northeastern Coastal Zone")).toBeVisible({
+    timeout: 30_000,
+  });
+  await expect(page.getByText("New England aster", { exact: true })).toBeVisible();
+});
