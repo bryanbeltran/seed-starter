@@ -7,7 +7,7 @@ test("natives page shows ecoregion plants for ZIP", async ({ page }) => {
   await expect(page.getByText("North Central Hardwood Forests")).toBeVisible({
     timeout: 30_000,
   });
-  await expect(page.getByText("Purple coneflower")).toBeVisible();
+  await expect(page.getByText("Purple coneflower", { exact: true })).toBeVisible();
   await expect(page.getByText(/Direct sow Purple coneflower/i)).toBeVisible();
 });
 
