@@ -3,11 +3,13 @@
 import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import type { RiskProfile } from "@/planning";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { RiskProfilePicker } from "@/components/seed-form/RiskProfilePicker";
 
 type NativeTask = { type: string; date: string; label: string };
 type NativePlant = {
@@ -25,7 +27,9 @@ type NativesResponse = {
   zip: string;
   zone: string;
   season?: string;
+  riskProfile?: RiskProfile;
   ecoregion: { id: string; name: string } | null;
+  county?: { fips: string; name: string; state: string } | null;
   lastFrostDate: string;
   frostSource: string;
   catalogCoverage: string;
@@ -37,15 +41,25 @@ function isValidZip(zip: string) {
   return /^\d{5}$/.test(zip.replace(/\D/g, ""));
 }
 
+function parseRisk(raw: string | null): RiskProfile {
+  if (raw === "conservative" || raw === "aggressive") return raw;
+  return "balanced";
+}
+
 export function NativesLookup() {
   const searchParams = useSearchParams();
   const [zip, setZip] = useState("");
   const [season, setSeason] = useState<"spring" | "fall">("spring");
+  const [riskProfile, setRiskProfile] = useState<RiskProfile>("balanced");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [data, setData] = useState<NativesResponse | null>(null);
 
-  async function load(zipValue: string, seasonValue: "spring" | "fall") {
+  async function load(
+    zipValue: string,
+    seasonValue: "spring" | "fall",
+    risk: RiskProfile,
+  ) {
     if (!isValidZip(zipValue)) {
       setError("Enter a valid 5-digit US ZIP code.");
       return;
@@ -56,6 +70,7 @@ export function NativesLookup() {
       const q = new URLSearchParams({
         zip: zipValue.replace(/\D/g, ""),
         season: seasonValue,
+        riskProfile: risk,
       });
       const res = await fetch(`/api/natives?${q}`);
       const body = (await res.json()) as NativesResponse;
@@ -65,6 +80,11 @@ export function NativesLookup() {
         return;
       }
       setData(body);
+      const url = new URL(window.location.href);
+      url.searchParams.set("zip", zipValue.replace(/\D/g, ""));
+      url.searchParams.set("season", seasonValue);
+      url.searchParams.set("riskProfile", risk);
+      window.history.replaceState({}, "", url);
     } catch {
       setData(null);
       setError("Lookup failed.");
@@ -76,17 +96,19 @@ export function NativesLookup() {
   useEffect(() => {
     const qZip = searchParams.get("zip");
     const qSeason = searchParams.get("season") === "fall" ? "fall" : "spring";
+    const qRisk = parseRisk(searchParams.get("riskProfile"));
     setSeason(qSeason);
+    setRiskProfile(qRisk);
     if (qZip && isValidZip(qZip)) {
       setZip(qZip);
-      void load(qZip, qSeason);
+      void load(qZip, qSeason, qRisk);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- initial deep-link only
   }, []);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    void load(zip, season);
+    void load(zip, season, riskProfile);
   }
 
   const isFall = data?.season === "fall";
@@ -137,6 +159,12 @@ export function NativesLookup() {
             </label>
           </RadioGroup>
         </fieldset>
+        <RiskProfilePicker
+          value={riskProfile}
+          loading={loading}
+          onChange={setRiskProfile}
+          season={season}
+        />
         {error && (
           <p className="text-sm text-destructive" role="alert">
             {error}
@@ -154,7 +182,15 @@ export function NativesLookup() {
               {data.ecoregion && (
                 <Badge variant="outline">L3 {data.ecoregion.id}</Badge>
               )}
+              {data.county && (
+                <Badge variant="outline">
+                  {data.county.name} County, {data.county.state}
+                </Badge>
+              )}
               <Badge variant="outline">{isFall ? "Fall" : "Spring"}</Badge>
+              <Badge variant="outline" className="capitalize">
+                {data.riskProfile ?? "balanced"}
+              </Badge>
               <Badge variant="secondary" className="capitalize">
                 {data.frostSource} frost
               </Badge>
@@ -168,7 +204,9 @@ export function NativesLookup() {
             </p>
             <p className="text-muted-foreground text-xs">
               Native to this EPA Level III ecoregion — not a guarantee for your
-              yard. Nativity: USDA PLANTS. Timing: frost p50 + curated offsets.
+              yard. County is Census overlay context only. Nativity: USDA
+              PLANTS. Timing: frost percentiles + curated offsets (
+              {data.riskProfile ?? "balanced"}).
               {isFall && " Fall list shows species suited to dormant sowing."}
             </p>
           </header>

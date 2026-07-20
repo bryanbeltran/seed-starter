@@ -50,7 +50,8 @@ Eval gates (golden ZIPs ±14d, drift/monotonic percentiles): see README **Climat
 | Layer | Source |
 |-------|--------|
 | ZIP → ecoregion | Census ZCTA centroids × EPA L3 shapefile → `data/natives/zip-ecoregion.json` (`pnpm run etl:natives-ecoregion -- --write`) |
-| Species nativity | USDA PLANTS (hand-curated lists per ecoregion) |
-| Seed timing | GHCN last-spring-frost p50 + NRCS / regional guidelines |
+| ZIP → county (overlay) | Census ZCTA-county rel (max pop share) + gazetteer → `data/natives/zip-county.json` (`pnpm run etl:natives-county -- --fetch --write`) |
+| Species nativity | USDA PLANTS (hand-curated lists per ecoregion: 51, 25, 59, 54) |
+| Seed timing | GHCN frost percentiles + `riskProfile` + NRCS / regional guidelines |
 
 See [ADR 007](adrs/007-native-ecoregion.md) and [native-plants-data-sources.md](plans/native-plants-data-sources.md).

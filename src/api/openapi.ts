@@ -35,6 +35,22 @@ export const openApiSpec = {
             required: true,
             schema: { type: "string", pattern: "^\\d{5}$" },
           },
+          {
+            name: "season",
+            in: "query",
+            required: false,
+            schema: { type: "string", enum: ["spring", "fall"], default: "spring" },
+          },
+          {
+            name: "riskProfile",
+            in: "query",
+            required: false,
+            schema: {
+              type: "string",
+              enum: ["conservative", "balanced", "aggressive"],
+              default: "balanced",
+            },
+          },
         ],
         responses: {
           "200": {

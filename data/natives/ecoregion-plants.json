@@ -1,5 +1,28 @@
 {
   "ecoregions": {
+    "25": {
+      "ecoregionId": "25",
+      "name": "High Plains",
+      "plantIds": [
+        "bouteloua-gracilis",
+        "bouteloua-curtipendula",
+        "schizachyrium-scoparium",
+        "andropogon-gerardii",
+        "panicum-virgatum",
+        "ratibida-columnifera",
+        "linum-lewisii",
+        "gaillardia-aristata",
+        "asclepias-speciosa",
+        "penstemon-strictus",
+        "dalea-purpurea",
+        "artemisia-frigida",
+        "eriogonum-umbellatum",
+        "oenothera-missouriensis",
+        "rudbeckia-hirta",
+        "echinacea-purpurea"
+      ],
+      "provenance": "Hand-curated High Plains / Front Range natives; PLANTS-native in CO/region. ADR 007 Phase 5."
+    },
     "51": {
       "ecoregionId": "51",
       "name": "North Central Hardwood Forests",
@@ -23,28 +46,51 @@
       ],
       "provenance": "Hand-curated MN/Upper Midwest prairie–woodland natives; PLANTS-native in MN. ADR 007."
     },
-    "25": {
-      "ecoregionId": "25",
-      "name": "High Plains",
+    "54": {
+      "ecoregionId": "54",
+      "name": "Central Corn Belt Plains",
       "plantIds": [
-        "bouteloua-gracilis",
-        "bouteloua-curtipendula",
+        "echinacea-pallida",
+        "silphium-laciniatum",
+        "silphium-terebinthinaceum",
+        "eryngium-yuccifolium",
+        "ratibida-pinnata",
+        "dalea-purpurea",
+        "asclepias-syriaca",
+        "asclepias-incarnata",
+        "monarda-fistulosa",
+        "rudbeckia-hirta",
         "schizachyrium-scoparium",
         "andropogon-gerardii",
+        "bouteloua-curtipendula",
         "panicum-virgatum",
-        "ratibida-columnifera",
-        "linum-lewisii",
-        "gaillardia-aristata",
-        "asclepias-speciosa",
-        "penstemon-strictus",
-        "dalea-purpurea",
-        "artemisia-frigida",
-        "eriogonum-umbellatum",
-        "oenothera-missouriensis",
+        "sporobolus-heterolepis",
+        "penstemon-digitalis"
+      ],
+      "provenance": "Hand-curated Central Corn Belt Plains natives; PLANTS-native in IL/IN/IA. ADR 007 Phase 5."
+    },
+    "59": {
+      "ecoregionId": "59",
+      "name": "Northeastern Coastal Zone",
+      "plantIds": [
+        "symphyotrichum-novae-angliae",
+        "liatris-spicata",
+        "baptisia-tinctoria",
+        "vernonia-noveboracensis",
+        "solidago-sempervirens",
+        "amelanchier-canadensis",
+        "viburnum-dentatum",
+        "carex-pensylvanica",
+        "asclepias-syriaca",
+        "asclepias-incarnata",
         "rudbeckia-hirta",
+        "monarda-fistulosa",
+        "aquilegia-canadensis",
+        "schizachyrium-scoparium",
+        "panicum-virgatum",
         "echinacea-purpurea"
       ],
-      "provenance": "Hand-curated High Plains / Front Range natives; PLANTS-native in CO/region. ADR 007 Phase 5."
+      "provenance": "Hand-curated Northeastern Coastal Zone natives; PLANTS-native in NY/NE. ADR 007 Phase 5."
     }
   }
 }

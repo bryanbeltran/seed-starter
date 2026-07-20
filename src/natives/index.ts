@@ -1,3 +1,9 @@
 export { lookupZipEcoregion, type EcoregionRef } from "./lookupEcoregion";
-export { resolveNatives, type NativePlantResult, type ResolveNativesResult } from "./resolveNatives";
+export { lookupZipCounty } from "./lookupCounty";
+export {
+  resolveNatives,
+  type NativePlantResult,
+  type ResolveNativesResult,
+  type CountyOverlay,
+} from "./resolveNatives";
 export type { NativePlant } from "./schema";

@@ -106,9 +106,9 @@ Strict sequence where deps matter. Parallel where noted.
 
 ## After polish (queued)
 
-| Item | Plan | Why after 1–10 |
-|------|------|----------------|
-| Native plants by ZIP | [native-plants-by-zip.md](./native-plants-by-zip.md) | Needs ADR 007 (ecoregion ≠ zone); reuses frost sow model; don’t dilute veg Fall polish |
+| Item | Plan | Status |
+|------|------|--------|
+| Native plants by ZIP | [native-plants-by-zip.md](./native-plants-by-zip.md) | Done through Phase 5 |
 
 ## Interview talking points
 

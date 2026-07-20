@@ -19,6 +19,7 @@
     "etl:phzm": "node scripts/etl-phzm-zones.mjs",
     "etl:catalog": "node scripts/catalog/etl-catalog.mjs",
     "etl:natives-ecoregion": "node scripts/etl-natives-ecoregion.mjs",
+    "etl:natives-county": "node scripts/etl-natives-county.mjs",
     "check:native-ecoregion": "node scripts/check-native-ecoregion.mjs",
     "check:catalog": "node scripts/check-catalog.mjs",
     "audit:timing": "node scripts/audit-timing.mjs",

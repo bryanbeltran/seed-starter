@@ -7,6 +7,8 @@ describe("GET /api/natives", () => {
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.ecoregion.id).toBe("51");
+    expect(body.county.name).toBe("Hennepin");
+    expect(body.riskProfile).toBe("balanced");
     expect(body.catalogCoverage).toBe("full");
     expect(body.plants.length).toBeGreaterThanOrEqual(15);
     expect(body.plants[0].tasks[0].date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
@@ -26,6 +28,14 @@ describe("GET /api/natives", () => {
     expect(body.plants.length).toBeGreaterThanOrEqual(15);
   });
 
+  it("returns Northeastern Coastal Zone for 10001", async () => {
+    const res = await GET(new Request("http://localhost/api/natives?zip=10001"));
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.ecoregion.id).toBe("59");
+    expect(body.plants.length).toBeGreaterThanOrEqual(15);
+  });
+
   it("supports fall season dormant sow", async () => {
     const res = await GET(
       new Request("http://localhost/api/natives?zip=55423&season=fall"),
@@ -34,5 +44,16 @@ describe("GET /api/natives", () => {
     const body = await res.json();
     expect(body.season).toBe("fall");
     expect(body.plants[0].tasks[0].type).toBe("fall_sow");
+  });
+
+  it("honors riskProfile query", async () => {
+    const res = await GET(
+      new Request(
+        "http://localhost/api/natives?zip=55423&riskProfile=conservative",
+      ),
+    );
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.riskProfile).toBe("conservative");
   });
 });

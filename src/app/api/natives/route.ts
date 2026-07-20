@@ -1,12 +1,17 @@
 import { format } from "date-fns";
 import { getFileClimateRepository } from "@/climate";
 import { resolveNatives } from "@/natives";
-import type { GardenSeason } from "@/planning";
+import type { GardenSeason, RiskProfile } from "@/planning";
 import { apiRoute } from "@/lib/apiRoute";
 import { resolveLocation } from "@/lib/resolveLocation";
 import { normalizeZip, ZoneLookupError } from "@/lib/zipToZone";
 
 const climateRepository = getFileClimateRepository();
+
+function parseRisk(raw: string | null): RiskProfile {
+  if (raw === "conservative" || raw === "aggressive") return raw;
+  return "balanced";
+}
 
 export const GET = apiRoute(
   "natives",
@@ -14,6 +19,7 @@ export const GET = apiRoute(
     const params = new URL(req.url).searchParams;
     const raw = params.get("zip") ?? "";
     const season: GardenSeason = params.get("season") === "fall" ? "fall" : "spring";
+    const riskProfile = parseRisk(params.get("riskProfile"));
 
     let zip: string;
     try {
@@ -31,6 +37,7 @@ export const GET = apiRoute(
         zip,
         zone,
         season,
+        riskProfile,
         climateLookup: climateRepository,
       });
       const frostLabel =
@@ -39,7 +46,9 @@ export const GET = apiRoute(
         zip: result.zip,
         zone: result.zone,
         season: result.season,
+        riskProfile: result.riskProfile,
         ecoregion: result.ecoregion,
+        county: result.county,
         [frostLabel]: format(result.lastFrostDate, "yyyy-MM-dd"),
         lastFrostDate: format(result.lastFrostDate, "yyyy-MM-dd"),
         frostSource: result.frostSource,

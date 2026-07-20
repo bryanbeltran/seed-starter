@@ -5,7 +5,7 @@
 | [Fall season](./fall-season.md) | P0 | Implemented (#18) |
 | [FAANG polish](./faang-polish.md) | Done (slots 1–10) | Complete |
 | [Variety timing](./variety-timing.md) | Slot 7 | Implemented |
-| [Native plants by ZIP](./native-plants-by-zip.md) | Done | Merged (#26) — [audit](./native-plants-plan-audit.md) · [impl log](./native-plants-impl-audit.md) |
+| [Native plants by ZIP](./native-plants-by-zip.md) | Done | Phases 0–5 (#26 + Phase 5 expand) |
 | [Summer season](./summer-season.md) | Defer | Low signal |
 
 ## Polish order (summary)

@@ -182,11 +182,11 @@ Uncovered ecoregion: show name + “Catalog coming” + link to veg planner. `ca
 
 ### Phase 5 — Expand (after v1)
 
-- Contrast L3 + more species
-- Optional `?riskProfile=`
-- Optional county overlay
-- Fall-sow natives via first fall frost
-- Saved native lists (only if users ask)
+- [x] Contrast L3 + more species (25, 59, 54)
+- [x] Optional `?riskProfile=`
+- [x] Optional county overlay (Census; context only)
+- [x] Fall-sow natives via first fall frost
+- [ ] Saved native lists (only if users ask) — deferred
 
 ## Key files (expected)
 

@@ -54,7 +54,12 @@
 |------|--------|
 | Lint CI | Fixed `<a href="/">` → `Link` |
 | Contrast L3 25 High Plains | 16 plants; 80202 full coverage |
+| L3 59 Northeastern Coastal | 16 plants; 10001 |
+| L3 54 Central Corn Belt | 16 plants; 60601 |
 | Fall dormant | `?season=fall` → `fall_sow` vs first fall frost |
-| e2e | `e2e/natives.spec.ts` |
-| Artifact size | Compacted zip→id + names map (~415KB vs 1.6MB) for CI/runtime |
+| `?riskProfile=` | selectFrostDate; UI + deep-link |
+| County overlay | Census ZCTA→county; UI badge; CI golden presence |
+| e2e | `e2e/natives.spec.ts` (county, risk, L3 59) |
+| Artifact size | Compacted zip→id + names map (~415KB); zip-county ~645KB |
 | CI e2e | Strict-mode: `getByText("Purple coneflower")` matched name + task — use `exact: true` |
+| Saved lists | Deferred (deep-link bookmark) |
