@@ -1,8 +1,15 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
+
+async function zipAndLockSpring(page: Page) {
+  await page.getByLabel("ZIP code").fill("55423");
+  // ZIP preview may auto-suggest Fall mid-year; lock Spring for warm-crop tests.
+  await page.locator("#season-spring").click();
+  await expect(page.locator("#season-spring")).toBeChecked();
+}
 
 test("calculates schedule from fixture zip", async ({ page }) => {
   await page.goto("/");
-  await page.getByLabel("ZIP code").fill("55423");
+  await zipAndLockSpring(page);
   await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
   await expect(page.getByText("Zone 5A", { exact: true })).toBeVisible();
@@ -13,7 +20,7 @@ test("calculates schedule from fixture zip", async ({ page }) => {
 test("saves and reopens a plan", async ({ page }) => {
   const planName = `E2E bed ${Date.now()}`;
   await page.goto("/");
-  await page.getByLabel("ZIP code").fill("55423");
+  await zipAndLockSpring(page);
   await page.getByRole("checkbox", { name: "Lettuce", exact: true }).click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
   await expect(page.getByText("Zone 5A", { exact: true })).toBeVisible();
@@ -34,7 +41,7 @@ test("saves and reopens a plan", async ({ page }) => {
 
 test("compares risk profiles", async ({ page }) => {
   await page.goto("/");
-  await page.getByLabel("ZIP code").fill("55423");
+  await zipAndLockSpring(page);
   await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
   await page.getByLabel("Compare risk profiles").click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
