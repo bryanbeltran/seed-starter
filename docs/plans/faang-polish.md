@@ -2,7 +2,7 @@
 
 **Goal:** High-signal senior portfolio — domain depth, production judgment, measurable correctness. Not feature sprawl.
 
-**State (2026-07-20):** Slots 1–8 + natives (#26) on main. Slots 9–10 (fall catalog + fallbacks) in flight.
+**State (2026-07-20):** Slots 1–10 + natives (#26) on main. Polish stack complete.
 
 ## Recommended implementation order
 
