@@ -1,7 +1,9 @@
 import type { GardenSeason } from "@/planning";
 
-/** Days after last spring frost before we prefer fall planning. */
+/** Days after last spring frost before we prefer summer planning. */
 const SPRING_WINDOW_DAYS = 30;
+/** Days before first fall frost when we flip from summer to fall. */
+const FALL_LEAD_DAYS = 45;
 
 function startOfDay(d: Date): Date {
   const x = new Date(d);
@@ -15,15 +17,14 @@ function addDays(d: Date, days: number): Date {
   return x;
 }
 
-/** Month-day key (MMDD) so year from resolveFrost (next occurrence) does not skew the cycle. */
+/** Month-day key (MMDD) so year from resolveFrost does not skew the cycle. */
 function mdKey(d: Date): number {
   return (d.getMonth() + 1) * 100 + d.getDate();
 }
 
 /**
  * Next actionable garden season from frost anchors.
- * Spring until ~30d past last spring frost; fall until first fall frost; else next spring.
- * Compares month-day only — climate dates may be next calendar year.
+ * Spring → summer → fall using month-day only.
  */
 export function suggestSeasonFromFrost(input: {
   now?: Date;
@@ -40,10 +41,17 @@ export function suggestSeasonFromFrost(input: {
 
   if (nowMd < springEndMd) return "spring";
 
-  if (input.firstFallFrostP50) {
-    const fallMd = mdKey(input.firstFallFrostP50);
-    if (nowMd < fallMd) return "fall";
-  }
+  if (!input.firstFallFrostP50) return "summer";
+
+  const fallBase = new Date(
+    2000,
+    input.firstFallFrostP50.getMonth(),
+    input.firstFallFrostP50.getDate(),
+  );
+  const fallMd = mdKey(fallBase);
+  const summerEndMd = mdKey(addDays(fallBase, -FALL_LEAD_DAYS));
+  if (nowMd < summerEndMd) return "summer";
+  if (nowMd < fallMd) return "fall";
 
   return "spring";
 }

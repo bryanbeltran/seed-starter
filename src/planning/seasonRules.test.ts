@@ -148,4 +148,20 @@ describe("rulesFromCrop", () => {
   it("delegates to fall when season is fall", () => {
     expect(rulesFromCrop(base, "fall")).toEqual(fallRulesFromCrop(base));
   });
+
+  it("delegates to summer when season is summer", () => {
+    const crop = {
+      ...base,
+      seasons: {
+        summer: {
+          anchor: "lastSpringFrost" as const,
+          method: "direct" as const,
+          directSowDaysBeforeAnchor: -14,
+          successionIntervalDays: 14,
+        },
+      },
+    };
+    expect(rulesFromCrop(crop, "summer").directSowDaysBeforeFrost).toBe(-14);
+    expect(rulesFromCrop(crop, "summer").successionIntervalDays).toBe(14);
+  });
 });

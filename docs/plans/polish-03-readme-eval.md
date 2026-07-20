@@ -44,10 +44,10 @@ Tone: factual. No “FAANG” / marketing language.
 - Extending smoke.mjs (polish-02 follow-up)
 
 ## Acceptance
-- [ ] README has Climate eval section
-- [ ] States ±14d, spring + fall, `pnpm run check`
-- [ ] Links golden data and/or ADR 003
-- [ ] Merged to `main`
+- [x] README has Climate eval section
+- [x] States ±14d, spring + fall, `pnpm run check`
+- [x] Links golden data and/or ADR 003
+- [x] Merged to `main`
 
 ## Draft sketch
 

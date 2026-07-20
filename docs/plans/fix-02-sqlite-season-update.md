@@ -25,9 +25,9 @@ Create/load already thread season. Update path false-greens if tests only assert
 3. Do not assert only on update return value without re-get.
 
 ## Acceptance
-- [ ] Update season spring→fall persists in sqlite file
-- [ ] Re-get after update returns fall schedule
-- [ ] Existing create/load tests still pass
+- [x] Update season spring→fall persists in sqlite file
+- [x] Re-get after update returns fall schedule
+- [x] Existing create/load tests still pass
 
 ## Files
 `src/persistence/sqliteSavedPlans.ts`, `src/persistence/savedPlanService.test.ts`

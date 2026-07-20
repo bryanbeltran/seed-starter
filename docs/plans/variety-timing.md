@@ -1,6 +1,6 @@
 # Plan: Variety timing
 
-**Status:** Ready to build (incremental)  
+**Status:** Implemented (A–B)
 **Depends on:** Catalog ETL + `resolveCropRules` (done)  
 **Independent of:** Fall/summer seasons (can ship in parallel)
 
@@ -64,11 +64,11 @@ indoorSowOffsetDays?: number  // already in schema
 
 ## Acceptance
 
-- [ ] Test fails if variety DTH stops affecting harvest
-- [ ] Audit surfaces extreme DTM deltas in `pnpm run check` (warn or fail — pick in PR)
-- [ ] Picker or results show DTM + source for selected variety
-- [ ] No blanket per-variety spring seasons in catalog
-- [ ] Outlier list triaged or threshold justified
+- [x] Test fails if variety DTH stops affecting harvest
+- [x] Audit surfaces extreme DTM deltas in `pnpm run check` (warn or fail — pick in PR)
+- [x] Picker or results show DTM + source for selected variety
+- [x] No blanket per-variety spring seasons in catalog
+- [x] Outlier list triaged or threshold justified
 
 ## Out of scope
 

@@ -10,7 +10,7 @@ User picks **fall** as the garden season. Schedule anchors on **first fall frost
 
 ## Decisions
 
-1. **MVP = spring + fall only.** Summer later.
+1. **MVP = spring + fall only.** Summer shipped separately (see `summer-season.md`).
 2. **Anchor = `firstFallFrost`.** Mirror spring GHCN nearest-station model (ADR 003 pattern).
 3. **Risk inversion:** conservative → earlier first frost (`p10`); balanced → `p50`; aggressive → later (`p90`).
 4. **One plan = one season.** Save/share carries `season`.

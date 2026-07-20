@@ -10,11 +10,11 @@
 Land fall season + climate regen + audit fixes on `main` so prod and portfolio reflect the work.
 
 ## Preconditions
-- [ ] GitHub check rollup on **remote** HEAD is green (`check` + `postgres` SUCCESS) — not merely `mergeable`
-- [ ] Vercel preview deploy SUCCESS for that commit
-- [ ] PR undrafted / ready to merge
-- [ ] No open blocker review comments
-- [ ] Ignore local untracked noise (`.agents/`); only remote branch matters
+- [x] GitHub check rollup on **remote** HEAD is green (`check` + `postgres` SUCCESS) — not merely `mergeable`
+- [x] Vercel preview deploy SUCCESS for that commit
+- [x] PR undrafted / ready to merge
+- [x] No open blocker review comments
+- [x] Ignore local untracked noise (`.agents/`); only remote branch matters
 
 ## Steps
 1. Wait until `gh pr checks 18` (or UI) shows all required checks green on latest commit.
@@ -37,10 +37,10 @@ Land fall season + climate regen + audit fixes on `main` so prod and portfolio r
 - Further commits on the fall branch after merge (unless hotfix)
 
 ## Acceptance
-- [ ] PR #18 state = MERGED
-- [ ] `origin/main` has ADR 006 + `firstFallFrostP50` in zipClimate
-- [ ] Production deploy queued/succeeded
-- [ ] Ready for polish-02
+- [x] PR #18 state = MERGED
+- [x] `origin/main` has ADR 006 + `firstFallFrostP50` in zipClimate
+- [x] Production deploy queued/succeeded
+- [x] Ready for polish-02
 
 ## Rollback
 1. `git revert -m 1 <merge_commit>` on `main` (or GitHub revert).

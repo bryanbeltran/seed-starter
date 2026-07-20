@@ -30,10 +30,10 @@ Prod uses Neon Postgres → fall save/reload broken in production.
    - Skip if no `DATABASE_URL` (existing pattern)
 
 ## Acceptance
-- [ ] Create fall plan in Postgres → column `season='fall'`
-- [ ] Get/list regenerates fall schedule (not spring)
-- [ ] Update still works
-- [ ] `pnpm run test:postgres` green when `DATABASE_URL` set
+- [x] Create fall plan in Postgres → column `season='fall'`
+- [x] Get/list regenerates fall schedule (not spring)
+- [x] Update still works
+- [x] `pnpm run test:postgres` green when `DATABASE_URL` set
 
 ## Files
 `src/persistence/postgresSavedPlans.ts`, `src/persistence/planHelpers.ts` (if needed), `src/persistence/postgresSavedPlans.test.ts` / `savedPlanService.test.ts`

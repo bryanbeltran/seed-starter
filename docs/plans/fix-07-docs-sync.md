@@ -17,9 +17,9 @@
 4. Optionally mark gap-07 done (already done) — no change needed if accurate
 
 ## Acceptance
-- [ ] fall-season.md matches reality
-- [ ] README links ADR 006
-- [ ] Plans index lists fix-01…07
+- [x] fall-season.md matches reality
+- [x] README links ADR 006
+- [x] Plans index lists fix-01…07
 
 ## Files
 `docs/plans/fall-season.md`, `docs/plans/README.md`, `README.md`

@@ -5,6 +5,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const seasons: { id: GardenSeason; label: string; hint: string }[] = [
   { id: "spring", label: "Spring", hint: "Anchored on last spring frost" },
+  { id: "summer", label: "Summer", hint: "Later sowings after last frost" },
   { id: "fall", label: "Fall", hint: "Anchored on first fall frost" },
 ];
 
@@ -24,7 +25,7 @@ export function SeasonPicker({ value, loading, onChange }: Props) {
         value={value}
         onValueChange={(v) => onChange(v as GardenSeason)}
         aria-labelledby="season-label"
-        className="grid grid-cols-2 gap-2"
+        className="grid grid-cols-1 gap-2 sm:grid-cols-3"
       >
         {seasons.map((s) => (
           <label

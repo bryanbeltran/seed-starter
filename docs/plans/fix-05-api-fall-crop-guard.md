@@ -18,10 +18,10 @@ UI filters via `cropSupportsSeason`. API/`buildSchedule` still accepts any crop 
 5. Do **not** silently drop crops (explicit fail is clearer than partial schedules).
 
 ## Acceptance
-- [ ] Fall + tomato → 400
-- [ ] Fall + lettuce → 200 with fall tasks
-- [ ] Spring + any catalog crop unchanged
-- [ ] Unit or route test covers both
+- [x] Fall + tomato → 400
+- [x] Fall + lettuce → 200 with fall tasks
+- [x] Spring + any catalog crop unchanged
+- [x] Unit or route test covers both
 
 ## Files
 `src/planning/schedule.ts` and/or `src/lib/createScheduleFromRequest.ts`, `src/app/api/schedules/route.ts`, tests, `src/api/openapi.ts`

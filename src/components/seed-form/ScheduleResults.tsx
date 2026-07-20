@@ -97,7 +97,12 @@ export function ScheduleResults({
         ? `${results.climateConfidence} confidence`
         : null;
   const cropIds = [...new Set(results.tasks.map((t) => t.cropId))];
-  const seasonLabel = isFall ? "Fall" : "Spring";
+  const seasonLabel =
+    results.season === "fall"
+      ? "Fall"
+      : results.season === "summer"
+        ? "Summer"
+        : "Spring";
 
   return (
     <Card className="print:shadow-none print:border-none">

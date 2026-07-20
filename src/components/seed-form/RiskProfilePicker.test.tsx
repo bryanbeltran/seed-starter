@@ -25,4 +25,16 @@ describe("RiskProfilePicker", () => {
     );
     expect(screen.getByText(/Earlier fall frost/i)).toBeInTheDocument();
   });
+
+  it("shows summer-aware hints when season is summer", () => {
+    render(
+      <RiskProfilePicker
+        value="conservative"
+        loading={false}
+        onChange={() => {}}
+        season="summer"
+      />,
+    );
+    expect(screen.getByText(/Later summer planting/i)).toBeInTheDocument();
+  });
 });

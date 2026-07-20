@@ -1,15 +1,18 @@
 import { test, expect } from "@playwright/test";
 
-test("fall season filters crops and shows first fall frost", async ({ page }) => {
-  await page.goto("/");
-
+async function zipAndLockFall(page: import("@playwright/test").Page) {
+  await page.getByLabel("ZIP code").fill("55423");
+  await expect(page.locator("#zip-preview")).toBeVisible({ timeout: 10_000 });
   await page.locator("#season-fall").click();
   await expect(page.locator("#season-fall")).toBeChecked();
+}
+
+test("fall season filters crops and shows first fall frost", async ({ page }) => {
+  await page.goto("/");
+  await zipAndLockFall(page);
 
   await expect(page.getByRole("checkbox", { name: "Tomato", exact: true })).toHaveCount(0);
   await page.getByRole("checkbox", { name: "Lettuce", exact: true }).click();
-
-  await page.getByLabel("ZIP code").fill("55423");
   await page.getByRole("button", { name: "Calculate schedule" }).click();
 
   await expect(page.locator("#zip-preview")).toContainText(/first fall frost/i);
@@ -19,9 +22,7 @@ test("fall season filters crops and shows first fall frost", async ({ page }) =>
 test("fall plan save and reload keeps season", async ({ page }) => {
   const planName = `E2E fall ${Date.now()}`;
   await page.goto("/");
-
-  await page.locator("#season-fall").click();
-  await page.getByLabel("ZIP code").fill("55423");
+  await zipAndLockFall(page);
   await page.getByRole("checkbox", { name: "Kale", exact: true }).click();
   await page.getByRole("button", { name: "Calculate schedule" }).click();
   await expect(page.locator("#zip-preview")).toContainText(/first fall frost/i);

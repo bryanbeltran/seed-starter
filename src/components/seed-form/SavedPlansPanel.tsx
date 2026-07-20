@@ -177,7 +177,11 @@ export function SavedPlansPanel({
                 <span className="flex items-center gap-2 font-medium">
                   {plan.name}
                   <Badge variant="outline" className="text-xs font-normal">
-                    {plan.season === "fall" ? "Fall" : "Spring"}
+                    {plan.season === "fall"
+                      ? "Fall"
+                      : plan.season === "summer"
+                        ? "Summer"
+                        : "Spring"}
                   </Badge>
                   {plan.climateDataStale && (
                     <Badge variant="outline" className="text-xs font-normal">
