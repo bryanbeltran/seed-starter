@@ -145,20 +145,24 @@ export function cropDefaults(cropId) {
 }
 
 function seasonFor(anchor, block) {
-  if (block.method === "transplant") {
-    return {
-      anchor,
-      method: "transplant",
-      indoorSowOffsetDays: block.indoorSowOffsetDays,
-      hardenOffDaysBeforeTransplant: block.hardenOffDaysBeforeTransplant,
-      transplantDaysAfterAnchor: block.transplantDaysAfterFrost ?? 0,
-    };
+  const base =
+    block.method === "transplant"
+      ? {
+          anchor,
+          method: "transplant",
+          indoorSowOffsetDays: block.indoorSowOffsetDays,
+          hardenOffDaysBeforeTransplant: block.hardenOffDaysBeforeTransplant,
+          transplantDaysAfterAnchor: block.transplantDaysAfterFrost ?? 0,
+        }
+      : {
+          anchor,
+          method: "direct",
+          directSowDaysBeforeAnchor: block.directSowDaysBeforeFrost ?? 0,
+        };
+  if (block.successionIntervalDays != null) {
+    base.successionIntervalDays = block.successionIntervalDays;
   }
-  return {
-    anchor,
-    method: "direct",
-    directSowDaysBeforeAnchor: block.directSowDaysBeforeFrost ?? 0,
-  };
+  return base;
 }
 
 export function springSeason(block) {
@@ -169,15 +173,13 @@ export function fallSeason(block) {
   return seasonFor("firstFallFrost", block);
 }
 
+export function summerSeason(block) {
+  return seasonFor("lastSpringFrost", block);
+}
+
 /**
  * Fall timing offsets are relative to the first fall frost.
- * - direct `before` = days before first fall frost.
- * - transplant `after` is typically negative (transplant before frost).
- *
- * Inclusion: cool-season veg/herbs that finish before frost or tolerate light frost;
- * fall-planted overwinter alliums (garlic/onion/shallot). Exclude warm solanaceae,
- * cucurbits, corn/beans, and heat herbs (basil, rosemary, etc.).
- * Offsets ≈ daysToHarvest (+small buffer) for direct; transplants count back indoor+harden.
+ * Inclusion: cool-season veg/herbs; fall-planted overwinter alliums.
  */
 const FALL_DEFAULTS = {
   spinach: D(42, 40),
@@ -235,10 +237,45 @@ const FALL_DEFAULTS = {
   strawberry: D(45, 90),
 };
 
+const Ds = (before, dth, succession) => ({
+  ...D(before, dth),
+  successionIntervalDays: succession,
+});
+
+/**
+ * Summer: same last-spring-frost anchor, later offsets (typically after frost).
+ * Negative directSowDaysBeforeFrost = days after frost. Optional succession.
+ */
+const SUMMER_DEFAULTS = {
+  beans: Ds(-14, 55, 14),
+  corn: D(-21, 75),
+  "squash-summer": Ds(-21, 55, 14),
+  cucumber: T(14, 5, 14, 55),
+  basil: T(21, 5, 14, 45),
+  okra: T(28, 5, 21, 60),
+  tomato: T(42, 7, 14, 75),
+  pepper: T(42, 7, 21, 70),
+  eggplant: T(42, 7, 21, 75),
+  melon: T(21, 5, 21, 85),
+  watermelon: T(21, 5, 21, 90),
+  cantaloupe: T(21, 5, 21, 85),
+  sunflower: D(-21, 90),
+  amaranth: Ds(-14, 60, 21),
+  "squash-winter": D(-28, 100),
+  pumpkin: D(-28, 100),
+  lettuce: Ds(-45, 40, 14),
+  chard: Ds(-30, 55, 21),
+};
+
 export function cropFallDefaults(cropId) {
   return FALL_DEFAULTS[cropId];
 }
 
+export function cropSummerDefaults(cropId) {
+  return SUMMER_DEFAULTS[cropId];
+}
+
 export const CROP_DEFAULT_IDS = Object.keys(DEFAULTS);
 export const CROP_FALL_DEFAULT_IDS = Object.keys(FALL_DEFAULTS);
-export { FALL_DEFAULTS };
+export const CROP_SUMMER_DEFAULT_IDS = Object.keys(SUMMER_DEFAULTS);
+export { FALL_DEFAULTS, SUMMER_DEFAULTS };

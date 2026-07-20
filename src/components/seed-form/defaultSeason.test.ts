@@ -22,17 +22,28 @@ describe("suggestSeasonFromFrost", () => {
     ).toBe("spring");
   });
 
-  it("flips to fall after spring transplant window", () => {
+  it("flips to summer after spring transplant window", () => {
     expect(
       suggestSeasonFromFrost({
         now: new Date(2026, 4, 20), // May 20 > Apr 15 + 30
         lastSpringFrostP50: springFrost,
         firstFallFrostP50: fallFrost,
       }),
-    ).toBe("fall");
+    ).toBe("summer");
     expect(
       suggestSeasonFromFrost({
-        now: new Date(2026, 7, 15),
+        now: new Date(2026, 6, 15),
+        lastSpringFrostP50: springFrost,
+        firstFallFrostP50: fallFrost,
+      }),
+    ).toBe("summer");
+  });
+
+  it("flips to fall near first fall frost", () => {
+    // summer ends 45d before Oct 5 → ~Aug 21
+    expect(
+      suggestSeasonFromFrost({
+        now: new Date(2026, 7, 25),
         lastSpringFrostP50: springFrost,
         firstFallFrostP50: fallFrost,
       }),
@@ -49,24 +60,23 @@ describe("suggestSeasonFromFrost", () => {
     ).toBe("spring");
   });
 
-  it("stays spring when fall frost missing", () => {
+  it("stays summer when fall frost missing after spring window", () => {
     expect(
       suggestSeasonFromFrost({
         now: new Date(2026, 7, 15),
         lastSpringFrostP50: springFrost,
         firstFallFrostP50: null,
       }),
-    ).toBe("spring");
+    ).toBe("summer");
   });
 
   it("uses month-day when spring frost is next calendar year", () => {
-    // Mid-summer resolveFrost often returns next spring (2027) + this fall (2026).
     expect(
       suggestSeasonFromFrost({
         now: new Date(2026, 6, 19),
         lastSpringFrostP50: new Date(2027, 3, 25),
         firstFallFrostP50: new Date(2026, 9, 5),
       }),
-    ).toBe("fall");
+    ).toBe("summer");
   });
 });

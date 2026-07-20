@@ -52,5 +52,64 @@ await check("POST /api/schedules", async () => {
   if (!body.climateConfidence) throw new Error("missing climateConfidence");
 });
 
+await check("POST /api/schedules fall", async () => {
+  const res = await fetch(`${base}/api/schedules`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      zip: "55423",
+      seeds: ["lettuce"],
+      season: "fall",
+      riskProfile: "balanced",
+    }),
+  });
+  if (!res.ok) throw new Error(`status ${res.status}: ${await res.text()}`);
+  const body = await res.json();
+  if (body.season !== "fall") throw new Error(`season=${body.season}`);
+  if (!body.tasks?.some((t) => t.type === "indoor_sow" || t.type === "fall_sow")) {
+    throw new Error("missing fall sow tasks");
+  }
+});
+
+await check("POST /api/schedules fall rejects tomato", async () => {
+  const res = await fetch(`${base}/api/schedules`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      zip: "55423",
+      seeds: ["tomato"],
+      season: "fall",
+    }),
+  });
+  if (res.status !== 400) throw new Error(`expected 400, got ${res.status}`);
+});
+
+await check("POST /api/schedules summer", async () => {
+  const res = await fetch(`${base}/api/schedules`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      zip: "55423",
+      seeds: ["beans"],
+      season: "summer",
+      riskProfile: "balanced",
+    }),
+  });
+  if (!res.ok) throw new Error(`status ${res.status}: ${await res.text()}`);
+  const body = await res.json();
+  if (body.season !== "summer") throw new Error(`season=${body.season}`);
+  if (!body.tasks?.some((t) => t.type === "succession_sow")) {
+    throw new Error("missing succession_sow");
+  }
+});
+
+await check("GET /api/natives", async () => {
+  const res = await fetch(`${base}/api/natives?zip=55423`);
+  if (!res.ok) throw new Error(`status ${res.status}`);
+  const body = await res.json();
+  if (body.ecoregion?.id !== "51") throw new Error(`ecoregion=${body.ecoregion?.id}`);
+  if (!body.county?.name) throw new Error("missing county overlay");
+});
+
 if (process.exitCode) process.exit(process.exitCode);
 console.log(`Smoke OK against ${base}${strict ? " (strict)" : ""}`);

@@ -3,6 +3,7 @@
 import { CSVLink } from "react-csv";
 import { Button } from "@/components/ui/button";
 import { buildICS } from "./buildICS";
+import { seasonSlug as toSeasonSlug } from "./seasonLabel";
 import type { ScheduleResult } from "./types";
 
 type Props = {
@@ -19,8 +20,7 @@ export function ExportActions({ results, zip }: Props) {
   }));
 
   const season = results.season ?? "spring";
-  const seasonSlug = season === "fall" ? "fall" : "spring";
-
+  const seasonSlug = toSeasonSlug(season);
   function downloadICS() {
     const blob = new Blob([buildICS(results.tasks, zip, season)], {
       type: "text/calendar;charset=utf-8",

@@ -20,6 +20,10 @@ function cropLabel(cropId: string, varietyName?: string): string {
   return varietyName ? `${base} (${varietyName})` : base;
 }
 
+function frostSeason(season: GardenSeason): GardenSeason {
+  return season === "fall" ? "fall" : "spring";
+}
+
 function tasksForCrop(
   crop: CropSelection,
   anchorFrost: Date,
@@ -29,13 +33,13 @@ function tasksForCrop(
   const label = cropLabel(rules.id, rules.varietyName);
   const tasks: PlantingTask[] = [];
   const isFall = season === "fall";
+  const isSummer = season === "summer";
 
   if (rules.method === "transplant") {
     const hardenDays = rules.hardenOffDaysBeforeTransplant ?? 7;
     const transplant = addDays(anchorFrost, rules.transplantDaysAfterFrost ?? 0);
     const harden = subDays(transplant, hardenDays);
     let indoorSow = subDays(anchorFrost, rules.indoorSowOffsetDays ?? 30);
-    // Preserve harden window: pull indoor sow earlier if needed (clamp B).
     if (harden.getTime() < indoorSow.getTime()) {
       indoorSow = subDays(harden, 1);
     }
@@ -68,18 +72,42 @@ function tasksForCrop(
   }
 
   const directSow = subDays(anchorFrost, rules.directSowDaysBeforeFrost ?? 0);
+  const sowType = isFall ? "fall_sow" : "direct_sow";
+  const sowLabel = isFall
+    ? `Sow ${label} for fall harvest`
+    : isSummer
+      ? `Direct sow ${label} (summer)`
+      : `Direct sow ${label}`;
   tasks.push({
     cropId: crop.cropId,
-    type: isFall ? "fall_sow" : "direct_sow",
+    type: sowType,
     date: directSow,
-    label: `${isFall ? "Sow" : "Direct sow"} ${label}${isFall ? " for fall harvest" : ""}`,
+    label: sowLabel,
   });
-  tasks.push({
-    cropId: crop.cropId,
-    type: "harvest",
-    date: addDays(directSow, rules.daysToHarvest),
-    label: `Harvest ${label}`,
-  });
+
+  const successionDays = rules.successionIntervalDays;
+  if (isSummer && successionDays != null && successionDays > 0) {
+    const second = addDays(directSow, successionDays);
+    tasks.push({
+      cropId: crop.cropId,
+      type: "succession_sow",
+      date: second,
+      label: `Succession sow ${label}`,
+    });
+    tasks.push({
+      cropId: crop.cropId,
+      type: "harvest",
+      date: addDays(second, rules.daysToHarvest),
+      label: `Harvest ${label} (succession)`,
+    });
+  } else {
+    tasks.push({
+      cropId: crop.cropId,
+      type: "harvest",
+      date: addDays(directSow, rules.daysToHarvest),
+      label: `Harvest ${label}`,
+    });
+  }
   return tasks;
 }
 
@@ -115,12 +143,18 @@ export function buildSchedule(input: ScheduleInput): Schedule {
   assertCropsSupportSeason(selections, season);
 
   const frostResolution = resolveFrost(
-    { zone, zip, referenceDate, season },
+    { zone, zip, referenceDate, season: frostSeason(season) },
     climateRepository,
   );
-  const anchorFrost = selectFrostDate(frostResolution, riskProfile, season);
+  const anchorFrost = selectFrostDate(
+    frostResolution,
+    riskProfile,
+    frostSeason(season),
+  );
 
-  const tasks = selections.flatMap((crop) => tasksForCrop(crop, anchorFrost, season));
+  const tasks = selections.flatMap((crop) =>
+    tasksForCrop(crop, anchorFrost, season),
+  );
 
   const frostPercentiles =
     frostResolution.lastFrostP10 && frostResolution.lastFrostP90
@@ -152,7 +186,11 @@ export type LegacySowDate = { seed: string; date: Date };
 export function sowDatesFromSchedule(schedule: Schedule): LegacySowDate[] {
   return schedule.tasks
     .filter(
-      (t) => t.type === "indoor_sow" || t.type === "direct_sow" || t.type === "fall_sow",
+      (t) =>
+        t.type === "indoor_sow" ||
+        t.type === "direct_sow" ||
+        t.type === "fall_sow" ||
+        t.type === "succession_sow",
     )
     .map((t) => ({ seed: t.cropId, date: t.date }));
 }

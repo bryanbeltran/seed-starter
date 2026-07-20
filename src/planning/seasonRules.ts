@@ -8,6 +8,7 @@ export type SchedulingRules = {
   transplantDaysAfterFrost?: number;
   directSowDaysBeforeFrost?: number;
   daysToHarvest: number;
+  successionIntervalDays?: number;
 };
 
 /** Spring timing from catalog `seasons.spring`, falling back to top-level crop fields. */
@@ -26,6 +27,7 @@ export function springRulesFromCrop(crop: CropDefinition): SchedulingRules {
       transplantDaysAfterFrost:
         spring.transplantDaysAfterAnchor ?? crop.transplantDaysAfterFrost,
       daysToHarvest: crop.daysToHarvest,
+      successionIntervalDays: spring.successionIntervalDays,
     };
   }
 
@@ -34,15 +36,13 @@ export function springRulesFromCrop(crop: CropDefinition): SchedulingRules {
     directSowDaysBeforeFrost:
       spring.directSowDaysBeforeAnchor ?? crop.directSowDaysBeforeFrost,
     daysToHarvest: crop.daysToHarvest,
+    successionIntervalDays: spring.successionIntervalDays,
   };
 }
 
 /**
  * Fall timing from catalog `seasons.fall` anchored on `firstFallFrost`.
- * Offsets are interpreted relative to the first fall frost:
- * - `transplantDaysAfterAnchor` is typically negative (transplant before frost).
- * - `directSowDaysBeforeAnchor` counts days back from frost (positive).
- * - `indoorSowOffsetDays` counts days back from frost.
+ * Offsets relative to first fall frost (transplant after-anchor usually negative).
  */
 export function fallRulesFromCrop(crop: CropDefinition): SchedulingRules {
   const fall = crop.seasons?.fall;
@@ -70,11 +70,45 @@ export function fallRulesFromCrop(crop: CropDefinition): SchedulingRules {
   };
 }
 
+/**
+ * Summer timing from catalog `seasons.summer` anchored on `lastSpringFrost`
+ * with later offsets (typically sow/transplant well after frost). No GDD.
+ */
+export function summerRulesFromCrop(crop: CropDefinition): SchedulingRules {
+  const summer = crop.seasons?.summer;
+  if (!summer || summer.anchor !== "lastSpringFrost") {
+    return flatRules(crop);
+  }
+
+  if (summer.method === "transplant") {
+    return {
+      method: "transplant",
+      indoorSowOffsetDays: summer.indoorSowOffsetDays ?? crop.indoorSowOffsetDays,
+      hardenOffDaysBeforeTransplant:
+        summer.hardenOffDaysBeforeTransplant ?? crop.hardenOffDaysBeforeTransplant,
+      transplantDaysAfterFrost:
+        summer.transplantDaysAfterAnchor ?? crop.transplantDaysAfterFrost,
+      daysToHarvest: crop.daysToHarvest,
+      successionIntervalDays: summer.successionIntervalDays,
+    };
+  }
+
+  return {
+    method: "direct",
+    directSowDaysBeforeFrost:
+      summer.directSowDaysBeforeAnchor ?? crop.directSowDaysBeforeFrost,
+    daysToHarvest: crop.daysToHarvest,
+    successionIntervalDays: summer.successionIntervalDays,
+  };
+}
+
 export function rulesFromCrop(
   crop: CropDefinition,
   season: GardenSeason = "spring",
 ): SchedulingRules {
-  return season === "fall" ? fallRulesFromCrop(crop) : springRulesFromCrop(crop);
+  if (season === "fall") return fallRulesFromCrop(crop);
+  if (season === "summer") return summerRulesFromCrop(crop);
+  return springRulesFromCrop(crop);
 }
 
 function flatRules(crop: CropDefinition): SchedulingRules {

@@ -18,6 +18,8 @@ export const seasonTimingSchema = z.object({
   hardenOffDaysBeforeTransplant: z.number().optional(),
   transplantDaysAfterAnchor: z.number().optional(),
   directSowDaysBeforeAnchor: z.number().optional(),
+  /** Days after first sow for optional succession_sow (summer). */
+  successionIntervalDays: z.number().optional(),
 });
 
 export const cropSchema = z.object({
@@ -31,6 +33,7 @@ export const cropSchema = z.object({
   transplantDaysAfterFrost: z.number().optional(),
   directSowDaysBeforeFrost: z.number().optional(),
   daysToHarvest: z.number(),
+  successionIntervalDays: z.number().optional(),
   seasons: z
     .object({
       spring: seasonTimingSchema.optional(),

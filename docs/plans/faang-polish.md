@@ -98,7 +98,7 @@ Strict sequence where deps matter. Parallel where noted.
 
 | Item | Why defer |
 |------|-----------|
-| Summer season | Little new systems story until midsummer ADR |
+| Summer season | Shipped — frost offsets + succession_sow; no GDD |
 | OIDC | Commodity; ADR 005 enough |
 | Soil temp / GDD | ADR 004 non-goal |
 | Baker Creek scrape | SPA stub |

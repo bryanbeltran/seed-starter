@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { GardenSeason } from "@/planning";
 import { ShareLinkButton } from "./ShareLinkButton";
+import { seasonDisplayLabel } from "./seasonLabel";
 
 type Props = {
   planId: string;
@@ -12,7 +13,7 @@ type Props = {
 
 export function PlanShareBar({ planId, planName, season }: Props) {
   const [url, setUrl] = useState(`/plans?id=${planId}`);
-  const seasonLabel = season === "fall" ? "Fall" : "Spring";
+  const seasonLabel = seasonDisplayLabel(season);
 
   useEffect(() => {
     setUrl(`${window.location.origin}/plans?id=${planId}`);

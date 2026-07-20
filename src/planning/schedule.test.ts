@@ -232,6 +232,55 @@ describe("buildSchedule (fall season)", () => {
     ).toThrow(/not available for fall/);
   });
 
+  it("builds summer schedule with succession_sow for beans", () => {
+    const schedule = buildSchedule({
+      zone: "5a",
+      crops: ["beans"],
+      season: "summer",
+      referenceDate: ref,
+    });
+    expect(schedule.season).toBe("summer");
+    const types = schedule.tasks.map((t) => t.type);
+    expect(types).toContain("direct_sow");
+    expect(types).toContain("succession_sow");
+    const first = schedule.tasks.find((t) => t.type === "direct_sow")!;
+    const second = schedule.tasks.find((t) => t.type === "succession_sow")!;
+    expect(second.date.getTime()).toBeGreaterThan(first.date.getTime());
+  });
+
+  it("rejects cool crops without seasons.summer", () => {
+    expect(() =>
+      buildSchedule({
+        zone: "5a",
+        crops: ["spinach"],
+        season: "summer",
+        referenceDate: ref,
+      }),
+    ).toThrow(/not available for summer/);
+  });
+
+  it("uses spring frost risk mapping for summer (no invert)", () => {
+    const conservative = buildSchedule({
+      zone: "5a",
+      zip: "55423",
+      crops: ["tomato"],
+      season: "summer",
+      riskProfile: "conservative",
+      referenceDate: ref,
+    });
+    const aggressive = buildSchedule({
+      zone: "5a",
+      zip: "55423",
+      crops: ["tomato"],
+      season: "summer",
+      riskProfile: "aggressive",
+      referenceDate: ref,
+    });
+    expect(conservative.lastFrostDate.getTime()).toBeGreaterThanOrEqual(
+      aggressive.lastFrostDate.getTime(),
+    );
+  });
+
   it("orders indoor ≤ harden ≤ transplant for fall lettuce", () => {
     const schedule = buildSchedule({
       zone: "5a",

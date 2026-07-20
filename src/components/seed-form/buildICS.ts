@@ -1,11 +1,12 @@
 import type { GardenSeason } from "@/planning";
+import { seasonDisplayLabel } from "./seasonLabel";
 
 export function buildICS(
   tasks: { label: string; date: string }[],
   zip: string,
   season: GardenSeason = "spring",
 ) {
-  const seasonLabel = season === "fall" ? "Fall" : "Spring";
+  const seasonLabel = seasonDisplayLabel(season);
   const events = tasks.map(({ label, date }) => {
     const d = new Date(date);
     const yyyy = d.getFullYear().toString().padStart(4, "0");

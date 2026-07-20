@@ -27,6 +27,7 @@ const taskIcons: Record<string, LucideIcon> = {
   transplant: Shovel,
   direct_sow: Sprout,
   fall_sow: Leaf,
+  succession_sow: Sprout,
   harvest: Flower2,
 };
 

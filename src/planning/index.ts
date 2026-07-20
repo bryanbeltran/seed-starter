@@ -59,6 +59,7 @@ export {
   fallRulesFromCrop,
   rulesFromCrop,
   springRulesFromCrop,
+  summerRulesFromCrop,
 } from "./seasonRules";
 export type { LegacySowDate } from "./schedule";
 export {

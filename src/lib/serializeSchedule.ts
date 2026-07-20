@@ -26,7 +26,8 @@ export function serializeSchedule(schedule: Schedule) {
         (t) =>
           t.type === "indoor_sow" ||
           t.type === "direct_sow" ||
-          t.type === "fall_sow",
+          t.type === "fall_sow" ||
+          t.type === "succession_sow",
       )
       .map((t) => ({ seed: t.cropId, date: t.date.toISOString() })),
   };

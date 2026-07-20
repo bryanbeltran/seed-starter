@@ -32,6 +32,9 @@ export function validateCatalog(catalog) {
     if (crop.seasons?.fall && crop.seasons.fall.anchor !== "firstFallFrost") {
       errors.push(`${cropId}: seasons.fall.anchor must be firstFallFrost`);
     }
+    if (crop.seasons?.summer && crop.seasons.summer.anchor !== "lastSpringFrost") {
+      errors.push(`${cropId}: seasons.summer.anchor must be lastSpringFrost`);
+    }
     const vars = Object.values(crop.varieties ?? {});
     varieties += vars.length;
     for (const v of vars) {
