@@ -85,6 +85,13 @@ function tasksForCrop(
     label: sowLabel,
   });
 
+  tasks.push({
+    cropId: crop.cropId,
+    type: "harvest",
+    date: addDays(directSow, rules.daysToHarvest),
+    label: `Harvest ${label}`,
+  });
+
   const successionDays = rules.successionIntervalDays;
   if (isSummer && successionDays != null && successionDays > 0) {
     const second = addDays(directSow, successionDays);
@@ -99,13 +106,6 @@ function tasksForCrop(
       type: "harvest",
       date: addDays(second, rules.daysToHarvest),
       label: `Harvest ${label} (succession)`,
-    });
-  } else {
-    tasks.push({
-      cropId: crop.cropId,
-      type: "harvest",
-      date: addDays(directSow, rules.daysToHarvest),
-      label: `Harvest ${label}`,
     });
   }
   return tasks;

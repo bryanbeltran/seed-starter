@@ -10,10 +10,22 @@ const SPRING_HINTS: Record<RiskProfile, string> = {
   aggressive: "Earlier spring planting",
 };
 
+const SUMMER_HINTS: Record<RiskProfile, string> = {
+  conservative: "Later summer planting",
+  balanced: "Median frost dates",
+  aggressive: "Earlier summer planting",
+};
+
 const FALL_HINTS: Record<RiskProfile, string> = {
   conservative: "Earlier fall frost (safer)",
   balanced: "Median frost dates",
   aggressive: "Later fall frost",
+};
+
+const HINTS: Record<GardenSeason, Record<RiskProfile, string>> = {
+  spring: SPRING_HINTS,
+  summer: SUMMER_HINTS,
+  fall: FALL_HINTS,
 };
 
 const profiles: { id: RiskProfile; label: string }[] = [
@@ -35,7 +47,7 @@ export function RiskProfilePicker({
   onChange,
   season = "spring",
 }: Props) {
-  const hints = season === "fall" ? FALL_HINTS : SPRING_HINTS;
+  const hints = HINTS[season];
   return (
     <div className="space-y-2">
       <Label id="risk-profile-label">Risk profile</Label>

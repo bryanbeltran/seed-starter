@@ -41,7 +41,7 @@ Strict sequence where deps matter. Parallel where noted.
 - **Default season before cross-year test** — builds product logic on calendar edge bugs  
 - **Catalog before variety honesty** — more rows without provenance weakens the trust story  
 - **Fallbacks early** — polish for 0.3% before the eval narrative and default season is wrong ROI  
-- **Summer / OIDC / GDD anywhere in this list** — defer
+- **OIDC / GDD anywhere in this list** — defer
 
 ## What already reads senior
 
@@ -98,7 +98,7 @@ Strict sequence where deps matter. Parallel where noted.
 
 | Item | Why defer |
 |------|-----------|
-| Summer season | Shipped — frost offsets + succession_sow; no GDD |
+| Summer season | Shipped (ADR 006) — frost offsets + succession_sow; no GDD |
 | OIDC | Commodity; ADR 005 enough |
 | Soil temp / GDD | ADR 004 non-goal |
 | Baker Creek scrape | SPA stub |

@@ -12,9 +12,12 @@ Build a frost-aware planting schedule.
 {
   "zip": "55423",
   "seeds": ["tomato", "lettuce"],
-  "riskProfile": "balanced"
+  "riskProfile": "balanced",
+  "season": "spring"
 }
 ```
+
+`season` is `"spring" | "summer" | "fall"` (default `"spring"`). Summer uses last-spring-frost offsets; fall uses first-fall-frost.
 
 ## `POST /api/schedules/compare`
 

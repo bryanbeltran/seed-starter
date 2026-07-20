@@ -10,7 +10,9 @@ export function apiRoute(
   handler: Handler,
   options: { limit?: number; windowMs?: number } = {},
 ) {
-  const limit = options.limit ?? 60;
+  // E2E suites hit list endpoints repeatedly; keep prod default tight.
+  const e2eBoost = process.env.E2E === "1" || process.env.E2E === "true";
+  const limit = options.limit ?? (e2eBoost ? 500 : 60);
   const windowMs = options.windowMs ?? 60_000;
 
   return async (req: Request) => {

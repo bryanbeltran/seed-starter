@@ -241,11 +241,18 @@ describe("buildSchedule (fall season)", () => {
     });
     expect(schedule.season).toBe("summer");
     const types = schedule.tasks.map((t) => t.type);
-    expect(types).toContain("direct_sow");
-    expect(types).toContain("succession_sow");
+    expect(types).toEqual([
+      "direct_sow",
+      "harvest",
+      "succession_sow",
+      "harvest",
+    ]);
     const first = schedule.tasks.find((t) => t.type === "direct_sow")!;
     const second = schedule.tasks.find((t) => t.type === "succession_sow")!;
     expect(second.date.getTime()).toBeGreaterThan(first.date.getTime());
+    const harvests = schedule.tasks.filter((t) => t.type === "harvest");
+    expect(harvests).toHaveLength(2);
+    expect(harvests[1]!.label).toMatch(/succession/i);
   });
 
   it("rejects cool crops without seasons.summer", () => {
