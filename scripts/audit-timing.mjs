@@ -107,11 +107,21 @@ function auditFall(id, crop) {
 const DTM_WARN = 60;
 const DTM_FAIL = 250;
 
+/** Known long-maturity / overwinter varieties — leave ΔDTH warnings off. */
+const DTM_ALLOW = new Set([
+  "broccoli/bonarda",
+  "broccoli/purple-sprouting-broccoli",
+  "broccoli/rudolph-broccoli",
+  "cabbage/tundra-cabbage",
+]);
+
 function auditVarietyDtm(id, crop) {
   for (const v of Object.values(crop.varieties ?? {})) {
     if (v.daysToHarvest == null) continue;
+    const key = `${id}/${v.id}`;
+    if (DTM_ALLOW.has(key)) continue;
     const delta = Math.abs(v.daysToHarvest - crop.daysToHarvest);
-    const msg = `${id}/${v.id}: |ΔDTH|=${delta} (crop ${crop.daysToHarvest} vs variety ${v.daysToHarvest})`;
+    const msg = `${key}: |ΔDTH|=${delta} (crop ${crop.daysToHarvest} vs variety ${v.daysToHarvest})`;
     if (delta >= DTM_FAIL) errors.push(msg);
     else if (delta >= DTM_WARN) warnings.push(msg);
   }

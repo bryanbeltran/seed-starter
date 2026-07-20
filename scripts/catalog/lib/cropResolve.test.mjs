@@ -60,12 +60,48 @@ describe("cropResolve", () => {
     ).toBe("artichoke");
   });
 
-  it("drops unresolvable records", () => {
+  it("maps microgreens and shoots before parent crops", () => {
+    expect(inferCropFromName("Cabbage, Red")).toBe("cabbage");
     expect(
       resolveCropRecord({
-        sourceUrl: "https://example.com/products/foo-bar",
-        cropCategory: "de",
-        name: "Mystery Widget",
+        name: "Cabbage, Red",
+        sourceUrl:
+          "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/cabbage-red-microgreen-seed-2230M.html",
+        cropCategory: "cabbage",
+      }),
+    ).toBe("microgreens");
+    expect(inferCropFromName("Popcorn Shoots")).toBe("microgreens");
+  });
+
+  it("maps grape tomato names and tomato URLs to tomato", () => {
+    expect(inferCropFromName("Five Star Grape")).toBe("tomato");
+    expect(
+      resolveCropRecord({
+        name: "Five Star Grape",
+        sourceUrl:
+          "https://www.johnnyseeds.com/vegetables/tomatoes/grape-tomatoes/five-star-grape-f1-tomato-seed-2527.html",
+        cropCategory: "grape",
+      }),
+    ).toBe("tomato");
+  });
+
+  it("maps kalettes to brussels-sprouts", () => {
+    expect(inferCropFromName("Snowdrop Kalettes")).toBe("brussels-sprouts");
+  });
+
+  it("drops garlic chives and cardoon", () => {
+    expect(
+      resolveCropRecord({
+        name: "Garlic Chives",
+        sourceUrl: "https://www.highmowingseeds.com/organic-non-gmo-garlic-chives.html",
+        cropCategory: "garlic",
+      }),
+    ).toBeNull();
+    expect(
+      resolveCropRecord({
+        name: "Cardoon Artichoke",
+        sourceUrl: "https://example.com/artichoke-cardoon",
+        cropCategory: "artichoke",
       }),
     ).toBeNull();
   });

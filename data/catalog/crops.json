@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-20T04:04:57.913Z",
+  "generatedAt": "2026-07-20T04:21:33.561Z",
   "crops": {
     "beans": {
       "id": "beans",
@@ -478,18 +478,18 @@
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -14
         },
+        "summer": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": -45,
+          "successionIntervalDays": 14
+        },
         "fall": {
           "anchor": "firstFallFrost",
           "method": "transplant",
           "indoorSowOffsetDays": 30,
           "hardenOffDaysBeforeTransplant": 5,
           "transplantDaysAfterAnchor": -28
-        },
-        "summer": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": -45,
-          "successionIntervalDays": 14
         }
       },
       "source": "catalog-etl",
@@ -2184,14 +2184,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beets/round-red-beets/red-ace-f1-beet-seed-125.html",
           "confidence": "high"
         },
-        "beet-early-wonder-tall-top": {
-          "id": "beet-early-wonder-tall-top",
-          "name": "Beet, Early Wonder Tall Top",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-early-wonder-tall-top-microgreen-seed-123M.html",
-          "confidence": "high"
-        },
         "moneta-40-monogerm-41": {
           "id": "moneta-40-monogerm-41",
           "name": "Moneta &#40;Monogerm&#41;",
@@ -2272,14 +2264,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beets/round-red-beets/merlin-organic-f1-beet-seed-2758G.html",
           "confidence": "high"
         },
-        "beet-bull-39-s-blood": {
-          "id": "beet-bull-39-s-blood",
-          "name": "Beet, Bull&#39;s Blood",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-bulls-blood-microgreen-seed-2912M.html",
-          "confidence": "high"
-        },
         "subeto": {
           "id": "subeto",
           "name": "Subeto",
@@ -2294,22 +2278,6 @@
           "daysToHarvest": 54,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beets/specialty-beets/formanova-organic-beet-seed-4430G.html",
-          "confidence": "high"
-        },
-        "beet-red-beet": {
-          "id": "beet-red-beet",
-          "name": "Beet, Red Beet",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-red-beet-organic-microgreen-seed-4544MG.html",
-          "confidence": "high"
-        },
-        "beet-red-leaf": {
-          "id": "beet-red-leaf",
-          "name": "Beet, Red Leaf",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-red-leaf-organic-microgreen-seed-4609MG.html",
           "confidence": "high"
         },
         "bull-039-s-blood-beet": {
@@ -2390,14 +2358,6 @@
           "daysToHarvest": 35,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-early-wonder-talltop-beet.html",
-          "confidence": "high"
-        },
-        "red-beet-microgreens": {
-          "id": "red-beet-microgreens",
-          "name": "Red Beet Microgreens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-beet-micro-greens.html",
           "confidence": "high"
         },
         "subeto-f1-beet": {
@@ -2770,7 +2730,7 @@
         "cucumber-armenian": {
           "id": "cucumber-armenian",
           "name": "Cucumber, Armenian",
-          "daysToHarvest": 14,
+          "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/cucumber-armenian-shoot-seed-5648S.html",
           "confidence": "high"
@@ -4170,7 +4130,7 @@
         "popcorn": {
           "id": "popcorn",
           "name": "Popcorn",
-          "daysToHarvest": 14,
+          "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/popcorn-shoot-seed-3164S.html",
           "confidence": "high"
@@ -4301,14 +4261,6 @@
           "daysToHarvest": 90,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-painted-mtn-milling-corn.html",
-          "confidence": "high"
-        },
-        "popcorn-shoots": {
-          "id": "popcorn-shoots",
-          "name": "Popcorn Shoots",
-          "daysToHarvest": 14,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-popcorn-shoots-l001.html",
           "confidence": "high"
         },
         "enchanted-f1-sweet-corn": {
@@ -5375,22 +5327,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/cabbage/fresh-market-cabbage/conqueror-f1-cabbage-seed-5196.html",
           "confidence": "high"
         },
-        "cabbage-red": {
-          "id": "cabbage-red",
-          "name": "Cabbage, Red",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/cabbage-red-microgreen-seed-2230M.html",
-          "confidence": "high"
-        },
-        "chinese-cabbage-tokyo-bekana": {
-          "id": "chinese-cabbage-tokyo-bekana",
-          "name": "Chinese Cabbage, Tokyo Bekana",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/chinese-cabbage-tokyo-bekana-f1-microgreen-seed-2251M.html",
-          "confidence": "high"
-        },
         "bilko": {
           "id": "bilko",
           "name": "Bilko",
@@ -5413,14 +5349,6 @@
           "daysToHarvest": 72,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/cabbage/fresh-market-cabbage/primero-organic-f1-cabbage-seed-4625G.html",
-          "confidence": "high"
-        },
-        "red-acre-cabbage-microgreens": {
-          "id": "red-acre-cabbage-microgreens",
-          "name": "Red Acre Cabbage Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-acre-cabbage-micro.html",
           "confidence": "high"
         },
         "passat-f1-cabbage": {
@@ -5784,10 +5712,10 @@
         "broccoli": {
           "id": "broccoli",
           "name": "Broccoli",
-          "daysToHarvest": 13,
+          "daysToHarvest": 60,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/broccoli-microgreen-seed-2290M.html",
-          "confidence": "high"
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/sprouts/broccoli-sprouting-seeds-2108.html",
+          "confidence": "medium"
         },
         "gypsy": {
           "id": "gypsy",
@@ -5948,14 +5876,6 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-sprouting-seeds.html",
           "confidence": "medium"
-        },
-        "broccoli-microgreens": {
-          "id": "broccoli-microgreens",
-          "name": "Broccoli Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
-          "confidence": "high"
         },
         "spring-raab-broccoli-raab": {
           "id": "spring-raab-broccoli-raab",
@@ -6161,15 +6081,15 @@
         "shungiku": {
           "id": "shungiku",
           "name": "Shungiku",
-          "daysToHarvest": 21,
+          "daysToHarvest": 45,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/shungiku-microgreen-seed-514M.html",
-          "confidence": "high"
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/asian-greens/shungiku-asian-green-seed-514.html",
+          "confidence": "medium"
         },
         "tokyo-bekana": {
           "id": "tokyo-bekana",
           "name": "Tokyo Bekana",
-          "daysToHarvest": 20,
+          "daysToHarvest": 45,
           "source": "fedco",
           "sourceUrl": "https://fedcoseeds.com/seeds/tokyo-bekana-organic-chinese-cabbage-3222",
           "confidence": "high"
@@ -6185,17 +6105,17 @@
         "mizuna": {
           "id": "mizuna",
           "name": "Mizuna",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mizuna-microgreen-seed-4546M.html",
+          "daysToHarvest": 40,
+          "source": "fedco",
+          "sourceUrl": "https://fedcoseeds.com/seeds/mizuna-organic-mustard-3226",
           "confidence": "high"
         },
         "tatsoi": {
           "id": "tatsoi",
           "name": "Tatsoi",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/tatsoi-organic-microgreen-seed-2897MG.html",
+          "daysToHarvest": 45,
+          "source": "fedco",
+          "sourceUrl": "https://fedcoseeds.com/seeds/tatsoi-asian-greens-3220",
           "confidence": "high"
         },
         "rosie": {
@@ -6265,7 +6185,7 @@
         "red-baron-plus": {
           "id": "red-baron-plus",
           "name": "Red Baron Plus",
-          "daysToHarvest": 19,
+          "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/asian-greens/red-baron-plus-f1-asian-green-seed-5071.html",
           "confidence": "high"
@@ -6277,38 +6197,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/asian-greens/green-river-f1-asian-green-seed-5542.html",
           "confidence": "medium"
-        },
-        "pac-choi-red-pac": {
-          "id": "pac-choi-red-pac",
-          "name": "Pac Choi, Red Pac",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/pac-choi-red-pac-f1-microgreen-seed-3168M.html",
-          "confidence": "high"
-        },
-        "mizuna-red-kingdom": {
-          "id": "mizuna-red-kingdom",
-          "name": "Mizuna, Red Kingdom",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mizuna-red-kingdom-f1-microgreen-seed-3748M.html",
-          "confidence": "high"
-        },
-        "mizuna-red": {
-          "id": "mizuna-red",
-          "name": "Mizuna, Red",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mizuna-red-microgreen-seed-5343M.html",
-          "confidence": "high"
-        },
-        "pac-choi-red-choi": {
-          "id": "pac-choi-red-choi",
-          "name": "Pac Choi, Red Choi",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/pac-choi-red-choi-organic-microgreen-seed-4664MG.html",
-          "confidence": "high"
         },
         "vivid-choi-pac-choy": {
           "id": "vivid-choi-pac-choy",
@@ -6332,14 +6220,6 @@
           "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-mizuna-asian-greens.html",
-          "confidence": "high"
-        },
-        "mizuna-microgreens": {
-          "id": "mizuna-microgreens",
-          "name": "Mizuna Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-mizuna-microgreens.html",
           "confidence": "high"
         },
         "purple-mizuna-asian-greens": {
@@ -6393,7 +6273,7 @@
         "green-coin-tatsoi-mustard": {
           "id": "green-coin-tatsoi-mustard",
           "name": "Green Coin Tatsoi Mustard",
-          "daysToHarvest": 18,
+          "daysToHarvest": 45,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/mustard-green-coin",
           "confidence": "high"
@@ -6750,14 +6630,6 @@
           "daysToHarvest": 70,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/carrots/colored-carrots/amber-f1-carrot-seed-5182.html",
-          "confidence": "high"
-        },
-        "carrot": {
-          "id": "carrot",
-          "name": "Carrot",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/carrot-microgreen-seed-2468M.html",
           "confidence": "high"
         },
         "yaya": {
@@ -7223,46 +7095,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/holy-basil/kapoor-tulsi-holy-basil-basil-seed-6021.html",
           "confidence": "high"
         },
-        "basil-lemon": {
-          "id": "basil-lemon",
-          "name": "Basil, Lemon",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-lemon-microgreen-seed-774M.html",
-          "confidence": "high"
-        },
-        "basil-dark-opal": {
-          "id": "basil-dark-opal",
-          "name": "Basil, Dark Opal",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-dark-opal-microgreen-seed-902M.html",
-          "confidence": "high"
-        },
-        "basil-cinnamon": {
-          "id": "basil-cinnamon",
-          "name": "Basil, Cinnamon",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-cinnamon-microgreen-seed-906M.html",
-          "confidence": "high"
-        },
-        "basil-red-rubin": {
-          "id": "basil-red-rubin",
-          "name": "Basil, Red Rubin",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-red-rubin-microgreen-seed-924M.html",
-          "confidence": "high"
-        },
-        "basil-italian-large-leaf": {
-          "id": "basil-italian-large-leaf",
-          "name": "Basil, Italian Large Leaf",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-italian-large-leaf-microgreen-seed-944M.html",
-          "confidence": "high"
-        },
         "nufar": {
           "id": "nufar",
           "name": "Nufar",
@@ -7285,14 +7117,6 @@
           "daysToHarvest": 74,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/compact-genovese-basil/genovese-compact-improved-multi-seed-pellet-pelleted-basil-seed-3188P.html",
-          "confidence": "high"
-        },
-        "basil-genovese": {
-          "id": "basil-genovese",
-          "name": "Basil, Genovese",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-genovese-microgreen-seed-3303M.html",
           "confidence": "high"
         },
         "prospera-reg-dmr-40-cg1-41": {
@@ -7375,28 +7199,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/genovese-basil/mia-prospera-active-dmr-organic-basil-seed-5877G.html",
           "confidence": "high"
         },
-        "basil-bicolor": {
-          "id": "basil-bicolor",
-          "name": "Basil, Bicolor",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-bicolor-organic-microgreen-seed-3374MG.html",
-          "confidence": "high"
-        },
         "genovese-basil": {
           "id": "genovese-basil",
           "name": "Genovese Basil",
           "daysToHarvest": 68,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-genovese-basil.html",
-          "confidence": "high"
-        },
-        "basil-microgreens": {
-          "id": "basil-microgreens",
-          "name": "Basil Microgreens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-basil-micro-greens.html",
           "confidence": "high"
         },
         "lemon-basil": {
@@ -7596,14 +7404,6 @@
           "daysToHarvest": 42,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/kohlrabi/fresh-market-kohlrabi/beas-f1-kohlrabi-seed-3527.html",
-          "confidence": "high"
-        },
-        "kohlrabi-purple": {
-          "id": "kohlrabi-purple",
-          "name": "Kohlrabi, Purple",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kohlrabi-purple-microgreen-seed-2237M.html",
           "confidence": "high"
         },
         "azur-star": {
@@ -8147,28 +7947,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/kale/redbor-f1-kale-seed-2184.html",
           "confidence": "high"
         },
-        "autumn-star": {
-          "id": "autumn-star",
-          "name": "Autumn Star",
-          "daysToHarvest": 110,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/kalettes/autumn-star-f1-kalettes-seed-3139.html",
-          "confidence": "high"
-        },
         "black-magic": {
           "id": "black-magic",
           "name": "Black Magic",
           "daysToHarvest": 65,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/kale/black-magic-kale-seed-3531.html",
-          "confidence": "high"
-        },
-        "kale-red-russian": {
-          "id": "kale-red-russian",
-          "name": "Kale, Red Russian",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-red-russian-microgreen-seed-363M.html",
           "confidence": "high"
         },
         "darkibor": {
@@ -8235,13 +8019,13 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/kale/curly-kale/rubybor-f1-kale-seed-5294.html",
           "confidence": "high"
         },
-        "kale-toscano": {
-          "id": "kale-toscano",
-          "name": "Kale, Toscano",
-          "daysToHarvest": 13,
+        "kale-red-russian": {
+          "id": "kale-red-russian",
+          "name": "Kale, Red Russian",
+          "daysToHarvest": 55,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-toscano-microgreen-seed-2123M.html",
-          "confidence": "high"
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/sprouts/kale-red-russian-organic-sprouting-seeds-2159G.html",
+          "confidence": "medium"
         },
         "white-russian": {
           "id": "white-russian",
@@ -8259,52 +8043,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/kale/westlandse-winter-organic-kale-seed-3566G.html",
           "confidence": "high"
         },
-        "kale-bright-green-curly": {
-          "id": "kale-bright-green-curly",
-          "name": "Kale, Bright Green Curly",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-bright-green-curly-microgreen-seed-4085M.html",
-          "confidence": "high"
-        },
-        "kale-kx-1": {
-          "id": "kale-kx-1",
-          "name": "Kale, KX-1",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-kx-1-microgreen-seed-4112M.html",
-          "confidence": "high"
-        },
-        "kale-kalefetti-mix": {
-          "id": "kale-kalefetti-mix",
-          "name": "Kale, Kalefetti Mix",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/kale-kalefetti-mix-microgreen-seed-4175M.html",
-          "confidence": "high"
-        },
         "dazzling-blue": {
           "id": "dazzling-blue",
           "name": "Dazzling Blue",
           "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/kale/dazzling-blue-organic-kale-seed-4178G.html",
-          "confidence": "high"
-        },
-        "kale-purple-reign": {
-          "id": "kale-purple-reign",
-          "name": "Kale, Purple Reign",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-purple-reign-f1-microgreen-seed-4610M.html",
-          "confidence": "high"
-        },
-        "kale-unicorn": {
-          "id": "kale-unicorn",
-          "name": "Kale, Unicorn",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-unicorn-microgreen-seed-4647M.html",
           "confidence": "high"
         },
         "frise-rouge": {
@@ -8371,14 +8115,6 @@
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-russian-kale.html",
           "confidence": "high"
         },
-        "red-russian-kale-microgreens": {
-          "id": "red-russian-kale-microgreens",
-          "name": "Red Russian Kale Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-russian-kale-micro.html",
-          "confidence": "high"
-        },
         "siberian-kale": {
           "id": "siberian-kale",
           "name": "Siberian Kale",
@@ -8395,36 +8131,12 @@
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-darkibor-f1-kale.html",
           "confidence": "high"
         },
-        "ironman-kale-mix-salad-mix": {
-          "id": "ironman-kale-mix-salad-mix",
-          "name": "Ironman Kale Mix Salad Mix",
-          "daysToHarvest": 30,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-ironman-kale-mix-salad-mix-e.html",
-          "confidence": "high"
-        },
-        "lacinato-kale-microgreens": {
-          "id": "lacinato-kale-microgreens",
-          "name": "Lacinato Kale Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-lacinato-kale-microgreen-qmga.html",
-          "confidence": "high"
-        },
         "scarlet-kale": {
           "id": "scarlet-kale",
           "name": "Scarlet Kale",
           "daysToHarvest": 30,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-scarlet-kale-e.html",
-          "confidence": "high"
-        },
-        "kaleidoscope-mix-salad-mix": {
-          "id": "kaleidoscope-mix-salad-mix",
-          "name": "Kaleidoscope Mix Salad Mix",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-kaleidoscope-mix-salad-mix.html",
           "confidence": "high"
         },
         "kale-sprouting-seeds": {
@@ -8434,30 +8146,6 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-kale-sprouting-seeds.html",
           "confidence": "medium"
-        },
-        "autumn-star-kalettes": {
-          "id": "autumn-star-kalettes",
-          "name": "Autumn Star Kalettes®",
-          "daysToHarvest": 110,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/brussels-sprout-autumn-star",
-          "confidence": "high"
-        },
-        "mistletoe-kalettes": {
-          "id": "mistletoe-kalettes",
-          "name": "Mistletoe Kalettes®",
-          "daysToHarvest": 125,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/brussels-sprout-mistletoe",
-          "confidence": "high"
-        },
-        "snowdrop-kalettes": {
-          "id": "snowdrop-kalettes",
-          "name": "Snowdrop Kalettes®",
-          "daysToHarvest": 140,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/brussels-sprout-snowdrop",
-          "confidence": "high"
         },
         "kosmic-kale": {
           "id": "kosmic-kale",
@@ -8607,7 +8295,7 @@
         "garnet-giant": {
           "id": "garnet-giant",
           "name": "Garnet Giant",
-          "daysToHarvest": 20,
+          "daysToHarvest": 40,
           "source": "fedco",
           "sourceUrl": "https://fedcoseeds.com/seeds/garnet-giant-organic-mustard-3217",
           "confidence": "high"
@@ -8660,54 +8348,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/mustard-greens/moonshadow-mustard-green-seed-5541.html",
           "confidence": "medium"
         },
-        "mustard-ruby-streaks": {
-          "id": "mustard-ruby-streaks",
-          "name": "Mustard, Ruby Streaks",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-ruby-streaks-microgreen-seed-2740M.html",
-          "confidence": "high"
-        },
-        "mustard-garnet-giant": {
-          "id": "mustard-garnet-giant",
-          "name": "Mustard, Garnet Giant",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-garnet-giant-microgreen-seed-2797M.html",
-          "confidence": "high"
-        },
-        "mustard-miz-america": {
-          "id": "mustard-miz-america",
-          "name": "Mustard, Miz America",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-miz-america-f1-microgreen-seed-3749M.html",
-          "confidence": "high"
-        },
-        "mustard-wasabina": {
-          "id": "mustard-wasabina",
-          "name": "Mustard, Wasabina",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-wasabina-microgreen-seed-4396M.html",
-          "confidence": "high"
-        },
-        "mustard-golden-frills": {
-          "id": "mustard-golden-frills",
-          "name": "Mustard, Golden Frills",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-golden-frills-organic-microgreen-seed-2738MG.html",
-          "confidence": "high"
-        },
-        "mustard-red-giant": {
-          "id": "mustard-red-giant",
-          "name": "Mustard, Red Giant",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-red-giant-organic-microgreen-seed-2884MG.html",
-          "confidence": "high"
-        },
         "vit-mache": {
           "id": "vit-mache",
           "name": "Vit Mache",
@@ -8743,7 +8383,7 @@
         "ruby-streaks-mustard-greens": {
           "id": "ruby-streaks-mustard-greens",
           "name": "Ruby Streaks Mustard Greens",
-          "daysToHarvest": 20,
+          "daysToHarvest": 40,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-ruby-streaks-must-greens.html",
           "confidence": "high"
@@ -8759,7 +8399,7 @@
         "red-lace-mustard-greens": {
           "id": "red-lace-mustard-greens",
           "name": "Red Lace Mustard Greens",
-          "daysToHarvest": 20,
+          "daysToHarvest": 40,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-lace-mustard-greens.html",
           "confidence": "high"
@@ -8905,9 +8545,9 @@
         "sorrel": {
           "id": "sorrel",
           "name": "Sorrel",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/sorrel-microgreen-seed-383M.html",
+          "daysToHarvest": 45,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-sorrel.html",
           "confidence": "high"
         },
         "red-veined-sorrel": {
@@ -8923,7 +8563,7 @@
           "name": "Sorrel, Red Veined",
           "daysToHarvest": 28,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/sorrel-red-veined-microgreen-seed-2827M.html",
+          "sourceUrl": "https://www.johnnyseeds.com/herbs/microgreen-herbs/sorrel-red-veined-organic-microgreen-seed-2827MG.html",
           "confidence": "high"
         },
         "french-sorrel": {
@@ -8998,14 +8638,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/arugula-roquette/bellezia-wild-arugula-seed-3213.html",
           "confidence": "medium"
-        },
-        "arugula": {
-          "id": "arugula",
-          "name": "Arugula",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/arugula-microgreen-seed-385M.html",
-          "confidence": "high"
         },
         "nemesis": {
           "id": "nemesis",
@@ -9134,14 +8766,6 @@
           "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/specialty-greens/claytonia-specialty-green-seed-388.html",
-          "confidence": "high"
-        },
-        "cress-cressida": {
-          "id": "cress-cressida",
-          "name": "Cress, Cressida",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/cress-cressida-microgreen-seed-382M.html",
           "confidence": "high"
         }
       }
@@ -9346,7 +8970,7 @@
         "melon": {
           "id": "melon",
           "name": "Melon",
-          "daysToHarvest": 14,
+          "daysToHarvest": 85,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/melon-shoot-seed-5649S.html",
           "confidence": "high"
@@ -9727,14 +9351,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peas/snap-peas/sugar-ann-pea-seed-559.html",
           "confidence": "high"
         },
-        "red-pearl": {
-          "id": "red-pearl",
-          "name": "Red Pearl",
-          "daysToHarvest": 58,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/grape-tomatoes/red-pearl-organic-tomato-seed-97G.html",
-          "confidence": "high"
-        },
         "maxigolt": {
           "id": "maxigolt",
           "name": "Maxigolt",
@@ -9797,14 +9413,6 @@
           "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peas/snow-peas/avalanche-pea-seed-3040.html",
-          "confidence": "high"
-        },
-        "sunpeach": {
-          "id": "sunpeach",
-          "name": "Sunpeach",
-          "daysToHarvest": 60,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/cherry-tomatoes/sunpeach-f1-tomato-seed-3084.html",
           "confidence": "high"
         },
         "royal-snow": {
@@ -9890,7 +9498,7 @@
         "pea-field": {
           "id": "pea-field",
           "name": "Pea, Field",
-          "daysToHarvest": 14,
+          "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/pea-field-shoot-seed-3161S.html",
           "confidence": "high"
@@ -9898,7 +9506,7 @@
         "tendril-pea": {
           "id": "tendril-pea",
           "name": "Tendril Pea",
-          "daysToHarvest": 14,
+          "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/tendril-pea-shoot-seed-3165S.html",
           "confidence": "high"
@@ -9910,14 +9518,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/radishes/round-radishes/pearl-organic-f1-radish-seed-3456G.html",
           "confidence": "high"
-        },
-        "pea-shoots": {
-          "id": "pea-shoots",
-          "name": "Pea Shoots",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-pea-shoots.html",
-          "confidence": "medium"
         },
         "green-arrow-shelling-pea": {
           "id": "green-arrow-shelling-pea",
@@ -10191,30 +9791,6 @@
           "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/specialty-greens/red-leaf-vegetable-amaranth-specialty-green-seed-516.html",
-          "confidence": "high"
-        },
-        "amaranth-garnet-red": {
-          "id": "amaranth-garnet-red",
-          "name": "Amaranth, Garnet Red",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/amaranth-garnet-red-microgreen-seed-2247M.html",
-          "confidence": "high"
-        },
-        "amaranth-bicolor": {
-          "id": "amaranth-bicolor",
-          "name": "Amaranth, Bicolor",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/amaranth-bicolor-microgreen-seed-4426M.html",
-          "confidence": "high"
-        },
-        "amaranth-glitter-mix": {
-          "id": "amaranth-glitter-mix",
-          "name": "Amaranth, Glitter Mix",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/amaranth-glitter-mix-microgreen-seed-5167M.html",
           "confidence": "high"
         },
         "garnet-red-amaranth-greens": {
@@ -10854,10 +10430,10 @@
         "radish-daikon": {
           "id": "radish-daikon",
           "name": "Radish, Daikon",
-          "daysToHarvest": 13,
+          "daysToHarvest": 30,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-daikon-organic-microgreen-seed-2155MG.html",
-          "confidence": "high"
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/sprouts/radish-daikon-organic-sprouting-seeds-2155.html",
+          "confidence": "medium"
         },
         "alpine": {
           "id": "alpine",
@@ -10995,60 +10571,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/radishes/round-radishes/purpella-f1-radish-seed-6558.html",
           "confidence": "high"
         },
-        "radish-hong-vit": {
-          "id": "radish-hong-vit",
-          "name": "Radish, Hong Vit",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-hong-vit-microgreen-seed-2461M.html",
-          "confidence": "high"
-        },
-        "radish-red-rambo": {
-          "id": "radish-red-rambo",
-          "name": "Radish, Red Rambo",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-red-rambo-microgreen-seed-2539M.html",
-          "confidence": "high"
-        },
-        "radish-red-stem": {
-          "id": "radish-red-stem",
-          "name": "Radish, Red Stem",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-red-stem-microgreen-seed-4105M.html",
-          "confidence": "high"
-        },
-        "radish-confetti-mix": {
-          "id": "radish-confetti-mix",
-          "name": "Radish, Confetti Mix",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/radish-confetti-mix-microgreen-seed-4119M.html",
-          "confidence": "high"
-        },
         "annabel": {
           "id": "annabel",
           "name": "Annabel",
           "daysToHarvest": 22,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/radishes/round-radishes/annabel-organic-f1-radish-seed-5396G.html",
-          "confidence": "high"
-        },
-        "radish-purple-stem": {
-          "id": "radish-purple-stem",
-          "name": "Radish, Purple Stem",
-          "daysToHarvest": 13,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-purple-stem-organic-microgreen-seed-4107MG.html",
-          "confidence": "high"
-        },
-        "purple-sango-radish-microgreens": {
-          "id": "purple-sango-radish-microgreens",
-          "name": "Purple Sango Radish Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-purple-sango-radish-micro.html",
           "confidence": "high"
         },
         "hong-vit-radish-greens": {
@@ -11137,14 +10665,6 @@
           "daysToHarvest": 23,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-sora-radish.html",
-          "confidence": "high"
-        },
-        "daikon-type-radish-microgreens": {
-          "id": "daikon-type-radish-microgreens",
-          "name": "Daikon-type Radish Microgreens",
-          "daysToHarvest": 13,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-daikon-radish-microgreens.html",
           "confidence": "high"
         },
         "radish-sprouting-seeds": {
@@ -11579,14 +11099,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/herbs/parsley/leaf-parsley/peione-parsley-seed-5551.html",
           "confidence": "high"
         },
-        "parsley": {
-          "id": "parsley",
-          "name": "Parsley",
-          "daysToHarvest": 28,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/parsley-microgreen-seed-3770M.html",
-          "confidence": "high"
-        },
         "splendid": {
           "id": "splendid",
           "name": "Splendid",
@@ -11676,10 +11188,18 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/greens-mixes/elegance-greens-mix-vegetable-seed-653.html",
           "confidence": "high"
         },
+        "beet-early-wonder-tall-top": {
+          "id": "beet-early-wonder-tall-top",
+          "name": "Beet, Early Wonder Tall Top",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-early-wonder-tall-top-microgreen-seed-123M.html",
+          "confidence": "high"
+        },
         "mild-micro-mix": {
           "id": "mild-micro-mix",
           "name": "Mild Micro Mix",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/mild-micro-mix-microgreen-seed-2566.html",
           "confidence": "high"
@@ -11687,9 +11207,233 @@
         "spicy-micro-mix": {
           "id": "spicy-micro-mix",
           "name": "Spicy Micro Mix",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/spicy-micro-mix-microgreen-seed-2567.html",
+          "confidence": "high"
+        },
+        "kale-red-russian": {
+          "id": "kale-red-russian",
+          "name": "Kale, Red Russian",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-red-russian-microgreen-seed-363M.html",
+          "confidence": "high"
+        },
+        "cress-cressida": {
+          "id": "cress-cressida",
+          "name": "Cress, Cressida",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/cress-cressida-microgreen-seed-382M.html",
+          "confidence": "high"
+        },
+        "sorrel": {
+          "id": "sorrel",
+          "name": "Sorrel",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/sorrel-microgreen-seed-383M.html",
+          "confidence": "high"
+        },
+        "arugula": {
+          "id": "arugula",
+          "name": "Arugula",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/arugula-microgreen-seed-385M.html",
+          "confidence": "high"
+        },
+        "shungiku": {
+          "id": "shungiku",
+          "name": "Shungiku",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/shungiku-microgreen-seed-514M.html",
+          "confidence": "high"
+        },
+        "lemon-balm": {
+          "id": "lemon-balm",
+          "name": "Lemon Balm",
+          "daysToHarvest": 28,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/lemon-balm-microgreen-seed-766M.html",
+          "confidence": "high"
+        },
+        "basil-lemon": {
+          "id": "basil-lemon",
+          "name": "Basil, Lemon",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-lemon-microgreen-seed-774M.html",
+          "confidence": "high"
+        },
+        "basil-dark-opal": {
+          "id": "basil-dark-opal",
+          "name": "Basil, Dark Opal",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-dark-opal-microgreen-seed-902M.html",
+          "confidence": "high"
+        },
+        "basil-cinnamon": {
+          "id": "basil-cinnamon",
+          "name": "Basil, Cinnamon",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-cinnamon-microgreen-seed-906M.html",
+          "confidence": "high"
+        },
+        "borage": {
+          "id": "borage",
+          "name": "Borage",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/borage-microgreen-seed-912M.html",
+          "confidence": "high"
+        },
+        "cilantro": {
+          "id": "cilantro",
+          "name": "Cilantro",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/cilantro-microgreen-seed-919M.html",
+          "confidence": "high"
+        },
+        "dill": {
+          "id": "dill",
+          "name": "Dill",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/dill-microgreen-seed-920M.html",
+          "confidence": "high"
+        },
+        "cutting-celery": {
+          "id": "cutting-celery",
+          "name": "Cutting Celery",
+          "daysToHarvest": 28,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/cutting-celery-microgreen-seed-922M.html",
+          "confidence": "high"
+        },
+        "basil-red-rubin": {
+          "id": "basil-red-rubin",
+          "name": "Basil, Red Rubin",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-red-rubin-microgreen-seed-924M.html",
+          "confidence": "high"
+        },
+        "basil-italian-large-leaf": {
+          "id": "basil-italian-large-leaf",
+          "name": "Basil, Italian Large Leaf",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-italian-large-leaf-microgreen-seed-944M.html",
+          "confidence": "high"
+        },
+        "nasturtium-empress-of-india": {
+          "id": "nasturtium-empress-of-india",
+          "name": "Nasturtium, Empress of India",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/nasturtium-empress-of-india-shoot-seed-1824S.html",
+          "confidence": "high"
+        },
+        "nasturtium": {
+          "id": "nasturtium",
+          "name": "Nasturtium",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/nasturtium-shoot-seed-1905S.html",
+          "confidence": "high"
+        },
+        "kale-toscano": {
+          "id": "kale-toscano",
+          "name": "Kale, Toscano",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-toscano-microgreen-seed-2123M.html",
+          "confidence": "high"
+        },
+        "cabbage-red": {
+          "id": "cabbage-red",
+          "name": "Cabbage, Red",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/cabbage-red-microgreen-seed-2230M.html",
+          "confidence": "high"
+        },
+        "kohlrabi-purple": {
+          "id": "kohlrabi-purple",
+          "name": "Kohlrabi, Purple",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kohlrabi-purple-microgreen-seed-2237M.html",
+          "confidence": "high"
+        },
+        "amaranth-garnet-red": {
+          "id": "amaranth-garnet-red",
+          "name": "Amaranth, Garnet Red",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/amaranth-garnet-red-microgreen-seed-2247M.html",
+          "confidence": "high"
+        },
+        "chinese-cabbage-tokyo-bekana": {
+          "id": "chinese-cabbage-tokyo-bekana",
+          "name": "Chinese Cabbage, Tokyo Bekana",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/chinese-cabbage-tokyo-bekana-f1-microgreen-seed-2251M.html",
+          "confidence": "high"
+        },
+        "purslane-red-gruner": {
+          "id": "purslane-red-gruner",
+          "name": "Purslane, Red Gruner",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/purslane-red-gruner-microgreen-seed-2257M.html",
+          "confidence": "high"
+        },
+        "broccoli": {
+          "id": "broccoli",
+          "name": "Broccoli",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/broccoli-microgreen-seed-2290M.html",
+          "confidence": "high"
+        },
+        "chervil": {
+          "id": "chervil",
+          "name": "Chervil",
+          "daysToHarvest": 28,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/chervil-microgreen-seed-2441M.html",
+          "confidence": "high"
+        },
+        "radish-hong-vit": {
+          "id": "radish-hong-vit",
+          "name": "Radish, Hong Vit",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-hong-vit-microgreen-seed-2461M.html",
+          "confidence": "high"
+        },
+        "carrot": {
+          "id": "carrot",
+          "name": "Carrot",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/carrot-microgreen-seed-2468M.html",
+          "confidence": "high"
+        },
+        "radish-red-rambo": {
+          "id": "radish-red-rambo",
+          "name": "Radish, Red Rambo",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-red-rambo-microgreen-seed-2539M.html",
           "confidence": "high"
         },
         "ovation-greens-mix": {
@@ -11700,12 +11444,348 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/greens-mixes/ovation-greens-mix-organic-vegetable-seed-2697G.html",
           "confidence": "high"
         },
+        "mustard-ruby-streaks": {
+          "id": "mustard-ruby-streaks",
+          "name": "Mustard, Ruby Streaks",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-ruby-streaks-microgreen-seed-2740M.html",
+          "confidence": "high"
+        },
+        "mustard-garnet-giant": {
+          "id": "mustard-garnet-giant",
+          "name": "Mustard, Garnet Giant",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-garnet-giant-microgreen-seed-2797M.html",
+          "confidence": "high"
+        },
+        "sorrel-red-veined": {
+          "id": "sorrel-red-veined",
+          "name": "Sorrel, Red Veined",
+          "daysToHarvest": 28,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/sorrel-red-veined-microgreen-seed-2827M.html",
+          "confidence": "high"
+        },
+        "beet-bull-39-s-blood": {
+          "id": "beet-bull-39-s-blood",
+          "name": "Beet, Bull&#39;s Blood",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-bulls-blood-microgreen-seed-2912M.html",
+          "confidence": "high"
+        },
+        "anise-hyssop": {
+          "id": "anise-hyssop",
+          "name": "Anise Hyssop",
+          "daysToHarvest": 28,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/anise-hyssop-microgreen-seed-3123M.html",
+          "confidence": "high"
+        },
+        "fennel-green": {
+          "id": "fennel-green",
+          "name": "Fennel, Green",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/fennel-green-microgreen-seed-3152M.html",
+          "confidence": "high"
+        },
+        "pac-choi-red-pac": {
+          "id": "pac-choi-red-pac",
+          "name": "Pac Choi, Red Pac",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/pac-choi-red-pac-f1-microgreen-seed-3168M.html",
+          "confidence": "high"
+        },
+        "basil-genovese": {
+          "id": "basil-genovese",
+          "name": "Basil, Genovese",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-genovese-microgreen-seed-3303M.html",
+          "confidence": "high"
+        },
+        "dandelion-red": {
+          "id": "dandelion-red",
+          "name": "Dandelion, Red",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/dandelion-red-microgreen-seed-3357M.html",
+          "confidence": "high"
+        },
+        "nasturtium-shades-of-green": {
+          "id": "nasturtium-shades-of-green",
+          "name": "Nasturtium, Shades of Green",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/nasturtium-shades-of-green-shoot-seed-3389S.html",
+          "confidence": "high"
+        },
+        "cilantro-monogerm": {
+          "id": "cilantro-monogerm",
+          "name": "Cilantro, Monogerm",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/cilantro-monogerm-microgreen-seed-3446M.html",
+          "confidence": "high"
+        },
+        "mizuna-red-kingdom": {
+          "id": "mizuna-red-kingdom",
+          "name": "Mizuna, Red Kingdom",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mizuna-red-kingdom-f1-microgreen-seed-3748M.html",
+          "confidence": "high"
+        },
+        "mustard-miz-america": {
+          "id": "mustard-miz-america",
+          "name": "Mustard, Miz America",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-miz-america-f1-microgreen-seed-3749M.html",
+          "confidence": "high"
+        },
+        "parsley": {
+          "id": "parsley",
+          "name": "Parsley",
+          "daysToHarvest": 28,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/parsley-microgreen-seed-3770M.html",
+          "confidence": "high"
+        },
+        "kale-bright-green-curly": {
+          "id": "kale-bright-green-curly",
+          "name": "Kale, Bright Green Curly",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-bright-green-curly-microgreen-seed-4085M.html",
+          "confidence": "high"
+        },
+        "radish-red-stem": {
+          "id": "radish-red-stem",
+          "name": "Radish, Red Stem",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-red-stem-microgreen-seed-4105M.html",
+          "confidence": "high"
+        },
+        "chard-and-beet-rainbow-sprinkles-mix": {
+          "id": "chard-and-beet-rainbow-sprinkles-mix",
+          "name": "Chard and Beet, Rainbow Sprinkles Mix",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/chard-and-beet-rainbow-sprinkles-mix-microgreen-seed-4106M.html",
+          "confidence": "high"
+        },
+        "kale-kx-1": {
+          "id": "kale-kx-1",
+          "name": "Kale, KX-1",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-kx-1-microgreen-seed-4112M.html",
+          "confidence": "high"
+        },
+        "radish-confetti-mix": {
+          "id": "radish-confetti-mix",
+          "name": "Radish, Confetti Mix",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/radish-confetti-mix-microgreen-seed-4119M.html",
+          "confidence": "high"
+        },
+        "kale-kalefetti-mix": {
+          "id": "kale-kalefetti-mix",
+          "name": "Kale, Kalefetti Mix",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/kale-kalefetti-mix-microgreen-seed-4175M.html",
+          "confidence": "high"
+        },
+        "mustard-wasabina": {
+          "id": "mustard-wasabina",
+          "name": "Mustard, Wasabina",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-wasabina-microgreen-seed-4396M.html",
+          "confidence": "high"
+        },
+        "amaranth-bicolor": {
+          "id": "amaranth-bicolor",
+          "name": "Amaranth, Bicolor",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/amaranth-bicolor-microgreen-seed-4426M.html",
+          "confidence": "high"
+        },
+        "watercress": {
+          "id": "watercress",
+          "name": "Watercress",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/watercress-microgreen-seed-4427M.html",
+          "confidence": "high"
+        },
+        "chard-yellow": {
+          "id": "chard-yellow",
+          "name": "Chard, Yellow",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/chard-yellow-microgreen-seed-4478M.html",
+          "confidence": "high"
+        },
+        "mizuna": {
+          "id": "mizuna",
+          "name": "Mizuna",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mizuna-microgreen-seed-4546M.html",
+          "confidence": "high"
+        },
+        "kale-purple-reign": {
+          "id": "kale-purple-reign",
+          "name": "Kale, Purple Reign",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-purple-reign-f1-microgreen-seed-4610M.html",
+          "confidence": "high"
+        },
+        "kale-unicorn": {
+          "id": "kale-unicorn",
+          "name": "Kale, Unicorn",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/kale-unicorn-microgreen-seed-4647M.html",
+          "confidence": "high"
+        },
+        "amaranth-glitter-mix": {
+          "id": "amaranth-glitter-mix",
+          "name": "Amaranth, Glitter Mix",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/amaranth-glitter-mix-microgreen-seed-5167M.html",
+          "confidence": "high"
+        },
+        "cilantro-moroccan": {
+          "id": "cilantro-moroccan",
+          "name": "Cilantro, Moroccan",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/cilantro-moroccan-microgreen-seed-5228M.html",
+          "confidence": "high"
+        },
+        "mizuna-red": {
+          "id": "mizuna-red",
+          "name": "Mizuna, Red",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mizuna-red-microgreen-seed-5343M.html",
+          "confidence": "high"
+        },
+        "fennel-bronze": {
+          "id": "fennel-bronze",
+          "name": "Fennel, Bronze",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/fennel-bronze-organic-microgreen-seed-784MG.html",
+          "confidence": "high"
+        },
         "alfalfa": {
           "id": "alfalfa",
           "name": "Alfalfa",
           "daysToHarvest": 21,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/alfalfa-organic-microgreen-seed-2150MG.html",
+          "confidence": "high"
+        },
+        "radish-daikon": {
+          "id": "radish-daikon",
+          "name": "Radish, Daikon",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-daikon-organic-microgreen-seed-2155MG.html",
+          "confidence": "high"
+        },
+        "mustard-golden-frills": {
+          "id": "mustard-golden-frills",
+          "name": "Mustard, Golden Frills",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-golden-frills-organic-microgreen-seed-2738MG.html",
+          "confidence": "high"
+        },
+        "mustard-red-giant": {
+          "id": "mustard-red-giant",
+          "name": "Mustard, Red Giant",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-red-giant-organic-microgreen-seed-2884MG.html",
+          "confidence": "high"
+        },
+        "tatsoi": {
+          "id": "tatsoi",
+          "name": "Tatsoi",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/tatsoi-organic-microgreen-seed-2897MG.html",
+          "confidence": "high"
+        },
+        "basil-bicolor": {
+          "id": "basil-bicolor",
+          "name": "Basil, Bicolor",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-bicolor-organic-microgreen-seed-3374MG.html",
+          "confidence": "high"
+        },
+        "orach-ruby-red": {
+          "id": "orach-ruby-red",
+          "name": "Orach, Ruby Red",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/orach-ruby-red-organic-microgreen-seed-3999MG.html",
+          "confidence": "high"
+        },
+        "radish-purple-stem": {
+          "id": "radish-purple-stem",
+          "name": "Radish, Purple Stem",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-purple-stem-organic-microgreen-seed-4107MG.html",
+          "confidence": "high"
+        },
+        "scallion": {
+          "id": "scallion",
+          "name": "Scallion",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/scallion-organic-microgreen-seed-4127MG.html",
+          "confidence": "high"
+        },
+        "beet-red-beet": {
+          "id": "beet-red-beet",
+          "name": "Beet, Red Beet",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-red-beet-organic-microgreen-seed-4544MG.html",
+          "confidence": "high"
+        },
+        "beet-red-leaf": {
+          "id": "beet-red-leaf",
+          "name": "Beet, Red Leaf",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-red-leaf-organic-microgreen-seed-4609MG.html",
+          "confidence": "high"
+        },
+        "pac-choi-red-choi": {
+          "id": "pac-choi-red-choi",
+          "name": "Pac Choi, Red Choi",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/pac-choi-red-choi-organic-microgreen-seed-4664MG.html",
           "confidence": "high"
         },
         "spicy-salad-mix-sprouting-seeds": {
@@ -11719,7 +11799,7 @@
         "mild-mix-microgreens": {
           "id": "mild-mix-microgreens",
           "name": "Mild Mix Microgreens",
-          "daysToHarvest": 18,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-mild-mix-micro-greens.html",
           "confidence": "high"
@@ -11727,9 +11807,73 @@
         "spicy-mix-microgreens": {
           "id": "spicy-mix-microgreens",
           "name": "Spicy Mix Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-spicy-mix-micro-greens.html",
+          "confidence": "high"
+        },
+        "broccoli-microgreens": {
+          "id": "broccoli-microgreens",
+          "name": "Broccoli Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-broccoli-micro-greens.html",
+          "confidence": "high"
+        },
+        "purple-sango-radish-microgreens": {
+          "id": "purple-sango-radish-microgreens",
+          "name": "Purple Sango Radish Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-purple-sango-radish-micro.html",
+          "confidence": "high"
+        },
+        "red-acre-cabbage-microgreens": {
+          "id": "red-acre-cabbage-microgreens",
+          "name": "Red Acre Cabbage Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-acre-cabbage-micro.html",
+          "confidence": "high"
+        },
+        "pea-shoots": {
+          "id": "pea-shoots",
+          "name": "Pea Shoots",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-pea-shoots.html",
+          "confidence": "medium"
+        },
+        "red-beet-microgreens": {
+          "id": "red-beet-microgreens",
+          "name": "Red Beet Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-beet-micro-greens.html",
+          "confidence": "high"
+        },
+        "golden-chard-microgreens": {
+          "id": "golden-chard-microgreens",
+          "name": "Golden Chard Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-golden-chard-micro-greens.html",
+          "confidence": "high"
+        },
+        "red-chard-microgreens": {
+          "id": "red-chard-microgreens",
+          "name": "Red Chard Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-chard-micro-greens.html",
+          "confidence": "high"
+        },
+        "mizuna-microgreens": {
+          "id": "mizuna-microgreens",
+          "name": "Mizuna Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-mizuna-microgreens.html",
           "confidence": "high"
         },
         "red-mustard-microgreens": {
@@ -11743,7 +11887,7 @@
         "ruby-streaks-microgreens": {
           "id": "ruby-streaks-microgreens",
           "name": "Ruby Streaks Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-ruby-streaks-microgreens.html",
           "confidence": "high"
@@ -11751,9 +11895,17 @@
         "pac-choy-microgreens": {
           "id": "pac-choy-microgreens",
           "name": "Pac Choy Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-pac-choy-micro-greens.html",
+          "confidence": "high"
+        },
+        "red-russian-kale-microgreens": {
+          "id": "red-russian-kale-microgreens",
+          "name": "Red Russian Kale Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-russian-kale-micro.html",
           "confidence": "high"
         },
         "mesclun-mix": {
@@ -11764,26 +11916,66 @@
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-mesclun-mix.html",
           "confidence": "high"
         },
+        "basil-microgreens": {
+          "id": "basil-microgreens",
+          "name": "Basil Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-basil-micro-greens.html",
+          "confidence": "high"
+        },
         "green-wave-mustard-microgreens": {
           "id": "green-wave-mustard-microgreens",
           "name": "Green Wave Mustard Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-green-wave-mustard-microgreen.html",
+          "confidence": "high"
+        },
+        "popcorn-shoots": {
+          "id": "popcorn-shoots",
+          "name": "Popcorn Shoots",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-popcorn-shoots-l001.html",
+          "confidence": "high"
+        },
+        "ironman-kale-mix-salad-mix": {
+          "id": "ironman-kale-mix-salad-mix",
+          "name": "Ironman Kale Mix Salad Mix",
+          "daysToHarvest": 30,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-ironman-kale-mix-salad-mix-e.html",
+          "confidence": "high"
+        },
+        "lacinato-kale-microgreens": {
+          "id": "lacinato-kale-microgreens",
+          "name": "Lacinato Kale Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-lacinato-kale-microgreen-qmga.html",
           "confidence": "high"
         },
         "purple-kohlrabi-microgreens": {
           "id": "purple-kohlrabi-microgreens",
           "name": "Purple Kohlrabi Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-purple-kohlrabi-microgreens.html",
+          "confidence": "high"
+        },
+        "daikon-type-radish-microgreens": {
+          "id": "daikon-type-radish-microgreens",
+          "name": "Daikon-type Radish Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-daikon-radish-microgreens.html",
           "confidence": "high"
         },
         "garnet-red-amaranth-microgreens": {
           "id": "garnet-red-amaranth-microgreens",
           "name": "Garnet Red Amaranth Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-garnet-red-amaranth-microgreens.html",
           "confidence": "high"
@@ -11791,7 +11983,7 @@
         "silk-road-mix-microgreens": {
           "id": "silk-road-mix-microgreens",
           "name": "Silk Road Mix Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-silk-road-mix-microgreens.html",
           "confidence": "high"
@@ -11799,7 +11991,7 @@
         "red-lace-mustard-microgreens": {
           "id": "red-lace-mustard-microgreens",
           "name": "Red Lace Mustard Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-lace-mustard-microgreens.html",
           "confidence": "high"
@@ -11807,9 +11999,17 @@
         "wasabina-mustard-microgreens": {
           "id": "wasabina-mustard-microgreens",
           "name": "Wasabina Mustard Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-wasabina-mustard-microgreens.html",
+          "confidence": "high"
+        },
+        "kaleidoscope-mix-salad-mix": {
+          "id": "kaleidoscope-mix-salad-mix",
+          "name": "Kaleidoscope Mix Salad Mix",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-kaleidoscope-mix-salad-mix.html",
           "confidence": "high"
         },
         "spring-salad-mix-sprouting-seeds": {
@@ -11823,7 +12023,7 @@
         "prism-blend-microgreens": {
           "id": "prism-blend-microgreens",
           "name": "Prism Blend Microgreens",
-          "daysToHarvest": 18,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-prism-blend-microgreens-qmg.html",
           "confidence": "high"
@@ -11831,15 +12031,23 @@
         "red-carpet-mustard-microgreens": {
           "id": "red-carpet-mustard-microgreens",
           "name": "Red Carpet Mustard Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-carpet-microgreens-qmg.html",
+          "confidence": "high"
+        },
+        "sunset-chard-microgreens": {
+          "id": "sunset-chard-microgreens",
+          "name": "Sunset Chard Microgreens",
+          "daysToHarvest": 21,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-sunset-chard-microgreens-qmg.html",
           "confidence": "high"
         },
         "tokyo-bekana-microgreens": {
           "id": "tokyo-bekana-microgreens",
           "name": "Tokyo Bekana Microgreens",
-          "daysToHarvest": 13,
+          "daysToHarvest": 21,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-tokyo-bekana-microgreens-qmg.html",
           "confidence": "high"
@@ -11879,7 +12087,7 @@
         "microgreens-blend": {
           "id": "microgreens-blend",
           "name": "Microgreens Blend",
-          "daysToHarvest": 18,
+          "daysToHarvest": 21,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/gourmet-mesclun-salad-blends-micro-greens-blend",
           "confidence": "high"
@@ -12406,14 +12614,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/fruits/strawberry/strawberry-seeds/summer-breeze-cherry-blossom-f1-strawberry-seed-5076.html",
           "confidence": "medium"
         },
-        "strawberry-fields": {
-          "id": "strawberry-fields",
-          "name": "Strawberry Fields",
-          "daysToHarvest": 75,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/specialty-tomatoes/strawberry-fields-organic-f1-tomato-seed-4501G.html",
-          "confidence": "high"
-        },
         "strawberry-blonde-calendula": {
           "id": "strawberry-blonde-calendula",
           "name": "Strawberry Blonde Calendula",
@@ -12454,16 +12654,16 @@
           "method": "direct",
           "directSowDaysBeforeAnchor": 14
         },
-        "fall": {
-          "anchor": "firstFallFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 60
-        },
         "summer": {
           "anchor": "lastSpringFrost",
           "method": "direct",
           "directSowDaysBeforeAnchor": -30,
           "successionIntervalDays": 21
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 60
         }
       },
       "source": "catalog-etl",
@@ -12533,22 +12733,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/swiss-chard/oriole-organic-swiss-chard-seed-3122G.html",
           "confidence": "medium"
         },
-        "chard-and-beet-rainbow-sprinkles-mix": {
-          "id": "chard-and-beet-rainbow-sprinkles-mix",
-          "name": "Chard and Beet, Rainbow Sprinkles Mix",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-mixes/chard-and-beet-rainbow-sprinkles-mix-microgreen-seed-4106M.html",
-          "confidence": "high"
-        },
-        "chard-yellow": {
-          "id": "chard-yellow",
-          "name": "Chard, Yellow",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/chard-yellow-microgreen-seed-4478M.html",
-          "confidence": "high"
-        },
         "heart-of-gold": {
           "id": "heart-of-gold",
           "name": "Heart of Gold",
@@ -12563,14 +12747,6 @@
           "daysToHarvest": 25,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-fordhook-giant-chard.html",
-          "confidence": "high"
-        },
-        "golden-chard-microgreens": {
-          "id": "golden-chard-microgreens",
-          "name": "Golden Chard Microgreens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-golden-chard-micro-greens.html",
           "confidence": "high"
         },
         "improved-rainbow-blend-chard": {
@@ -12597,14 +12773,6 @@
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-ruby-rhubarb-red-chard.html",
           "confidence": "high"
         },
-        "red-chard-microgreens": {
-          "id": "red-chard-microgreens",
-          "name": "Red Chard Microgreens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-red-chard-micro-greens.html",
-          "confidence": "high"
-        },
         "rhubarb-supreme-chard": {
           "id": "rhubarb-supreme-chard",
           "name": "Rhubarb Supreme Chard",
@@ -12619,14 +12787,6 @@
           "daysToHarvest": 30,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-sunset-chard.html",
-          "confidence": "high"
-        },
-        "sunset-chard-microgreens": {
-          "id": "sunset-chard-microgreens",
-          "name": "Sunset Chard Microgreens",
-          "daysToHarvest": 21,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-sunset-chard-microgreens-qmg.html",
           "confidence": "high"
         },
         "perpetual-swiss-chard": {
@@ -12877,6 +13037,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/cherry-tomatoes/black-cherry-organic-tomato-seed-88G.html",
           "confidence": "high"
         },
+        "red-pearl": {
+          "id": "red-pearl",
+          "name": "Red Pearl",
+          "daysToHarvest": 58,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/grape-tomatoes/red-pearl-organic-tomato-seed-97G.html",
+          "confidence": "high"
+        },
         "big-beef": {
           "id": "big-beef",
           "name": "Big Beef",
@@ -12907,6 +13075,14 @@
           "daysToHarvest": 78,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/heirloom-tomatoes/striped-german-organic-tomato-seed-2372.html",
+          "confidence": "high"
+        },
+        "five-star-grape": {
+          "id": "five-star-grape",
+          "name": "Five Star Grape",
+          "daysToHarvest": 62,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/grape-tomatoes/five-star-grape-f1-tomato-seed-2527.html",
           "confidence": "high"
         },
         "plum-regal": {
@@ -12979,6 +13155,14 @@
           "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/slicing-tomatoes/mountain-merit-f1-tomato-seed-3080.html",
+          "confidence": "high"
+        },
+        "sunpeach": {
+          "id": "sunpeach",
+          "name": "Sunpeach",
+          "daysToHarvest": 60,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/cherry-tomatoes/sunpeach-f1-tomato-seed-3084.html",
           "confidence": "high"
         },
         "pozzano": {
@@ -13635,6 +13819,14 @@
           "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/cherry-tomatoes/honey-bee-organic-f1-tomato-seed-4500G.html",
+          "confidence": "high"
+        },
+        "strawberry-fields": {
+          "id": "strawberry-fields",
+          "name": "Strawberry Fields",
+          "daysToHarvest": 75,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/specialty-tomatoes/strawberry-fields-organic-f1-tomato-seed-4501G.html",
           "confidence": "high"
         },
         "queen-bee": {
@@ -14654,14 +14846,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/fennel/dragon-f1-fennel-seed-4613.html",
           "confidence": "medium"
         },
-        "fennel-green": {
-          "id": "fennel-green",
-          "name": "Fennel, Green",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/fennel-green-microgreen-seed-3152M.html",
-          "confidence": "high"
-        },
         "preludio": {
           "id": "preludio",
           "name": "Preludio",
@@ -14677,14 +14861,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/fennel/finale-organic-fennel-seed-5977G.html",
           "confidence": "medium"
-        },
-        "fennel-bronze": {
-          "id": "fennel-bronze",
-          "name": "Fennel, Bronze",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/fennel-bronze-organic-microgreen-seed-784MG.html",
-          "confidence": "high"
         },
         "preludio-f1-fennel": {
           "id": "preludio-f1-fennel",
@@ -15202,22 +15378,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/cruiser-monogerm-cilantro-coriander-seed-4787.html",
           "confidence": "medium"
         },
-        "cilantro": {
-          "id": "cilantro",
-          "name": "Cilantro",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/cilantro-microgreen-seed-919M.html",
-          "confidence": "high"
-        },
-        "cilantro-monogerm": {
-          "id": "cilantro-monogerm",
-          "name": "Cilantro, Monogerm",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/cilantro-monogerm-microgreen-seed-3446M.html",
-          "confidence": "high"
-        },
         "marino": {
           "id": "marino",
           "name": "Marino",
@@ -15225,14 +15385,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/cilantro-coriander/marino-organic-cilantro-coriander-seed-3858G.html",
           "confidence": "medium"
-        },
-        "cilantro-moroccan": {
-          "id": "cilantro-moroccan",
-          "name": "Cilantro, Moroccan",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/cilantro-moroccan-microgreen-seed-5228M.html",
-          "confidence": "high"
         },
         "santo-cilantro": {
           "id": "santo-cilantro",
@@ -15370,14 +15522,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/teddy-dill-seed-5550.html",
           "confidence": "medium"
-        },
-        "dill": {
-          "id": "dill",
-          "name": "Dill",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/dill-microgreen-seed-920M.html",
-          "confidence": "high"
         },
         "greensleeves-dill": {
           "id": "greensleeves-dill",
@@ -15819,14 +15963,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/chicory/italian-dandelion/italiko-red-italian-dandelion-seed-3358.html",
           "confidence": "medium"
         },
-        "dandelion-red": {
-          "id": "dandelion-red",
-          "name": "Dandelion, Red",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/dandelion-red-microgreen-seed-3357M.html",
-          "confidence": "high"
-        },
         "felix": {
           "id": "felix",
           "name": "Felix",
@@ -15928,14 +16064,6 @@
           "daysToHarvest": 90,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/leeks/megaton-f1-leek-seed-2583.html",
-          "confidence": "high"
-        },
-        "chinese-leeks-garlic-chives": {
-          "id": "chinese-leeks-garlic-chives",
-          "name": "Chinese Leeks/Garlic Chives",
-          "daysToHarvest": 90,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/herbs/chives/chinese-leeks-garlic-chives/chinese-leeks-garlic-chives-herb-seed-3299.html",
           "confidence": "high"
         },
         "comanche": {
@@ -16584,7 +16712,7 @@
       "indoorSowOffsetDays": 84,
       "hardenOffDaysBeforeTransplant": 7,
       "transplantDaysAfterFrost": -14,
-      "daysToHarvest": 180,
+      "daysToHarvest": 90,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
@@ -16652,14 +16780,6 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/artichoke-imperial-star",
           "confidence": "high"
-        },
-        "cardoon-artichoke": {
-          "id": "cardoon-artichoke",
-          "name": "Cardoon Artichoke",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/artichoke-cardoon",
-          "confidence": "high"
         }
       }
     },
@@ -16726,52 +16846,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/herbs/herbs-for-salad-mix/vertissimo-chervil-seed-2441.html",
           "confidence": "high"
         },
-        "chervil": {
-          "id": "chervil",
-          "name": "Chervil",
-          "daysToHarvest": 28,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/chervil-microgreen-seed-2441M.html",
-          "confidence": "high"
-        },
         "fine-curled": {
           "id": "fine-curled",
           "name": "Fine Curled",
           "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/chervil/fine-curled-organic-chervil-seed-3523G.html",
-          "confidence": "high"
-        }
-      }
-    },
-    "grape": {
-      "id": "grape",
-      "name": "Grape",
-      "category": "fruit",
-      "family": "other",
-      "method": "transplant",
-      "indoorSowOffsetDays": 70,
-      "hardenOffDaysBeforeTransplant": 7,
-      "transplantDaysAfterFrost": 14,
-      "daysToHarvest": 300,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "transplant",
-          "indoorSowOffsetDays": 70,
-          "hardenOffDaysBeforeTransplant": 7,
-          "transplantDaysAfterAnchor": 14
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "five-star-grape": {
-          "id": "five-star-grape",
-          "name": "Five Star Grape",
-          "daysToHarvest": 62,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/grape-tomatoes/five-star-grape-f1-tomato-seed-2527.html",
           "confidence": "high"
         }
       }
@@ -17048,42 +17128,6 @@
         }
       }
     },
-    "asparagus": {
-      "id": "asparagus",
-      "name": "Asparagus",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 28,
-      "daysToHarvest": 300,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 28
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "low",
-      "varieties": {
-        "millennium": {
-          "id": "millennium",
-          "name": "Millennium",
-          "daysToHarvest": 300,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/asparagus/millennium-f1-asparagus-seed-3455.html",
-          "confidence": "medium"
-        },
-        "erasmus": {
-          "id": "erasmus",
-          "name": "Erasmus",
-          "daysToHarvest": 300,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/asparagus/erasmus-f1-asparagus-seed-4643.html",
-          "confidence": "medium"
-        }
-      }
-    },
     "brussels-sprouts": {
       "id": "brussels-sprouts",
       "name": "Brussels Sprouts",
@@ -17113,6 +17157,14 @@
       "source": "catalog-etl",
       "confidence": "medium",
       "varieties": {
+        "autumn-star": {
+          "id": "autumn-star",
+          "name": "Autumn Star",
+          "daysToHarvest": 110,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/kalettes/autumn-star-f1-kalettes-seed-3139.html",
+          "confidence": "high"
+        },
         "gladius": {
           "id": "gladius",
           "name": "Gladius",
@@ -17200,6 +17252,66 @@
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/brussels-sprout-roodnerf",
           "confidence": "high"
+        },
+        "autumn-star-kalettes": {
+          "id": "autumn-star-kalettes",
+          "name": "Autumn Star Kalettes®",
+          "daysToHarvest": 110,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/brussels-sprout-autumn-star",
+          "confidence": "high"
+        },
+        "mistletoe-kalettes": {
+          "id": "mistletoe-kalettes",
+          "name": "Mistletoe Kalettes®",
+          "daysToHarvest": 125,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/brussels-sprout-mistletoe",
+          "confidence": "high"
+        },
+        "snowdrop-kalettes": {
+          "id": "snowdrop-kalettes",
+          "name": "Snowdrop Kalettes®",
+          "daysToHarvest": 140,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/brussels-sprout-snowdrop",
+          "confidence": "high"
+        }
+      }
+    },
+    "asparagus": {
+      "id": "asparagus",
+      "name": "Asparagus",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 28,
+      "daysToHarvest": 300,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 28
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "millennium": {
+          "id": "millennium",
+          "name": "Millennium",
+          "daysToHarvest": 300,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/asparagus/millennium-f1-asparagus-seed-3455.html",
+          "confidence": "medium"
+        },
+        "erasmus": {
+          "id": "erasmus",
+          "name": "Erasmus",
+          "daysToHarvest": 300,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/asparagus/erasmus-f1-asparagus-seed-4643.html",
+          "confidence": "medium"
         }
       }
     },
@@ -17212,7 +17324,7 @@
       "indoorSowOffsetDays": 56,
       "hardenOffDaysBeforeTransplant": 5,
       "transplantDaysAfterFrost": -7,
-      "daysToHarvest": 120,
+      "daysToHarvest": 365,
       "seasons": {
         "spring": {
           "anchor": "lastSpringFrost",
@@ -17266,42 +17378,6 @@
           "daysToHarvest": 125,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/gourds/luffa-gourd-gourd-seed-5914.html",
-          "confidence": "high"
-        }
-      }
-    },
-    "purslane": {
-      "id": "purslane",
-      "name": "Purslane",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 14,
-      "daysToHarvest": 50,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 14
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "purslane-red-gruner": {
-          "id": "purslane-red-gruner",
-          "name": "Purslane, Red Gruner",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/purslane-red-gruner-microgreen-seed-2257M.html",
-          "confidence": "high"
-        },
-        "golden-purslane": {
-          "id": "golden-purslane",
-          "name": "Golden Purslane",
-          "daysToHarvest": 50,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/purslane-golden-purslane",
           "confidence": "high"
         }
       }
@@ -17374,7 +17450,7 @@
         }
       },
       "source": "catalog-etl",
-      "confidence": "medium",
+      "confidence": "low",
       "varieties": {
         "ruby-red-orach": {
           "id": "ruby-red-orach",
@@ -17383,14 +17459,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/specialty-greens/ruby-red-orach-organic-specialty-green-seed-3999G.html",
           "confidence": "medium"
-        },
-        "orach-ruby-red": {
-          "id": "orach-ruby-red",
-          "name": "Orach, Ruby Red",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/orach-ruby-red-organic-microgreen-seed-3999MG.html",
-          "confidence": "high"
         }
       }
     },
@@ -17410,12 +17478,12 @@
         }
       },
       "source": "catalog-etl",
-      "confidence": "medium",
+      "confidence": "low",
       "varieties": {
         "buckwheat": {
           "id": "buckwheat",
           "name": "Buckwheat",
-          "daysToHarvest": 12,
+          "daysToHarvest": 70,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/buckwheat-organic-shoot-seed-2151SG.html",
           "confidence": "high"
@@ -17427,39 +17495,6 @@
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-common-buckwheat.html",
           "confidence": "medium"
-        }
-      }
-    },
-    "scallion": {
-      "id": "scallion",
-      "name": "Scallion",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 28,
-      "daysToHarvest": 70,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 28
-        },
-        "fall": {
-          "anchor": "firstFallFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 70
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "scallion": {
-          "id": "scallion",
-          "name": "Scallion",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/scallion-organic-microgreen-seed-4127MG.html",
-          "confidence": "high"
         }
       }
     },
@@ -17594,247 +17629,6 @@
         }
       }
     },
-    "garlic": {
-      "id": "garlic",
-      "name": "Garlic",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 150,
-      "daysToHarvest": 240,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 150
-        },
-        "fall": {
-          "anchor": "firstFallFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 21
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "garlic-chives": {
-          "id": "garlic-chives",
-          "name": "Garlic Chives",
-          "daysToHarvest": 90,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-garlic-chives.html",
-          "confidence": "high"
-        },
-        "inchelium-red-garlic": {
-          "id": "inchelium-red-garlic",
-          "name": "Inchelium Red Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-inchelium-red-garlic.html",
-          "confidence": "medium"
-        },
-        "killarney-red-garlic": {
-          "id": "killarney-red-garlic",
-          "name": "Killarney Red Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-killarney-red-garlic.html",
-          "confidence": "medium"
-        },
-        "lorz-italian-garlic": {
-          "id": "lorz-italian-garlic",
-          "name": "Lorz Italian Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-lorz-italian-garlic.html",
-          "confidence": "medium"
-        },
-        "music-garlic": {
-          "id": "music-garlic",
-          "name": "Music Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-music-garlic.html",
-          "confidence": "medium"
-        },
-        "chesnok-red-garlic": {
-          "id": "chesnok-red-garlic",
-          "name": "Chesnok Red Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-chesnok-red-garlic.html",
-          "confidence": "medium"
-        },
-        "silver-white-garlic": {
-          "id": "silver-white-garlic",
-          "name": "Silver White Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-silver-white-garlic.html",
-          "confidence": "medium"
-        },
-        "zemo-garlic": {
-          "id": "zemo-garlic",
-          "name": "Zemo Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-zemo-garlic.html",
-          "confidence": "medium"
-        },
-        "nootka-rose-garlic": {
-          "id": "nootka-rose-garlic",
-          "name": "Nootka Rose Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-nootka-rose-garlic.html",
-          "confidence": "medium"
-        },
-        "spanish-roja-garlic": {
-          "id": "spanish-roja-garlic",
-          "name": "Spanish Roja Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-spanish-roja-garlic.html",
-          "confidence": "medium"
-        },
-        "georgian-crystal-garlic": {
-          "id": "georgian-crystal-garlic",
-          "name": "Georgian Crystal Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-georgian-crystal-garlic.html",
-          "confidence": "medium"
-        },
-        "geisha-garlic-chives": {
-          "id": "geisha-garlic-chives",
-          "name": "Geisha Garlic Chives",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/chives-geisha-garlic",
-          "confidence": "medium"
-        },
-        "purple-glazer-garlic": {
-          "id": "purple-glazer-garlic",
-          "name": "Purple Glazer Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-purple-glazer",
-          "confidence": "medium"
-        },
-        "bavarian-purple-garlic": {
-          "id": "bavarian-purple-garlic",
-          "name": "Bavarian Purple Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-bavarian-purple",
-          "confidence": "medium"
-        },
-        "georgian-fire-garlic": {
-          "id": "georgian-fire-garlic",
-          "name": "Georgian Fire Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-georgian-fire",
-          "confidence": "medium"
-        },
-        "duganski-garlic": {
-          "id": "duganski-garlic",
-          "name": "Duganski Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-duganski",
-          "confidence": "medium"
-        },
-        "uzbekistan-garlic": {
-          "id": "uzbekistan-garlic",
-          "name": "Uzbekistan Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-uzbekistan",
-          "confidence": "medium"
-        },
-        "premium-northern-white-garlic": {
-          "id": "premium-northern-white-garlic",
-          "name": "Premium Northern White Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-premium-northern-white",
-          "confidence": "medium"
-        },
-        "metechi-garlic": {
-          "id": "metechi-garlic",
-          "name": "Metechi Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-metechi",
-          "confidence": "medium"
-        },
-        "siberian-garlic": {
-          "id": "siberian-garlic",
-          "name": "Siberian Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-siberian",
-          "confidence": "medium"
-        },
-        "vietnamese-red-garlic": {
-          "id": "vietnamese-red-garlic",
-          "name": "Vietnamese Red Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-vietnamese-red",
-          "confidence": "medium"
-        },
-        "early-red-italian-garlic": {
-          "id": "early-red-italian-garlic",
-          "name": "Early Red Italian Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-early-red-italian",
-          "confidence": "medium"
-        },
-        "italian-late-garlic": {
-          "id": "italian-late-garlic",
-          "name": "Italian Late Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-italian-late",
-          "confidence": "medium"
-        },
-        "susanville-garlic": {
-          "id": "susanville-garlic",
-          "name": "Susanville Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-susanville",
-          "confidence": "medium"
-        },
-        "western-rose-garlic": {
-          "id": "western-rose-garlic",
-          "name": "Western Rose Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-western-rose",
-          "confidence": "medium"
-        },
-        "the-braiding-bunch-garlic": {
-          "id": "the-braiding-bunch-garlic",
-          "name": "The Braiding Bunch Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-the-braiding-bunch-combo",
-          "confidence": "medium"
-        },
-        "great-garlic-combo": {
-          "id": "great-garlic-combo",
-          "name": "Great Garlic Combo",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-great-combo",
-          "confidence": "medium"
-        }
-      }
-    },
     "potato": {
       "id": "potato",
       "name": "Potato",
@@ -17925,7 +17719,7 @@
         "yukon-gem-potato": {
           "id": "yukon-gem-potato",
           "name": "Yukon Gem Potato",
-          "daysToHarvest": 10,
+          "daysToHarvest": 90,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-yukon-gem-potato.html",
           "confidence": "high"
@@ -17976,6 +17770,135 @@
           "daysToHarvest": 90,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-magic-molly-potato.html",
+          "confidence": "medium"
+        }
+      }
+    },
+    "garlic": {
+      "id": "garlic",
+      "name": "Garlic",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 150,
+      "daysToHarvest": 240,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 150
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 21
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "inchelium-red-garlic": {
+          "id": "inchelium-red-garlic",
+          "name": "Inchelium Red Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-inchelium-red-garlic.html",
+          "confidence": "medium"
+        },
+        "killarney-red-garlic": {
+          "id": "killarney-red-garlic",
+          "name": "Killarney Red Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-killarney-red-garlic.html",
+          "confidence": "medium"
+        },
+        "lorz-italian-garlic": {
+          "id": "lorz-italian-garlic",
+          "name": "Lorz Italian Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-lorz-italian-garlic.html",
+          "confidence": "medium"
+        },
+        "music-garlic": {
+          "id": "music-garlic",
+          "name": "Music Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-music-garlic.html",
+          "confidence": "medium"
+        },
+        "chesnok-red-garlic": {
+          "id": "chesnok-red-garlic",
+          "name": "Chesnok Red Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-chesnok-red-garlic.html",
+          "confidence": "medium"
+        },
+        "silver-white-garlic": {
+          "id": "silver-white-garlic",
+          "name": "Silver White Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-silver-white-garlic.html",
+          "confidence": "medium"
+        },
+        "zemo-garlic": {
+          "id": "zemo-garlic",
+          "name": "Zemo Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-zemo-garlic.html",
+          "confidence": "medium"
+        },
+        "nootka-rose-garlic": {
+          "id": "nootka-rose-garlic",
+          "name": "Nootka Rose Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-nootka-rose-garlic.html",
+          "confidence": "medium"
+        },
+        "spanish-roja-garlic": {
+          "id": "spanish-roja-garlic",
+          "name": "Spanish Roja Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-spanish-roja-garlic.html",
+          "confidence": "medium"
+        },
+        "georgian-crystal-garlic": {
+          "id": "georgian-crystal-garlic",
+          "name": "Georgian Crystal Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-georgian-crystal-garlic.html",
+          "confidence": "medium"
+        },
+        "purple-glazer-garlic": {
+          "id": "purple-glazer-garlic",
+          "name": "Purple Glazer Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-purple-glazer",
+          "confidence": "medium"
+        },
+        "bavarian-purple-garlic": {
+          "id": "bavarian-purple-garlic",
+          "name": "Bavarian Purple Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-bavarian-purple",
+          "confidence": "medium"
+        },
+        "georgian-fire-garlic": {
+          "id": "georgian-fire-garlic",
+          "name": "Georgian Fire Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-georgian-fire",
           "confidence": "medium"
         }
       }
@@ -18327,6 +18250,34 @@
           "daysToHarvest": 80,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/melon-sugar-cube",
+          "confidence": "high"
+        }
+      }
+    },
+    "purslane": {
+      "id": "purslane",
+      "name": "Purslane",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 14,
+      "daysToHarvest": 50,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 14
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "golden-purslane": {
+          "id": "golden-purslane",
+          "name": "Golden Purslane",
+          "daysToHarvest": 50,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/purslane-golden-purslane",
           "confidence": "high"
         }
       }
