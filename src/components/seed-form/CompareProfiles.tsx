@@ -4,6 +4,7 @@ import { format, parseISO } from "date-fns";
 import type { RiskProfile } from "@/planning";
 import { getCropName } from "@/planning";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { frostAnchorLabel } from "./seasonLabel";
 import type { ScheduleResult } from "./types";
 
 export type CompareResult = Record<RiskProfile, ScheduleResult>;
@@ -45,7 +46,8 @@ export function CompareProfiles({ compared, baseline }: Props) {
         return (
           <TabsContent key={profile} value={profile}>
             <p className="text-muted-foreground mb-3 text-sm">
-              Last frost: {format(parseISO(schedule.lastFrostDate), "MMM d, yyyy")}
+              {frostAnchorLabel(schedule.season)}:{" "}
+              {format(parseISO(schedule.lastFrostDate), "MMM d, yyyy")}
             </p>
             <ul className="space-y-2 text-sm">
               {tasks.map((task) => {

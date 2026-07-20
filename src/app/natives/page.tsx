@@ -22,8 +22,8 @@ export default function NativesPage() {
         </p>
         <h1 className="text-3xl font-semibold tracking-tight">Native plants</h1>
         <p className="text-muted-foreground mt-2 text-sm">
-          Enter a ZIP to see plants native to that ecoregion and when to start
-          seeds (frost-anchored).
+          Enter a ZIP to see plants native to that ecoregion and when to sow or
+          start seeds, anchored to frost dates.
         </p>
         <div className="mt-8">
           <Suspense fallback={<p className="text-sm text-muted-foreground">Loading…</p>}>

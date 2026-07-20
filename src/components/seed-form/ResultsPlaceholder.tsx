@@ -17,7 +17,7 @@ export function ResultsPlaceholder() {
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground text-sm">
-          Pick a ZIP code, select crops, and choose a risk profile to build a
+          Pick a ZIP, season, crops, varieties, and risk profile to build a
           frost-aware timeline with sow, transplant, and harvest dates.
         </p>
       </CardContent>

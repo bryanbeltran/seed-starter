@@ -36,11 +36,11 @@ export function VarietySelect({ crop, value, disabled, onChange }: Props) {
         disabled={disabled}
       >
         <SelectTrigger id={`variety-${crop.id}`} className="mt-1" aria-label={`${crop.name} variety`}>
-          <SelectValue placeholder="Default" />
+          <SelectValue placeholder="Catalog default" />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="default">
-            Default · {crop.daysToHarvest}d
+            Catalog default · {crop.daysToHarvest}d
           </SelectItem>
           {varieties.map((v) => (
             <SelectItem key={v.id} value={v.id}>

@@ -12,6 +12,16 @@ import { displayName, slugify, varietyId } from "./slug.mjs";
 /** Drop scraped DTH that is almost certainly a parse error. */
 const MIN_VARIETY_DTH = 21;
 
+function decodeHtmlEntities(text) {
+  return String(text ?? "")
+    .replace(/&#039;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&quot;/g, '"')
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">");
+}
+
 const EDIBLE_PREFIXES = [
   "/vegetables/",
   "/herbs/",
@@ -128,7 +138,7 @@ function buildCatalog(seeds) {
         : undefined;
     crop.varieties[vid] = {
       id: vid,
-      name: seed.name,
+      name: decodeHtmlEntities(seed.name),
       daysToHarvest: scraped ?? crop.daysToHarvest,
       source: seed.source,
       sourceUrl: seed.sourceUrl,
