@@ -24,6 +24,7 @@ export type SavedPlanSummary = {
   zip: string;
   zone: string;
   crops: string[];
+  varieties?: Record<string, string>;
   riskProfile: RiskProfile;
   season?: GardenSeason;
   climateDataVersion?: string | null;
@@ -42,6 +43,7 @@ type Props = {
   onStatusMessage: (msg: string, variant?: "success" | "error") => void;
   currentZip: string;
   currentCrops: string[];
+  currentVarieties: Record<string, string | undefined>;
   currentRisk: RiskProfile;
   currentSeason: GardenSeason;
   saveOpen: boolean;
@@ -53,6 +55,7 @@ export function SavedPlansPanel({
   onStatusMessage,
   currentZip,
   currentCrops,
+  currentVarieties,
   currentRisk,
   currentSeason,
   saveOpen,
@@ -93,6 +96,11 @@ export function SavedPlansPanel({
           name: planName.trim(),
           zip: currentZip,
           crops: currentCrops,
+          varieties: Object.fromEntries(
+            Object.entries(currentVarieties).filter(
+              (entry): entry is [string, string] => Boolean(entry[1]),
+            ),
+          ),
           riskProfile: currentRisk,
           season: currentSeason,
         }),

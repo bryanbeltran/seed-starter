@@ -12,6 +12,8 @@ export type SavedPlanInput = {
   name: string;
   zip: string;
   crops: string[];
+  /** cropId → varietyId */
+  varieties?: Record<string, string>;
   riskProfile?: RiskProfile;
   season?: GardenSeason;
   ownerId?: string | null;
@@ -41,6 +43,7 @@ export type SavedPlan = {
   zip: string;
   zone: string;
   crops: string[];
+  varieties: Record<string, string>;
   riskProfile: RiskProfile;
   season: GardenSeason;
   ownerId: string | null;
@@ -61,15 +64,35 @@ export async function scheduleForPlan(
   crops: string[],
   riskProfile: RiskProfile,
   season: GardenSeason = "spring",
+  varieties: Record<string, string> = {},
 ): Promise<Schedule> {
   return buildSchedule({
     zone,
     zip,
     crops,
+    cropSelections: crops.map((cropId) => ({
+      cropId,
+      ...(varieties[cropId] ? { varietyId: varieties[cropId] } : {}),
+    })),
     riskProfile,
     season,
     climateRepository,
   });
+}
+
+export function parseVarietiesJson(raw: unknown): Record<string, string> {
+  if (raw == null || raw === "") return {};
+  try {
+    const parsed = typeof raw === "string" ? JSON.parse(raw) : raw;
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    const out: Record<string, string> = {};
+    for (const [k, v] of Object.entries(parsed as Record<string, unknown>)) {
+      if (typeof v === "string" && v) out[k] = v;
+    }
+    return out;
+  } catch {
+    return {};
+  }
 }
 
 export function climateSnapshotForZip(zip: string): string | null {
@@ -118,6 +141,7 @@ export function rowToPlan(
     zip: String(row.zip),
     zone: String(row.zone),
     crops: JSON.parse(String(row.crops_json)) as string[],
+    varieties: parseVarietiesJson(row.varieties_json),
     riskProfile: String(row.risk_profile) as RiskProfile,
     season: (row.season ? String(row.season) : "spring") as GardenSeason,
     ownerId: row.owner_id ? String(row.owner_id) : null,

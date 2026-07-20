@@ -31,4 +31,4 @@ Returns conservative, balanced, and aggressive schedules for the same input.
 - `PATCH /api/saved-plans/{planId}`
 - `DELETE /api/saved-plans/{planId}`
 
-Schedules are regenerated server-side from stored ZIP, crops, and risk profile.
+Schedules are regenerated server-side from stored ZIP, crops, optional varieties, risk profile, and season.

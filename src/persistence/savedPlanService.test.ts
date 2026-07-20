@@ -86,6 +86,33 @@ describe("savedPlanService", () => {
     expect(back?.schedule.tasks.some((t) => t.type === "fall_sow")).toBe(true);
   });
 
+  it("persists varieties and rebuilds harvest from variety DTH", async () => {
+    const base = await createSavedPlan({
+      name: "Pepper base",
+      zip: "55423",
+      crops: ["pepper"],
+    });
+    const withVariety = await createSavedPlan({
+      name: "Habanero bed",
+      zip: "55423",
+      crops: ["pepper"],
+      varieties: { pepper: "habanero" },
+    });
+    expect(withVariety.varieties).toEqual({ pepper: "habanero" });
+
+    const baseHarvest = base.schedule.tasks.find((t) => t.type === "harvest")!;
+    const varietyHarvest = withVariety.schedule.tasks.find(
+      (t) => t.type === "harvest",
+    )!;
+    expect(varietyHarvest.date).not.toBe(baseHarvest.date);
+
+    const reloaded = await getSavedPlan(withVariety.id);
+    expect(reloaded?.varieties).toEqual({ pepper: "habanero" });
+    expect(reloaded?.schedule.tasks.find((t) => t.type === "harvest")?.date).toBe(
+      varietyHarvest.date,
+    );
+  });
+
   it("updates and deletes plans", async () => {
     const plan = await createSavedPlan({
       name: "Spring bed",

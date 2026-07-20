@@ -242,6 +242,11 @@ export const openApiSpec = {
           name: { type: "string" },
           zip: { type: "string" },
           crops: { type: "array", items: { type: "string" } },
+          varieties: {
+            type: "object",
+            additionalProperties: { type: "string" },
+            description: "Optional cropId → varietyId map for harvest DTM.",
+          },
           riskProfile: {
             type: "string",
             enum: ["conservative", "balanced", "aggressive"],

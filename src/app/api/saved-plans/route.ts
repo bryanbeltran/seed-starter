@@ -13,6 +13,7 @@ const createSchema = z.object({
   name: z.string().trim().min(1, "Plan name is required."),
   zip: z.string().trim().min(1),
   crops: z.array(z.string()).min(1),
+  varieties: z.record(z.string(), z.string()).optional(),
   riskProfile: z.enum(["conservative", "balanced", "aggressive"]).optional(),
   season: z.enum(["spring", "fall", "summer"]).optional(),
 });
