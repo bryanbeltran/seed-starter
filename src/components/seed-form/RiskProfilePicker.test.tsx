@@ -13,4 +13,16 @@ describe("RiskProfilePicker", () => {
     await user.click(screen.getByRole("radio", { name: /aggressive/i }));
     expect(onChange).toHaveBeenCalledWith("aggressive");
   });
+
+  it("shows fall-aware hints when season is fall", () => {
+    render(
+      <RiskProfilePicker
+        value="balanced"
+        loading={false}
+        onChange={() => {}}
+        season="fall"
+      />,
+    );
+    expect(screen.getByText(/Earlier fall frost/i)).toBeInTheDocument();
+  });
 });

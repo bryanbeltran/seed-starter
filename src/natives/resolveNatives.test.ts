@@ -98,9 +98,45 @@ describe("resolveNatives", () => {
     expect(conservative.lastFrostDate.getTime()).toBeGreaterThan(
       aggressive.lastFrostDate.getTime(),
     );
+    const id = conservative.plants[0].id;
     const cSow = conservative.plants[0].tasks[0].date.getTime();
-    const aSow = aggressive.plants.find((p) => p.id === conservative.plants[0].id)!
-      .tasks[0].date.getTime();
+    const aSow = aggressive.plants.find((p) => p.id === id)!.tasks[0].date.getTime();
     expect(cSow).toBeGreaterThan(aSow);
+  });
+
+  it("inverts riskProfile for fall (conservative → earlier)", () => {
+    const conservative = resolveNatives({
+      zip: "55423",
+      zone: "5a",
+      season: "fall",
+      riskProfile: "conservative",
+      referenceDate: ref,
+      climateLookup: climate,
+    });
+    const aggressive = resolveNatives({
+      zip: "55423",
+      zone: "5a",
+      season: "fall",
+      riskProfile: "aggressive",
+      referenceDate: ref,
+      climateLookup: climate,
+    });
+    expect(conservative.lastFrostDate.getTime()).toBeLessThan(
+      aggressive.lastFrostDate.getTime(),
+    );
+  });
+
+  it("fall list requires fallDormant and uses stratificationDays offset", () => {
+    const result = resolveNatives({
+      zip: "55423",
+      zone: "5a",
+      season: "fall",
+      referenceDate: ref,
+    });
+    expect(result.plants.every((p) => p.fallDormant)).toBe(true);
+    const ratibida = result.plants.find((p) => p.id === "ratibida-pinnata")!;
+    const expected = new Date(result.lastFrostDate);
+    expected.setDate(expected.getDate() - 60);
+    expect(ratibida.tasks[0].date.toDateString()).toBe(expected.toDateString());
   });
 });

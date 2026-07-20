@@ -40,3 +40,12 @@ test("natives expands to Northeastern Coastal Zone", async ({ page }) => {
   });
   await expect(page.getByText("New England aster", { exact: true })).toBeVisible();
 });
+
+test("natives expands to Central Corn Belt Plains", async ({ page }) => {
+  await page.goto("/natives?zip=60601");
+
+  await expect(page.getByText("Central Corn Belt Plains")).toBeVisible({
+    timeout: 30_000,
+  });
+  await expect(page.getByText("Compass plant", { exact: true })).toBeVisible();
+});

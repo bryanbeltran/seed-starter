@@ -68,7 +68,8 @@
       "stratificationDays": 30,
       "needsStratification": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASIN",
-      "confidence": "high"
+      "confidence": "high",
+      "fallDormant": true
     },
     "rudbeckia-hirta": {
       "id": "rudbeckia-hirta",
@@ -94,7 +95,8 @@
       "stratificationDays": 60,
       "needsStratification": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SORIR",
-      "confidence": "medium"
+      "confidence": "medium",
+      "fallDormant": true
     },
     "lupinus-perennis": {
       "id": "lupinus-perennis",
@@ -107,7 +109,8 @@
       "stratificationDays": 14,
       "needsStratification": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LUPE3",
-      "confidence": "high"
+      "confidence": "high",
+      "fallDormant": true
     },
     "schizachyrium-scoparium": {
       "id": "schizachyrium-scoparium",
@@ -185,7 +188,8 @@
       "stratificationDays": 30,
       "needsStratification": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=AQCA",
-      "confidence": "high"
+      "confidence": "high",
+      "fallDormant": true
     },
     "coreopsis-lanceolata": {
       "id": "coreopsis-lanceolata",
