@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle";
 
 const nav = [
+  { href: "/natives", label: "Natives" },
   { href: "/coverage", label: "Coverage" },
   { href: "/docs", label: "Docs" },
 ];

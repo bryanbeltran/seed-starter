@@ -24,6 +24,27 @@ export const openApiSpec = {
         },
       },
     },
+    "/api/natives": {
+      get: {
+        summary: "Native plants by ZIP (EPA Level III ecoregion)",
+        operationId: "getNatives",
+        parameters: [
+          {
+            name: "zip",
+            in: "query",
+            required: true,
+            schema: { type: "string", pattern: "^\\d{5}$" },
+          },
+        ],
+        responses: {
+          "200": {
+            description: "Ecoregion natives with frost-anchored sow tasks",
+          },
+          "400": { description: "Invalid ZIP" },
+          "429": { description: "Rate limited" },
+        },
+      },
+    },
     "/api/schedules": {
       post: {
         summary: "Build planting schedule",
