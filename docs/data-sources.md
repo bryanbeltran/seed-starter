@@ -32,6 +32,8 @@ Method: ZCTA centroid → nearest GHCN station with TMIN → median last spring 
 
 Station pool: `data/ghcn/stations-us-tmin.json` (US inventory filter). TMIN cache: `data/ghcn/tmin-parsed.json`. Coverage manifest: `data/climate-manifest.json`.
 
+Eval gates (golden ZIPs ±14d, drift/monotonic percentiles): see README **Climate eval** and `data/golden-zips.json`.
+
 ### Attribution
 
 - **NOAA NCEI GHCN-Daily** — temperature observations

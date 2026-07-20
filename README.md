@@ -64,6 +64,19 @@ Next builds: [FAANG polish](docs/plans/faang-polish.md) · [plans index](docs/pl
 | Rate limit exceeded | `429` + `Retry-After` |
 | Climate data refresh | Saved plans flag stale + show last-frost diff |
 
+## Climate eval
+
+Schedules are only as good as the frost model. We keep ~50 golden US ZIPs with expected last-spring-frost and first-fall-frost p50 dates. `pnpm run check` runs `check-golden-climate` (±14 day band) and `check-climate-drift` (coverage, station distance, monotonic percentiles). When GHCN ETL changes stations or summaries, eval failures mean fix the model — not the UI.
+
+| Gate | Script | Signal |
+|------|--------|--------|
+| Golden ZIPs | `scripts/check-golden-climate.mjs` | Spring + fall p50 ±14d |
+| Climate drift | `scripts/check-climate-drift.mjs` | Coverage, distance, monotonic percentiles |
+
+Crop timing is audited separately via `scripts/audit-timing.mjs` (not climate eval).
+
+See [`data/golden-zips.json`](data/golden-zips.json) and [ADR 003](docs/adrs/003-climate-nearest-station.md).
+
 ## Setup
 
 ```bash
