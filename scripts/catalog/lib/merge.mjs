@@ -1,6 +1,16 @@
-import { cropDefaults, cropFallDefaults, fallSeason, springSeason } from "./cropDefaults.mjs";
+import {
+  cropDefaults,
+  cropFallDefaults,
+  cropSummerDefaults,
+  fallSeason,
+  springSeason,
+  summerSeason,
+} from "./cropDefaults.mjs";
 import { resolveCropRecord } from "./cropResolve.mjs";
 import { displayName, slugify, varietyId } from "./slug.mjs";
+
+/** Drop scraped DTH that is almost certainly a parse error. */
+const MIN_VARIETY_DTH = 21;
 
 const EDIBLE_PREFIXES = [
   "/vegetables/",
@@ -90,6 +100,7 @@ function buildCatalog(seeds) {
     if (!crops[cropId]) {
       const defaults = cropDefaults(cropId);
       const fall = cropFallDefaults(cropId);
+      const summer = cropSummerDefaults(cropId);
       crops[cropId] = {
         id: cropId,
         name: displayName(cropId),
@@ -98,6 +109,7 @@ function buildCatalog(seeds) {
         ...defaults,
         seasons: {
           spring: springSeason(defaults),
+          ...(summer ? { summer: summerSeason(summer) } : {}),
           ...(fall ? { fall: fallSeason(fall) } : {}),
         },
         source: "catalog-etl",
@@ -110,16 +122,20 @@ function buildCatalog(seeds) {
     if (crop.varieties[vid]) {
       vid = `${vid}-${seed.source}`;
     }
+    const scraped =
+      seed.daysToHarvest != null && seed.daysToHarvest >= MIN_VARIETY_DTH
+        ? seed.daysToHarvest
+        : undefined;
     crop.varieties[vid] = {
       id: vid,
       name: seed.name,
-      daysToHarvest: seed.daysToHarvest ?? crop.daysToHarvest,
+      daysToHarvest: scraped ?? crop.daysToHarvest,
       source: seed.source,
       sourceUrl: seed.sourceUrl,
       confidence: seed.confidence,
       ...(seed.sku ? { sku: seed.sku } : {}),
     };
-    if (seed.daysToHarvest) {
+    if (scraped) {
       crop.confidence = "medium";
     }
   }

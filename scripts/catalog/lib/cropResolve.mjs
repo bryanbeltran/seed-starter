@@ -48,6 +48,9 @@ const VARIETY_HINTS = {
 };
 
 const NAME_HINTS = [
+  // Order matters: specific before generic (microgreens/shoots before cabbage/corn).
+  [/microgreen|mesclun|greens mix|salad mix|\bshoots?\b/i, "microgreens"],
+  [/kalette/i, "brussels-sprouts"],
   [/winter squash|butternut|acorn squash|hubbard|honeyboat|delicata/i, "squash-winter"],
   [/summer squash|zucchini|pattypan/i, "squash-summer"],
   [/watermelon/i, "watermelon"],
@@ -64,7 +67,7 @@ const NAME_HINTS = [
   [/bush bean|pole bean|lima bean|fava bean|dry bean|shell bean|wax bean|yard.?long/i, "beans"],
   [/soybean|edamame/i, "soybean"],
   [/hot pepper|sweet pepper|bell pepper|cayenne|jalape|habanero|poblano/i, "pepper"],
-  [/cherry tomato|grape tomato|paste tomato|beefsteak|roma tomato|tomato/i, "tomato"],
+  [/cherry tomato|grape tomato|paste tomato|beefsteak|roma tomato|tomato|five.?star.?grape/i, "tomato"],
   [/lettuce|romaine|butterhead|bibb|oakleaf/i, "lettuce"],
   [/cucumber|gherkin/i, "cucumber"],
   [/broccoli|broccolini/i, "broccoli"],
@@ -115,7 +118,6 @@ const NAME_HINTS = [
   [/sage/i, "sage"],
   [/mint/i, "mint"],
   [/arugula|rocket/i, "arugula"],
-  [/microgreen|mesclun|greens mix|salad mix/i, "microgreens"],
   [/sorrel/i, "sorrel"],
   [/purslane/i, "purslane"],
   [/orach/i, "orach"],
@@ -219,10 +221,19 @@ export function isCoverCropRecord(rec) {
 
 /**
  * Resolve a raw seed record to a canonical crop id, or null to drop it.
- * Priority: product name > URL path > category alias.
+ * Priority: strong URL signals > product name > URL path > category alias.
  */
 export function resolveCropRecord(rec) {
   if (isCollectionRecord(rec) || isCoverCropRecord(rec)) return null;
+
+  const text = `${rec.name ?? ""} ${rec.cropCategory ?? ""}`;
+  if (/garlic\s*chives/i.test(text)) return null;
+  if (/\bcardoon\b/i.test(text)) return null;
+
+  const url = rec.sourceUrl ?? "";
+  if (/\/microgreens?\//i.test(url) || /\bmicrogreen/i.test(text)) return "microgreens";
+  if (/\/tomatoes?\//i.test(url)) return "tomato";
+  if (/kalette/i.test(text) || /kalette/i.test(url)) return "brussels-sprouts";
 
   const candidates = [
     inferCropFromName(rec.name),

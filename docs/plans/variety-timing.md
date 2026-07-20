@@ -1,6 +1,6 @@
 # Plan: Variety timing
 
-**Status:** Implemented (A–B)
+**Status:** Implemented (A–C)
 **Depends on:** Catalog ETL + `resolveCropRules` (done)  
 **Independent of:** Fall/summer seasons (can ship in parallel)
 
@@ -17,7 +17,7 @@ Make variety selection **honest and useful**: harvest dates reflect variety DTM,
 | Sow path | Variety `indoorSowOffsetDays` schema exists; **0** set; always crop spring |
 | UI | Picker shows name only; no DTM / `sourceUrl` |
 | Tests | Variety label covered; harvest delta not asserted |
-| Outliers | ~547 with \|ΔDTH\| ≥ 14 vs crop; ~26 with \|Δ\| ≥ 60 |
+| Outliers | Triaged (Phase C): mis-filed crops remapped; artichoke/angelica defaults fixed; overwinter brassicas allowlisted |
 
 ## Decisions
 
@@ -49,6 +49,8 @@ Make variety selection **honest and useful**: harvest dates reflect variety DTM,
 2. Prefer re-resolve crop over inventing variety sow fields
 3. Document DTM semantics: schedule adds DTH after transplant/direct sow (vendor “days to maturity” may differ)
 
+**Done:** resolver prefers `/microgreens/`, `/tomatoes/`, kalettes→brussels; drops garlic chives + cardoon; artichoke DTH 90; angelica 365; scrapes DTH `<21` discarded; audit allowlists overwinter broccoli + Tundra cabbage.
+
 ### Phase D — Optional curated sow overrides
 
 Only if horticultural evidence for a named variety:
@@ -69,8 +71,6 @@ indoorSowOffsetDays?: number  // already in schema
 - [x] Picker or results show DTM + source for selected variety
 - [x] No blanket per-variety spring seasons in catalog
 - [x] Outlier list triaged or threshold justified
-
-## Out of scope
 
 - Scraping sow/transplant offsets from vendor pages
 - Per-variety `seasons.spring|summer|fall`

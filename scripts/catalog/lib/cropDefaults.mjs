@@ -106,7 +106,7 @@ const DEFAULTS = {
   borage: D(14, 60),
   chervil: D(14, 45),
   rue: T(56, 5, 7, 90),
-  angelica: T(56, 5, -7, 120),
+  angelica: T(56, 5, -7, 365),
   valerian: T(56, 5, 7, 120),
   cumin: T(42, 5, 14, 120),
   "salad-burnet": D(14, 60),
@@ -126,7 +126,7 @@ const DEFAULTS = {
   blueberry: D(14, 300),
   grape: T(70, 7, 14, 300),
   rhubarb: D(28, 300),
-  artichoke: T(84, 7, -14, 180),
+  artichoke: T(84, 7, -14, 90),
   asparagus: D(28, 300),
   okra: T(42, 5, 14, 60),
 
@@ -224,7 +224,7 @@ const FALL_DEFAULTS = {
   chamomile: D(55, 60),
   borage: D(55, 60),
   lovage: T(42, 5, -55, 90),
-  angelica: T(56, 5, -70, 120),
+  angelica: T(56, 5, -70, 365),
   dandelion: D(50, 55),
   "salad-burnet": D(50, 60),
 
