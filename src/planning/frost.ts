@@ -37,6 +37,23 @@ export function nextFrostDate(
   return frost;
 }
 
+/** Parse p10/p50/p90 MM-DD into one planning year (anchor = next p50). */
+export function frostPercentileDates(
+  p10: string,
+  p50: string,
+  p90: string,
+  referenceDate: Date = new Date(),
+): { p10: Date; p50: Date; p90: Date } {
+  const [m50, d50] = p50.split("-").map(Number);
+  const p50Date = nextFrostDate(m50, d50, referenceDate);
+  const year = p50Date.getFullYear();
+  const inYear = (mmdd: string) => {
+    const [m, d] = mmdd.split("-").map(Number);
+    return new Date(year, m - 1, d);
+  };
+  return { p10: inYear(p10), p50: p50Date, p90: inYear(p90) };
+}
+
 export function lastFrostDateForZone(
   zone: string,
   referenceDate: Date = new Date(),

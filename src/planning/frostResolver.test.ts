@@ -78,6 +78,42 @@ describe("resolveFirstFallFrost", () => {
     expect(result.lastFrostP90).toEqual(new Date(2026, 9, 15));
   });
 
+  it("keeps climate percentiles in one year when ref splits p10/p50", () => {
+    const lookup: FrostClimateLookup = {
+      getByZip: () => ({
+        lastFrostP10: "04-01",
+        lastFrostP50: "04-15",
+        lastFrostP90: "04-30",
+        firstFallFrostP10: "09-25",
+        firstFallFrostP50: "10-05",
+        firstFallFrostP90: "10-15",
+        provenance: "test-climate",
+        dataVersion: "test-1",
+        stationId: "TEST",
+        stationName: "Test",
+        distanceKm: 5,
+      }),
+    };
+    const midSpring = new Date(2026, 3, 10);
+    const spring = resolveLastFrost(
+      { zone: "5a", zip: "55423", referenceDate: midSpring },
+      lookup,
+    );
+    expect(spring.lastFrostP10!.getFullYear()).toBe(2026);
+    expect(spring.lastFrostDate.getFullYear()).toBe(2026);
+    expect(spring.lastFrostP90!.getFullYear()).toBe(2026);
+    expect(spring.lastFrostP10!.getTime()).toBeLessThan(spring.lastFrostDate.getTime());
+
+    const midFall = new Date(2026, 8, 28);
+    const fall = resolveFirstFallFrost(
+      { zone: "5a", zip: "55423", referenceDate: midFall },
+      lookup,
+    );
+    expect(fall.lastFrostP10!.getFullYear()).toBe(2026);
+    expect(fall.lastFrostDate.getFullYear()).toBe(2026);
+    expect(fall.lastFrostP10!.getTime()).toBeLessThan(fall.lastFrostDate.getTime());
+  });
+
   it("falls back through chain when climate lacks fall fields", () => {
     const lookup: FrostClimateLookup = {
       getByZip: () => ({
