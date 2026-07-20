@@ -44,12 +44,38 @@ export function LocationForm({
     if (!isValidZip(zip)) {
       setPreview(null);
       setPreviewError(null);
+      return;
     }
-  }, [zip]);
-
-  useEffect(() => {
+    const normalized = zip.replace(/\D/g, "");
+    let cancelled = false;
     setPreview(null);
-  }, [season]);
+    setPreviewError(null);
+    void (async () => {
+      try {
+        const res = await fetch(`/api/location?zip=${normalized}&season=${season}`);
+        const data = await res.json();
+        if (cancelled) return;
+        if (!res.ok) {
+          setPreview(null);
+          setPreviewError(data.error ?? "Could not look up ZIP.");
+          return;
+        }
+        const next = data as LocationPreview;
+        setPreview(next);
+        onPreview?.(next);
+      } catch {
+        if (!cancelled) {
+          setPreview(null);
+          setPreviewError("Could not look up ZIP.");
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // onPreview omitted: parent callback not stable
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [season, zip]);
 
   async function loadPreview() {
     if (!isValidZip(zip)) return;

@@ -58,4 +58,15 @@ describe("suggestSeasonFromFrost", () => {
       }),
     ).toBe("spring");
   });
+
+  it("uses month-day when spring frost is next calendar year", () => {
+    // Mid-summer resolveFrost often returns next spring (2027) + this fall (2026).
+    expect(
+      suggestSeasonFromFrost({
+        now: new Date(2026, 6, 19),
+        lastSpringFrostP50: new Date(2027, 3, 25),
+        firstFallFrostP50: new Date(2026, 9, 5),
+      }),
+    ).toBe("fall");
+  });
 });

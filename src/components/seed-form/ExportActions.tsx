@@ -18,14 +18,17 @@ export function ExportActions({ results, zip }: Props) {
     date: t.date.split("T")[0],
   }));
 
+  const season = results.season ?? "spring";
+  const seasonSlug = season === "fall" ? "fall" : "spring";
+
   function downloadICS() {
-    const blob = new Blob([buildICS(results.tasks, zip)], {
+    const blob = new Blob([buildICS(results.tasks, zip, season)], {
       type: "text/calendar;charset=utf-8",
     });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = `garden-schedule-${zip}.ics`;
+    link.download = `garden-schedule-${zip}-${seasonSlug}.ics`;
     link.click();
     URL.revokeObjectURL(url);
   }
@@ -44,7 +47,7 @@ export function ExportActions({ results, zip }: Props) {
           { label: "Label", key: "label" },
           { label: "Date", key: "date" },
         ]}
-        filename={`garden-schedule-${zip}.csv`}
+        filename={`garden-schedule-${zip}-${seasonSlug}.csv`}
       >
         <Button variant="outline" className="w-full sm:w-auto">
           Download CSV
