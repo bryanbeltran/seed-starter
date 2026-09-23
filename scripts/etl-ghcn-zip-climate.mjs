@@ -4,7 +4,7 @@
  *
  *   pnpm run etl:climate
  *   pnpm run etl:climate -- --write
- *   pnpm run etl:climate -- --fetch-stations --fetch-daily-needed --full --write
+ *   pnpm run etl:climate -- --fetch-centroids --fetch-stations --fetch-daily-needed --full --write
  *   pnpm run etl:climate -- --refetch-missing-fall --full --write
  */
 
@@ -62,6 +62,11 @@ async function main() {
   }
 
   const centroidsPath = path.join(root, "data/zctaCentroids.json");
+  if (full && !fetchCentroids && !fs.existsSync(centroidsPath)) {
+    throw new Error(
+      "Full climate build requires data/zctaCentroids.json; pass --fetch-centroids or provide the Census ZCTA centroid file.",
+    );
+  }
   if (fetchCentroids || (full && fs.existsSync(centroidsPath))) {
     if (fetchCentroids) {
       console.log("Fetching Census ZCTA gazetteer…");

@@ -31,11 +31,27 @@ const limit = limitArg ? Number(limitArg.split("=")[1]) : Infinity;
 const targetArg = process.argv.find((a) => a.startsWith("--target="));
 const target = targetArg ? Number(targetArg.split("=")[1]) : 2000;
 
-async function runSource(mod, perSourceLimit) {
+async function runSource(mod, perSourceLimit, refresh) {
   console.log(`\n[${mod.meta.id}] ${mod.meta.name}`);
   const t0 = Date.now();
-  const records = await mod.collect(root, { limit: perSourceLimit, refresh });
+  const fetchFailures = [];
+  const records = await mod.collect(root, {
+    limit: perSourceLimit,
+    refresh,
+    onFetchError: (url, err) => fetchFailures.push({ url, status: err.status ?? null }),
+  });
   console.log(`  → ${records.length} records (${((Date.now() - t0) / 1000).toFixed(1)}s)`);
+
+  const forbidden = fetchFailures.filter(({ status }) => status === 403);
+  const transient = fetchFailures.filter(
+    ({ status }) => status == null || status === 408 || status === 429 || status >= 500,
+  );
+  if (forbidden.length || transient.length >= 10) {
+    throw new Error(
+      `${mod.meta.id} had ${forbidden.length} forbidden and ${transient.length} transient product fetch failures; refusing to replace the last good catalog.`,
+    );
+  }
+
   return records;
 }
 
@@ -53,7 +69,7 @@ async function main() {
   const all = [];
   for (const mod of active) {
     const perSource = Number.isFinite(limit) ? limit : limits[mod.meta.id] ?? 1000;
-    const records = await runSource(mod, perSource);
+    const records = await runSource(mod, perSource, refresh);
     all.push(...records);
   }
 
@@ -68,6 +84,11 @@ async function main() {
   }
 
   console.log(`Catalog: ${cropCount} crops, ${varietyCount} varieties`);
+
+  if (varietyCount < target && !sourceFilter) {
+    console.warn(`Below target (${varietyCount}/${target}). Sources may be exhausted or rate-limited.`);
+    if (varietyCount < 1000) process.exit(1);
+  }
 
   const sourcesMeta = Object.fromEntries(
     SOURCES.map((s) => [
@@ -86,10 +107,6 @@ async function main() {
     console.log("Dry run — pass --write to save.");
   }
 
-  if (varietyCount < target && !sourceFilter) {
-    console.warn(`Below target (${varietyCount}/${target}). Sources may be exhausted or rate-limited.`);
-    process.exit(varietyCount < 1000 ? 1 : 0);
-  }
 }
 
 main().catch((err) => {

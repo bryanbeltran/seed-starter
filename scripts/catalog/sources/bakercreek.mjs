@@ -12,7 +12,9 @@ export const meta = {
 };
 
 export async function listCategoryUrls(root) {
-  const xml = await cachedFetch(root, "bakercreek", "sitemap.xml", SITEMAP);
+  const xml = await cachedFetch(root, "bakercreek", "sitemap.xml", SITEMAP, {
+    refresh: true,
+  });
   const cats = [...xml.matchAll(/<loc>([^<]*\/vegetable-seeds\/[^<]+)<\/loc>/g)].map((m) => m[1]);
   return [...new Set(cats)];
 }
@@ -22,7 +24,10 @@ export async function listUrls(root, { limit = Infinity } = {}) {
   const urls = new Set();
   for (const cat of cats) {
     const key = cat.replace(/https?:\/\//, "");
-    const html = await cachedFetch(root, "bakercreek", `cat-${key}`, cat, { delayMs: 200 });
+    const html = await cachedFetch(root, "bakercreek", `cat-${key}`, cat, {
+      delayMs: 200,
+      refresh: true,
+    });
     for (const m of html.matchAll(/href="(\/[^"]+\.html)"/g)) {
       const path = m[1];
       if (!path.includes("-seeds/") && !path.match(/\/[a-z0-9-]+\.html$/)) continue;
@@ -39,9 +44,12 @@ export async function listUrls(root, { limit = Infinity } = {}) {
   return [...urls];
 }
 
-export async function fetchRecord(root, url) {
+export async function fetchRecord(root, url, { refresh = false } = {}) {
   const key = url.replace(/https?:\/\//, "");
-  const html = await cachedFetch(root, "bakercreek", key, url, { delayMs: 150 });
+  const html = await cachedFetch(root, "bakercreek", key, url, {
+    delayMs: 150,
+    refresh,
+  });
   const name = html.match(/<h1[^>]*class="[^"]*page-title[^"]*"[^>]*>([^<]+)/)?.[1]?.trim()
     ?? html.match(/<meta[^>]*property="og:title"[^>]*content="([^"]+)"/)?.[1]?.trim();
   if (!name) return null;
@@ -67,8 +75,9 @@ export async function collect(root, opts = {}) {
   const urls = await listUrls(root, opts);
   const rows = await mapConcurrent(urls, async (url) => {
     try {
-      return await fetchRecord(root, url);
+      return await fetchRecord(root, url, opts);
     } catch (err) {
+      opts.onFetchError?.(url, err);
       console.warn(`bakercreek skip ${url}: ${err.message}`);
       return null;
     }

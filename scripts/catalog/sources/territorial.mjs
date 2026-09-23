@@ -14,18 +14,23 @@ export const meta = {
 const SKIP = /pollination|nematode|wood-tray|seed-to-seed|cloche|grafting|book|tool|fertiliz|magic|dynamite/i;
 
 export async function listUrls(root, { limit = Infinity } = {}) {
-  const xml = await cachedFetch(root, "territorial", "sitemap-products.xml", SITEMAP);
+  const xml = await cachedFetch(root, "territorial", "sitemap-products.xml", SITEMAP, {
+    refresh: true,
+  });
   return parseSitemapLocs(xml)
     .filter((u) => u.includes("/products/") && !SKIP.test(u))
     .slice(0, limit);
 }
 
-export async function fetchRecord(root, url) {
+export async function fetchRecord(root, url, { refresh = false } = {}) {
   const handle = url.split("/products/")[1]?.replace(/\/$/, "");
   if (!handle) return null;
   const jsonUrl = `https://territorialseed.com/products/${handle}.js`;
   const key = `products-${handle}.js`;
-  const raw = await cachedFetch(root, "territorial", key, jsonUrl, { delayMs: 120 });
+  const raw = await cachedFetch(root, "territorial", key, jsonUrl, {
+    delayMs: 500,
+    refresh,
+  });
   const product = JSON.parse(raw);
   if (!product?.title) return null;
 
@@ -53,11 +58,12 @@ export async function collect(root, opts = {}) {
   const urls = await listUrls(root, opts);
   const rows = await mapConcurrent(urls, async (url) => {
     try {
-      return await fetchRecord(root, url);
+      return await fetchRecord(root, url, opts);
     } catch (err) {
+      opts.onFetchError?.(url, err);
       console.warn(`territorial skip ${url}: ${err.message}`);
       return null;
     }
-  }, { concurrency: 3, delayMs: 250 });
+  }, { concurrency: 2 });
   return rows.filter(Boolean);
 }

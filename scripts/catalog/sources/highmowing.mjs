@@ -13,7 +13,9 @@ export const meta = {
 const VARIANT_SUFFIX = /-(?:[a-d]|m\d+)\.html$/;
 
 export async function listUrls(root, { limit = Infinity } = {}) {
-  const xml = await cachedFetch(root, "highmowing", "sitemap.xml", SITEMAP);
+  const xml = await cachedFetch(root, "highmowing", "sitemap.xml", SITEMAP, {
+    refresh: true,
+  });
   const seen = new Set();
   const urls = [];
   for (const url of parseSitemapLocs(xml)) {
@@ -31,9 +33,9 @@ export async function listUrls(root, { limit = Infinity } = {}) {
   return urls;
 }
 
-export async function fetchRecord(root, url) {
+export async function fetchRecord(root, url, { refresh = false } = {}) {
   const key = url.replace(/https?:\/\//, "");
-  const html = await cachedFetch(root, "highmowing", key, url);
+  const html = await cachedFetch(root, "highmowing", key, url, { refresh });
   const name = html.match(/<span[^>]*class="[^"]*base[^"]*"[^>]*>([^<]+)/)?.[1]?.trim()
     ?? html.match(/<h1[^>]*>([^<]+)/)?.[1]?.trim();
   if (!name) return null;
@@ -58,8 +60,9 @@ export async function collect(root, opts = {}) {
   const urls = await listUrls(root, opts);
   const rows = await mapConcurrent(urls, async (url) => {
     try {
-      return await fetchRecord(root, url);
+      return await fetchRecord(root, url, opts);
     } catch (err) {
+      opts.onFetchError?.(url, err);
       console.warn(`highmowing skip ${url}: ${err.message}`);
       return null;
     }

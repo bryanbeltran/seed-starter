@@ -12,7 +12,7 @@ permissions:
 jobs:
   publish-etl:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -20,9 +20,22 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+      - name: Restore catalog page cache
+        uses: actions/cache/restore@v4
+        with:
+          path: data/catalog/.cache
+          key: seed-catalog-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            seed-catalog-${{ runner.os }}-
       - run: pnpm install --frozen-lockfile
       - name: Rebuild seed catalog
         run: pnpm run etl:catalog -- --write
+      - name: Save catalog page cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: data/catalog/.cache
+          key: seed-catalog-${{ runner.os }}-${{ github.run_id }}
       - run: pnpm run check:catalog
       - name: Upload catalog artifacts
         if: always()

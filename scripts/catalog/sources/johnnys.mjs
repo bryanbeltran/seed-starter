@@ -11,15 +11,17 @@ export const meta = {
 };
 
 export async function listUrls(root, { limit = Infinity } = {}) {
-  const xml = await cachedFetch(root, "johnnys", "sitemap-products.xml", SITEMAP);
+  const xml = await cachedFetch(root, "johnnys", "sitemap-products.xml", SITEMAP, {
+    refresh: true,
+  });
   return parseSitemapLocs(xml)
     .filter((u) => isEdibleUrl(u) && u.endsWith(".html"))
     .slice(0, limit);
 }
 
-export async function fetchRecord(root, url) {
+export async function fetchRecord(root, url, { refresh = false } = {}) {
   const key = url.replace(/https?:\/\//, "");
-  const html = await cachedFetch(root, "johnnys", key, url);
+  const html = await cachedFetch(root, "johnnys", key, url, { refresh });
   const name = html.match(/<h1[^>]*class="[^"]*product-name[^"]*"[^>]*>([^<]+)/)?.[1]?.trim();
   if (!name) return null;
 
@@ -50,8 +52,9 @@ export async function collect(root, opts = {}) {
   const urls = await listUrls(root, opts);
   const rows = await mapConcurrent(urls, async (url) => {
     try {
-      return await fetchRecord(root, url);
+      return await fetchRecord(root, url, opts);
     } catch (err) {
+      opts.onFetchError?.(url, err);
       console.warn(`johnnys skip ${url}: ${err.message}`);
       return null;
     }
