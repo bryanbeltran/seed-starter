@@ -16,7 +16,11 @@ type Props = {
 
 function keyTasks(tasks: ScheduleResult["tasks"]) {
   return tasks.filter(
-    (t) => t.type === "indoor_sow" || t.type === "transplant" || t.type === "direct_sow",
+    (t) =>
+      t.type === "indoor_sow" ||
+      t.type === "transplant" ||
+      t.type === "direct_sow" ||
+      t.type === "fall_sow",
   );
 }
 
