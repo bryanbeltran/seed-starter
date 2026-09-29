@@ -13,10 +13,14 @@ export function diffSchedules(previous: Schedule, current: Schedule): ScheduleDi
   const prev = serializeSchedule(previous);
   const curr = serializeSchedule(current);
   const prevByLabel = new Map(prev.tasks.map((t) => [t.label, t.date]));
+  const currentLabels = new Set(curr.tasks.map((t) => t.label));
   const changedLabels: string[] = [];
   for (const t of curr.tasks) {
     const old = prevByLabel.get(t.label);
-    if (old && old !== t.date) changedLabels.push(t.label);
+    if (old !== t.date) changedLabels.push(t.label);
+  }
+  for (const t of prev.tasks) {
+    if (!currentLabels.has(t.label)) changedLabels.push(t.label);
   }
   return {
     lastFrostChanged: prev.lastFrostDate !== curr.lastFrostDate,
