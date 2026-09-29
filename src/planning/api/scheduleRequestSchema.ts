@@ -25,7 +25,10 @@ export const scheduleRequestSchema = z.object({
     .array(z.string())
     .min(1, "Select at least one crop.")
     .transform((seeds) => [...new Set(seeds)]),
-  cropSelections: z.array(cropSelectionSchema).optional(),
+  cropSelections: z
+    .array(cropSelectionSchema)
+    .min(1, "Select at least one crop.")
+    .optional(),
   riskProfile: riskProfileSchema.optional(),
   season: gardenSeasonSchema.optional(),
 });

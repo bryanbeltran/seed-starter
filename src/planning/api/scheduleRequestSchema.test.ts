@@ -15,6 +15,20 @@ describe("parseScheduleRequest", () => {
     }
   });
 
+  it("accepts nonempty crop selections with optional varieties", () => {
+    const cropSelections = [
+      { cropId: "tomato", varietyId: "test-variety" },
+      { cropId: "lettuce" },
+    ];
+    const result = parseScheduleRequest({
+      zip: "55423",
+      seeds: ["tomato", "lettuce"],
+      cropSelections,
+    });
+    expect(result.success).toBe(true);
+    if (result.success) expect(result.data.cropSelections).toEqual(cropSelections);
+  });
+
   it("rejects invalid zip", () => {
     const result = parseScheduleRequest({ zip: "abc", seeds: ["tomato"] });
     expect(result.success).toBe(false);
