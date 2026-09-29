@@ -50,6 +50,37 @@ describe("diffSchedules", () => {
     });
   });
 
+  it("does not count reordered tasks with repeated labels as changes", () => {
+    const previous = stub("2026-05-01", "Sow Tomato", "2026-03-01");
+    previous.tasks.push({ ...previous.tasks[0], date: new Date("2026-03-15") });
+    const current = { ...previous, tasks: [...previous.tasks].reverse() };
+    expect(diffSchedules(previous, current).tasksChanged).toBe(0);
+  });
+
+  it("counts a removed occurrence of a repeated task", () => {
+    const previous = stub("2026-05-01", "Sow Tomato", "2026-03-01");
+    previous.tasks.push({ ...previous.tasks[0] });
+    const current = { ...previous, tasks: previous.tasks.slice(0, 1) };
+    expect(diffSchedules(previous, current)).toMatchObject({
+      tasksChanged: 1,
+      changedLabels: ["Sow Tomato"],
+    });
+    expect(diffSchedules(current, previous).tasksChanged).toBe(1);
+  });
+
+  it("counts only the rescheduled occurrence of a repeated label", () => {
+    const previous = stub("2026-05-01", "Sow Tomato", "2026-03-01");
+    previous.tasks.push({ ...previous.tasks[0], date: new Date("2026-03-15") });
+    const current = {
+      ...previous,
+      tasks: [previous.tasks[1], { ...previous.tasks[0], date: new Date("2026-03-02") }],
+    };
+    expect(diffSchedules(previous, current)).toMatchObject({
+      tasksChanged: 1,
+      changedLabels: ["Sow Tomato"],
+    });
+  });
+
   it("counts all changes while limiting the label preview to 12", () => {
     const previous = stub("2026-05-01", "Sow Tomato", "2026-03-01");
     previous.tasks = Array.from({ length: 14 }, (_, i) => ({
