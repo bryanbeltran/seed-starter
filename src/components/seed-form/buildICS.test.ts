@@ -2,6 +2,27 @@ import { describe, expect, it } from "vitest";
 import { buildICS } from "./buildICS";
 
 describe("buildICS", () => {
+  it("escapes calendar text without introducing extra properties", () => {
+    const ics = buildICS(
+      [{ label: "Harvest Cucumber (Cucumber, Armenian); bed \\1\r\nDESCRIPTION:extra", date: "2026-08-01" }],
+      "55423",
+    );
+
+    expect(ics).toContain(
+      "SUMMARY:[Spring] Harvest Cucumber (Cucumber\\, Armenian)\\; bed \\\\1\\nDESCRIPTION:extra",
+    );
+    expect(ics).toContain(
+      "UID:Harvest-Cucumber-(Cucumber\\,-Armenian)\\;-bed-\\\\1-DESCRIPTION:extra-20260801@seedstarter",
+    );
+    expect(ics.split(/\r?\n/)).not.toContain("DESCRIPTION:extra");
+  });
+
+  it("uses CRLF content lines and terminates the calendar with CRLF", () => {
+    const ics = buildICS([{ label: "Harvest Tomato", date: "2026-08-01" }], "55423");
+    expect(ics).not.toMatch(/(?<!\r)\n/);
+    expect(ics).toMatch(/END:VCALENDAR\r\n$/);
+  });
+
   // Also run with TZ=America/Los_Angeles to catch accidental local-date conversion.
   it.each([
     ["2026-02-01T00:00:00.000Z", "20260201"],

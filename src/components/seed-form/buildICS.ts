@@ -1,6 +1,14 @@
 import type { GardenSeason } from "@/planning";
 import { seasonDisplayLabel } from "./seasonLabel";
 
+// iCalendar TEXT values escape backslashes, newlines, commas, and semicolons.
+function escapeText(value: string) {
+  return value
+    .replace(/\\/g, "\\\\")
+    .replace(/\r\n|\r|\n/g, "\\n")
+    .replace(/[,;]/g, "\\$&");
+}
+
 export function buildICS(
   tasks: { label: string; date: string }[],
   zip: string,
@@ -14,20 +22,21 @@ export function buildICS(
     const uid = `${label.replace(/\s+/g, "-")}-${dt}@seedstarter`;
     return [
       "BEGIN:VEVENT",
-      `UID:${uid}`,
+      `UID:${escapeText(uid)}`,
       `DTSTAMP:${dt}T120000Z`,
       `DTSTART;VALUE=DATE:${dt}`,
-      `SUMMARY:${summary}`,
+      `SUMMARY:${escapeText(summary)}`,
       "END:VEVENT",
-    ].join("\n");
+    ].join("\r\n");
   });
 
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    `PRODID:-//SeedStarter//${seasonLabel}//${zip}`,
-    `X-WR-CALNAME:Seed Starter ${seasonLabel} (${zip})`,
+    `PRODID:${escapeText(`-//SeedStarter//${seasonLabel}//${zip}`)}`,
+    `X-WR-CALNAME:${escapeText(`Seed Starter ${seasonLabel} (${zip})`)}`,
     ...events,
     "END:VCALENDAR",
-  ].join("\n");
+    "",
+  ].join("\r\n");
 }
