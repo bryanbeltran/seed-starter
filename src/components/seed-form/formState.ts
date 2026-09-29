@@ -44,7 +44,11 @@ export function loadFormState(): Partial<FormState> | null {
 
 export function saveFormState(state: FormState) {
   if (typeof window === "undefined") return;
-  sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(state));
+  try {
+    sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Persistence is optional: blocked or full storage must not break the form.
+  }
 }
 
 export function isValidZip(zip: string) {

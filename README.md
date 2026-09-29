@@ -69,6 +69,7 @@ Next builds: portfolio freeze / interview prep · [plans index](docs/plans/).
 | No `DATABASE_URL` on Vercel | Schedules work; saved plans not durable across instances |
 | Rate limit exceeded | `429` + `Retry-After` |
 | Climate data refresh | Saved plans flag stale + show last-frost diff |
+| Browser session storage blocked or full | Form remains usable; current selections may not survive a reload |
 
 ## Climate eval
 

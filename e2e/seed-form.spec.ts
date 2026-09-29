@@ -18,6 +18,23 @@ test("calculates schedule from fixture zip", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Print schedule" })).toBeVisible();
 });
 
+test("calculates a schedule when session storage cannot be written", async ({ page }) => {
+  await page.addInitScript(() => {
+    Storage.prototype.setItem = () => {
+      throw new DOMException("Storage is full", "QuotaExceededError");
+    };
+  });
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+
+  await page.goto("/");
+  await zipAndLockSpring(page);
+  await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
+  await page.getByRole("button", { name: "Calculate schedule" }).click();
+  await expect(page.getByText(/Sow Tomato/i)).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
 test("saves and reopens a plan", async ({ page }) => {
   const planName = `E2E bed ${Date.now()}`;
   await page.goto("/");

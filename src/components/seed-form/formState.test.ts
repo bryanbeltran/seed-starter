@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   cropSelectionsFromForm,
   defaultSeasonForDate,
@@ -10,8 +10,27 @@ import {
 
 describe("formState", () => {
   afterEach(() => {
+    vi.restoreAllMocks();
     sessionStorage.clear();
   });
+
+  it.each(["QuotaExceededError", "SecurityError"])(
+    "does not interrupt form updates when storage throws %s",
+    (name) => {
+      vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+        throw new DOMException("Storage unavailable", name);
+      });
+
+      expect(() => saveFormState({
+        zip: "55423",
+        selectedCrops: ["tomato"],
+        varieties: {},
+        riskProfile: "balanced",
+        season: "spring",
+        compareMode: false,
+      })).not.toThrow();
+    },
+  );
 
   it("validates zip codes", () => {
     expect(isValidZip("55423")).toBe(true);
