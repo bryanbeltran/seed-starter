@@ -8,14 +8,34 @@ describe("buildICS", () => {
       "55423",
     );
 
-    expect(ics).toContain(
+    const unfolded = ics.replace(/\r\n /g, "");
+    expect(unfolded).toContain(
       "SUMMARY:[Spring] Harvest Cucumber (Cucumber\\, Armenian)\\; bed \\\\1\\nDESCRIPTION:extra",
     );
-    expect(ics).toContain(
+    expect(unfolded).toContain(
       "UID:Harvest-Cucumber-(Cucumber\\,-Armenian)\\;-bed-\\\\1-DESCRIPTION:extra-20260801@seedstarter",
     );
     expect(ics.split(/\r?\n/)).not.toContain("DESCRIPTION:extra");
   });
+
+  it.each(["A".repeat(160), "🌱é".repeat(40)])(
+    "folds long UTF-8 content lines without losing text (%s)",
+    (name) => {
+      const label = `Harvest ${name}`;
+      const ics = buildICS([{ label, date: "2026-08-01" }], "55423");
+      const lines = ics.split("\r\n");
+
+      expect(lines.some((line) => line.startsWith(" "))).toBe(true);
+      for (const line of lines) {
+        expect(new TextEncoder().encode(line).length).toBeLessThanOrEqual(75);
+      }
+      const unfolded = ics.replace(/\r\n /g, "");
+      expect(unfolded).toContain(`SUMMARY:[Spring] ${label}\r\n`);
+      expect(unfolded).toContain(
+        `UID:Harvest-${name}-20260801@seedstarter\r\n`,
+      );
+    },
+  );
 
   it("uses CRLF content lines and terminates the calendar with CRLF", () => {
     const ics = buildICS([{ label: "Harvest Tomato", date: "2026-08-01" }], "55423");

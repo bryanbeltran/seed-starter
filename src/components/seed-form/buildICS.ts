@@ -9,6 +9,24 @@ function escapeText(value: string) {
     .replace(/[,;]/g, "\\$&");
 }
 
+// Fold at 75 UTF-8 octets, including the continuation space, without splitting
+// a Unicode code point. Calendar readers unfold CRLF + space before parsing.
+function foldLine(line: string): string {
+  const encoder = new TextEncoder();
+  let result = "";
+  let bytes = 0;
+  for (const character of line) {
+    const size = encoder.encode(character).length;
+    if (bytes + size > 75) {
+      result += "\r\n ";
+      bytes = 1;
+    }
+    result += character;
+    bytes += size;
+  }
+  return result;
+}
+
 export function buildICS(
   tasks: { label: string; date: string }[],
   zip: string,
@@ -38,5 +56,9 @@ export function buildICS(
     ...events,
     "END:VCALENDAR",
     "",
-  ].join("\r\n");
+  ]
+    .join("\r\n")
+    .split("\r\n")
+    .map(foldLine)
+    .join("\r\n");
 }
