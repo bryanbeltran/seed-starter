@@ -2,6 +2,18 @@ import { describe, expect, it } from "vitest";
 import { buildICS } from "./buildICS";
 
 describe("buildICS", () => {
+  // Also run with TZ=America/Los_Angeles to catch accidental local-date conversion.
+  it.each([
+    ["2026-02-01T00:00:00.000Z", "20260201"],
+    ["2027-01-01T00:00:00.000Z", "20270101"],
+    ["2026-06-01", "20260601"],
+  ])("preserves the schedule date %s in all-day events", (date, expected) => {
+    const ics = buildICS([{ label: "Sow Tomato indoors", date }], "55423");
+
+    expect(ics).toContain(`DTSTART;VALUE=DATE:${expected}`);
+    expect(ics).toContain(`UID:Sow-Tomato-indoors-${expected}@seedstarter`);
+  });
+
   it("builds valid calendar content", () => {
     const ics = buildICS(
       [{ label: "Sow Tomato indoors", date: "2026-02-01T12:00:00.000Z" }],

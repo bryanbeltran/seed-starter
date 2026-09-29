@@ -21,6 +21,8 @@ Frost-aware garden planning for US ZIP codes. Pick a season, crops, varieties, a
 - OpenAPI 3 at `/api/openapi` · Swagger UI at `/docs`
 - CSV, iCalendar, and print exports
 
+Calendar exports use all-day events and preserve the same planting dates as CSV exports, regardless of your browser's timezone.
+
 ## Architecture
 
 ```mermaid

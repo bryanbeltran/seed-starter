@@ -8,11 +8,8 @@ export function buildICS(
 ) {
   const seasonLabel = seasonDisplayLabel(season);
   const events = tasks.map(({ label, date }) => {
-    const d = new Date(date);
-    const yyyy = d.getFullYear().toString().padStart(4, "0");
-    const mm = (d.getMonth() + 1).toString().padStart(2, "0");
-    const dd = d.getDate().toString().padStart(2, "0");
-    const dt = `${yyyy}${mm}${dd}`;
+    // Keep the schedule's calendar date, as CSV does, regardless of browser timezone.
+    const dt = date.split("T")[0].replace(/-/g, "");
     const summary = `[${seasonLabel}] ${label}`;
     const uid = `${label.replace(/\s+/g, "-")}-${dt}@seedstarter`;
     return [
