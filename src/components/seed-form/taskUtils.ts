@@ -1,9 +1,14 @@
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import type { ScheduleTask } from "./types";
 
+export function parseTaskDate(dateIso: string) {
+  // Tasks represent planting days, matching the date used in CSV and ICS exports.
+  return parseISO(dateIso.split("T")[0]);
+}
+
 export function groupTasksByCrop(tasks: ScheduleTask[]) {
   const sorted = [...tasks].sort(
-    (a, b) => parseISO(a.date).getTime() - parseISO(b.date).getTime(),
+    (a, b) => parseTaskDate(a.date).getTime() - parseTaskDate(b.date).getTime(),
   );
   const groups = new Map<string, ScheduleTask[]>();
   for (const task of sorted) {
@@ -15,7 +20,7 @@ export function groupTasksByCrop(tasks: ScheduleTask[]) {
 }
 
 export function daysFromToday(dateIso: string, now = new Date()) {
-  return differenceInCalendarDays(parseISO(dateIso), now);
+  return differenceInCalendarDays(parseTaskDate(dateIso), now);
 }
 
 export function isPastTask(dateIso: string, now = new Date()) {
