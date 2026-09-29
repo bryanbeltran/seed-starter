@@ -1,4 +1,5 @@
 import type { GardenSeason, RiskProfile } from "@/planning";
+import { z } from "zod";
 
 export type CropSelection = {
   cropId: string;
@@ -22,6 +23,16 @@ export function defaultSeasonForDate(_now?: Date): GardenSeason {
 
 export const FORM_STORAGE_KEY = "seedstarter-form";
 
+// Older sessions may omit fields, but any restored values must be safe for the form.
+const storedFormSchema = z.object({
+  zip: z.string(),
+  selectedCrops: z.array(z.string()),
+  varieties: z.record(z.string(), z.string().optional()),
+  riskProfile: z.enum(["conservative", "balanced", "aggressive"]),
+  season: z.enum(["spring", "fall", "summer"]),
+  compareMode: z.boolean(),
+}).partial();
+
 export function cropSelectionsFromForm(
   selectedCrops: string[],
   varieties: Record<string, string | undefined>,
@@ -36,7 +47,9 @@ export function loadFormState(): Partial<FormState> | null {
   if (typeof window === "undefined") return null;
   try {
     const raw = sessionStorage.getItem(FORM_STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Partial<FormState>) : null;
+    if (!raw) return null;
+    const parsed = storedFormSchema.safeParse(JSON.parse(raw));
+    return parsed.success ? parsed.data : null;
   } catch {
     return null;
   }

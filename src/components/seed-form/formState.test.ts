@@ -63,6 +63,27 @@ describe("formState", () => {
     expect(loadFormState()).toBeNull();
   });
 
+  it.each([
+    null, [], true, 123, "saved",
+    { zip: 55423 },
+    { selectedCrops: 123 },
+    { selectedCrops: ["tomato", null] },
+    { varieties: [] },
+    { varieties: { tomato: 123 } },
+    { riskProfile: "unknown" },
+    { season: "winter" },
+    { compareMode: "false" },
+  ].map((state) => ({ state })))("ignores stored state with an invalid shape: $state", ({ state }) => {
+    sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(state));
+    expect(loadFormState()).toBeNull();
+  });
+
+  it("loads older partial state without requiring newer fields", () => {
+    const state = { zip: "55423", selectedCrops: ["tomato"], varieties: {} };
+    sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(state));
+    expect(loadFormState()).toEqual(state);
+  });
+
   it("defaults season to spring", () => {
     expect(defaultSeasonForDate(new Date(2026, 2, 15))).toBe("spring");
     expect(defaultSeasonForDate(new Date(2026, 7, 15))).toBe("spring");

@@ -35,6 +35,21 @@ test("calculates a schedule when session storage cannot be written", async ({ pa
   expect(errors).toEqual([]);
 });
 
+test("recovers from malformed saved form selections", async ({ page }) => {
+  await page.addInitScript(() => {
+    sessionStorage.setItem("seedstarter-form", JSON.stringify({ selectedCrops: 123 }));
+  });
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+
+  await page.goto("/");
+  await zipAndLockSpring(page);
+  await page.getByRole("checkbox", { name: "Tomato", exact: true }).click();
+  await page.getByRole("button", { name: "Calculate schedule" }).click();
+  await expect(page.getByText(/Sow Tomato/i)).toBeVisible();
+  expect(errors).toEqual([]);
+});
+
 test("saves and reopens a plan", async ({ page }) => {
   const planName = `E2E bed ${Date.now()}`;
   await page.goto("/");

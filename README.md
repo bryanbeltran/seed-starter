@@ -70,6 +70,7 @@ Next builds: portfolio freeze / interview prep · [plans index](docs/plans/).
 | Rate limit exceeded | `429` + `Retry-After` |
 | Climate data refresh | Saved plans flag stale + show last-frost diff |
 | Browser session storage blocked or full | Form remains usable; current selections may not survive a reload |
+| Malformed saved form selections | Invalid stored state is ignored; the form uses defaults |
 
 ## Climate eval
 
