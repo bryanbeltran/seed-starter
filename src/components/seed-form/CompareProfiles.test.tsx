@@ -33,6 +33,31 @@ function fallSchedule(riskProfile: ScheduleResult["riskProfile"], day: number): 
 describe("CompareProfiles", () => {
   afterEach(cleanup);
 
+  // Also run in America/Los_Angeles and Pacific/Kiritimati.
+  it.each(["00:00:00.000Z", "12:00:00.000Z", "18:00:00.000Z"])(
+    "preserves calendar dates and day differences for timestamps at %s",
+    async (time) => {
+      const user = userEvent.setup();
+      const compared: CompareResult = {
+        conservative: fallSchedule("conservative", 10),
+        balanced: fallSchedule("balanced", 15),
+        aggressive: fallSchedule("aggressive", 20),
+      };
+      for (const schedule of Object.values(compared)) {
+        schedule.lastFrostDate = `2026-10-15T${time}`;
+        schedule.tasks[0].date = `2026-03-08T${time}`;
+      }
+      compared.aggressive.tasks[0].date = "2026-03-09T00:00:00.000Z";
+      render(<CompareProfiles compared={compared} baseline="balanced" />);
+
+      expect(screen.getByText(/Oct 15, 2026/)).toBeInTheDocument();
+      expect(screen.getByText("Mar 8")).toBeInTheDocument();
+      await user.click(screen.getByRole("tab", { name: "aggressive" }));
+      expect(screen.getByText("Mar 9")).toBeInTheDocument();
+      expect(screen.getByText("(+1d)")).toBeInTheDocument();
+    },
+  );
+
   it("compares fall sowing dates against the selected baseline", async () => {
     const user = userEvent.setup();
     const compared: CompareResult = {

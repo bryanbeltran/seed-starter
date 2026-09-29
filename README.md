@@ -27,6 +27,8 @@ Repeated tasks receive distinct calendar event IDs so each occurrence can be imp
 
 The task timeline preserves those same planting dates and calculates “Today,” upcoming, and past status against your local calendar day.
 
+Risk-profile comparisons also preserve calendar dates for tasks and frost anchors; day differences ignore timestamp hours and daylight-saving transitions.
+
 ## Architecture
 
 ```mermaid
