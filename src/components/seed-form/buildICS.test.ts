@@ -2,6 +2,26 @@ import { describe, expect, it } from "vitest";
 import { buildICS } from "./buildICS";
 
 describe("buildICS", () => {
+  it("gives repeated tasks distinct, repeatable event IDs", () => {
+    const task = { label: "Sow Tomato", date: "2026-03-01" };
+    const tasks = [task, task, task];
+    const ics = buildICS(tasks, "55423");
+    const ids = ics.replace(/\r\n /g, "").split("\r\n").filter((line) => line.startsWith("UID:"));
+
+    expect(ids).toHaveLength(3);
+    expect(new Set(ids).size).toBe(3);
+    expect(buildICS(tasks, "55423")).toBe(ics);
+  });
+
+  it("disambiguates labels that normalize to the same event ID", () => {
+    const tasks = ["Sow Tomato", "Sow-Tomato", "Sow  Tomato"].map((label) => ({
+      label,
+      date: "2026-03-01",
+    }));
+    const ids = buildICS(tasks, "55423").split("\r\n").filter((line) => line.startsWith("UID:"));
+    expect(new Set(ids).size).toBe(3);
+  });
+
   it("escapes calendar text without introducing extra properties", () => {
     const ics = buildICS(
       [{ label: "Harvest Cucumber (Cucumber, Armenian); bed \\1\r\nDESCRIPTION:extra", date: "2026-08-01" }],

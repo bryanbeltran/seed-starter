@@ -33,11 +33,16 @@ export function buildICS(
   season: GardenSeason = "spring",
 ) {
   const seasonLabel = seasonDisplayLabel(season);
+  const uidOccurrences = new Map<string, number>();
   const events = tasks.map(({ label, date }) => {
     // Keep the schedule's calendar date, as CSV does, regardless of browser timezone.
     const dt = date.split("T")[0].replace(/-/g, "");
     const summary = `[${seasonLabel}] ${label}`;
-    const uid = `${label.replace(/\s+/g, "-")}-${dt}@seedstarter`;
+    const uidBase = `${label.replace(/\s+/g, "-")}-${dt}`;
+    const occurrence = (uidOccurrences.get(uidBase) ?? 0) + 1;
+    uidOccurrences.set(uidBase, occurrence);
+    // Calendar importers identify events by UID; preserve repeated tasks too.
+    const uid = `${uidBase}${occurrence > 1 ? `-${occurrence}` : ""}@seedstarter`;
     return [
       "BEGIN:VEVENT",
       `UID:${escapeText(uid)}`,

@@ -23,6 +23,8 @@ Frost-aware garden planning for US ZIP codes. Pick a season, crops, varieties, a
 
 Calendar exports use all-day events and preserve the same planting dates as CSV exports, regardless of your browser's timezone. Long calendar lines are folded without splitting Unicode characters, preserving crop and variety names on import.
 
+Repeated tasks receive distinct calendar event IDs so each occurrence can be imported, even when labels and dates match.
+
 The task timeline preserves those same planting dates and calculates “Today,” upcoming, and past status against your local calendar day.
 
 ## Architecture
