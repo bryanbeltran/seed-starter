@@ -5,8 +5,6 @@ import { normalizeZip, ZoneLookupError } from "./zipToZone";
 const fixtureZones: Record<string, string> = zipZones;
 const bundledPhzm: Record<string, string> = phzmZones;
 
-type PhzmResponse = { zone?: string; error?: string };
-
 export type ResolvedLocation = {
   zip: string;
   zone: string;
@@ -34,9 +32,14 @@ export async function resolveLocation(zip: string): Promise<ResolvedLocation> {
     throw new ZoneLookupError(`No hardiness zone found for ZIP ${normalized}.`);
   }
 
-  const data = (await res.json()) as PhzmResponse;
-  const zone = data.zone?.toLowerCase();
-  if (!zone) {
+  const data: unknown = await res.json();
+  // Validate the external payload before allowing it into frost calculations.
+  const zone =
+    data !== null && typeof data === "object" && "zone" in data &&
+    typeof data.zone === "string"
+      ? data.zone.toLowerCase()
+      : undefined;
+  if (!zone || !/^(?:[1-9]|1[0-3])[ab]$/.test(zone)) {
     throw new ZoneLookupError(`No hardiness zone found for ZIP ${normalized}.`);
   }
 
