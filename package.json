@@ -28,6 +28,11 @@
     "smoke:prod": "SMOKE_URL=https://seed-starter.vercel.app SMOKE_STRICT=1 node scripts/smoke.mjs",
     "audit": "pnpm audit --prod --audit-level=high"
   },
+  "overrides": {
+    "nanoid": "^3.3.18",
+    "postcss": "^8.5.23",
+    "sharp": "^0.35.4"
+  },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
     "@radix-ui/react-accordion": "^1.2.13",
@@ -43,7 +48,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "lucide-react": "^0.525.0",
-    "next": "15.5.18",
+    "next": "15.5.26",
     "react": "19.1.0",
     "react-csv": "^2.2.2",
     "react-dom": "19.1.0",
