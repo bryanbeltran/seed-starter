@@ -28,7 +28,7 @@ export async function fetchRecord(root, url, { refresh = false } = {}) {
   const jsonUrl = `https://territorialseed.com/products/${handle}.js`;
   const key = `products-${handle}.js`;
   const raw = await cachedFetch(root, "territorial", key, jsonUrl, {
-    delayMs: 500,
+    delayMs: 1_000,
     refresh,
   });
   const product = JSON.parse(raw);
@@ -64,6 +64,6 @@ export async function collect(root, opts = {}) {
       console.warn(`territorial skip ${url}: ${err.message}`);
       return null;
     }
-  }, { concurrency: 2 });
+  }, { concurrency: 1 });
   return rows.filter(Boolean);
 }
