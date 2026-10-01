@@ -1,19 +1,32 @@
 import { addDays, subDays } from "date-fns";
 import plantsData from "../../data/natives/plants.json";
 import ecoregionPlantsData from "../../data/natives/ecoregion-plants.json";
-import { lookupZipCounty } from "./lookupCounty";
+import nativeSourcesData from "../../data/natives/native-sources.json";
+import nativeRangeEvidenceData from "../../data/natives/plant-range-evidence.json";
+import { lookupZipCounty, lookupZipCountyFips } from "./lookupCounty";
 import { lookupZipEcoregion, type EcoregionRef } from "./lookupEcoregion";
 import {
   ecoregionPlantsFileSchema,
+  nativeRangeEvidenceFileSchema,
+  nativeSourcesFileSchema,
   nativesFileSchema,
   type NativePlant,
 } from "./schema";
+import {
+  affirmativeCountyEvidenceForPlant,
+  summarizeNativeRangeEvidence,
+  type NativeRangeEvidenceSummary,
+} from "./rangeEvidence";
 import { resolveFrost } from "@/planning/frostResolver";
 import { selectFrostDate } from "@/planning/riskProfile";
 import type { FrostClimateLookup, GardenSeason, RiskProfile } from "@/planning/types";
 
 const plantsFile = nativesFileSchema.parse(plantsData);
 const ecoregionFile = ecoregionPlantsFileSchema.parse(ecoregionPlantsData);
+const nativeSourcesFile = nativeSourcesFileSchema.parse(nativeSourcesData);
+const nativeRangeEvidenceFile = nativeRangeEvidenceFileSchema.parse(
+  nativeRangeEvidenceData,
+);
 
 export type NativeTask = {
   type: "direct_sow" | "indoor_sow" | "transplant" | "fall_sow";
@@ -23,6 +36,7 @@ export type NativeTask = {
 
 export type NativePlantResult = NativePlant & {
   tasks: NativeTask[];
+  rangeEvidence: (typeof nativeRangeEvidenceFile.records)[number][];
 };
 
 export type CountyOverlay = {
@@ -43,6 +57,7 @@ export type ResolveNativesResult = {
   frostProvenance: string;
   plants: NativePlantResult[];
   catalogCoverage: "full" | "none" | "unknown";
+  rangeEvidenceCoverage: NativeRangeEvidenceSummary;
 };
 
 function parseRiskProfile(raw?: RiskProfile | string | null): RiskProfile {
@@ -50,7 +65,7 @@ function parseRiskProfile(raw?: RiskProfile | string | null): RiskProfile {
   return "balanced";
 }
 
-function tasksForPlant(
+export function tasksForPlant(
   plant: NativePlant,
   frost: Date,
   season: GardenSeason,
@@ -115,6 +130,7 @@ export function resolveNatives(input: {
   const riskProfile = parseRiskProfile(input.riskProfile);
   const ecoregion = lookupZipEcoregion(input.zip);
   const county = lookupZipCounty(input.zip);
+  const countyFipses = lookupZipCountyFips(input.zip);
   const frostResolution = resolveFrost(
     {
       zone: input.zone,
@@ -143,6 +159,14 @@ export function resolveNatives(input: {
       ecoregion: null,
       plants: [],
       catalogCoverage: "unknown",
+      rangeEvidenceCoverage: summarizeNativeRangeEvidence({
+        candidateIds: [],
+        countyFips: countyFipses,
+        geographyResolved: countyFipses.length > 0,
+        catalogAvailable: false,
+        evidence: nativeRangeEvidenceFile.records,
+        sources: nativeSourcesFile.sources,
+      }),
     };
   }
 
@@ -153,22 +177,49 @@ export function resolveNatives(input: {
       ecoregion: { id: ecoregion.id, name: ecoregion.name },
       plants: [],
       catalogCoverage: "none",
+      rangeEvidenceCoverage: summarizeNativeRangeEvidence({
+        candidateIds: [],
+        countyFips: county?.fips ?? null,
+        geographyResolved: Boolean(ecoregion && countyFipses.length),
+        catalogAvailable: false,
+        evidence: nativeRangeEvidenceFile.records,
+        sources: nativeSourcesFile.sources,
+      }),
     };
   }
 
-  const plants: NativePlantResult[] = listing.plantIds
+  const candidates = listing.plantIds
     .map((id) => plantsFile.plants[id])
-    .filter(Boolean)
-    .map((plant) => ({
-      ...plant,
-      tasks: tasksForPlant(plant, lastFrostDate, season),
-    }))
-    .filter((p) => p.tasks.length > 0);
+    .filter((plant): plant is NativePlant => Boolean(plant));
+  const rangeEvidenceCoverage = summarizeNativeRangeEvidence({
+    candidateIds: candidates.map((plant) => plant.id),
+    countyFips: countyFipses,
+    geographyResolved: Boolean(ecoregion && countyFipses.length),
+    catalogAvailable: candidates.length > 0,
+    evidence: nativeRangeEvidenceFile.records,
+    sources: nativeSourcesFile.sources,
+  });
+  const plants: NativePlantResult[] = candidates
+    .map((plant) => {
+      const rangeEvidence = affirmativeCountyEvidenceForPlant(
+        plant.id,
+        countyFipses,
+        nativeRangeEvidenceFile.records,
+        nativeSourcesFile.sources,
+      );
+      return {
+        ...plant,
+        tasks: tasksForPlant(plant, lastFrostDate, season),
+        rangeEvidence,
+      };
+    })
+    .filter((plant) => plant.rangeEvidence.length > 0 && plant.tasks.length > 0);
 
   return {
     ...base,
     ecoregion: { id: ecoregion.id, name: listing.name || ecoregion.name },
     plants,
     catalogCoverage: "full",
+    rangeEvidenceCoverage,
   };
 }

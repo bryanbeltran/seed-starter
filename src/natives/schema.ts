@@ -28,6 +28,50 @@ export const nativesFileSchema = z.object({
   plants: z.record(z.string(), nativePlantSchema),
 });
 
+export const nativeSourceSchema = z.object({
+  authority: z.string(),
+  name: z.string(),
+  citation: z.string(),
+  url: z.string().url(),
+  releaseOrObservationDate: z.string().nullable(),
+  retrievedAt: z.string().nullable(),
+  licenseNote: z.string().nullable(),
+  geographicScope: z.string().nullable(),
+  spatialResolution: z.string().nullable(),
+  coverage: z.string().nullable(),
+  uncertainty: z.string().nullable(),
+  rangeEvidenceAvailable: z.boolean(),
+});
+
+export const nativeSourcesFileSchema = z.object({
+  version: z.string(),
+  sources: z.record(z.string(), nativeSourceSchema),
+});
+
+export const nativeRangeEvidenceSchema = z.object({
+  plantId: z.string(),
+  sourceId: z.string(),
+  sourceCitation: z.string().min(1),
+  sourceUrl: z.string().url(),
+  releaseOrObservationDate: z.string().nullable(),
+  retrievedAt: z.string().nullable(),
+  licenseNote: z.string().nullable(),
+  geographicScope: z.string().nullable(),
+  spatialResolution: z.enum(["county", "finer", "state", "unknown"]),
+  countyFips: z.string().regex(/^\d{5}$/).nullable(),
+  nativityStatus: z.enum(["native", "not_native", "unknown"]),
+  uncertainty: z.string().nullable(),
+});
+
+export const nativeRangeEvidenceFileSchema = z.object({
+  version: z.string(),
+  provenance: z.string(),
+  records: z.array(nativeRangeEvidenceSchema),
+});
+
+export type NativeSource = z.infer<typeof nativeSourceSchema>;
+export type NativeRangeEvidence = z.infer<typeof nativeRangeEvidenceSchema>;
+
 export const ecoregionPlantsFileSchema = z.object({
   ecoregions: z.record(
     z.string(),

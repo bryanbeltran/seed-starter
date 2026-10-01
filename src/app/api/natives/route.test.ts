@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { GET } from "./route";
 
 describe("GET /api/natives", () => {
-  it("returns native plants for 55423", async () => {
+  it("reports missing local range evidence for 55423 without recommending catalog candidates", async () => {
     const res = await GET(new Request("http://localhost/api/natives?zip=55423"));
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -10,8 +10,17 @@ describe("GET /api/natives", () => {
     expect(body.county.name).toBe("Hennepin");
     expect(body.riskProfile).toBe("balanced");
     expect(body.catalogCoverage).toBe("full");
-    expect(body.plants.length).toBeGreaterThanOrEqual(15);
-    expect(body.plants[0].tasks[0].date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(body.rangeEvidenceCoverage).toMatchObject({
+      status: "no_local_evidence",
+      affirmativeCount: 0,
+      notNativeCount: 0,
+      unknownCount: 0,
+    });
+    expect(body.rangeEvidenceCoverage.catalogCandidateCount).toBeGreaterThan(0);
+    expect(body.rangeEvidenceCoverage.missingCount).toBe(
+      body.rangeEvidenceCoverage.catalogCandidateCount,
+    );
+    expect(body.plants).toEqual([]);
   });
 
   it("rejects invalid zip", async () => {
@@ -19,31 +28,34 @@ describe("GET /api/natives", () => {
     expect(res.status).toBe(400);
   });
 
-  it("returns High Plains plants for 80202", async () => {
+  it("does not recommend High Plains catalog plants without local evidence", async () => {
     const res = await GET(new Request("http://localhost/api/natives?zip=80202"));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.ecoregion.id).toBe("25");
     expect(body.catalogCoverage).toBe("full");
-    expect(body.plants.length).toBeGreaterThanOrEqual(15);
+    expect(body.rangeEvidenceCoverage.status).toBe("no_local_evidence");
+    expect(body.plants).toEqual([]);
   });
 
-  it("returns Northeastern Coastal Zone for 10001", async () => {
+  it("does not recommend Northeastern Coastal Zone catalog plants without local evidence", async () => {
     const res = await GET(new Request("http://localhost/api/natives?zip=10001"));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.ecoregion.id).toBe("59");
-    expect(body.plants.length).toBeGreaterThanOrEqual(15);
+    expect(body.rangeEvidenceCoverage.status).toBe("no_local_evidence");
+    expect(body.plants).toEqual([]);
   });
 
-  it("supports fall season dormant sow", async () => {
+  it("does not return fall sow tasks without local range evidence", async () => {
     const res = await GET(
       new Request("http://localhost/api/natives?zip=55423&season=fall"),
     );
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.season).toBe("fall");
-    expect(body.plants[0].tasks[0].type).toBe("fall_sow");
+    expect(body.rangeEvidenceCoverage.status).toBe("no_local_evidence");
+    expect(body.plants).toEqual([]);
   });
 
   it("honors riskProfile query", async () => {

@@ -45,13 +45,28 @@ Eval gates (golden ZIPs ±14d, drift/monotonic percentiles): see README **Climat
 - Climate ETL: weekly (see `.github/workflows/climate-etl.yml`)
 - PHZM zone lookup: 24h HTTP cache
 
-## Native plants (EPA Level III)
+## Native plants (EPA Level III + USDA PLANTS)
 
 | Layer | Source |
 |-------|--------|
 | ZIP → ecoregion | Census ZCTA centroids × EPA L3 shapefile → `data/natives/zip-ecoregion.json` (`pnpm run etl:natives-ecoregion -- --write`) |
-| ZIP → county (overlay) | Census ZCTA-county rel (max pop share) + gazetteer → `data/natives/zip-county.json` (`pnpm run etl:natives-county -- --fetch --write`) |
-| Species nativity | USDA PLANTS (hand-curated lists per ecoregion: 51, 25, 59, 54) |
+| ZIP → county intersections | Census ZCTA-county relationship (2010, all intersections) + 2021 gazetteer → `data/natives/zip-county.json` (`pnpm run etl:natives-county -- --fetch --write`); the largest population-share county remains the display overlay |
+| Species candidates | Hand-curated species profiles in `data/natives/plants.json`, grouped by EPA L3 in `ecoregion-plants.json`; catalog membership is not local nativity evidence |
+| Local nativity recommendation | Only an affirmative USDA PLANTS county-or-finer claim matching any Census county FIPS intersecting the ZIP in `data/natives/plant-range-evidence.json`; source metadata is recorded in `data/natives/native-sources.json` |
 | Seed timing | GHCN frost percentiles + `riskProfile` + NRCS / regional guidelines |
 
 See [ADR 007](adrs/007-native-ecoregion.md) and [native-plants-data-sources.md](plans/native-plants-data-sources.md).
+
+### Native coverage and gaps
+
+Run `pnpm run check:native-coverage` for an offline JSON report covering all 48 lower-48 states, county and EPA L3 mapping, catalog-only coverage, local USDA county-range evidence, and source metadata. Catalog coverage is reported separately from local range evidence.
+
+The regenerated Census relationship table contains 32,604 lower-48 ZCTAs and every county intersection in the 2010 relationship file. Of those, 32,597 have a county name in the 2021 Gazetteer. The 2010 relationship associates nine ZCTAs with county FIPS 46113, while the 2021 Gazetteer uses current Oglala Lakota County FIPS 46102; a tenth ZCTA intersects FIPS 51515, which also has no 2021 Gazetteer name. These vintage gaps remain visible in the report and are not converted to a different county FIPS. The 2010 relationship's own `STATE` field supplies state FIPS for coverage; the resolver still requires an exact county FIPS evidence match.
+
+EPA L3 mapping is available for 32,537 lower-48 ZCTAs, leaving 67 without an ecoregion match. The candidate catalog maps 3,168 ZCTAs across the full crosswalk, including 3 records whose primary county name is unresolved; the previous metadata-resolved subset maps 3,165. Twenty-eight states have no catalog-mapped ZCTAs and 20 have partial mapping; no state is fully mapped. Catalog coverage is distinct from local range-evidence coverage. The offline report lists every state, county and ecoregion gaps, unresolved county-name FIPS, and local evidence gaps.
+
+The county evidence ETL uses the official PLANTS API and NRCS Counties MapServer. `PlantSearch` and `PlantProfile` resolve each curated symbol; Distribution Documentation supplies state and county FIPS; the county layer's published `Symbol` supplies local nativity. The importer joins a layer county name only when it identifies one unique U.S. state/county row across that plant's Distribution Documentation and that row is in the lower 48. Uniquely identified non-lower-48 rows are excluded; ambiguous or missing names remain unresolved, and state prefixes are not used to create county FIPS. Regional profile status is not local evidence. The importer stores a null release/observation date and the retrieval timestamp because a per-record date has not been verified. It records the numeric `plant_nativity_id` as provenance but does not interpret its code domain; status comes from the published `Symbol` text.
+
+The project's existing licensing decision allows citation-based use of PLANTS facts and excludes images. The current endpoint reuse terms and nativity-ID domain could not be checked from this worktree, which has no DNS access to the USDA endpoints. The bundled range-evidence file remains empty. Scheduled and manual runs open a review PR; verify the live endpoint terms and field domains before merging an imported snapshot.
+
+The monthly and manual GitHub refresh stages and validates a complete evidence snapshot before replacing the workflow worktree's last-good file, runs the focused native tests and offline coverage report, and opens a review PR when data changes. Download, taxon, or provenance validation failures leave the checked-out last-good file unchanged; unresolved individual county-name joins stay as explicit records with null FIPS and cannot match a ZIP.

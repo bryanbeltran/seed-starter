@@ -12,6 +12,18 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { RiskProfilePicker } from "@/components/seed-form/RiskProfilePicker";
 
 type NativeTask = { type: string; date: string; label: string };
+type NativeRangeEvidence = {
+  sourceCitation: string;
+  sourceUrl: string;
+  releaseOrObservationDate: string | null;
+  retrievedAt: string | null;
+  licenseNote: string | null;
+  geographicScope: string | null;
+  spatialResolution: "county" | "finer" | "state" | "unknown";
+  countyFips: string | null;
+  nativityStatus: "native" | "not_native" | "unknown";
+  uncertainty: string | null;
+};
 type NativePlant = {
   id: string;
   commonName: string;
@@ -20,7 +32,22 @@ type NativePlant = {
   needsStratification: boolean;
   sourceUrl: string;
   confidence: string;
+  rangeEvidence: NativeRangeEvidence[];
   tasks: NativeTask[];
+};
+
+type NativeRangeEvidenceCoverage = {
+  status:
+    | "unresolved_geography"
+    | "no_catalog"
+    | "no_local_evidence"
+    | "affirmative_evidence"
+    | "not_native_evidence";
+  catalogCandidateCount: number;
+  affirmativeCount: number;
+  notNativeCount: number;
+  unknownCount: number;
+  missingCount: number;
 };
 
 type NativesResponse = {
@@ -33,6 +60,7 @@ type NativesResponse = {
   lastFrostDate: string;
   frostSource: string;
   catalogCoverage: string;
+  rangeEvidenceCoverage: NativeRangeEvidenceCoverage;
   plants: NativePlant[];
   error?: string;
 };
@@ -203,9 +231,10 @@ export function NativesLookup() {
               )}
             </p>
             <p className="text-muted-foreground text-xs">
-              Native to this EPA Level III ecoregion — not a guarantee for your
-              yard. County shown for context; plants are matched by ecoregion.
-              Nativity: USDA PLANTS. Timing: frost percentiles + curated offsets
+              Recommendations require affirmative USDA PLANTS county or finer
+              range evidence for the ZIP&apos;s resolved county. EPA Level III
+              membership only supplies candidate species; it does not establish
+              local nativity. Timing: frost percentiles + curated offsets
               ({data.riskProfile ?? "balanced"}).
               {isFall && " Fall list shows species suited to dormant sowing."}
             </p>
@@ -223,14 +252,49 @@ export function NativesLookup() {
 
           {data.catalogCoverage === "unknown" && (
             <p className="text-sm">
-              No ecoregion match for this ZIP (often AK/HI/territories). Try a
-              continental US ZIP.
+              No EPA Level III ecoregion match is available for this ZIP, so no
+              candidate species catalog can be selected.
             </p>
           )}
 
-          {data.plants.length === 0 && data.catalogCoverage === "full" && isFall && (
+          {data.rangeEvidenceCoverage.status === "unresolved_geography" && (
             <p className="text-sm">
-              No fall-dormant entries for this ecoregion yet. Try Spring.
+              County or ecoregion geography could not be resolved for this ZIP.
+              No local native plant recommendations are available.
+            </p>
+          )}
+
+          {data.rangeEvidenceCoverage.status === "no_catalog" && (
+            <p className="text-sm">
+              No candidate species catalog is available for this ecoregion, so
+              no local native plant recommendations can be made.
+            </p>
+          )}
+
+          {data.rangeEvidenceCoverage.status === "no_local_evidence" && (
+            <p className="text-sm">
+              No candidate has affirmative USDA PLANTS county-range evidence
+              for this ZIP. {data.rangeEvidenceCoverage.unknownCount} candidate(s)
+              have matching records with unknown or conflicting details, and{" "}
+              {data.rangeEvidenceCoverage.missingCount} have no matching record.
+              {data.rangeEvidenceCoverage.notNativeCount > 0 &&
+                ` ${data.rangeEvidenceCoverage.notNativeCount} have explicit records stating they are not native.`}
+              {" "}Missing evidence is unknown, not evidence that a species is
+              non-native.
+            </p>
+          )}
+
+          {data.rangeEvidenceCoverage.status === "not_native_evidence" && (
+            <p className="text-sm">
+              USDA PLANTS records classify all {data.rangeEvidenceCoverage.notNativeCount} catalog candidates as not native in this county.
+            </p>
+          )}
+
+          {data.plants.length === 0 &&
+            data.rangeEvidenceCoverage.status === "affirmative_evidence" && (
+            <p className="text-sm">
+              Local native-range evidence is available, but those plants have no
+              sowing tasks for this season.
             </p>
           )}
 
@@ -265,6 +329,38 @@ export function NativesLookup() {
                       Benefits from cold stratification (see sow window).
                     </p>
                   )}
+                  <div className="mt-2 space-y-1 text-xs">
+                    {p.rangeEvidence.map((evidence, index) => (
+                      <div key={`${evidence.sourceUrl}-${index}`}>
+                        <a
+                          href={evidence.sourceUrl}
+                          className="underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          USDA PLANTS county-range evidence
+                        </a>
+                        <p className="text-muted-foreground">
+                          {evidence.sourceCitation} · {evidence.spatialResolution} resolution
+                          {` · nativity ${evidence.nativityStatus}`}
+                          {evidence.countyFips ? ` · county FIPS ${evidence.countyFips}` : ""}
+                          {evidence.releaseOrObservationDate
+                            ? ` · source date ${evidence.releaseOrObservationDate}`
+                            : " · source date unknown"}
+                          {evidence.retrievedAt
+                            ? ` · retrieved ${evidence.retrievedAt}`
+                            : " · retrieval date unknown"}
+                          {` · geographic scope ${evidence.geographicScope ?? "unknown"}`}
+                        </p>
+                        <p className="text-muted-foreground">
+                          License: {evidence.licenseNote ?? "unknown"}
+                        </p>
+                        <p className="text-muted-foreground">
+                          Uncertainty: {evidence.uncertainty ?? "unknown"}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                   <a
                     href={p.sourceUrl}
                     className="text-muted-foreground mt-2 inline-block text-xs underline"

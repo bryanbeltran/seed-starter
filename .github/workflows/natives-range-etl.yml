@@ -1,0 +1,68 @@
+name: Native Range Evidence ETL
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 12 1 * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: natives-range-etl
+  cancel-in-progress: false
+
+jobs:
+  refresh-range-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Fetch, discover, stage, and validate USDA county evidence
+        run: pnpm run etl:natives-range-evidence -- --write
+      - name: Validate native data and exercise local evidence rules
+        run: >-
+          pnpm exec vitest run
+          scripts/etl-natives-range-evidence.test.mjs
+          scripts/etl-natives-county.test.mjs
+          scripts/check-native-coverage.test.mjs
+          src/natives/rangeEvidence.test.ts
+          src/natives/rangeEvidence.multi.test.ts
+          src/natives/resolveNatives.test.ts
+      - name: Report lower-48 coverage
+        run: node scripts/check-native-coverage.mjs > "${RUNNER_TEMP}/native-coverage-report.json"
+      - name: Upload evidence and coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-range-evidence
+          path: |
+            data/natives/plant-range-evidence.json
+            ${{ runner.temp }}/native-coverage-report.json
+      - name: Open PR when evidence changes
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(natives): refresh USDA county range evidence"
+          branch: chore/natives-range-etl
+          delete-branch: true
+          title: "chore(natives): refresh USDA county range evidence"
+          body: |
+            Monthly USDA PLANTS county-range refresh.
+
+            - Resolves current catalog symbols through PlantSearch and PlantProfile.
+            - Joins unique county names to same-plant Distribution Documentation FIPS; ambiguous names remain unresolved.
+            - Reads nativity from county Symbol text and keeps numeric nativity IDs uninterpreted.
+            - Requires review of live field semantics and reuse terms before merging imported records.
+            - Keeps unknown statuses and unresolved geography non-affirmative.
+            - Passed staged provenance validation and native coverage tests.
+
+            Review the attached lower-48 coverage report and the evidence date/status changes before merging.
+          add-paths: data/natives/plant-range-evidence.json

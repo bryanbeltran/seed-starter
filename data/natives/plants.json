@@ -1,6 +1,6 @@
 {
   "version": "2026-07-20",
-  "provenance": "Hand-curated for EPA L3 51, 25, 59, 54. Nativity via USDA PLANTS. Timing: NRCS / regional guidelines + frost offsets. ADR 007 Phase 5.",
+  "provenance": "Candidate species catalog for EPA L3 51, 25, 59, and 54. USDA PLANTS profile links identify species sources but do not establish local county nativity; see plant-range-evidence.json. Timing: NRCS / regional guidelines + frost offsets. ADR 007 Phase 5.",
   "plants": {
     "echinacea-purpurea": {
       "id": "echinacea-purpurea",

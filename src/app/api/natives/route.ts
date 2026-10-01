@@ -54,6 +54,7 @@ export const GET = apiRoute(
         frostSource: result.frostSource,
         frostProvenance: result.frostProvenance,
         catalogCoverage: result.catalogCoverage,
+        rangeEvidenceCoverage: result.rangeEvidenceCoverage,
         plants: result.plants.map((p) => ({
           id: p.id,
           commonName: p.commonName,
@@ -65,6 +66,7 @@ export const GET = apiRoute(
           fallDormant: Boolean(p.fallDormant),
           sourceUrl: p.sourceUrl,
           confidence: p.confidence,
+          rangeEvidence: p.rangeEvidence,
           tasks: p.tasks.map((t) => ({
             type: t.type,
             date: format(t.date, "yyyy-MM-dd"),

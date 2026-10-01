@@ -9,7 +9,8 @@
 | Need | Source | Ship in repo? |
 |------|--------|----------------|
 | ZIP → ecoregion | Census ZCTA centroids × **EPA Level III** polygons | Precomputed `zip-ecoregion.json` only |
-| Is it native here? | **USDA PLANTS** (native status + county/state) → roll up / hand-filter for pilot L3 | Curated plant JSON + citations |
+| Is it native here? | **USDA PLANTS** county-or-finer native distribution evidence, matched against every Census county intersection for a ZCTA | `plant-range-evidence.json`; currently empty while live field semantics and endpoint terms await verification |
+| Species identity / candidate selection | **USDA PLANTS** profile references plus approved regional curation | Candidate species catalog and per-species profile URLs; catalog membership is not local nativity evidence |
 | Seed-start timing | Our **GHCN frost** + **NRCS Plant Guides** / **MN BWSR** establishment guidelines | Offsets in plant JSON; link guides |
 | Enrichment (optional) | Lady Bird Johnson NPIN — **link out**, don’t scrape | `sourceUrl` only |
 
@@ -48,8 +49,8 @@
 - **Images:** Separate rules — **do not** bundle PLANTS photos without per-image check. Text-only v1.
 - **How we use it (v1):**
   1. Pick garden-appropriate species known in MN / L3 51 (forbs/grasses first; defer trees if noisy).
-  2. Verify **native** in Minnesota (and preferably counties overlapping L3 51) via PLANTS.
-  3. Store `id`, names, habit, `sourceUrl` → PLANTS profile / symbol page.
+  2. Use profile and state-level information for candidate selection only; a plant is not recommended for a ZIP without affirmative county-or-finer PLANTS range evidence matching that ZIP's county FIPS.
+  3. Store `id`, names, habit, and `sourceUrl` → PLANTS profile / symbol page in the candidate catalog.
 - **Not v1:** Full PLANTS dump → auto ecoregion flora. County→L3 rollup is Phase 5+.
 
 ### Rejected / constrained
@@ -88,7 +89,8 @@ NRCS Plant Guides: search by USDA symbol on PLANTS / plants.usda.gov plant guide
 
 ```text
 Census centroids × EPA L3  →  zip-ecoregion.json
-USDA PLANTS native check   →  plants.json (hand-curated ≥15 for L3 51)
+USDA PLANTS profile refs   →  plants.json (candidate species for selected L3s)
+USDA PLANTS county ranges →  plant-range-evidence.json → ZIP recommendations only on local match
 NRCS / BWSR timing notes   →  frost offsets + stratificationDays
 GHCN frost (existing)      →  concrete dates at request time
 ```
@@ -119,4 +121,18 @@ GHCN frost (existing)      →  concrete dates at request time
 
 - Exact PLANTS download path for county×native bulk (site has moved; CloudVault / API variants) — resolve when writing Phase 2 ETL notes.  
 - Whether MN county native ∩ L3 51 counties is automated later or stays hand-curated for pilot.  
-- Contrast ecoregion species source when Phase 5 starts (still PLANTS + regional NRCS).  
+- Contrast ecoregion species source when Phase 5 starts (still PLANTS + regional NRCS).
+
+## County-level range evidence gate
+
+The ecoregion species JSON is a candidate catalog, not a local nativity assertion. A ZIP recommendation requires an affirmative USDA PLANTS record in `data/natives/plant-range-evidence.json` whose county FIPS matches any Census county intersecting the ZCTA and whose stated resolution is county or finer. Unknown, non-native, state-only, ecoregion-only, or missing evidence never produces a recommendation.
+
+Each range record carries its source citation and URL, release/observation and retrieval dates, license note, geographic scope, spatial resolution, nativity status, and uncertainty. Unknown dates, license details, scope, or uncertainty are represented explicitly as `null`; no date or local claim is inferred from a species profile or L3 catalog entry. `data/natives/native-sources.json` records source coverage and known licensing decisions. The initial range file is intentionally empty because no USDA county-distribution artifact has been ingested.
+
+Run `pnpm run check:native-coverage` offline to report county, L3, catalog, and range-evidence coverage for every lower-48 state. The Census relationship bundle contains 32,604 lower-48 ZCTAs; 32,597 have a named primary county, and 10 ZCTAs touch county FIPS without a matching 2021 Gazetteer name (46113 on nine ZCTAs and 51515 on one). EPA L3 mapping covers 32,537 ZCTAs, leaving 67 without an L3 match. The candidate catalog maps 3,168 ZCTAs, of which 3,165 have resolved primary-county names; 28 states have no catalog coverage, 20 have partial coverage, and none are fully covered. Local USDA county-range evidence currently covers zero catalog-mapped ZCTAs.
+
+### Refresh workflow and source review
+
+The importer uses the official `PlantSearch`, `PlantProfile`, and `PlantProfile/getDownloadDistributionDocumentation` endpoints plus the NRCS PLANTS Counties MapServer. It takes nativity from the layer's published `Symbol` text and leaves numeric `plant_nativity_id` uninterpreted; county FIPS are joined only when a county name identifies one unique U.S. state/county row in the same plant's official Distribution Documentation and that row is in the lower 48. Uniquely identified non-lower-48 rows are excluded; ambiguous names stay unresolved. Profile region status never supplies local evidence.
+
+No live source response was retrieved in this worktree because DNS access to USDA endpoints is unavailable. Therefore the numeric nativity-ID domain, current endpoint reuse terms, and per-record source date remain unverified; `releaseOrObservationDate` is null, retrieval timestamps are recorded, and the bundled evidence file remains empty. The monthly/manual workflow stages and validates a complete snapshot, preserves the checked-out last-good file on failure, and opens a review PR instead of merging data. Review source terms and field semantics before merging.

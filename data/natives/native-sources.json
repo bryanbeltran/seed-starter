@@ -1,0 +1,61 @@
+{
+  "version": "1",
+  "sources": {
+    "usda-plants": {
+      "authority": "USDA PLANTS",
+      "name": "USDA, NRCS PLANTS Database",
+      "citation": "USDA, NRCS. The PLANTS Database. Date unavailable. National Plant Data Team, Greensboro, NC. https://plants.usda.gov.",
+      "url": "https://plants.usda.gov",
+      "releaseOrObservationDate": null,
+      "retrievedAt": null,
+      "licenseNote": "The approved project data-source plan states that PLANTS information is not copyrighted and may be used freely with citation. Do not bundle photos.",
+      "geographicScope": "The USDA PLANTS source covers the United States and additional regions. The importer retains lower-48 county or county-equivalent rows for the 38 curated candidate species; ambiguous names remain unresolved with null county FIPS, and uniquely identified non-lower-48 rows are excluded.",
+      "spatialResolution": "County or county-equivalent, from the official Counties MapServer layer.",
+      "coverage": "County status comes from the PLANTS Counties layer Symbol. County names are joined to the same plant's Distribution Documentation only when they identify one unique U.S. state/county row and that row is in the lower 48; ambiguous or missing joins stay unresolved. Coverage is limited to records returned for the curated candidate catalog.",
+      "uncertainty": "A per-record release or observation date, the numeric plant_nativity_id code domain, and the current endpoint reuse terms were not verified in this worktree. Retrieval time is recorded per claim. Nativity is read from the published county Symbol text; the numeric ID is retained as opaque provenance. The approved project source plan permits cited PLANTS facts and excludes images. Regional profile status is not county evidence. Both, Excluded, Unknown, and unresolved FIPS joins are not affirmative.",
+      "rangeEvidenceAvailable": true
+    },
+    "census-zcta-county": {
+      "authority": "U.S. Census Bureau",
+      "name": "2010 ZCTA-county relationship and 2021 county gazetteer",
+      "citation": "U.S. Census Bureau. 2010 ZCTA-county relationship file; U.S. Census Bureau. 2021 County Gazetteer Files.",
+      "url": "https://www2.census.gov/geo/docs/maps-data/data/rel/zcta_county_rel_10.txt",
+      "releaseOrObservationDate": "2010 relationship; 2021 gazetteer",
+      "retrievedAt": null,
+      "licenseNote": "U.S. government public data; public domain. Cite the Census Bureau.",
+      "geographicScope": "United States ZCTAs and counties; the bundled ZIP-county table includes lower-48 and non-lower-48 records.",
+      "spatialResolution": "All 2010 Census county intersections per ZCTA; the maximum-ZPOPPCT county remains the primary display overlay.",
+      "coverage": "The lower-48 bundle includes 32,604 ZCTAs and all county intersections present in the Census 2010 relationship file. The report distinguishes 32,597 ZCTAs with a named primary county and lists county-name metadata gaps separately.",
+      "uncertainty": "The relationship file uses 2010 county FIPS, while the bundled county names use the 2021 gazetteer. Nine ZCTA intersections carry 2010 county FIPS 46113, which has no name in the 2021 gazetteer; a separate Virginia intersection at 51515 is also unnamed. The gazetteer contains Oglala Lakota County as 46102, but no cross-vintage FIPS is inferred.",
+      "rangeEvidenceAvailable": false
+    },
+    "census-zcta-centroids": {
+      "authority": "U.S. Census Bureau",
+      "name": "Census ZCTA centroid gazetteer",
+      "citation": "U.S. Census Bureau. ZCTA Gazetteer / centroid data. Release date unavailable in the bundled ecoregion provenance.",
+      "url": "https://www.census.gov/geographies/reference-files/time-series/geo/gazetteer-files.html",
+      "releaseOrObservationDate": null,
+      "retrievedAt": null,
+      "licenseNote": "U.S. government public data; public domain. Cite the Census Bureau.",
+      "geographicScope": "U.S. Census ZIP Code Tabulation Areas used by the bundled EPA ecoregion mapping.",
+      "spatialResolution": "ZCTA centroid point.",
+      "coverage": "The bundled EPA mapping resolves 32,537 of 32,604 lower-48 ZCTAs to an ecoregion.",
+      "uncertainty": "Centroid assignment can miss within-ZCTA ecoregion boundaries; release and retrieval dates are unknown.",
+      "rangeEvidenceAvailable": false
+    },
+    "epa-level-iii": {
+      "authority": "U.S. Environmental Protection Agency",
+      "name": "Level III Ecoregions of the Continental United States",
+      "citation": "U.S. EPA. Level III and IV Ecoregions of the Continental United States (2013 layer, per bundled data provenance).",
+      "url": "https://www.epa.gov/eco-research/level-iii-and-iv-ecoregions-continental-united-states",
+      "releaseOrObservationDate": "2013 layer, per bundled data provenance",
+      "retrievedAt": null,
+      "licenseNote": "U.S. government public data; public domain. Cite the EPA.",
+      "geographicScope": "Continental United States EPA Level III ecoregions.",
+      "spatialResolution": "Level III ecoregion assigned from a ZCTA centroid point.",
+      "coverage": "32,537 of 32,604 lower-48 ZCTAs resolve to an EPA Level III ecoregion in the current bundle; 67 have no match.",
+      "uncertainty": "An ecoregion match is contextual catalog coverage, not species-level local nativity evidence; 67 lower-48 ZCTAs have no match.",
+      "rangeEvidenceAvailable": false
+    }
+  }
+}
