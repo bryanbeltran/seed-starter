@@ -37,6 +37,7 @@ jobs:
           src/natives/rangeEvidence.multi.test.ts
           src/natives/resolveNatives.test.ts
       - name: Report lower-48 coverage
+        if: always()
         run: node scripts/check-native-coverage.mjs > "${RUNNER_TEMP}/native-coverage-report.json"
       - name: Upload evidence and coverage report
         if: always()
@@ -64,5 +65,5 @@ jobs:
             - Keeps unknown statuses and unresolved geography non-affirmative.
             - Passed staged provenance validation and native coverage tests.
 
-            Review the attached lower-48 coverage report and the evidence date/status changes before merging.
+            Review the [lower-48 coverage report from this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) in the `native-range-evidence` artifact, along with the evidence date/status changes, before merging.
           add-paths: data/natives/plant-range-evidence.json
