@@ -12,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { summarizeNativeSourceEvidence } from "./lib/native-source-evidence.mjs";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const plantsPath = path.join(root, "data/natives/plants.json");
@@ -518,6 +519,18 @@ export async function main() {
   const plants = readJson(plantsPath).plants;
   const sourcesFile = readJson(sourcesPath);
   const current = readJson(rangeEvidencePath);
+  const reportSourceEvidence = (label, records) => {
+    for (const summary of summarizeNativeSourceEvidence(
+      sourcesFile.sources,
+      records,
+      LOWER48,
+    )) {
+      console.log(
+        `snapshot=${label} source=${summary.sourceId} owner=${summary.ownerAuthorizationStatus} terms=${summary.sourceTermsStatus} enabled=${summary.rangeEvidenceAvailable} records=${summary.recordCount} lower48Counties=${summary.lower48CountyFipsCount} states=${summary.statesWithCountyEvidence.map((state) => state.stateCode ?? state.stateFips).join(",") || "none"}`,
+      );
+    }
+  };
+  reportSourceEvidence("current", current.records);
   const next = await fetchRangeEvidence({
     plants,
     sources: sourcesFile.sources,
@@ -526,6 +539,7 @@ export async function main() {
   });
   const changes = discoverRangeEvidenceChanges(current, next);
   console.log(`records=${next.records.length} discovery=${JSON.stringify(changes)}`);
+  reportSourceEvidence("staged", next.records);
   if (!write) {
     console.log("dry-run (pass --write to stage, validate, and replace the last-good file)");
     return;

@@ -2,6 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { summarizeNativeSourceEvidence } from "./lib/native-source-evidence.mjs";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -359,6 +360,7 @@ export function buildNativeCoverageReport({
       catalogMappedZctasWithoutLocalEvidence:
         catalogMappedZctas.size - localRangeEvidenceZctas.size,
     },
+    sourceEvidence: summarizeNativeSourceEvidence(sources, rangeEvidence, LOWER48),
     sources: Object.entries(sources).map(([id, source]) => ({
       id,
       authority: source.authority,
@@ -373,6 +375,10 @@ export function buildNativeCoverageReport({
       coverage: source.coverage,
       uncertainty: source.uncertainty,
       rangeEvidenceAvailable: source.rangeEvidenceAvailable,
+      ownerAuthorizationNote: source.ownerAuthorizationNote ?? null,
+      sourceTermsStatus: source.sourceTermsStatus ?? "unknown",
+      sourceCheckDate: source.sourceCheckDate ?? null,
+      sourceStatusCategories: source.sourceStatusCategories ?? null,
     })),
     states,
   };

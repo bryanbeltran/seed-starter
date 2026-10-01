@@ -41,6 +41,13 @@ export const nativeSourceSchema = z.object({
   coverage: z.string().nullable(),
   uncertainty: z.string().nullable(),
   rangeEvidenceAvailable: z.boolean(),
+  /** Project-owner permission, distinct from the source's own terms. */
+  ownerAuthorizationNote: z.string().nullable().optional(),
+  sourceTermsStatus: z.enum(["verified", "unverified", "unknown"]).optional(),
+  /** Date of a recorded source check; not a substitute for retrievedAt. */
+  sourceCheckDate: z.string().nullable().optional(),
+  /** Preserve literal source categories without normalizing their meanings. */
+  sourceStatusCategories: z.array(z.string()).optional(),
 });
 
 export const nativeSourcesFileSchema = z.object({

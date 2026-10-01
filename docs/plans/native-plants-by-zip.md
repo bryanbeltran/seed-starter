@@ -33,7 +33,7 @@ Interview signal: spatial ecology join + frost scheduling reuse — not another 
 | 3 | **Timing = frost offsets** (ADR 004). No soil temp / GDD. `?riskProfile=` (default balanced / p50); same spring/fall invert as veg planner. |
 | 4 | **Parallel product surface** — `/natives` + `/api/natives`. Do not merge into veg CropPicker. Do **not** reuse schedule `LocationForm` (season-coupled); share `isValidZip` only. |
 | 5 | **Curated depth:** L3 **51**, **25**, **59**, **54** each ≥15 cited species. Uncovered L3 → `catalogCoverage: "none"`. |
-| 6 | **ADR 007** before any nativity claims in UI/API. Licenses locked in ADR before Phase 2 curation. Stack: **EPA L3 + Census centroids** (join), **USDA PLANTS** (nativity), **NRCS/BWSR + frost** (timing). See [data sources](./native-plants-data-sources.md). **No BONAP dump.** |
+| 6 | **ADR 007** before any nativity claims in UI/API. Licenses locked in ADR before Phase 2 curation. Stack: **EPA L3 + Census centroids** (join), **USDA PLANTS** (currently enabled nativity), **NRCS/BWSR + frost** (timing). BONAP bundling and NPIN scraping have separate owner authorization and recorded source terms; BONAP map conversion and NPIN profile access still need source-specific validation. See [data sources](./native-plants-data-sources.md). |
 | 7 | Saved “native meadow plans” deferred; deep-link `?zip=&season=&riskProfile=` is the bookmark. |
 
 ### Rejected
@@ -109,7 +109,7 @@ Uncovered ecoregion: show name + “Catalog coming” + link to veg planner. `ca
 ### Phase 0 — ADR (docs PR)
 
 - Write `docs/adrs/007-native-ecoregion.md`
-- Lock: L3 key, p50-only timing, pilot 51, Phase 5 contrast candidate, **data stack from [native-plants-data-sources.md](./native-plants-data-sources.md)** (PLANTS / EPA / no BONAP), non-goals
+- Lock: L3 key, p50-only timing, pilot 51, Phase 5 contrast candidate, **data stack from [native-plants-data-sources.md](./native-plants-data-sources.md)** (PLANTS currently enabled; BONAP/NPIN authorization, terms, and readiness recorded separately), non-goals
 - Link plans index + data-sources stub
 
 **Exit:** ADR merged.

@@ -28,6 +28,20 @@ function reportWithEvidence(rangeEvidence) {
         rangeEvidenceAvailable: true,
         licenseNote: "Freely reusable with citation.",
       },
+      "bonap-napa": {
+        authority: "Biota of North America Program (BONAP)",
+        rangeEvidenceAvailable: false,
+        licenseNote: "BONAP requires advance written permission; permission is confirmed for this project.",
+        sourceTermsStatus: "verified",
+        ownerAuthorizationNote: "The project owner confirms permission to bundle BONAP data.",
+      },
+      npin: {
+        authority: "Lady Bird Johnson Wildflower Center (NPIN)",
+        rangeEvidenceAvailable: false,
+        licenseNote: "The published policy permits non-commercial data use with attribution.",
+        sourceTermsStatus: "verified",
+        ownerAuthorizationNote: "The project owner separately confirms permission to scrape NPIN data.",
+      },
     },
     rangeEvidence,
   });
@@ -89,7 +103,7 @@ describe("offline native coverage report", () => {
     expect(report.states.every((state) => "gaps" in state)).toBe(true);
   });
 
-  it("keeps the approved source and licensing choices visible", () => {
+  it("keeps owner authorization, source terms, and source readiness distinct", () => {
     const sources = read("data/natives/native-sources.json").sources;
     expect(sources["usda-plants"].authority).toBe("USDA PLANTS");
     expect(sources["usda-plants"].licenseNote).toContain("freely with citation");
@@ -97,7 +111,88 @@ describe("offline native coverage report", () => {
       "U.S. Environmental Protection Agency",
     );
     expect(sources["census-zcta-county"].authority).toBe("U.S. Census Bureau");
-    expect(Object.keys(sources).join(" ")).not.toMatch(/bonap|npin/i);
+    expect(sources["bonap-napa"]).toMatchObject({
+      ownerAuthorizationNote: expect.stringContaining("confirms that BONAP's required advance written permission"),
+      sourceTermsStatus: "verified",
+      sourceCheckDate: "2026-10-01",
+      retrievedAt: null,
+      sourceStatusCategories: ["Native", "Native Historic", "Adventive", "Exotic", "rare"],
+      rangeEvidenceAvailable: false,
+    });
+    expect(sources["bonap-napa"].citation).toContain(
+      "https://bonap.net/TDC/Query/SpeciesList",
+    );
+    expect(sources["bonap-napa"].uncertainty).toContain(
+      "Only a taxonomy-matched county category exactly Native may support affirmative nativity",
+    );
+    expect(sources["npin"]).toMatchObject({
+      ownerAuthorizationNote: expect.stringContaining("separately confirms permission"),
+      sourceTermsStatus: "verified",
+      sourceCheckDate: "2026-10-01",
+      retrievedAt: null,
+      rangeEvidenceAvailable: false,
+    });
+    expect(sources.npin.citation).toContain(
+      "https://www.wildflower.org/wp-json/wp/v2/pages?slug=plants-main",
+    );
+    expect(sources.npin.coverage).toContain(
+      "common name, scientific name, genus, and ID only",
+    );
+  });
+
+  it("reports source-level lower-48 coverage without admitting disabled BONAP or NPIN claims", () => {
+    const bonapRecord = {
+      ...affirmativeRecord,
+      sourceId: "bonap-napa",
+      sourceCitation: "BONAP. North American Plant Atlas.",
+      sourceUrl: "https://bonap.org/",
+    };
+    const npinRecord = {
+      ...affirmativeRecord,
+      sourceId: "npin",
+      sourceCitation: "Lady Bird Johnson Wildflower Center. NPIN.",
+      sourceUrl: "https://www.wildflower.org/plants/",
+    };
+    const report = reportWithEvidence([bonapRecord, npinRecord]);
+    const bonap = report.sourceEvidence.find((source) => source.sourceId === "bonap-napa");
+    const npin = report.sourceEvidence.find((source) => source.sourceId === "npin");
+    const minnesota = report.states.find((state) => state.stateCode === "MN");
+
+    expect(bonap).toMatchObject({
+      ownerAuthorizationStatus: "authorized",
+      sourceTermsStatus: "verified",
+      rangeEvidenceAvailable: false,
+      recordCount: 1,
+      countyOrFinerRecordCount: 1,
+      lower48CountyFipsCount: 1,
+      lower48StateCount: 1,
+      statesWithCountyEvidence: [
+        { stateCode: "MN", state: "Minnesota", stateFips: "27" },
+      ],
+    });
+    expect(bonap.lower48StateCoverage).toHaveLength(48);
+    expect(bonap.lower48StateCoverage).toContainEqual({
+      stateCode: "MN",
+      state: "Minnesota",
+      stateFips: "27",
+      countyOrFinerRecordCount: 1,
+      countyFipsCount: 1,
+    });
+    expect(bonap.lower48StateCoverage.find((state) => state.stateCode === "AL")).toMatchObject({
+      countyOrFinerRecordCount: 0,
+      countyFipsCount: 0,
+    });
+    expect(npin).toMatchObject({
+      ownerAuthorizationStatus: "authorized",
+      sourceTermsStatus: "verified",
+      rangeEvidenceAvailable: false,
+      recordCount: 1,
+      lower48CountyFipsCount: 1,
+    });
+    expect(minnesota).toMatchObject({
+      localRangeEvidenceZctaCount: 0,
+      affirmativeRangeEvidenceZctaCount: 0,
+    });
   });
 
   it("counts only cited USDA county records as local evidence and requires known licensing to affirm", () => {

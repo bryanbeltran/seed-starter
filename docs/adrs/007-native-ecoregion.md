@@ -10,18 +10,18 @@ Users want plants **native to their place** and when to start seeds. Hardiness z
 
 1. **Nativity key = EPA Level III ecoregion** (`us_l3code`), not USDA hardiness zone.
 2. **ZIP → ecoregion** via ZCTA centroid × EPA L3 polygons, **precomputed** to `data/natives/zip-ecoregion.json`. No runtime geo / polygon bundle.
-3. **Nativity source of truth = USDA PLANTS** (cite; free for use). Hand-curate species lists. **Do not** redistribute BONAP.
+3. **Current nativity source of truth = USDA PLANTS** (cite; use under the recorded project source plan). Hand-curate species lists. The project owner confirms BONAP's required advance written permission for bundling. BONAP NAPA county maps and TDC taxon/occurrence interfaces are recorded in the source plan, but map-derived claims stay disabled until taxonomy matching, a reviewable map conversion, freshness reporting, and lower-48 coverage checks are implemented. Only a taxonomy-matched county category exactly `Native` may affirm nativity; the continental background and TDC occurrence results are not county native evidence.
 4. **Timing** = GHCN frost percentiles + curated offsets (NRCS / regional guides). `?riskProfile=` maps like the veg planner (spring: conservative→p90; fall: inverted →p10). Default `balanced` (p50).
 5. **Stratification:** `stratificationDays` (days before last frost) or flag-only copy — no invented precision.
 6. **Parallel surface:** `/natives` + `GET /api/natives`. Domain in `src/natives/` (framework-free). Do not fold into veg `CropPicker` / `buildSchedule`.
 7. **Catalog depth:** L3 **51**, **25** (High Plains), **59** (Northeastern Coastal Zone), **54** (Central Corn Belt Plains) — each ≥15 cited plants. Uncovered ecoregions return honest `catalogCoverage: "none"`.
 8. **County overlay:** Census ZCTA→primary county (`data/natives/zip-county.json`) is **context only** — does not redefine nativity. Shown in API/UI beside ecoregion.
-9. **Enrichment:** Lady Bird Johnson NPIN may be linked; not scraped as SoT. No image bundling from PLANTS/NPIN.
+9. **Enrichment:** The project owner separately authorizes scraping Lady Bird Johnson NPIN. Its published Data Use Policy allows non-commercial data use with attribution and prohibits commercial use. The verified autocomplete route supplies common name, scientific name, genus, and ID for taxon crosswalk only; it has no range data. Do not bypass profile-page access challenges or infer range from the autocomplete fields. Image reuse from PLANTS or NPIN requires source-specific terms review.
 
 ## Non-goals
 - Zone-as-native claims
 - Full continental flora dump
-- BONAP county maps in-repo (county overlay ≠ BONAP nativity)
+- BONAP map claims before the reviewable taxon match, map conversion, and freshness checks are implemented
 - Purchase / affiliate links
 - Saved native meadow plans (`?zip=&season=&riskProfile=` deep-link is the bookmark)
 - Soil / GDD

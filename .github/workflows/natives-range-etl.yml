@@ -25,7 +25,7 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Fetch, discover, stage, and validate USDA county evidence
+      - name: Fetch enabled range evidence and report all configured sources
         run: pnpm run etl:natives-range-evidence -- --write
       - name: Validate native data and exercise local evidence rules
         run: >-
@@ -46,24 +46,24 @@ jobs:
           name: native-range-evidence
           path: |
             data/natives/plant-range-evidence.json
+            data/natives/native-sources.json
             ${{ runner.temp }}/native-coverage-report.json
       - name: Open PR when evidence changes
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(natives): refresh USDA county range evidence"
+          commit-message: "chore(natives): refresh native range evidence"
           branch: chore/natives-range-etl
           delete-branch: true
-          title: "chore(natives): refresh USDA county range evidence"
+          title: "chore(natives): refresh native range evidence"
           body: |
-            Monthly USDA PLANTS county-range refresh.
+            Monthly native range-evidence refresh and source-readiness report.
 
-            - Resolves current catalog symbols through PlantSearch and PlantProfile.
-            - Joins unique county names to same-plant Distribution Documentation FIPS; ambiguous names remain unresolved.
-            - Reads nativity from county Symbol text and keeps numeric nativity IDs uninterpreted.
-            - Requires review of live field semantics and reuse terms before merging imported records.
+            - Refreshes currently enabled USDA PLANTS county evidence and summarizes every configured source.
+            - Reports owner authorization separately from source terms, with per-source lower-48 county and state coverage.
+            - BONAP's county maps/TDC interfaces and NPIN's autocomplete endpoint are documented; neither is enabled as nativity evidence until its source-specific adapter and claim semantics pass review.
             - Keeps unknown statuses and unresolved geography non-affirmative.
             - Passed staged provenance validation and native coverage tests.
 
-            Review the [lower-48 coverage report from this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) in the `native-range-evidence` artifact, along with the evidence date/status changes, before merging.
+            Review the [lower-48 coverage report from this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) in the `native-range-evidence` artifact for source status and evidence date/status changes before merging.
           add-paths: data/natives/plant-range-evidence.json
