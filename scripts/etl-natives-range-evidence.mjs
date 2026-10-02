@@ -1,23 +1,48 @@
 #!/usr/bin/env node
 /**
- * Discover and validate USDA PLANTS county nativity records.
+ * Discover and validate source-reviewed lower-48 county nativity records.
  *
  *   pnpm run etl:natives-range-evidence           # fetch and preview
  *   pnpm run etl:natives-range-evidence -- --write # stage, validate, replace
  *
- * County FIPS come only from PLANTS Distribution Documentation. The County
- * MapServer Symbol supplies county nativity; regional profile status is used
- * only to detect direct contradictions, never to infer a county claim.
+ * USDA county FIPS come from PLANTS Distribution Documentation and the County
+ * MapServer Symbol supplies USDA county status. BONAP can affirm only through
+ * a current-hash, exact-taxon, manually reviewed NAPA county-map conversion.
+ * TDC and NPIN remain identity, presence, or enrichment data only.
  */
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { summarizeNativeSourceEvidence } from "./lib/native-source-evidence.mjs";
+import {
+  isEligibleFinerRangeEvidenceRecord,
+  isEligibleRangeEvidenceClaim,
+} from "./lib/native-claim-eligibility.mjs";
+import {
+  BONAP_FULL_TAXON_LIST_VERIFIED_BYTES,
+  BONAP_URLS,
+  assertValidBonapCountyMapPng,
+  buildBonapCountyEvidence,
+  fetchBonapMapSnapshots,
+  fetchBonapSourceSnapshot,
+} from "./lib/bonap-native-source.mjs";
+import { fetchNpinEnrichment } from "./lib/npin-source.mjs";
+import { normalizeScientificName } from "./lib/native-taxonomy.mjs";
+import {
+  createNativeRefreshStatus,
+  failNativeRefreshStatus,
+  persistNativeRefreshStatus,
+} from "./lib/native-refresh-status.mjs";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const plantsPath = path.join(root, "data/natives/plants.json");
 const sourcesPath = path.join(root, "data/natives/native-sources.json");
 const rangeEvidencePath = path.join(root, "data/natives/plant-range-evidence.json");
+const countyDataPath = path.join(root, "data/natives/zip-county.json");
+const bonapReviewsPath = path.join(root, "data/natives/bonap-county-map-reviews.json");
+const sourceIngestionPath = path.join(root, "data/natives/native-source-ingestion.json");
+const bonapMapAssetsPath = path.join(root, "data/natives/bonap-map-snapshots");
 const write = process.argv.includes("--write");
 
 export const PLANTS_API = "https://plantsservices.sc.egov.usda.gov/api";
@@ -287,11 +312,6 @@ async function getJson(url, fetchImpl) {
   return response.json();
 }
 
-async function getText(url, fetchImpl) {
-  const response = await request(url, { headers: { accept: "text/csv,text/plain" } }, fetchImpl);
-  return response.text();
-}
-
 async function postJsonText(url, body, fetchImpl) {
   const response = await request(
     url,
@@ -354,7 +374,12 @@ function assertPlantSearch(symbol, searchResults, profile) {
   return profileId;
 }
 
-export function validateRangeEvidenceFile(payload, { plantIds, sources }) {
+export function validateRangeEvidenceFile(payload, {
+  plantIds,
+  sources,
+  bonapMapSnapshots = [],
+  bonapReviewRecords = [],
+}) {
   if (!payload || typeof payload.version !== "string" || typeof payload.provenance !== "string") {
     throw new Error("Native range-evidence file is missing version or provenance");
   }
@@ -369,8 +394,8 @@ export function validateRangeEvidenceFile(payload, { plantIds, sources }) {
     if (!expectedPlantIds.has(record.plantId)) throw new Error(`${path}: unknown plantId ${record.plantId}`);
     const source = sources[record.sourceId];
     if (!source) throw new Error(`${path}: unknown sourceId ${record.sourceId}`);
-    if (source.authority !== "USDA PLANTS" || !source.rangeEvidenceAvailable) {
-      throw new Error(`${path}: source is not an approved USDA range-evidence source`);
+    if (!source.rangeEvidenceAvailable) {
+      throw new Error(`${path}: source is not enabled for range-evidence records`);
     }
     if (!record.sourceCitation?.trim()) throw new Error(`${path}: sourceCitation is required`);
     let url;
@@ -379,11 +404,66 @@ export function validateRangeEvidenceFile(payload, { plantIds, sources }) {
     } catch {
       throw new Error(`${path}: sourceUrl is invalid`);
     }
-    if (
-      url.protocol !== "https:" ||
-      !(url.hostname === "usda.gov" || url.hostname.endsWith(".usda.gov"))
-    ) {
-      throw new Error(`${path}: sourceUrl is not an official USDA HTTPS URL`);
+    if (record.spatialResolution === "finer") {
+      if (!isEligibleFinerRangeEvidenceRecord(record, sources)) {
+        throw new Error(`${path}: finer evidence is not tied to a verified ZCTA-capable source`);
+      }
+    } else if (record.sourceId === "usda-plants") {
+      if (
+        source.authority !== "USDA PLANTS" ||
+        url.protocol !== "https:" ||
+        !(url.hostname === "usda.gov" || url.hostname.endsWith(".usda.gov")) ||
+        !record.sourceCitation.toUpperCase().includes("USDA")
+      ) {
+        throw new Error(`${path}: sourceUrl is not an official USDA HTTPS URL`);
+      }
+    } else if (record.sourceId === "bonap-napa") {
+      if (
+        source.authority !== "Biota of North America Program (BONAP)" ||
+        source.sourceTermsStatus !== "verified" ||
+        !source.ownerAuthorizationNote?.trim() ||
+        url.protocol !== "https:" ||
+        url.hostname !== "bonap.net" ||
+        !/^\/MapGallery\/County\/[^/]+\.png$/i.test(url.pathname) ||
+        !record.sourceCitation.toUpperCase().includes("BONAP")
+      ) {
+        throw new Error(`${path}: BONAP record is not linked to an authorized official county map`);
+      }
+      const review = record.bonapReview;
+      if (
+        !review ||
+        !/^[a-f0-9]{64}$/.test(review.mapSha256 ?? "") ||
+        review.mapKeyUrl !== BONAP_URLS.mapKey ||
+        typeof review.rawCategory !== "string" ||
+        !(review.mapGenerationDateSource === null || ["png_content_metadata", "visual_map_content"].includes(review.mapGenerationDateSource)) ||
+        !["exact", "ambiguous", "unresolved"].includes(review.taxonomyMatch) ||
+        !["confirmed_taxon_scope", "may_conflate_infraspecific", "unresolved"].includes(review.mapScopeDecision) ||
+        !["approved", "pending", "rejected"].includes(review.reviewStatus) ||
+        typeof review.currentStatusConfirmed !== "boolean" ||
+        !review.reviewer?.trim() ||
+        !review.reviewedAt ||
+        Number.isNaN(Date.parse(review.reviewedAt)) ||
+        !review.reviewNote?.trim() ||
+        (review.mapGenerationDate !== null && Number.isNaN(Date.parse(review.mapGenerationDate))) ||
+        (review.mapGenerationDate === null ? review.mapGenerationDateSource !== null : !review.mapGenerationDateSource)
+      ) {
+        throw new Error(`${path}: BONAP county record is missing reviewable map provenance`);
+      }
+      if (!isEligibleRangeEvidenceClaim(record, sources, bonapMapSnapshots, null, bonapReviewRecords)) {
+        throw new Error(`${path}: BONAP claim does not match its approved map review conversion`);
+      }
+      const mapScopeConfirmed = review.mapScopeDecision === "confirmed_taxon_scope";
+      if (mapScopeConfirmed && review.rawCategory === "Native" && record.nativityStatus !== "native") {
+        throw new Error(`${path}: BONAP Native category with confirmed taxon scope must remain native`);
+      }
+      if (mapScopeConfirmed && ["Native Historic", "Adventive", "Exotic"].includes(review.rawCategory) && record.nativityStatus !== "not_native") {
+        throw new Error(`${path}: BONAP ${review.rawCategory} category with confirmed taxon scope must remain non-affirmative`);
+      }
+      if ((!mapScopeConfirmed || !new Set(["Native", "Native Historic", "Adventive", "Exotic"]).has(review.rawCategory)) && record.nativityStatus !== "unknown") {
+        throw new Error(`${path}: unresolved BONAP map scope or category must remain unknown`);
+      }
+    } else {
+      throw new Error(`${path}: source has no county range-evidence adapter`);
     }
     if (
       record.releaseOrObservationDate !== null &&
@@ -403,16 +483,32 @@ export function validateRangeEvidenceFile(payload, { plantIds, sources }) {
     if (!["county", "finer", "state", "unknown"].includes(record.spatialResolution)) {
       throw new Error(`${path}: spatialResolution is invalid`);
     }
+    if (record.spatialResolution !== "finer" && record.finerArea !== undefined) {
+      throw new Error(`${path}: finerArea is only valid for finer evidence`);
+    }
     if (record.countyFips !== null && !/^\d{5}$/.test(record.countyFips)) {
       throw new Error(`${path}: countyFips must be five digits or null`);
     }
     if (!["native", "not_native", "unknown"].includes(record.nativityStatus)) {
       throw new Error(`${path}: nativityStatus is invalid`);
     }
-    if (!record.sourceCitation.toUpperCase().includes("USDA")) {
-      throw new Error(`${path}: sourceCitation must identify USDA`);
+    if (record.nativityStatus !== "unknown" &&
+      (record.spatialResolution === "county" || record.spatialResolution === "finer")) {
+      const eligible = record.spatialResolution === "finer"
+        ? isEligibleFinerRangeEvidenceRecord(record, sources)
+        : record.countyFips !== null && isEligibleRangeEvidenceClaim(
+            record,
+            sources,
+            bonapMapSnapshots,
+            null,
+            bonapReviewRecords,
+          );
+      if (!eligible) throw new Error(`${path}: source-specific evidence does not meet the native claim gate`);
     }
-    const key = [record.plantId, record.countyFips ?? "?", record.sourceCitation].join("|");
+    const area = record.finerArea
+      ? `${record.finerArea.geography}:${record.finerArea.zctaId}`
+      : record.countyFips ?? "?";
+    const key = [record.plantId, area, record.sourceCitation].join("|");
     if (seen.has(key)) throw new Error(`${path}: duplicate range-evidence record`);
     seen.add(key);
   }
@@ -433,8 +529,77 @@ export function commitRangeEvidenceAtomically(outputPath, payload, validation) {
   }
 }
 
+export function commitNativeEvidenceSnapshotAtomically({
+  rangeEvidencePath: outputRangePath,
+  rangeEvidence,
+  rangeValidation,
+  sourceIngestionPath: outputIngestionPath,
+  sourceIngestion,
+  sourceValidation,
+  mapAssets = [],
+}) {
+  validateRangeEvidenceFile(rangeEvidence, rangeValidation);
+  validateSourceIngestionSnapshot(sourceIngestion, sourceValidation);
+  for (const asset of mapAssets) {
+    const digest = asset.path.match(/([a-f0-9]{64})\.png$/)?.[1];
+    if (!digest || createHash("sha256").update(asset.bytes).digest("hex") !== digest) {
+      throw new Error(`BONAP map snapshot asset does not match its content hash: ${asset.path}`);
+    }
+    assertValidBonapCountyMapPng(asset.bytes);
+    if (fs.existsSync(asset.path)) {
+      const existingHash = createHash("sha256").update(fs.readFileSync(asset.path)).digest("hex");
+      if (existingHash !== digest) throw new Error(`Existing BONAP map asset has wrong hash: ${asset.path}`);
+    }
+  }
+  const staged = [outputRangePath, outputIngestionPath].map((outputPath) => `${outputPath}.staged`);
+  const previous = new Map(
+    [outputRangePath, outputIngestionPath].map((outputPath) => [
+      outputPath,
+      fs.existsSync(outputPath) ? fs.readFileSync(outputPath) : null,
+    ]),
+  );
+  try {
+    for (const asset of mapAssets) {
+      fs.mkdirSync(path.dirname(asset.path), { recursive: true });
+      if (fs.existsSync(asset.path)) {
+        continue;
+      } else {
+        const stagedAsset = `${asset.path}.staged`;
+        fs.writeFileSync(stagedAsset, asset.bytes, { flag: "wx" });
+        fs.renameSync(stagedAsset, asset.path);
+      }
+    }
+    fs.writeFileSync(staged[0], `${JSON.stringify(rangeEvidence)}\n`);
+    fs.writeFileSync(staged[1], `${JSON.stringify(sourceIngestion, null, 2)}\n`);
+    validateRangeEvidenceFile(JSON.parse(fs.readFileSync(staged[0], "utf8")), rangeValidation);
+    validateSourceIngestionSnapshot(
+      JSON.parse(fs.readFileSync(staged[1], "utf8")),
+      sourceValidation,
+    );
+    fs.renameSync(staged[0], outputRangePath);
+    fs.renameSync(staged[1], outputIngestionPath);
+  } catch (error) {
+    for (let index = 0; index < staged.length; index++) {
+      fs.rmSync(staged[index], { force: true });
+    }
+    for (const [outputPath, contents] of previous) {
+      if (contents === null) {
+        fs.rmSync(outputPath, { force: true });
+        continue;
+      }
+      const restorePath = `${outputPath}.restore`;
+      fs.writeFileSync(restorePath, contents);
+      fs.renameSync(restorePath, outputPath);
+    }
+    throw error;
+  }
+}
+
 function recordIdentity(record) {
-  return [record.plantId, record.countyFips ?? "?", record.geographicScope].join("|");
+  const area = record.finerArea
+    ? `${record.finerArea.geography}:${record.finerArea.zctaId}`
+    : record.countyFips ?? "?";
+  return [record.sourceId, record.plantId, area, record.geographicScope].join("|");
 }
 
 export function discoverRangeEvidenceChanges(previous, next) {
@@ -511,44 +676,550 @@ export async function fetchRangeEvidence({
   return payload;
 }
 
+export function lower48CountyFipses(countyData) {
+  const rows = Object.values(countyData.intersections ?? {}).flat();
+  const fipses = rows.map((row) => row.fips);
+  return [...new Set(fipses.filter((fips) =>
+    /^\d{5}$/.test(String(fips ?? "")) &&
+    LOWER48.some((state) => state.fips === String(fips).slice(0, 2)),
+  ))].sort();
+}
+
+export function validateSourceIngestionSnapshot(payload, {
+  countyFipses,
+  plantIds,
+  verifiedFullTaxonListBytes = BONAP_FULL_TAXON_LIST_VERIFIED_BYTES,
+}) {
+  if (!payload || payload.version !== "1" || !payload.retrievedAt || Number.isNaN(Date.parse(payload.retrievedAt))) {
+    throw new Error("Native source-ingestion snapshot is missing version or retrieval time");
+  }
+  const bonap = payload.bonap;
+  if (!bonap || bonap.sourceId !== "bonap-napa") throw new Error("BONAP source-ingestion snapshot is missing");
+  if (
+    !Number.isSafeInteger(bonap.fullTaxonList?.taxonCount) ||
+    bonap.fullTaxonList.taxonCount <= 0 ||
+    !Array.isArray(bonap.fullTaxonList.taxa) ||
+    bonap.fullTaxonList.taxa.length !== bonap.fullTaxonList.taxonCount ||
+    bonap.fullTaxonList.url !== "https://bonap.net/TDC/Query/FullTaxonList" ||
+    bonap.fullTaxonList.completenessCheck !== "verified_response_bytes_and_strict_tsv_v1" ||
+    bonap.fullTaxonList.verifiedResponseBytes !== verifiedFullTaxonListBytes ||
+    !Number.isSafeInteger(bonap.fullTaxonList.responseBytes) ||
+    bonap.fullTaxonList.responseBytes !== verifiedFullTaxonListBytes ||
+    !/^[a-f0-9]{64}$/.test(bonap.fullTaxonList.sha256 ?? "") ||
+    (bonap.fullTaxonList.etag != null && typeof bonap.fullTaxonList.etag !== "string") ||
+    (bonap.fullTaxonList.lastModified != null && typeof bonap.fullTaxonList.lastModified !== "string") ||
+    (bonap.fullTaxonList.contentLength != null &&
+      (!Number.isSafeInteger(bonap.fullTaxonList.contentLength) ||
+        bonap.fullTaxonList.contentLength !== bonap.fullTaxonList.responseBytes))
+  ) {
+    throw new Error("BONAP FullTaxonList snapshot is incomplete or has invalid taxa, count, or update markers");
+  }
+  for (const [index, taxon] of bonap.fullTaxonList.taxa.entries()) {
+    if (
+      !taxon ||
+      !String(taxon.family ?? "").trim() ||
+      !/^[A-Z][a-z-]+$/.test(taxon.genus ?? "") ||
+      !String(taxon.scientificName ?? "").trim()
+    ) {
+      throw new Error(`BONAP FullTaxonList snapshot contains malformed taxon row ${index}`);
+    }
+  }
+  const expectedCounties = new Set(countyFipses);
+  const actualCounties = new Set();
+  const expectedDetailIds = new Set();
+  for (const row of bonap.countyOccurrences ?? []) {
+    if (!expectedCounties.has(row.countyFips) || actualCounties.has(row.countyFips)) {
+      throw new Error(`BONAP county occurrence coverage has an unexpected or duplicate FIPS ${row.countyFips}`);
+    }
+    if (!Number.isSafeInteger(row.occurrenceTaxonCount) || row.occurrenceTaxonCount < 0) {
+      throw new Error(`BONAP county occurrence count is invalid for ${row.countyFips}`);
+    }
+    if (
+      !Number.isSafeInteger(row.pageCount) || row.pageCount < 1 ||
+      !Array.isArray(row.pageUpdateMarkers) || row.pageUpdateMarkers.length !== row.pageCount ||
+      !Number.isSafeInteger(row.speciesAndNothospeciesTaxonCount) ||
+      row.speciesAndNothospeciesTaxonCount < 0 ||
+      !Number.isSafeInteger(row.infraspecificTaxonCount) ||
+      row.infraspecificTaxonCount < 0 ||
+      !Number.isSafeInteger(row.reportedSpeciesAndNothospeciesCount) ||
+      row.reportedSpeciesAndNothospeciesCount < 0 ||
+      row.speciesAndNothospeciesTaxonCount !== row.reportedSpeciesAndNothospeciesCount ||
+      row.occurrenceTaxonCount !== row.speciesAndNothospeciesTaxonCount + row.infraspecificTaxonCount
+    ) {
+      throw new Error(`BONAP county occurrence pages or source count are invalid for ${row.countyFips}`);
+    }
+    for (const marker of row.pageUpdateMarkers) {
+      if (
+        typeof marker.page !== "string" ||
+        (marker.etag != null && typeof marker.etag !== "string") ||
+        (marker.lastModified != null && typeof marker.lastModified !== "string")
+      ) {
+        throw new Error(`BONAP county page update marker is invalid for ${row.countyFips}`);
+      }
+    }
+    for (const key of ["etag", "lastModified"]) {
+      if (row[key] != null && typeof row[key] !== "string") {
+        throw new Error(`BONAP county update marker ${key} is invalid for ${row.countyFips}`);
+      }
+    }
+    if (row.evidenceUse !== "presence_only" || Object.hasOwn(row, "nativityStatus")) {
+      throw new Error(`BONAP SpeciesList data cannot be stored as county nativity for ${row.countyFips}`);
+    }
+    for (const taxon of row.candidateTaxa ?? []) {
+      if (!plantIds.includes(taxon.plantId) || !taxon.bonapTaxonId || !taxon.scientificName) {
+        throw new Error(`BONAP county occurrence has an unresolved catalog taxon in ${row.countyFips}`);
+      }
+      expectedDetailIds.add(String(taxon.bonapTaxonId));
+    }
+    actualCounties.add(row.countyFips);
+  }
+  if (actualCounties.size !== expectedCounties.size) {
+    throw new Error(`BONAP county occurrence snapshot covers ${actualCounties.size} of ${expectedCounties.size} lower-48 counties`);
+  }
+  const matchedPlantIds = new Set();
+  for (const match of bonap.taxonMatches ?? []) {
+    if (!plantIds.includes(match.plantId) || matchedPlantIds.has(match.plantId)) {
+      throw new Error(`BONAP taxon crosswalk has an unexpected or duplicate plant ${match.plantId}`);
+    }
+    if (!["exact", "ambiguous", "unresolved"].includes(match.matchStatus)) {
+      throw new Error(`BONAP taxon crosswalk status is invalid for ${match.plantId}`);
+    }
+    matchedPlantIds.add(match.plantId);
+  }
+  if (matchedPlantIds.size !== plantIds.length) {
+    throw new Error(`BONAP taxon crosswalk covers ${matchedPlantIds.size} of ${plantIds.length} catalog taxa`);
+  }
+  const actualDetailIds = new Set();
+  for (const detail of bonap.taxonDetails ?? []) {
+    if (
+      !detail.bonapTaxonId ||
+      !detail.scientificName ||
+      detail.evidenceUse !== "identity_and_occurrence_only" ||
+      !/^[a-f0-9]{64}$/.test(detail.contentSha256 ?? "") ||
+      Object.hasOwn(detail, "nativityStatus")
+    ) {
+      throw new Error(`BONAP TaxonDetails cannot be stored as county nativity for ${detail.bonapTaxonId}`);
+    }
+    if (actualDetailIds.has(String(detail.bonapTaxonId))) {
+      throw new Error(`BONAP TaxonDetails has duplicate source ID ${detail.bonapTaxonId}`);
+    }
+    actualDetailIds.add(String(detail.bonapTaxonId));
+    for (const key of ["etag", "lastModified"]) {
+      if (detail[key] != null && typeof detail[key] !== "string") {
+        throw new Error(`BONAP TaxonDetails update marker ${key} is invalid for ${detail.bonapTaxonId}`);
+      }
+    }
+    if (detail.countyOccurrenceMapUrl != null) {
+      let occurrenceMapUrl;
+      try {
+        occurrenceMapUrl = new URL(detail.countyOccurrenceMapUrl);
+      } catch {
+        throw new Error(`BONAP TaxonDetails county map URL is invalid for ${detail.bonapTaxonId}`);
+      }
+      if (occurrenceMapUrl.protocol !== "https:" || occurrenceMapUrl.hostname !== "bonap.net" || !occurrenceMapUrl.pathname.startsWith("/MapGallery/County/")) {
+        throw new Error(`BONAP TaxonDetails county map is not an official county map for ${detail.bonapTaxonId}`);
+      }
+    }
+  }
+  if (expectedDetailIds.size !== actualDetailIds.size || [...expectedDetailIds].some((id) => !actualDetailIds.has(id))) {
+    throw new Error(`BONAP TaxonDetails covers ${actualDetailIds.size} of ${expectedDetailIds.size} discovered catalog IDs`);
+  }
+  const mapByUrl = new Map();
+  for (const map of bonap.mapSnapshots ?? []) {
+    if (
+      !/^https:\/\/bonap\.net\/MapGallery\/County\/[^/]+\.png$/i.test(map.mapUrl ?? "") ||
+      !/^[a-f0-9]{64}$/.test(map.sha256 ?? "") ||
+      map.mapKeyUrl !== BONAP_URLS.mapKey ||
+      !map.retrievedAt ||
+      map.assetPath !== `data/natives/bonap-map-snapshots/${map.sha256}.png` ||
+      (map.etag != null && typeof map.etag !== "string") ||
+      (map.lastModified != null && typeof map.lastModified !== "string") ||
+      (map.mapGenerationDate !== null && Number.isNaN(Date.parse(map.mapGenerationDate))) ||
+      (map.mapGenerationDate === null ? map.mapGenerationDateSource !== null : !["png_content_metadata", "visual_map_content"].includes(map.mapGenerationDateSource)) ||
+      mapByUrl.has(map.mapUrl)
+    ) {
+      throw new Error("BONAP map snapshot is missing its URL, hash, MapKey, retrieval time, or date marker");
+    }
+    mapByUrl.set(map.mapUrl, map);
+  }
+  for (const mapping of bonap.mapMappings ?? []) {
+    if (!matchedPlantIds.has(mapping.plantId) || !["exact", "ambiguous", "unresolved"].includes(mapping.mapStatus)) {
+      throw new Error(`BONAP map mapping is invalid for ${mapping.plantId}`);
+    }
+    if (mapping.mapStatus === "exact" && mapByUrl.get(mapping.mapUrl)?.sha256 !== mapping.mapSha256) {
+      throw new Error(`BONAP exact map mapping has no captured snapshot for ${mapping.plantId}`);
+    }
+  }
+  const expectedMapPlants = new Set(
+    bonap.taxonMatches.filter((match) => match.matchStatus === "exact").map((match) => match.plantId),
+  );
+  const mappedPlants = new Set((bonap.mapMappings ?? []).map((mapping) => mapping.plantId));
+  if (expectedMapPlants.size !== mappedPlants.size || [...expectedMapPlants].some((id) => !mappedPlants.has(id))) {
+    throw new Error(`BONAP NAPA map discovery covers ${mappedPlants.size} of ${expectedMapPlants.size} exact catalog taxa`);
+  }
+  const npin = payload.npin;
+  if (!npin || npin.sourceId !== "npin" || !Array.isArray(npin.enrichments)) {
+    throw new Error("NPIN enrichment snapshot is missing");
+  }
+  for (const enrichment of npin.enrichments) {
+    if (!plantIds.includes(enrichment.plantId) || enrichment.evidenceUse === "nativity") {
+      throw new Error(`NPIN profile data cannot be stored as local nativity for ${enrichment.plantId}`);
+    }
+    if (!["exact", "ambiguous", "unresolved"].includes(enrichment.matchStatus)) {
+      throw new Error(`NPIN taxon match status is invalid for ${enrichment.plantId}`);
+    }
+    if (!["available", "challenge", "not_attempted"].includes(enrichment.profileStatus)) {
+      throw new Error(`NPIN profile status is invalid for ${enrichment.plantId}`);
+    }
+    if (enrichment.nativityResolution && enrichment.nativityResolution !== "none") {
+      throw new Error(`NPIN profile geography cannot resolve county nativity for ${enrichment.plantId}`);
+    }
+    for (const key of ["autocompleteEtag", "autocompleteLastModified", "profileEtag", "profileLastModified"]) {
+      if (enrichment[key] != null && typeof enrichment[key] !== "string") {
+        throw new Error(`NPIN update marker ${key} is invalid for ${enrichment.plantId}`);
+      }
+    }
+  }
+  const npinPlantIds = new Set(npin.enrichments.map((row) => row.plantId));
+  if (npinPlantIds.size !== plantIds.length || npinPlantIds.size !== npin.enrichments.length || plantIds.some((id) => !npinPlantIds.has(id))) {
+    throw new Error(`NPIN enrichment snapshot covers ${npinPlantIds.size} of ${plantIds.length} catalog taxa`);
+  }
+  return payload;
+}
+
+export function validateBonapCountyMapReviewFile(payload, plants, countyData = readJson(countyDataPath)) {
+  if (
+    !payload ||
+    payload.version !== "2" ||
+    payload.mapKeyUrl !== BONAP_URLS.mapKey ||
+    !Array.isArray(payload.records)
+  ) {
+    throw new Error("BONAP map review file is missing its version, MapKey, or records");
+  }
+  const canonicalCountyFips = new Set(Object.keys(countyData?.counties ?? {}));
+  if (canonicalCountyFips.size === 0) {
+    throw new Error("Canonical Census county FIPS set is missing from ZIP-county geography data");
+  }
+  const lower48Prefixes = new Set(LOWER48.map((state) => state.fips));
+  const seenReviews = new Set();
+  for (const [index, review] of payload.records.entries()) {
+    const path = `records[${index}]`;
+    const plant = plants[review.plantId];
+    if (!plant) throw new Error(`${path}: unknown plantId ${review.plantId}`);
+    let mapUrl;
+    try {
+      mapUrl = new URL(review.mapUrl);
+    } catch {
+      throw new Error(`${path}: mapUrl is invalid`);
+    }
+    if (
+      mapUrl.protocol !== "https:" ||
+      mapUrl.hostname !== "bonap.net" ||
+      !/^\/MapGallery\/County\/[^/]+\.png$/i.test(mapUrl.pathname)
+    ) {
+      throw new Error(`${path}: mapUrl must be a linked BONAP per-taxon county PNG`);
+    }
+    let mapTaxonName;
+    try {
+      mapTaxonName = decodeURIComponent(mapUrl.pathname.slice("/MapGallery/County/".length, -4));
+    } catch {
+      throw new Error(`${path}: mapUrl taxon name is invalid`);
+    }
+    if (
+      normalizeScientificName(mapTaxonName) !== normalizeScientificName(review.scientificName) ||
+      (review.taxonomyMatch === "exact" &&
+        normalizeScientificName(review.scientificName) !== normalizeScientificName(plant.scientificName))
+    ) {
+      throw new Error(`${path}: BONAP map name and taxonomy review do not match the catalog taxon`);
+    }
+    if (
+      !/^[a-f0-9]{64}$/.test(review.mapSha256 ?? "") ||
+      !["exact", "ambiguous", "unresolved"].includes(review.taxonomyMatch) ||
+      !["confirmed_taxon_scope", "may_conflate_infraspecific", "unresolved"].includes(review.mapScopeDecision) ||
+      !["approved", "rejected"].includes(review.reviewStatus) ||
+      typeof review.currentStatusConfirmed !== "boolean" ||
+      !review.reviewer?.trim() ||
+      !review.reviewedAt ||
+      Number.isNaN(Date.parse(review.reviewedAt)) ||
+      !review.reviewNote?.trim() ||
+      !Array.isArray(review.counties)
+    ) {
+      throw new Error(`${path}: BONAP map review is missing taxonomy, map scope, reviewer, status, or conversion data`);
+    }
+    const reviewKey = [review.plantId, review.mapUrl, review.mapSha256].join("|");
+    if (seenReviews.has(reviewKey)) {
+      throw new Error(`${path}: duplicate BONAP map review for plant, URL, and map hash`);
+    }
+    seenReviews.add(reviewKey);
+    if (review.mapGenerationDateFromContent !== null &&
+      (typeof review.mapGenerationDateFromContent !== "string" ||
+        !/^\d{4}-\d{2}-\d{2}$/.test(review.mapGenerationDateFromContent) ||
+        Number.isNaN(Date.parse(review.mapGenerationDateFromContent)))) {
+      throw new Error(`${path}: mapGenerationDateFromContent must be a date read from the map or null`);
+    }
+    const seenCounties = new Set();
+    for (const county of review.counties) {
+      if (
+        !/^\d{5}$/.test(county.countyFips ?? "") ||
+        !lower48Prefixes.has(county.countyFips.slice(0, 2)) ||
+        !String(county.rawCategory ?? "").trim() ||
+        seenCounties.has(county.countyFips)
+      ) {
+        throw new Error(`${path}: county conversion must have unique lower-48 FIPS and preserved raw category`);
+      }
+      if (!canonicalCountyFips.has(county.countyFips)) {
+        throw new Error(`${path}: county FIPS ${county.countyFips} is absent from the canonical Census county set`);
+      }
+      seenCounties.add(county.countyFips);
+    }
+  }
+  return payload;
+}
+
+export async function fetchSupplementalSourceData({
+  plants,
+  sources,
+  countyFipses,
+  bonapReviews = [],
+  previousFullTaxonList = null,
+  verifiedFullTaxonListBytes = BONAP_FULL_TAXON_LIST_VERIFIED_BYTES,
+  fetchImpl = fetch,
+  now = new Date(),
+  onCounty = () => {},
+  onPlant = () => {},
+  onSource = () => {},
+}) {
+  const retrievedAt = now.toISOString();
+  const sourceCall = async (sourceId, operation) => {
+    try {
+      return await operation();
+    } catch (error) {
+      const sourceError = error instanceof Error ? error : new Error(String(error));
+      sourceError.sourceId ??= sourceId;
+      throw sourceError;
+    }
+  };
+  const bonap = await sourceCall("bonap-napa", () => fetchBonapSourceSnapshot({
+    plants,
+    countyFipses,
+    fetchImpl,
+    now,
+    previousTaxa: previousFullTaxonList?.taxa ?? [],
+    verifiedFullTaxonListBytes,
+    onCounty,
+  }));
+  const maps = await sourceCall("bonap-napa", () => fetchBonapMapSnapshots({
+    plants,
+    taxonMatches: bonap.taxonMatches,
+    fetchImpl,
+    now,
+  }));
+  const mapAssets = maps.snapshots.map((snapshot) => ({
+    path: path.join(bonapMapAssetsPath, `${snapshot.sha256}.png`),
+    bytes: snapshot.bytes,
+  }));
+  const bonapMapSnapshots = maps.snapshots.map((snapshot) => {
+    const metadata = Object.fromEntries(
+      Object.entries(snapshot).filter(([key]) => key !== "bytes"),
+    );
+    return {
+      ...metadata,
+      assetPath: `data/natives/bonap-map-snapshots/${snapshot.sha256}.png`,
+    };
+  });
+  const reviewedMapRecords = await sourceCall("bonap-napa", async () => buildBonapCountyEvidence({
+    plants,
+    mapSnapshots: maps.snapshots,
+    reviews: bonapReviews,
+    source: sources["bonap-napa"],
+  }));
+  onSource({ sourceId: "bonap-napa", status: "staged" });
+  onSource({ sourceId: "npin", status: "retrieving" });
+  const npin = await sourceCall("npin", () =>
+    fetchNpinEnrichment({ plants, fetchImpl, now, onPlant }),
+  );
+  onSource({ sourceId: "npin", status: "staged" });
+  const snapshot = {
+    version: "1",
+    status: "retrieved",
+    retrievedAt,
+    provenance:
+      `Retrieved ${retrievedAt}. BONAP FullTaxonList taxon names have no source-stable ID; TDC Id values remain source-scoped. County SpeciesList and TaxonDetails are recorded for identity and occurrence only. NAPA county maps are discovered from live genus pages and stored by SHA-256; map dates are read from PNG content metadata when available and otherwise remain null for manual content review. County categories become range evidence only through a current-hash approved map review tied to the BONAP MapKey. NPIN autocomplete/profile records are crosswalk and enrichment only; geographic prose never establishes local nativity.`,
+    bonap: {
+      sourceId: bonap.sourceId,
+      retrievedAt: bonap.retrievedAt,
+      fullTaxonList: bonap.fullTaxonList,
+      taxonMatches: bonap.taxonMatches,
+      countyOccurrences: bonap.countyOccurrences,
+      taxonDetails: bonap.taxonDetails,
+      mapMappings: maps.mappings,
+      mapSnapshots: bonapMapSnapshots,
+      reviewedMapRecordCount: reviewedMapRecords.length,
+    },
+    npin,
+  };
+  await sourceCall("source-validation", async () =>
+    validateSourceIngestionSnapshot(snapshot, {
+      countyFipses,
+      plantIds: Object.keys(plants),
+      verifiedFullTaxonListBytes,
+    }),
+  );
+  return { snapshot, reviewedMapRecords, mapAssets };
+}
+
 function readJson(filePath) {
   return JSON.parse(fs.readFileSync(filePath, "utf8"));
 }
 
 export async function main() {
-  const plants = readJson(plantsPath).plants;
-  const sourcesFile = readJson(sourcesPath);
-  const current = readJson(rangeEvidencePath);
-  const reportSourceEvidence = (label, records) => {
-    for (const summary of summarizeNativeSourceEvidence(
-      sourcesFile.sources,
-      records,
-      LOWER48,
-    )) {
-      console.log(
-        `snapshot=${label} source=${summary.sourceId} owner=${summary.ownerAuthorizationStatus} terms=${summary.sourceTermsStatus} enabled=${summary.rangeEvidenceAvailable} records=${summary.recordCount} lower48Counties=${summary.lower48CountyFipsCount} states=${summary.statesWithCountyEvidence.map((state) => state.stateCode ?? state.stateFips).join(",") || "none"}`,
-      );
-    }
+  const startedAt = new Date().toISOString();
+  const statusPath = process.env.NATIVE_SOURCE_REFRESH_STATUS_PATH ??
+    path.join(root, "data/natives/native-source-refresh-status.json");
+  let stage = "load";
+  let rangeEvidence = null;
+  let sourceIngestion = null;
+  let runStatus = createNativeRefreshStatus({ startedAt });
+  const persistStatus = () => persistNativeRefreshStatus(statusPath, runStatus);
+  const markSource = (sourceId, sourceStatus) => {
+    runStatus.sources[sourceId].status = sourceStatus;
+    persistStatus();
   };
-  reportSourceEvidence("current", current.records);
-  const next = await fetchRangeEvidence({
-    plants,
-    sources: sourcesFile.sources,
-    onPlant: ({ id, symbol, recordCount }) =>
-      console.log(`${symbol} (${id}): ${recordCount} county records`),
-  });
-  const changes = discoverRangeEvidenceChanges(current, next);
-  console.log(`records=${next.records.length} discovery=${JSON.stringify(changes)}`);
-  reportSourceEvidence("staged", next.records);
-  if (!write) {
-    console.log("dry-run (pass --write to stage, validate, and replace the last-good file)");
-    return;
+  persistStatus();
+  try {
+    const plants = readJson(plantsPath).plants;
+    const sourcesFile = readJson(sourcesPath);
+    rangeEvidence = readJson(rangeEvidencePath);
+    const countyData = readJson(countyDataPath);
+    sourceIngestion = readJson(sourceIngestionPath);
+    runStatus = createNativeRefreshStatus({ startedAt, rangeEvidence, sourceIngestion });
+    persistStatus();
+    const bonapReviewFile = validateBonapCountyMapReviewFile(
+      readJson(bonapReviewsPath),
+      plants,
+      countyData,
+    );
+    const bonapReviews = bonapReviewFile.records;
+    console.log(
+      `current supplemental snapshot=${sourceIngestion.status ?? (sourceIngestion.retrievedAt ? "retrieved" : "not_refreshed")} retrievedAt=${sourceIngestion.retrievedAt ?? "none"}`,
+    );
+    const reportSourceEvidence = (label, records, bonapMapSnapshots = [], bonapReviewRecords = []) => {
+      for (const summary of summarizeNativeSourceEvidence(
+        sourcesFile.sources,
+        records,
+        LOWER48,
+        bonapMapSnapshots,
+        bonapReviewRecords,
+      )) {
+        console.log(
+          `snapshot=${label} source=${summary.sourceId} owner=${summary.ownerAuthorizationStatus} terms=${summary.sourceTermsStatus} enabled=${summary.rangeEvidenceAvailable} records=${summary.recordCount} lower48Counties=${summary.lower48CountyFipsCount} states=${summary.statesWithCountyEvidence.map((state) => state.stateCode ?? state.stateFips).join(",") || "none"}`,
+        );
+      }
+    };
+    reportSourceEvidence(
+      "current",
+      rangeEvidence.records,
+      sourceIngestion.bonap?.mapSnapshots ?? [],
+      bonapReviews,
+    );
+
+    stage = "usda-plants";
+    markSource(stage, "retrieving");
+    const usdaNext = await fetchRangeEvidence({
+      plants,
+      sources: sourcesFile.sources,
+      onPlant: ({ id, symbol, recordCount }) =>
+        console.log(`${symbol} (${id}): ${recordCount} county records`),
+    });
+    markSource(stage, "staged");
+
+    stage = "bonap-napa";
+    markSource(stage, "retrieving");
+    const countyFipses = lower48CountyFipses(countyData);
+    const supplemental = await fetchSupplementalSourceData({
+      plants,
+      sources: sourcesFile.sources,
+      countyFipses,
+      bonapReviews,
+      previousFullTaxonList: sourceIngestion.bonap?.fullTaxonList ?? null,
+      onCounty: ({ countyFips, index, total, occurrenceTaxonCount }) => {
+        if (index % 100 === 0 || index === total) {
+          console.log(`BONAP TDC county=${countyFips} occurrenceTaxa=${occurrenceTaxonCount} progress=${index}/${total}`);
+        }
+      },
+      onPlant: ({ plantId, status }) => console.log(`NPIN ${plantId}: ${status}`),
+      onSource: ({ sourceId, status }) => markSource(sourceId, status),
+    });
+    markSource("bonap-napa", "staged");
+    markSource("npin", "staged");
+
+    stage = "source-validation";
+    const next = {
+      version: `native-sources-live-${new Date().toISOString().slice(0, 10)}`,
+      provenance: `${usdaNext.provenance} BONAP reviewed map records are included only when current map hash, exact taxonomy, review approval, and current-status confirmation match. TDC records and NPIN data remain discovery or enrichment, never local claims.`,
+      records: [...usdaNext.records, ...supplemental.reviewedMapRecords],
+    };
+    const rangeValidation = {
+      plantIds: Object.keys(plants),
+      sources: sourcesFile.sources,
+      bonapMapSnapshots: supplemental.snapshot.bonap.mapSnapshots,
+      bonapReviewRecords: bonapReviews,
+    };
+    validateRangeEvidenceFile(next, rangeValidation);
+    const changes = discoverRangeEvidenceChanges(rangeEvidence, next);
+    console.log(`records=${next.records.length} discovery=${JSON.stringify(changes)}`);
+    console.log(
+      `BONAP taxa=${supplemental.snapshot.bonap.fullTaxonList.taxonCount} exactCatalogMatches=${supplemental.snapshot.bonap.taxonMatches.filter((row) => row.matchStatus === "exact").length} occurrenceCounties=${supplemental.snapshot.bonap.countyOccurrences.length} mapSnapshots=${supplemental.snapshot.bonap.mapSnapshots.length} reviewedRecords=${supplemental.reviewedMapRecords.length}`,
+    );
+    console.log(
+      `NPIN exactCrosswalks=${supplemental.snapshot.npin.enrichments.filter((row) => row.matchStatus === "exact").length} profiles=${supplemental.snapshot.npin.enrichments.filter((row) => row.profileStatus === "available").length} challenges=${supplemental.snapshot.npin.enrichments.filter((row) => row.profileStatus === "challenge").length}`,
+    );
+    reportSourceEvidence(
+      "staged",
+      next.records,
+      supplemental.snapshot.bonap.mapSnapshots,
+      bonapReviews,
+    );
+
+    if (!write) {
+      runStatus.status = "validated";
+      runStatus.completedAt = new Date().toISOString();
+      for (const source of Object.values(runStatus.sources)) {
+        if (source.status === "staged") source.status = "validated";
+      }
+      persistStatus();
+      console.log("dry-run (pass --write to stage, validate, and replace the last-good evidence and source snapshots)");
+      return;
+    }
+    stage = "publication";
+    commitNativeEvidenceSnapshotAtomically({
+      rangeEvidencePath,
+      rangeEvidence: next,
+      rangeValidation,
+      sourceIngestionPath,
+      sourceIngestion: supplemental.snapshot,
+      sourceValidation: { countyFipses, plantIds: Object.keys(plants) },
+      mapAssets: supplemental.mapAssets,
+    });
+    runStatus.status = "succeeded";
+    runStatus.completedAt = new Date().toISOString();
+    runStatus.lastGoodSnapshotRetrievedAt = supplemental.snapshot.retrievedAt;
+    for (const source of Object.values(runStatus.sources)) {
+      source.status = "published";
+      source.lastSuccessAt = runStatus.completedAt;
+    }
+    persistStatus();
+    console.log(`wrote ${rangeEvidencePath} and ${sourceIngestionPath}`);
+  } catch (error) {
+    failNativeRefreshStatus({
+      filePath: statusPath,
+      status: runStatus,
+      error,
+      stage,
+      completedAt: new Date().toISOString(),
+    });
+    throw error;
   }
-  commitRangeEvidenceAtomically(rangeEvidencePath, next, {
-    plantIds: Object.keys(plants),
-    sources: sourcesFile.sources,
-  });
-  console.log(`wrote ${rangeEvidencePath}`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

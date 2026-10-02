@@ -16,7 +16,7 @@ concurrency:
 jobs:
   refresh-range-evidence:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -25,12 +25,16 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - name: Fetch enabled range evidence and report all configured sources
+      - name: Refresh USDA, BONAP discovery/maps, NPIN enrichment, and reviewed claims
         run: pnpm run etl:natives-range-evidence -- --write
+        env:
+          NATIVE_SOURCE_REFRESH_STATUS_PATH: ${{ runner.temp }}/native-source-refresh-status.json
       - name: Validate native data and exercise local evidence rules
         run: >-
           pnpm exec vitest run
           scripts/etl-natives-range-evidence.test.mjs
+          scripts/lib/bonap-native-source.test.mjs
+          scripts/lib/npin-source.test.mjs
           scripts/etl-natives-county.test.mjs
           scripts/check-native-coverage.test.mjs
           src/natives/rangeEvidence.test.ts
@@ -39,6 +43,8 @@ jobs:
       - name: Report lower-48 coverage
         if: always()
         run: node scripts/check-native-coverage.mjs > "${RUNNER_TEMP}/native-coverage-report.json"
+        env:
+          NATIVE_SOURCE_REFRESH_STATUS_PATH: ${{ runner.temp }}/native-source-refresh-status.json
       - name: Upload evidence and coverage report
         if: always()
         uses: actions/upload-artifact@v4
@@ -47,23 +53,31 @@ jobs:
           path: |
             data/natives/plant-range-evidence.json
             data/natives/native-sources.json
+            data/natives/native-source-ingestion.json
+            data/natives/bonap-county-map-reviews.json
+            data/natives/bonap-map-snapshots/**
+            ${{ runner.temp }}/native-source-refresh-status.json
             ${{ runner.temp }}/native-coverage-report.json
       - name: Open PR when evidence changes
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(natives): refresh native range evidence"
+          commit-message: "chore(natives): refresh native source snapshots"
           branch: chore/natives-range-etl
           delete-branch: true
-          title: "chore(natives): refresh native range evidence"
+          title: "chore(natives): refresh native source snapshots"
           body: |
-            Monthly native range-evidence refresh and source-readiness report.
+            Monthly native range-evidence, source discovery, and enrichment refresh.
 
-            - Refreshes currently enabled USDA PLANTS county evidence and summarizes every configured source.
-            - Reports owner authorization separately from source terms, with per-source lower-48 county and state coverage.
-            - BONAP's county maps/TDC interfaces and NPIN's autocomplete endpoint are documented; neither is enabled as nativity evidence until its source-specific adapter and claim semantics pass review.
-            - Keeps unknown statuses and unresolved geography non-affirmative.
-            - Passed staged provenance validation and native coverage tests.
+            - Refreshes USDA county evidence, BONAP TDC discovery/occurrences and linked county-map snapshots, and NPIN crosswalk/profile enrichment.
+            - TDC presence, continental nativity, and NPIN profile geography never become county nativity claims.
+            - BONAP records become affirmative only through current-hash, exact-taxonomy, approved county conversions tied to the MapKey.
+            - Multi-county ZIPs require affirmative evidence for every intersecting county.
+            - Review `bonap-county-map-reviews.json` before adding any conversion. An unreviewed map remains non-affirmative.
+            - The report keeps discovery/enrichment coverage separate from local nativity coverage and compares against the 2026-10-01 baseline.
 
             Review the [lower-48 coverage report from this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) in the `native-range-evidence` artifact for source status and evidence date/status changes before merging.
-          add-paths: data/natives/plant-range-evidence.json
+          add-paths: |
+            data/natives/plant-range-evidence.json
+            data/natives/native-source-ingestion.json
+            data/natives/bonap-map-snapshots/**

@@ -44,6 +44,8 @@ export const nativeSourceSchema = z.object({
   /** Project-owner permission, distinct from the source's own terms. */
   ownerAuthorizationNote: z.string().nullable().optional(),
   sourceTermsStatus: z.enum(["verified", "unverified", "unknown"]).optional(),
+  /** Units reviewed as whole-area coverage; mere spatial overlap does not qualify. */
+  verifiedFinerAreaGeographies: z.array(z.literal("census-zcta-2010")).optional(),
   /** Date of a recorded source check; not a substitute for retrievedAt. */
   sourceCheckDate: z.string().nullable().optional(),
   /** Preserve literal source categories without normalizing their meanings. */
@@ -53,6 +55,36 @@ export const nativeSourceSchema = z.object({
 export const nativeSourcesFileSchema = z.object({
   version: z.string(),
   sources: z.record(z.string(), nativeSourceSchema),
+});
+
+export const bonapCountyMapReviewSchema = z.object({
+  plantId: z.string(),
+  scientificName: z.string().min(1),
+  mapUrl: z.string().url(),
+  mapSha256: z.string().regex(/^[a-f0-9]{64}$/),
+  mapGenerationDateFromContent: z.string().date().nullable(),
+  taxonomyMatch: z.enum(["exact", "ambiguous", "unresolved"]),
+  mapScopeDecision: z.enum([
+    "confirmed_taxon_scope",
+    "may_conflate_infraspecific",
+    "unresolved",
+  ]),
+  reviewStatus: z.enum(["approved", "rejected"]),
+  currentStatusConfirmed: z.boolean(),
+  reviewer: z.string().min(1),
+  reviewedAt: z.string().datetime(),
+  reviewNote: z.string().min(1),
+  counties: z.array(z.object({
+    countyFips: z.string().regex(/^\d{5}$/),
+    rawCategory: z.string().min(1),
+  })),
+});
+
+export const bonapCountyMapReviewFileSchema = z.object({
+  version: z.literal("2"),
+  mapKeyUrl: z.literal("http://bonap.org/MapKey.html"),
+  provenance: z.string(),
+  records: z.array(bonapCountyMapReviewSchema),
 });
 
 export const nativeRangeEvidenceSchema = z.object({
@@ -66,8 +98,47 @@ export const nativeRangeEvidenceSchema = z.object({
   geographicScope: z.string().nullable(),
   spatialResolution: z.enum(["county", "finer", "state", "unknown"]),
   countyFips: z.string().regex(/^\d{5}$/).nullable(),
+  /** The source claim covers this entire Census 2010 ZCTA, not just an overlap. */
+  finerArea: z.object({
+    geography: z.literal("census-zcta-2010"),
+    zctaId: z.string().regex(/^\d{5}$/),
+  }).optional(),
   nativityStatus: z.enum(["native", "not_native", "unknown"]),
   uncertainty: z.string().nullable(),
+  /** BONAP claims are usable only when tied to a reviewed map snapshot and MapKey. */
+  bonapReview: z
+    .object({
+      mapSha256: z.string().regex(/^[a-f0-9]{64}$/),
+      mapKeyUrl: z.literal("http://bonap.org/MapKey.html"),
+      mapGenerationDate: z.string().date().nullable(),
+      mapGenerationDateSource: z.enum(["png_content_metadata", "visual_map_content"]).nullable(),
+      etag: z.string().nullable(),
+      lastModified: z.string().nullable(),
+      rawCategory: z.string(),
+      taxonomyMatch: z.enum(["exact", "ambiguous", "unresolved"]),
+      mapScopeDecision: z.enum([
+        "confirmed_taxon_scope",
+        "may_conflate_infraspecific",
+        "unresolved",
+      ]),
+      reviewStatus: z.enum(["approved", "pending", "rejected"]),
+      currentStatusConfirmed: z.boolean(),
+      reviewer: z.string().min(1),
+      reviewedAt: z.string().datetime(),
+      reviewNote: z.string().nullable(),
+  })
+    .optional(),
+}).superRefine((record, context) => {
+  if (record.spatialResolution === "finer") {
+    if (!record.finerArea) {
+      context.addIssue({ code: "custom", path: ["finerArea"], message: "finer evidence must identify its ZCTA footprint" });
+    }
+    if (record.countyFips !== null) {
+      context.addIssue({ code: "custom", path: ["countyFips"], message: "ZCTA-wide finer evidence must not be assigned to one county" });
+    }
+  } else if (record.finerArea !== undefined) {
+    context.addIssue({ code: "custom", path: ["finerArea"], message: "finerArea is only valid for finer evidence" });
+  }
 });
 
 export const nativeRangeEvidenceFileSchema = z.object({
@@ -78,6 +149,7 @@ export const nativeRangeEvidenceFileSchema = z.object({
 
 export type NativeSource = z.infer<typeof nativeSourceSchema>;
 export type NativeRangeEvidence = z.infer<typeof nativeRangeEvidenceSchema>;
+export type BonapCountyMapReview = z.infer<typeof bonapCountyMapReviewSchema>;
 
 export const ecoregionPlantsFileSchema = z.object({
   ecoregions: z.record(

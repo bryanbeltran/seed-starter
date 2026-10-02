@@ -1,10 +1,29 @@
 import { describe, expect, it } from "vitest";
 import plantsData from "../../data/natives/plants.json";
 import ecoregionPlantsData from "../../data/natives/ecoregion-plants.json";
-import { lookupZipCounty, lookupZipCountyFips } from "./lookupCounty";
+import {
+  lookupZipCounty,
+  lookupZipCountyFips,
+  lookupZipCountyFipsFromData,
+} from "./lookupCounty";
 import { lookupZipEcoregion } from "./lookupEcoregion";
-import { resolveNatives, tasksForPlant } from "./resolveNatives";
-import { nativePlantSchema, type NativePlant } from "./schema";
+import {
+  buildNativeRangeEvidenceConflicts,
+  resolveNatives,
+  tasksForPlant,
+  type NativePlantResult,
+} from "./resolveNatives";
+import {
+  nativePlantSchema,
+  type NativePlant,
+  type NativeRangeEvidence,
+  type NativeSource,
+} from "./schema";
+import {
+  affirmativeCountyEvidenceForPlant,
+  conflictingCountyEvidenceForPlant,
+  summarizeNativeRangeEvidence,
+} from "./rangeEvidence";
 import { getFileClimateRepository } from "@/climate";
 
 const plants = Object.fromEntries(
@@ -45,6 +64,49 @@ describe("lookupZipCounty", () => {
     expect(lookupZipCounty("57716")).toBeNull();
     expect(lookupZipCountyFips("57716")).toContain("46113");
   });
+
+  it("does not use a primary-county overlay as nativity geography when intersections are missing", () => {
+    const countyFipses = lookupZipCountyFipsFromData("55423", {
+      zips: { "55423": "27053" },
+      counties: { "27053": { name: "Hennepin", state: "MN" } },
+    });
+    expect(countyFipses).toEqual([]);
+    const claim: NativeRangeEvidence = {
+      plantId: "echinacea-purpurea",
+      sourceId: "usda-plants",
+      sourceCitation: "USDA PLANTS county profile.",
+      sourceUrl: "https://plants.usda.gov/plant-profile?symbol=ECPU",
+      releaseOrObservationDate: null,
+      retrievedAt: "2026-10-01T12:00:00.000Z",
+      licenseNote: "Reusable with citation.",
+      geographicScope: "County FIPS 27053.",
+      spatialResolution: "county",
+      countyFips: "27053",
+      nativityStatus: "native",
+      uncertainty: null,
+    };
+    const sources = {
+      "usda-plants": {
+        authority: "USDA PLANTS",
+        licenseNote: "Reusable with citation.",
+        rangeEvidenceAvailable: true,
+      } as NativeSource,
+    };
+    expect(affirmativeCountyEvidenceForPlant(
+      claim.plantId,
+      countyFipses,
+      [claim],
+      sources,
+    )).toEqual([]);
+    expect(summarizeNativeRangeEvidence({
+      candidateIds: [claim.plantId],
+      countyFips: countyFipses,
+      geographyResolved: countyFipses.length > 0,
+      catalogAvailable: true,
+      evidence: [claim],
+      sources,
+    }).status).toBe("unresolved_geography");
+  });
 });
 
 describe("resolveNatives", () => {
@@ -68,6 +130,107 @@ describe("resolveNatives", () => {
     expect(result.rangeEvidenceCoverage.missingCount).toBe(
       result.rangeEvidenceCoverage.catalogCandidateCount,
     );
+  });
+
+  it("returns a non-recommended candidate with both verified cross-scale claims for audit", () => {
+    const plantId = "echinacea-purpurea";
+    const finerSource: NativeSource = {
+      authority: "Example Botanical Atlas",
+      name: "Example Botanical Atlas",
+      citation: "Example Botanical Atlas ZCTA data.",
+      url: "https://flora.example/range-data",
+      releaseOrObservationDate: null,
+      retrievedAt: null,
+      licenseNote: "Reuse with attribution.",
+      geographicScope: "Census 2010 ZCTA 55423.",
+      spatialResolution: "finer",
+      coverage: "Reviewed ZCTA-wide claims.",
+      uncertainty: null,
+      rangeEvidenceAvailable: true,
+      sourceTermsStatus: "verified",
+      verifiedFinerAreaGeographies: ["census-zcta-2010"],
+    };
+    const countySource: NativeSource = {
+      authority: "USDA PLANTS",
+      name: "USDA PLANTS Database",
+      citation: "USDA, NRCS. PLANTS Database.",
+      url: "https://plants.usda.gov",
+      releaseOrObservationDate: null,
+      retrievedAt: null,
+      licenseNote: "Reusable with citation.",
+      geographicScope: "County or county-equivalent.",
+      spatialResolution: "county",
+      coverage: "County claims.",
+      uncertainty: null,
+      rangeEvidenceAvailable: true,
+    };
+    const finerNotNative: NativeRangeEvidence = {
+      plantId,
+      sourceId: "example-atlas",
+      sourceCitation: "Example Botanical Atlas reviewed ZCTA claim.",
+      sourceUrl: "https://flora.example/range-data/echinacea-purpurea",
+      releaseOrObservationDate: null,
+      retrievedAt: "2026-10-01T12:00:00.000Z",
+      licenseNote: "Reuse with attribution.",
+      geographicScope: "Census 2010 ZCTA 55423.",
+      spatialResolution: "finer",
+      countyFips: null,
+      finerArea: { geography: "census-zcta-2010", zctaId: "55423" },
+      nativityStatus: "not_native",
+      uncertainty: null,
+    };
+    const countyNative: NativeRangeEvidence = {
+      plantId,
+      sourceId: "usda-plants",
+      sourceCitation: "USDA PLANTS county profile.",
+      sourceUrl: "https://plants.usda.gov/plant-profile?symbol=ECPU",
+      releaseOrObservationDate: null,
+      retrievedAt: "2026-10-01T12:00:00.000Z",
+      licenseNote: "Reusable with citation.",
+      geographicScope: "County FIPS 27053.",
+      spatialResolution: "county",
+      countyFips: "27053",
+      nativityStatus: "native",
+      uncertainty: null,
+    };
+    const evidence = [finerNotNative, countyNative];
+    const sources = { "example-atlas": finerSource, "usda-plants": countySource };
+    const countyFipses = lookupZipCountyFips("55423");
+    const conflicts = conflictingCountyEvidenceForPlant(
+      plantId,
+      countyFipses,
+      evidence,
+      sources,
+      [],
+      "55423",
+    );
+    const candidatePlant = plant(plantId);
+    const candidate: NativePlantResult = {
+      ...candidatePlant,
+      tasks: tasksForPlant(candidatePlant, ref, "spring"),
+      rangeEvidence: affirmativeCountyEvidenceForPlant(
+        plantId,
+        countyFipses,
+        evidence,
+        sources,
+        [],
+        "55423",
+      ),
+      rangeEvidenceConflicts: conflicts,
+    };
+    const recommendations = [candidate].filter(
+      (resolved) => resolved.rangeEvidence.length > 0 && resolved.tasks.length > 0,
+    );
+
+    expect(conflicts).toEqual([finerNotNative, countyNative]);
+    expect(recommendations).toEqual([]);
+    expect(buildNativeRangeEvidenceConflicts([candidate], recommendations)).toEqual([{
+      plantId,
+      commonName: candidatePlant.commonName,
+      scientificName: candidatePlant.scientificName,
+      claims: [finerNotNative, countyNative],
+      recommended: false,
+    }]);
   });
 
   it.each([

@@ -20,11 +20,38 @@ export function lookupZipCounty(zip: string): CountyRef | null {
 }
 
 /** Census county FIPS values for every county intersecting this ZCTA. */
-export function lookupZipCountyFips(zip: string): string[] {
-  const intersections = file.intersections?.[zip];
-  if (intersections) {
-    return [...new Set(intersections.map(({ fips }) => fips))];
+export function lookupZipCountyFipsFromData(
+  zip: string,
+  countyData: ZipCountyFile,
+): string[] {
+  const intersections = countyData.intersections?.[zip];
+  if (
+    !Array.isArray(intersections) ||
+    intersections.length === 0 ||
+    intersections.some(({ fips }) => !/^\d{5}$/.test(fips))
+  ) {
+    return [];
   }
-  const primaryCounty = file.zips[zip];
-  return primaryCounty ? [primaryCounty] : [];
+  return [...new Set(intersections.map(({ fips }) => fips))];
+}
+
+export function lookupZipCountyFips(zip: string): string[] {
+  return lookupZipCountyFipsFromData(zip, file);
+}
+
+/** True only for a FIPS key present in the bundled Census county relationship data. */
+export function isKnownCountyFips(fips: string): boolean {
+  return /^\d{5}$/.test(fips) && Object.hasOwn(file.counties ?? {}, fips);
+}
+
+/** True only for a ZCTA key present in the loaded Census relationship data. */
+export function isKnownZctaIdFromData(zip: string, countyData: ZipCountyFile): boolean {
+  return /^\d{5}$/.test(zip) && (
+    Object.hasOwn(countyData.zips ?? {}, zip) ||
+    Object.hasOwn(countyData.intersections ?? {}, zip)
+  );
+}
+
+export function isKnownZctaId(zip: string): boolean {
+  return isKnownZctaIdFromData(zip, file);
 }

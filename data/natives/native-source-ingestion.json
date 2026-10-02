@@ -1,0 +1,29 @@
+{
+  "version": "1",
+  "status": "not_refreshed",
+  "retrievedAt": null,
+  "provenance": "No BONAP or NPIN network snapshot is bundled yet. Zero source snapshots means not refreshed, not no taxa or no range evidence. Lower-48 occurrence, profile, map, and evidence coverage must be measured from a successful monthly or manual ETL run.",
+  "bonap": {
+    "sourceId": "bonap-napa",
+    "retrievedAt": null,
+    "fullTaxonList": {
+      "taxonCount": 0,
+      "taxa": [],
+      "url": "https://bonap.net/TDC/Query/FullTaxonList",
+      "citationYear": 2014,
+      "etag": null,
+      "lastModified": null
+    },
+    "taxonMatches": [],
+    "countyOccurrences": [],
+    "taxonDetails": [],
+    "mapMappings": [],
+    "mapSnapshots": [],
+    "reviewedMapRecordCount": 0
+  },
+  "npin": {
+    "sourceId": "npin",
+    "retrievedAt": null,
+    "enrichments": []
+  }
+}

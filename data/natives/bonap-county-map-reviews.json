@@ -1,0 +1,6 @@
+{
+  "version": "2",
+  "mapKeyUrl": "http://bonap.org/MapKey.html",
+  "provenance": "Manual county-color conversion records. Add a row only after inspecting the current-hash PNG itself and the linked BONAP MapKey. Required fields: plantId, scientificName, mapUrl, mapSha256, mapGenerationDateFromContent (read from the image or null), taxonomyMatch, mapScopeDecision, reviewStatus, currentStatusConfirmed, reviewer, reviewedAt, reviewNote, and counties[{countyFips, rawCategory}]. Set mapScopeDecision to confirmed_taxon_scope only when the map applies specifically to the reviewed catalog taxon; use may_conflate_infraspecific or unresolved when BONAP's species-map aggregation warning cannot be cleared. Every county conversion preserves its raw category. Only an approved exact-taxon review with confirmed_taxon_scope, currentStatusConfirmed true, and rawCategory exactly Native can affirm nativity.",
+  "records": []
+}

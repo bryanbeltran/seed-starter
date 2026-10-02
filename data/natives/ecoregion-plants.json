@@ -21,7 +21,7 @@
         "rudbeckia-hirta",
         "echinacea-purpurea"
       ],
-      "provenance": "Candidate species catalog for the High Plains / Front Range. L3 membership and state-level curation are not local range evidence; require a matching USDA PLANTS county record. ADR 007 Phase 5."
+      "provenance": "Candidate species catalog for the High Plains / Front Range. L3 membership and state-level curation are not local range evidence; require eligible affirmative county-or-finer nativity evidence for every intersecting county. ADR 007 Phase 5."
     },
     "51": {
       "ecoregionId": "51",
@@ -44,7 +44,7 @@
         "coreopsis-lanceolata",
         "penstemon-digitalis"
       ],
-      "provenance": "Candidate species catalog for the MN / Upper Midwest prairie–woodland. L3 membership and state-level curation are not local range evidence; require a matching USDA PLANTS county record. ADR 007."
+      "provenance": "Candidate species catalog for the MN / Upper Midwest prairie–woodland. L3 membership and state-level curation are not local range evidence; require eligible affirmative county-or-finer nativity evidence for every intersecting county. ADR 007."
     },
     "54": {
       "ecoregionId": "54",
@@ -67,7 +67,7 @@
         "sporobolus-heterolepis",
         "penstemon-digitalis"
       ],
-      "provenance": "Candidate species catalog for the Central Corn Belt Plains. L3 membership and state-level curation are not local range evidence; require a matching USDA PLANTS county record. ADR 007 Phase 5."
+      "provenance": "Candidate species catalog for the Central Corn Belt Plains. L3 membership and state-level curation are not local range evidence; require eligible affirmative county-or-finer nativity evidence for every intersecting county. ADR 007 Phase 5."
     },
     "59": {
       "ecoregionId": "59",
@@ -90,7 +90,7 @@
         "panicum-virgatum",
         "echinacea-purpurea"
       ],
-      "provenance": "Candidate species catalog for the Northeastern Coastal Zone. L3 membership and state-level curation are not local range evidence; require a matching USDA PLANTS county record. ADR 007 Phase 5."
+      "provenance": "Candidate species catalog for the Northeastern Coastal Zone. L3 membership and state-level curation are not local range evidence; require eligible affirmative county-or-finer nativity evidence for every intersecting county. ADR 007 Phase 5."
     }
   }
 }

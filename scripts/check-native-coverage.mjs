@@ -3,8 +3,25 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { summarizeNativeSourceEvidence } from "./lib/native-source-evidence.mjs";
+import {
+  isAffirmativeRangeClaims,
+  isEligibleRangeEvidenceClaim,
+  isNotNativeRangeClaims,
+} from "./lib/native-claim-eligibility.mjs";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+
+const BASELINE = Object.freeze({
+  measuredAt: "2026-10-01",
+  lower48ZctasWithCountyIntersections: 32_604,
+  lower48ZctasWithEcoregion: 32_537,
+  catalogMappedZctas: 3_168,
+  catalogStatesWithNoCoverage: 28,
+  catalogStatesWithPartialCoverage: 20,
+  catalogStatesWithFullCoverage: 0,
+  rangeEvidenceRecords: 0,
+  zctasWithCompleteAffirmativeNativityCoverage: 0,
+});
 
 const LOWER48 = [
   ["AL", "Alabama", "01"], ["AZ", "Arizona", "04"],
@@ -35,9 +52,12 @@ const LOWER48 = [
 
 function indexRangeEvidence(records) {
   const byPlantId = new Map();
+  const byPlantAndZcta = new Map();
   let unresolvedCountyFipsRecordCount = 0;
   for (const record of records) {
-    if (record.countyFips === null) unresolvedCountyFipsRecordCount++;
+    if (record.countyFips === null && record.spatialResolution !== "finer") {
+      unresolvedCountyFipsRecordCount++;
+    }
     let byCountyFips = byPlantId.get(record.plantId);
     if (!byCountyFips) {
       byCountyFips = new Map();
@@ -49,68 +69,53 @@ function indexRangeEvidence(records) {
       byCountyFips.set(record.countyFips, claims);
     }
     claims.push(record);
+
+    const zctaId = record.finerArea?.zctaId;
+    if (record.spatialResolution === "finer" && /^\d{5}$/.test(zctaId ?? "")) {
+      let byZctaId = byPlantAndZcta.get(record.plantId);
+      if (!byZctaId) {
+        byZctaId = new Map();
+        byPlantAndZcta.set(record.plantId, byZctaId);
+      }
+      let zctaClaims = byZctaId.get(zctaId);
+      if (!zctaClaims) {
+        zctaClaims = [];
+        byZctaId.set(zctaId, zctaClaims);
+      }
+      zctaClaims.push(record);
+    }
   }
-  return { byPlantId, unresolvedCountyFipsRecordCount };
+  return { byPlantId, byPlantAndZcta, unresolvedCountyFipsRecordCount };
 }
 
-function validLocalClaims(plantId, countyFips, evidenceByPlantAndCounty, sources) {
+function validLocalClaims(
+  plantId,
+  countyFips,
+  evidenceByPlantAndCounty,
+  sources,
+  mapSnapshots,
+  bonapReviewRecords,
+) {
   const claims = evidenceByPlantAndCounty.get(plantId)?.get(countyFips) ?? [];
   return claims.filter((record) => {
-    const source = sources[record.sourceId];
-    let sourceUrl;
-    try {
-      sourceUrl = new URL(record.sourceUrl);
-    } catch {
-      return false;
-    }
-    const hostname = sourceUrl.hostname;
     return (
       record.plantId === plantId &&
       record.countyFips === countyFips &&
-      (record.spatialResolution === "county" ||
-        record.spatialResolution === "finer") &&
-      source?.authority === "USDA PLANTS" &&
-      source.rangeEvidenceAvailable &&
-      sourceUrl.protocol === "https:" &&
-      (hostname === "usda.gov" || hostname.endsWith(".usda.gov")) &&
-      record.sourceCitation?.toUpperCase().includes("USDA")
+      isEligibleRangeEvidenceClaim(record, sources, mapSnapshots, null, bonapReviewRecords)
     );
   });
 }
 
-function affirmativeClaims(claims, sources) {
-  return (
-    claims.length > 0 &&
-    claims.every(
-      (claim) =>
-        claim.nativityStatus === "native" &&
-        claim.licenseNote?.trim() &&
-        sources[claim.sourceId]?.licenseNote?.trim(),
-    )
-  );
-}
-
-function notNativeClaims(claims, sources) {
-  return (
-    claims.length > 0 &&
-    claims.every(
-      (claim) =>
-        claim.nativityStatus === "not_native" &&
-        claim.licenseNote?.trim() &&
-        sources[claim.sourceId]?.licenseNote?.trim(),
-    )
+function validLocalZctaClaims(plantId, zctaId, evidenceByPlantAndZcta, sources, mapSnapshots) {
+  const claims = evidenceByPlantAndZcta.get(plantId)?.get(zctaId) ?? [];
+  return claims.filter((record) =>
+    isEligibleRangeEvidenceClaim(record, sources, mapSnapshots, zctaId),
   );
 }
 
 function countyIntersectionsForZip(countyData, zip) {
   const intersections = countyData.intersections?.[zip];
-  if (Array.isArray(intersections)) return intersections;
-
-  const fips = countyData.zips?.[zip];
-  if (!fips) return [];
-  const state = countyData.counties?.[fips]?.state;
-  const stateFips = LOWER48.find((candidate) => candidate.code === state)?.fips;
-  return [{ fips, ...(stateFips ? { stateFips } : {}) }];
+  return Array.isArray(intersections) ? intersections : [];
 }
 
 function stateForIntersection(intersection, countyData, byFips, byCode) {
@@ -118,6 +123,25 @@ function stateForIntersection(intersection, countyData, byFips, byCode) {
     return byFips.get(String(intersection.stateFips).padStart(2, "0"));
   }
   return byCode.get(countyData.counties?.[intersection.fips]?.state);
+}
+
+function sourceReadiness(sourceId, retrievedAt, refreshStatus) {
+  const attempt = refreshStatus?.sources?.[sourceId];
+  if (!refreshStatus) return retrievedAt ? "retrieved" : "not_refreshed";
+  if (refreshStatus.status === "running") {
+    if (attempt?.status === "retrieving") return "incomplete_attempt";
+    if (attempt?.status === "staged") return "not_published_stale";
+    if (attempt?.status === "not_started") return retrievedAt ? "not_attempted_stale" : "not_attempted";
+  }
+  if (refreshStatus.status === "failed") {
+    if (attempt?.status === "failed") return retrievedAt ? "failed_stale" : "failed";
+    if (attempt?.status === "not_published") return "not_published_stale";
+    if (attempt?.status === "not_started") return retrievedAt ? "not_attempted_stale" : "not_attempted";
+    if (attempt?.status === "retrieving") return "incomplete_attempt";
+  }
+  if (refreshStatus.status === "succeeded") return "retrieved";
+  if (refreshStatus.status === "validated") return retrievedAt ? "validated" : "not_published";
+  return retrievedAt ? "retrieved" : "not_refreshed";
 }
 
 function hasUnresolvedCountyMetadata(countyData, intersection, state) {
@@ -130,6 +154,141 @@ function hasUnresolvedCountyMetadata(countyData, intersection, state) {
   );
 }
 
+function summarizeSupplementalSourceIngestion(sourceIngestion, bonapMapReviews, countyData, refreshStatus) {
+  const bonap = sourceIngestion?.bonap;
+  const npin = sourceIngestion?.npin;
+  const lower48CountyFipsByState = new Map(LOWER48.map((state) => [state.fips, new Set()]));
+  for (const intersection of Object.values(countyData.intersections ?? {}).flat()) {
+    if (/^\d{5}$/.test(String(intersection.fips ?? ""))) {
+      lower48CountyFipsByState.get(intersection.fips.slice(0, 2))?.add(intersection.fips);
+    }
+  }
+  const queriedCountyFipsByState = new Map(LOWER48.map((state) => [state.fips, new Set()]));
+  for (const occurrence of bonap?.countyOccurrences ?? []) {
+    queriedCountyFipsByState.get(String(occurrence.countyFips ?? "").slice(0, 2))?.add(occurrence.countyFips);
+  }
+
+  const bonapTaxonMatches = bonap?.taxonMatches ?? [];
+  const bonapMappings = bonap?.mapMappings ?? [];
+  const bonapMapSnapshots = bonap?.mapSnapshots ?? [];
+  const npinEnrichments = npin?.enrichments ?? [];
+  const reviewRecords = bonapMapReviews?.records ?? [];
+  const isCurrentReview = (review) => bonapMapSnapshots.some((map) =>
+    map.sha256 === review.mapSha256 &&
+    map.mapUrl === review.mapUrl &&
+    map.mapKeyUrl === bonapMapReviews?.mapKeyUrl,
+  );
+  const currentReviewRecords = reviewRecords.filter(isCurrentReview);
+  const staleReviewRecords = reviewRecords.filter((review) => !isCurrentReview(review));
+  const categoryCounts = new Map();
+  let conversionCount = 0;
+  for (const review of currentReviewRecords) {
+    for (const county of review.counties ?? []) {
+      conversionCount++;
+      const category = String(county.rawCategory ?? "");
+      categoryCounts.set(category, (categoryCounts.get(category) ?? 0) + 1);
+    }
+  }
+  return {
+    baselineMeasuredAt: BASELINE.measuredAt,
+    bonap: {
+      status: sourceReadiness("bonap-napa", bonap?.retrievedAt, refreshStatus),
+      retrievedAt: bonap?.retrievedAt ?? null,
+      lastSuccessAt: refreshStatus?.sources?.["bonap-napa"]?.lastSuccessAt ?? bonap?.retrievedAt ?? null,
+      lastAttemptStatus: refreshStatus?.sources?.["bonap-napa"]?.status ?? null,
+      fullTaxonListTaxonCount: bonap?.fullTaxonList?.taxonCount ?? 0,
+      exactCatalogTaxonMatchCount: bonapTaxonMatches.filter((row) => row.matchStatus === "exact").length,
+      ambiguousCatalogTaxonMatchCount: bonapTaxonMatches.filter((row) => row.matchStatus === "ambiguous").length,
+      unresolvedCatalogTaxonMatchCount: bonapTaxonMatches.filter((row) => row.matchStatus === "unresolved").length,
+      tdcOccurrenceCountyCount: (bonap?.countyOccurrences ?? []).length,
+      tdcOccurrenceTaxonCount: (bonap?.countyOccurrences ?? []).reduce((sum, row) => sum + (row.occurrenceTaxonCount ?? 0), 0),
+      tdcSpeciesAndNothospeciesTaxonCount: (bonap?.countyOccurrences ?? []).reduce((sum, row) => sum + (row.speciesAndNothospeciesTaxonCount ?? 0), 0),
+      tdcInfraspecificTaxonCount: (bonap?.countyOccurrences ?? []).reduce((sum, row) => sum + (row.infraspecificTaxonCount ?? 0), 0),
+      tdcSpeciesAndNothospeciesReportedCount: (bonap?.countyOccurrences ?? []).reduce((sum, row) => sum + (row.reportedSpeciesAndNothospeciesCount ?? 0), 0),
+      tdcSpeciesAndNothospeciesReportedCountyCount: (bonap?.countyOccurrences ?? []).filter((row) => Number.isSafeInteger(row.reportedSpeciesAndNothospeciesCount)).length,
+      tdcOccurrencePagesFetched: (bonap?.countyOccurrences ?? []).reduce((sum, row) => sum + (row.pageCount ?? 0), 0),
+      catalogTaxonPresenceRecordCount: (bonap?.countyOccurrences ?? []).reduce((sum, row) => sum + (row.candidateTaxa?.length ?? 0), 0),
+      tdcFullTaxonListUpdateMarkers: {
+        etag: bonap?.fullTaxonList?.etag ?? null,
+        lastModified: bonap?.fullTaxonList?.lastModified ?? null,
+        responseBytes: bonap?.fullTaxonList?.responseBytes ?? null,
+        verifiedResponseBytes: bonap?.fullTaxonList?.verifiedResponseBytes ?? null,
+        completenessCheck: bonap?.fullTaxonList?.completenessCheck ?? null,
+        sha256: bonap?.fullTaxonList?.sha256 ?? null,
+      },
+      tdcCountyOccurrenceUpdateMarkerCoverage: {
+        etagCountyCount: (bonap?.countyOccurrences ?? []).filter((row) => row.etag).length,
+        lastModifiedCountyCount: (bonap?.countyOccurrences ?? []).filter((row) => row.lastModified).length,
+      },
+      tdcTaxonDetailsUpdateMarkerCoverage: {
+        etagTaxonCount: (bonap?.taxonDetails ?? []).filter((row) => row.etag).length,
+        lastModifiedTaxonCount: (bonap?.taxonDetails ?? []).filter((row) => row.lastModified).length,
+      },
+      taxonDetailsCount: (bonap?.taxonDetails ?? []).length,
+      taxonDetailsWithCountyOccurrenceMapCount: (bonap?.taxonDetails ?? []).filter((row) => row.countyOccurrenceMapCount > 0).length,
+      napaMapTaxonCount: bonapMapSnapshots.length,
+      exactMapLinkCount: bonapMappings.filter((row) => row.mapStatus === "exact").length,
+      unresolvedMapLinkCount: bonapMappings.filter((row) => row.mapStatus === "unresolved").length,
+      ambiguousMapLinkCount: bonapMappings.filter((row) => row.mapStatus === "ambiguous").length,
+      mapSnapshots: bonapMapSnapshots.map((map) => {
+        const review = currentReviewRecords.find((row) => row.mapSha256 === map.sha256);
+        const generationDate = review?.mapGenerationDateFromContent ?? map.mapGenerationDate ?? null;
+        return {
+          mapUrl: map.mapUrl,
+          mapSha256: map.sha256,
+          retrievedAt: map.retrievedAt,
+          etag: map.etag ?? null,
+          lastModified: map.lastModified ?? null,
+          mapGenerationDate: generationDate,
+          mapGenerationDateSource: review?.mapGenerationDateFromContent
+            ? "visual_map_content"
+            : map.mapGenerationDateSource ?? null,
+          mapKeyUrl: map.mapKeyUrl,
+          reviewStatus: review?.reviewStatus ?? "unreviewed",
+          taxonomyMatch: review?.taxonomyMatch ?? null,
+          mapScopeDecision: review?.mapScopeDecision ?? null,
+          currentStatusConfirmed: review?.currentStatusConfirmed ?? false,
+        };
+      }),
+      reviewedCountyConversionCount: conversionCount,
+      mapScopeReviewCounts: {
+        confirmedTaxonScopeCount: currentReviewRecords.filter((row) => row.mapScopeDecision === "confirmed_taxon_scope").length,
+        mayConflateInfraspecificCount: currentReviewRecords.filter((row) => row.mapScopeDecision === "may_conflate_infraspecific").length,
+        unresolvedScopeCount: currentReviewRecords.filter((row) => row.mapScopeDecision === "unresolved").length,
+      },
+      approvedReviewedMapCount: currentReviewRecords.filter((row) => row.reviewStatus === "approved" && row.taxonomyMatch === "exact" && row.mapScopeDecision === "confirmed_taxon_scope" && row.currentStatusConfirmed).length,
+      staleReviewMapCount: new Set(staleReviewRecords.map((row) => row.mapSha256)).size,
+      staleReviewedCountyConversionCount: staleReviewRecords.reduce((sum, row) => sum + (row.counties?.length ?? 0), 0),
+      mapsAwaitingCountyReviewCount: bonapMapSnapshots.filter((map) => !currentReviewRecords.some((row) => row.mapSha256 === map.sha256)).length,
+      observedRawCategoryCounts: [...categoryCounts].map(([category, count]) => ({ category, count })).sort((a, b) => a.category.localeCompare(b.category)),
+      lower48StateCoverage: LOWER48.map((state) => ({
+        stateCode: state.code,
+        state: state.name,
+        stateFips: state.fips,
+        countyFipsCount: lower48CountyFipsByState.get(state.fips).size,
+        tdcOccurrenceCountyFipsCount: queriedCountyFipsByState.get(state.fips).size,
+      })),
+    },
+    npin: {
+      status: sourceReadiness("npin", npin?.retrievedAt, refreshStatus),
+      retrievedAt: npin?.retrievedAt ?? null,
+      lastSuccessAt: refreshStatus?.sources?.npin?.lastSuccessAt ?? npin?.retrievedAt ?? null,
+      lastAttemptStatus: refreshStatus?.sources?.npin?.status ?? null,
+      autocompleteTaxonMatchCount: npinEnrichments.filter((row) => row.matchStatus === "exact").length,
+      ambiguousTaxonMatchCount: npinEnrichments.filter((row) => row.matchStatus === "ambiguous").length,
+      unresolvedTaxonMatchCount: npinEnrichments.filter((row) => row.matchStatus === "unresolved").length,
+      availableProfileCount: npinEnrichments.filter((row) => row.profileStatus === "available").length,
+      challengedProfileCount: npinEnrichments.filter((row) => row.profileStatus === "challenge").length,
+      profileFieldEnrichmentCount: npinEnrichments.filter((row) => Object.keys(row.fields ?? {}).length > 0).length,
+      autocompleteEtagCount: npinEnrichments.filter((row) => row.autocompleteEtag).length,
+      autocompleteLastModifiedCount: npinEnrichments.filter((row) => row.autocompleteLastModified).length,
+      profileEtagCount: npinEnrichments.filter((row) => row.profileEtag).length,
+      profileLastModifiedCount: npinEnrichments.filter((row) => row.profileLastModified).length,
+      nativityEvidenceRecordCount: 0,
+    },
+  };
+}
+
 export function buildNativeCoverageReport({
   countyData,
   ecoregionData,
@@ -137,11 +296,20 @@ export function buildNativeCoverageReport({
   plants,
   sources,
   rangeEvidence,
+  sourceIngestion,
+  bonapMapReviews = { records: [] },
+  refreshStatus = null,
 }) {
   const byFips = new Map(LOWER48.map((state) => [state.fips, state]));
   const byCode = new Map(LOWER48.map((state) => [state.code, state]));
-  const { byPlantId: evidenceByPlantAndCounty, unresolvedCountyFipsRecordCount } =
+  const {
+    byPlantId: evidenceByPlantAndCounty,
+    byPlantAndZcta: evidenceByPlantAndZcta,
+    unresolvedCountyFipsRecordCount,
+  } =
     indexRangeEvidence(rangeEvidence);
+  const currentBonapMapSnapshots = sourceIngestion?.bonap?.mapSnapshots ?? [];
+  const currentBonapReviewRecords = bonapMapReviews?.records ?? [];
   const stateStats = new Map(
     LOWER48.map((state) => [
       state.code,
@@ -209,6 +377,61 @@ export function buildNativeCoverageReport({
     const primaryFips = countyData.zips?.[zip];
     const primaryCounty = primaryFips ? countyData.counties?.[primaryFips] : null;
     if (primaryCounty?.name) primaryCountyNameResolvedZctas.add(zip);
+    const zipEcoregionId = ecoregionData.zips[zip];
+    let zipHasAffirmativeEvidence = false;
+    let zipHasNotNativeEvidence = false;
+    if (zipEcoregionId && ecoregionData.names[zipEcoregionId]) {
+      const zipCandidates = (ecoregionPlants.ecoregions[zipEcoregionId]?.plantIds ?? [])
+        .filter((id) => plants[id]);
+      const allZipIntersectionsResolved =
+        intersections.length > 0 &&
+        intersections.every((intersection) => {
+          if (!/^\d{5}$/.test(String(intersection.fips ?? ""))) return false;
+          return Boolean(stateForIntersection(intersection, countyData, byFips, byCode));
+        });
+      const targetZctaResolved =
+        Object.hasOwn(countyData.zips ?? {}, zip) ||
+        Object.hasOwn(countyData.intersections ?? {}, zip);
+      if (zipCandidates.length > 0 && (allZipIntersectionsResolved || targetZctaResolved)) {
+        const countyFipses = [...new Set(intersections.map((row) => row.fips))];
+        const claimsByPlant = zipCandidates.map((plantId) => {
+          const finerClaims = targetZctaResolved
+            ? validLocalZctaClaims(plantId, zip, evidenceByPlantAndZcta, sources, currentBonapMapSnapshots)
+            : [];
+          return finerClaims.length > 0
+            ? { finerClaims, claimsByCounty: [] }
+            : {
+                finerClaims: [],
+                claimsByCounty: countyFipses.map((fips) =>
+                  validLocalClaims(
+                    plantId,
+                    fips,
+                    evidenceByPlantAndCounty,
+                    sources,
+                    currentBonapMapSnapshots,
+                    currentBonapReviewRecords,
+                  ),
+                ),
+              };
+        });
+        zipHasAffirmativeEvidence = claimsByPlant.some(({ finerClaims, claimsByCounty }) =>
+          finerClaims.length > 0
+            ? isAffirmativeRangeClaims(finerClaims, sources, currentBonapMapSnapshots, zip)
+            : claimsByCounty.every((claims) =>
+                isAffirmativeRangeClaims(claims, sources, currentBonapMapSnapshots, null, currentBonapReviewRecords),
+              ),
+        );
+        zipHasNotNativeEvidence = claimsByPlant.some(({ finerClaims, claimsByCounty }) =>
+          finerClaims.length > 0
+            ? isNotNativeRangeClaims(finerClaims, sources, currentBonapMapSnapshots, zip)
+            : claimsByCounty.every((claims) =>
+                isNotNativeRangeClaims(claims, sources, currentBonapMapSnapshots, null, currentBonapReviewRecords),
+              ),
+        );
+      }
+      if (zipHasAffirmativeEvidence) affirmativeRangeEvidenceZctas.add(zip);
+      if (zipHasNotNativeEvidence) notNativeEvidenceZctas.add(zip);
+    }
     const intersectionsByState = new Map();
     for (const intersection of intersections) {
       const state = stateForIntersection(intersection, countyData, byFips, byCode);
@@ -260,9 +483,19 @@ export function buildNativeCoverageReport({
       }
 
       const localClaimsByPlant = knownCandidateIds.map((plantId) => {
-        const claimsByCounty = countyFipses.map((fips) =>
-          validLocalClaims(plantId, fips, evidenceByPlantAndCounty, sources),
-        );
+        const finerClaims = validLocalZctaClaims(plantId, zip, evidenceByPlantAndZcta, sources, currentBonapMapSnapshots);
+        const claimsByCounty = finerClaims.length > 0
+          ? [finerClaims]
+          : countyFipses.map((fips) =>
+              validLocalClaims(
+                plantId,
+                fips,
+                evidenceByPlantAndCounty,
+                sources,
+                currentBonapMapSnapshots,
+                currentBonapReviewRecords,
+              ),
+            );
         return { claimsByCounty, claims: claimsByCounty.flat() };
       });
       const localClaims = localClaimsByPlant.flatMap((result) => result.claims);
@@ -270,20 +503,10 @@ export function buildNativeCoverageReport({
         localRangeEvidenceZctas.add(zip);
         stats.localRangeEvidenceZctas.add(zip);
       }
-      if (
-        localClaimsByPlant.some(({ claimsByCounty }) =>
-          claimsByCounty.some((claims) => affirmativeClaims(claims, sources)),
-        )
-      ) {
-        affirmativeRangeEvidenceZctas.add(zip);
+      if (zipHasAffirmativeEvidence) {
         stats.affirmativeRangeEvidenceZctas.add(zip);
       }
-      if (
-        localClaimsByPlant.some(({ claimsByCounty }) =>
-          claimsByCounty.some((claims) => notNativeClaims(claims, sources)),
-        )
-      ) {
-        notNativeEvidenceZctas.add(zip);
+      if (zipHasNotNativeEvidence) {
         stats.notNativeEvidenceZctas.add(zip);
       }
     }
@@ -323,6 +546,12 @@ export function buildNativeCoverageReport({
   const noCatalogStates = states.filter((state) => state.catalogCoverage === "none");
   const partialCatalogStates = states.filter((state) => state.catalogCoverage === "partial");
   const fullCatalogStates = states.filter((state) => state.catalogCoverage === "full");
+  const sourceAdapters = summarizeSupplementalSourceIngestion(
+    sourceIngestion,
+    bonapMapReviews,
+    countyData,
+    refreshStatus,
+  );
 
   return {
     geography: {
@@ -355,12 +584,52 @@ export function buildNativeCoverageReport({
       recordCount: rangeEvidence.length,
       unresolvedCountyFipsRecordCount,
       catalogMappedZctasWithAnyCountyEvidence: localRangeEvidenceZctas.size,
+      catalogMappedZctasWithCompleteAffirmativeCoverage: affirmativeRangeEvidenceZctas.size,
       catalogMappedZctasWithAffirmativeEvidence: affirmativeRangeEvidenceZctas.size,
       catalogMappedZctasWithNotNativeEvidence: notNativeEvidenceZctas.size,
       catalogMappedZctasWithoutLocalEvidence:
         catalogMappedZctas.size - localRangeEvidenceZctas.size,
     },
-    sourceEvidence: summarizeNativeSourceEvidence(sources, rangeEvidence, LOWER48),
+    sourceDiscovery: sourceAdapters,
+    refreshRun: refreshStatus,
+    baselineComparison: {
+      baseline: BASELINE,
+      current: {
+        lower48ZctasWithCountyIntersections: countyMappedZctas.size,
+        lower48ZctasWithEcoregion: ecoregionMappedZctas.size,
+        catalogMappedZctas: catalogMappedZctas.size,
+        catalogStatesWithNoCoverage: noCatalogStates.length,
+        catalogStatesWithPartialCoverage: partialCatalogStates.length,
+        catalogStatesWithFullCoverage: fullCatalogStates.length,
+        rangeEvidenceRecords: rangeEvidence.length,
+        zctasWithCompleteAffirmativeNativityCoverage: affirmativeRangeEvidenceZctas.size,
+        bonapFullTaxonListTaxonCount: sourceAdapters.bonap.fullTaxonListTaxonCount,
+        bonapCountyMapSnapshotCount: sourceAdapters.bonap.napaMapTaxonCount,
+        npinProfileEnrichmentCount: sourceAdapters.npin.profileFieldEnrichmentCount,
+      },
+      changeFromBaseline: {
+        lower48ZctasWithCountyIntersections:
+          countyMappedZctas.size - BASELINE.lower48ZctasWithCountyIntersections,
+        lower48ZctasWithEcoregion: ecoregionMappedZctas.size - BASELINE.lower48ZctasWithEcoregion,
+        catalogMappedZctas: catalogMappedZctas.size - BASELINE.catalogMappedZctas,
+        catalogStatesWithNoCoverage: noCatalogStates.length - BASELINE.catalogStatesWithNoCoverage,
+        catalogStatesWithPartialCoverage: partialCatalogStates.length - BASELINE.catalogStatesWithPartialCoverage,
+        catalogStatesWithFullCoverage: fullCatalogStates.length - BASELINE.catalogStatesWithFullCoverage,
+        rangeEvidenceRecords: rangeEvidence.length - BASELINE.rangeEvidenceRecords,
+        zctasWithCompleteAffirmativeNativityCoverage:
+          affirmativeRangeEvidenceZctas.size - BASELINE.zctasWithCompleteAffirmativeNativityCoverage,
+        bonapTaxonDiscoveryHasComparableBaseline: false,
+        npinEnrichmentHasComparableBaseline: false,
+      },
+      mappingCountsAreNotNativityCoverage: true,
+    },
+    sourceEvidence: summarizeNativeSourceEvidence(
+      sources,
+      rangeEvidence,
+      LOWER48,
+      currentBonapMapSnapshots,
+      currentBonapReviewRecords,
+    ),
     sources: Object.entries(sources).map(([id, source]) => ({
       id,
       authority: source.authority,
@@ -379,6 +648,7 @@ export function buildNativeCoverageReport({
       sourceTermsStatus: source.sourceTermsStatus ?? "unknown",
       sourceCheckDate: source.sourceCheckDate ?? null,
       sourceStatusCategories: source.sourceStatusCategories ?? null,
+      verifiedFinerAreaGeographies: source.verifiedFinerAreaGeographies ?? [],
     })),
     states,
   };
@@ -389,13 +659,21 @@ function readData(relativePath) {
 }
 
 function main() {
+  const countyData = readData("data/natives/zip-county.json");
+  const refreshStatusPath = process.env.NATIVE_SOURCE_REFRESH_STATUS_PATH ??
+    path.join(root, "data/natives/native-source-refresh-status.json");
   const report = buildNativeCoverageReport({
-    countyData: readData("data/natives/zip-county.json"),
+    countyData,
     ecoregionData: readData("data/natives/zip-ecoregion.json"),
     ecoregionPlants: readData("data/natives/ecoregion-plants.json"),
     plants: readData("data/natives/plants.json").plants,
     sources: readData("data/natives/native-sources.json").sources,
     rangeEvidence: readData("data/natives/plant-range-evidence.json").records,
+    sourceIngestion: readData("data/natives/native-source-ingestion.json"),
+    bonapMapReviews: readData("data/natives/bonap-county-map-reviews.json"),
+    refreshStatus: fs.existsSync(refreshStatusPath)
+      ? JSON.parse(fs.readFileSync(refreshStatusPath, "utf8"))
+      : null,
   });
   process.stdout.write(`${JSON.stringify(report, null, 2)}\n`);
 }

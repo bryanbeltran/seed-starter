@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 import {
   affirmativeCountyEvidenceForPlant,
+  bonapReviewsMatchingCatalogTaxa,
   summarizeNativeRangeEvidence,
 } from "./rangeEvidence";
 import {
   nativeRangeEvidenceSchema,
+  type BonapCountyMapReview,
   type NativeRangeEvidence,
   type NativeSource,
 } from "./schema";
@@ -23,6 +25,36 @@ const source: NativeSource = {
   uncertainty: null,
   rangeEvidenceAvailable: true,
 };
+
+const bonapSource: NativeSource = {
+  ...source,
+  authority: "Biota of North America Program (BONAP)",
+  name: "BONAP NAPA",
+  citation: "BONAP. North American Plant Atlas.",
+  url: "https://bonap.net/Napa/TaxonMaps/Genus/County/Echinacea",
+  licenseNote: "BONAP facts may be reproduced with permission and citation.",
+  sourceTermsStatus: "verified",
+  ownerAuthorizationNote: "The owner confirms written permission to bundle BONAP data.",
+};
+
+function approvedMapReviewFor(record: NativeRangeEvidence): BonapCountyMapReview {
+  const review = record.bonapReview!;
+  return {
+    plantId: record.plantId,
+    scientificName: "Echinacea purpurea",
+    mapUrl: record.sourceUrl,
+    mapSha256: review.mapSha256,
+    mapGenerationDateFromContent: review.mapGenerationDate,
+    taxonomyMatch: review.taxonomyMatch,
+    mapScopeDecision: review.mapScopeDecision,
+    reviewStatus: "approved",
+    currentStatusConfirmed: true,
+    reviewer: review.reviewer,
+    reviewedAt: review.reviewedAt,
+    reviewNote: review.reviewNote ?? "Reviewed against image and MapKey.",
+    counties: [{ countyFips: record.countyFips!, rawCategory: review.rawCategory }],
+  };
+}
 
 function record(
   overrides: Partial<NativeRangeEvidence> = {},
@@ -45,8 +77,21 @@ function record(
 }
 
 describe("affirmativeCountyEvidenceForPlant", () => {
-  it("matches affirmative USDA PLANTS evidence only at the resolved county", () => {
-    const claim = record({ spatialResolution: "finer" });
+  it("requires a whole-ZCTA identifier for finer evidence", () => {
+    const validFinerRecord = record({
+      spatialResolution: "finer",
+      countyFips: null,
+      finerArea: { geography: "census-zcta-2010", zctaId: "55401" },
+    });
+    expect(nativeRangeEvidenceSchema.safeParse(validFinerRecord).success).toBe(true);
+    expect(nativeRangeEvidenceSchema.safeParse({
+      ...record(),
+      spatialResolution: "finer",
+    }).success).toBe(false);
+  });
+
+  it("matches county-wide USDA PLANTS evidence only at the resolved county", () => {
+    const claim = record();
     expect(
       affirmativeCountyEvidenceForPlant(
         "plant-a",
@@ -60,6 +105,20 @@ describe("affirmativeCountyEvidenceForPlant", () => {
         "plant-a",
         "27055",
         [claim],
+        { "usda-plants": source },
+      ),
+    ).toEqual([]);
+
+    const finerClaim = record({
+      spatialResolution: "finer",
+      countyFips: null,
+      finerArea: { geography: "census-zcta-2010", zctaId: "55401" },
+    });
+    expect(
+      affirmativeCountyEvidenceForPlant(
+        "plant-a",
+        "27053",
+        [finerClaim],
         { "usda-plants": source },
       ),
     ).toEqual([]);
@@ -179,8 +238,14 @@ describe("summarizeNativeRangeEvidence", () => {
       catalogCandidateCount: 2,
       affirmativeCount: 0,
       notNativeCount: 0,
+      conflictCount: 0,
       unknownCount: 0,
+      unknownCountyCount: 0,
       missingCount: 2,
+      countyIntersectionCount: 1,
+      evidenceSourceIds: [],
+      affirmativeSourceIds: [],
+      notNativeSourceIds: [],
     });
   });
 
@@ -220,5 +285,119 @@ describe("summarizeNativeRangeEvidence", () => {
       affirmativeCount: 0,
       unknownCount: 1,
     });
+  });
+});
+
+describe("BONAP reviewed county claims", () => {
+  const reviewedNativeRecord: NativeRangeEvidence = {
+    ...record({
+      sourceId: "bonap-napa",
+      sourceCitation: "BONAP NAPA county map; raw county category Native.",
+      sourceUrl: "https://bonap.net/MapGallery/County/Echinacea%20purpurea.png",
+      releaseOrObservationDate: "2014-12-14",
+      retrievedAt: "2026-10-01T12:00:00.000Z",
+      licenseNote: "BONAP facts may be reproduced with permission and citation.",
+      nativityStatus: "native",
+    }),
+    bonapReview: {
+      mapSha256: "a".repeat(64),
+      mapKeyUrl: "http://bonap.org/MapKey.html",
+      mapGenerationDate: "2014-12-14",
+      mapGenerationDateSource: "visual_map_content",
+      etag: '"d5988b42bfd0d21:0"',
+      lastModified: "Fri, 19 May 2017 00:00:00 GMT",
+      rawCategory: "Native",
+      taxonomyMatch: "exact",
+      mapScopeDecision: "confirmed_taxon_scope",
+      reviewStatus: "approved",
+      currentStatusConfirmed: true,
+      reviewer: "native-data-reviewer",
+      reviewedAt: "2026-10-01T12:00:00.000Z",
+      reviewNote: "Exact taxon and county category reviewed against this map hash and MapKey.",
+    },
+  };
+  const currentMapSnapshots = [{
+    mapUrl: reviewedNativeRecord.sourceUrl,
+    sha256: reviewedNativeRecord.bonapReview!.mapSha256,
+    mapKeyUrl: reviewedNativeRecord.bonapReview!.mapKeyUrl,
+    retrievedAt: reviewedNativeRecord.retrievedAt!,
+    etag: reviewedNativeRecord.bonapReview!.etag,
+    lastModified: reviewedNativeRecord.bonapReview!.lastModified,
+    mapGenerationDate: "2014-12-14",
+    mapGenerationDateSource: "png_content_metadata" as const,
+  }];
+  const approvedReviews = [approvedMapReviewFor(reviewedNativeRecord)];
+
+  it("admits only a reviewed exact current Native county category on a BONAP taxon map", () => {
+    expect(
+      affirmativeCountyEvidenceForPlant("plant-a", "27053", [reviewedNativeRecord], {
+        "bonap-napa": bonapSource,
+      }, currentMapSnapshots, null, approvedReviews),
+    ).toEqual([reviewedNativeRecord]);
+  });
+
+  it("rejects an exact approved review when its map taxon belongs to another catalog plant", () => {
+    const currentPlant = { "plant-a": { scientificName: "Echinacea purpurea" } };
+    const wrongPlant = { "plant-a": { scientificName: "Echinacea angustifolia" } };
+    expect(bonapReviewsMatchingCatalogTaxa(approvedReviews, currentPlant)).toEqual(approvedReviews);
+    const mismatchedReviews = bonapReviewsMatchingCatalogTaxa(approvedReviews, wrongPlant);
+
+    expect(mismatchedReviews).toEqual([]);
+    expect(affirmativeCountyEvidenceForPlant(
+      "plant-a",
+      "27053",
+      [reviewedNativeRecord],
+      { "bonap-napa": bonapSource },
+      currentMapSnapshots,
+      null,
+      mismatchedReviews,
+    )).toEqual([]);
+  });
+
+  it("requires BONAP claim geography and category to match an approved conversion row", () => {
+    const wrongCounty = { ...reviewedNativeRecord, countyFips: "27123" };
+    const invalidCounty = { ...reviewedNativeRecord, countyFips: "01000" };
+    const wrongCategory = {
+      ...reviewedNativeRecord,
+      bonapReview: {
+        ...reviewedNativeRecord.bonapReview!,
+        rawCategory: "Native Historic",
+      },
+    };
+    for (const claim of [wrongCounty, invalidCounty, wrongCategory]) {
+      expect(affirmativeCountyEvidenceForPlant(
+        "plant-a",
+        claim.countyFips,
+        [claim],
+        { "bonap-napa": bonapSource },
+        currentMapSnapshots,
+        null,
+        approvedReviews,
+      )).toEqual([]);
+    }
+  });
+
+  it.each([
+    ["historic", { bonapReview: { ...reviewedNativeRecord.bonapReview!, rawCategory: "Native Historic" }, nativityStatus: "not_native" as const }],
+    ["adventive", { bonapReview: { ...reviewedNativeRecord.bonapReview!, rawCategory: "Adventive" }, nativityStatus: "not_native" as const }],
+    ["exotic", { bonapReview: { ...reviewedNativeRecord.bonapReview!, rawCategory: "Exotic" }, nativityStatus: "not_native" as const }],
+    ["ambiguous taxonomy", { bonapReview: { ...reviewedNativeRecord.bonapReview!, taxonomyMatch: "ambiguous" as const } }],
+    ["pending review", { bonapReview: { ...reviewedNativeRecord.bonapReview!, reviewStatus: "pending" as const } }],
+    ["unconfirmed current status", { bonapReview: { ...reviewedNativeRecord.bonapReview!, currentStatusConfirmed: false } }],
+    ["unapproved raw category", { bonapReview: { ...reviewedNativeRecord.bonapReview!, rawCategory: "rare" }, nativityStatus: "unknown" as const }],
+    ["unofficial map path", { sourceUrl: "https://bonap.net/MapGallery/County/Genus/Echinacea.png" }],
+  ])("does not affirm %s BONAP evidence", (_label, overrides) => {
+    const claim = { ...reviewedNativeRecord, ...overrides };
+    expect(
+      affirmativeCountyEvidenceForPlant(
+        "plant-a",
+        "27053",
+        [claim],
+        { "bonap-napa": bonapSource },
+        currentMapSnapshots,
+        null,
+        [approvedMapReviewFor(claim)],
+      ),
+    ).toEqual([]);
   });
 });
