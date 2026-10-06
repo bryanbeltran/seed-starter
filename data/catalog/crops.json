@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-07-20T04:21:33.561Z",
+  "generatedAt": "2026-10-06T19:19:44.324Z",
   "crops": {
     "beans": {
       "id": "beans",
@@ -98,14 +98,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/pole-beans/marvel-of-venice-bean-seed-2377.html",
           "confidence": "high"
         },
-        "tohya": {
-          "id": "tohya",
-          "name": "Tohya",
-          "daysToHarvest": 78,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/soybeans/tohya-soybean-seed-2553.html",
-          "confidence": "high"
-        },
         "velour": {
           "id": "velour",
           "name": "Velour",
@@ -136,14 +128,6 @@
           "daysToHarvest": 58,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/pole-beans/monte-gusto-bean-seed-3169.html",
-          "confidence": "high"
-        },
-        "carminat": {
-          "id": "carminat",
-          "name": "Carminat",
-          "daysToHarvest": 62,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/pole-beans/carminat-bean-seed-3170.html",
           "confidence": "high"
         },
         "vroma": {
@@ -218,14 +202,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/bush-beans/tobago-bean-seed-4433.html",
           "confidence": "high"
         },
-        "seychelles": {
-          "id": "seychelles",
-          "name": "Seychelles",
-          "daysToHarvest": 55,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/pole-beans/seychelles-bean-seed-4545.html",
-          "confidence": "high"
-        },
         "python": {
           "id": "python",
           "name": "Python",
@@ -256,14 +232,6 @@
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/bush-beans/trilogy-mix-organic-bean-seed-3193G.html",
-          "confidence": "high"
-        },
-        "chiba-green": {
-          "id": "chiba-green",
-          "name": "Chiba Green",
-          "daysToHarvest": 82,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/soybeans/chiba-green-organic-soybean-seed-3581G.html",
           "confidence": "high"
         },
         "celine": {
@@ -719,14 +687,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/oakleaf-lettuce/tango-lettuce-seed-405N.html",
           "confidence": "high"
         },
-        "winter-density": {
-          "id": "winter-density",
-          "name": "Winter Density",
-          "daysToHarvest": 44,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/winter-density-lettuce-seed-4181.html",
-          "confidence": "high"
-        },
         "alboreto": {
           "id": "alboreto",
           "name": "Alboreto",
@@ -805,6 +765,14 @@
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/tendita-lettuce-seed-4595.html",
+          "confidence": "high"
+        },
+        "volcana": {
+          "id": "volcana",
+          "name": "Volcana",
+          "daysToHarvest": 52,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/bibb-lettuce/volcana-lettuce-seed-4765.html",
           "confidence": "high"
         },
         "sunland": {
@@ -895,14 +863,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/rouge-dhiver-organic-lettuce-seed-2236N.html",
           "confidence": "medium"
         },
-        "encore-lettuce-mix": {
-          "id": "encore-lettuce-mix",
-          "name": "Encore Lettuce Mix",
-          "daysToHarvest": 28,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/lettuce-mixes/encore-lettuce-mix-organic-vegetable-seed-2366G.html",
-          "confidence": "high"
-        },
         "green-star": {
           "id": "green-star",
           "name": "Green Star",
@@ -991,20 +951,20 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/summer-crisp-lettuce-batavia/muir-organic-lettuce-seed-3881G.html",
           "confidence": "high"
         },
-        "dragoon": {
-          "id": "dragoon",
-          "name": "Dragoon",
-          "daysToHarvest": 43,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/dragoon-organic-lettuce-seed-3884G.html",
-          "confidence": "high"
-        },
         "little-gem": {
           "id": "little-gem",
           "name": "Little Gem",
           "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/bibb-lettuce/little-gem-organic-lettuce-seed-4120G.html",
+          "confidence": "high"
+        },
+        "winter-density": {
+          "id": "winter-density",
+          "name": "Winter Density",
+          "daysToHarvest": 44,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/winter-density-organic-lettuce-seed-4181G.html",
           "confidence": "high"
         },
         "xalbadora": {
@@ -1183,68 +1143,68 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/butterhead-lettuce-boston/rex-pelleted-lettuce-seed-2967JP.html",
           "confidence": "high"
         },
-        "salanova-reg-green-incised": {
-          "id": "salanova-reg-green-incised",
-          "name": "Salanova&reg; Green Incised",
+        "vicinity-salanova-reg-ndash-green-incised": {
+          "id": "vicinity-salanova-reg-ndash-green-incised",
+          "name": "Vicinity Salanova&reg; &ndash; Green Incised",
           "daysToHarvest": 53,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-incised-pelleted-lettuce-seed-3052JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/vicinity-salanova-green-incised-pelleted-lettuce-seed-3052JP.html",
           "confidence": "high"
         },
-        "salanova-reg-red-incised": {
-          "id": "salanova-reg-red-incised",
-          "name": "Salanova&reg; Red Incised",
+        "andiron-salanova-reg-ndash-red-incised": {
+          "id": "andiron-salanova-reg-ndash-red-incised",
+          "name": "Andiron Salanova&reg; &ndash; Red Incised",
           "daysToHarvest": 53,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-incised-pelleted-lettuce-seed-3053JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/andiron-salanova-red-incised-pelleted-lettuce-seed-3053JP.html",
           "confidence": "high"
         },
-        "salanova-reg-green-sweet-crisp": {
-          "id": "salanova-reg-green-sweet-crisp",
-          "name": "Salanova&reg; Green Sweet Crisp",
+        "extranet-salanova-reg-ndash-green-sweet-crisp": {
+          "id": "extranet-salanova-reg-ndash-green-sweet-crisp",
+          "name": "Extranet Salanova&reg; &ndash; Green Sweet Crisp",
           "daysToHarvest": 50,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-sweet-crisp-pelleted-lettuce-seed-3054JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/extranet-salanova-green-sweet-crisp-pelleted-lettuce-seed-3054JP.html",
           "confidence": "high"
         },
-        "salanova-reg-red-sweet-crisp": {
-          "id": "salanova-reg-red-sweet-crisp",
-          "name": "Salanova&reg; Red Sweet Crisp",
+        "pamex-salanova-reg-ndash-red-sweet-crisp": {
+          "id": "pamex-salanova-reg-ndash-red-sweet-crisp",
+          "name": "Pamex Salanova&reg; &ndash; Red Sweet Crisp",
           "daysToHarvest": 55,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-sweet-crisp-pelleted-lettuce-seed-3055JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/pamex-salanova-red-sweet-crisp-pelleted-lettuce-seed-3055JP.html",
           "confidence": "high"
         },
-        "salanova-reg-green-butter": {
-          "id": "salanova-reg-green-butter",
-          "name": "Salanova&reg; Green Butter",
+        "higgs-salanova-reg-ndash-green-butter": {
+          "id": "higgs-salanova-reg-ndash-green-butter",
+          "name": "Higgs Salanova&reg; &ndash; Green Butter",
           "daysToHarvest": 55,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-butter-pelleted-lettuce-seed-3056JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/higgs-salanova-green-butter-pelleted-lettuce-seed-3056JP.html",
           "confidence": "high"
         },
-        "salanova-reg-red-butter": {
-          "id": "salanova-reg-red-butter",
-          "name": "Salanova&reg; Red Butter",
+        "davinci-salanova-reg-ndash-red-butter": {
+          "id": "davinci-salanova-reg-ndash-red-butter",
+          "name": "Davinci Salanova&reg; &ndash; Red Butter",
           "daysToHarvest": 55,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-butter-pelleted-lettuce-seed-3057JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/davinci-salanova-red-butter-pelleted-lettuce-seed-3057JP.html",
           "confidence": "high"
         },
-        "salanova-reg-green-oakleaf": {
-          "id": "salanova-reg-green-oakleaf",
-          "name": "Salanova&reg; Green Oakleaf",
+        "cousteau-salanova-reg-ndash-green-oakleaf": {
+          "id": "cousteau-salanova-reg-ndash-green-oakleaf",
+          "name": "Cousteau Salanova&reg; &ndash; Green Oakleaf",
           "daysToHarvest": 55,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-oakleaf-pelleted-lettuce-seed-3058JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/cousteau-salanova-green-oakleaf-pelleted-lettuce-seed-3058JP.html",
           "confidence": "high"
         },
-        "salanova-reg-red-oakleaf": {
-          "id": "salanova-reg-red-oakleaf",
-          "name": "Salanova&reg; Red Oakleaf",
+        "xandra-salanova-reg-ndash-red-oakleaf": {
+          "id": "xandra-salanova-reg-ndash-red-oakleaf",
+          "name": "Xandra Salanova&reg; &ndash; Red Oakleaf",
           "daysToHarvest": 57,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-oakleaf-pelleted-lettuce-seed-3059JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/xandra-salanova-red-oakleaf-pelleted-lettuce-seed-3059JP.html",
           "confidence": "high"
         },
         "flandria": {
@@ -1253,6 +1213,14 @@
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/butterhead-lettuce-boston/flandria-pelleted-lettuce-seed-3133JP.html",
+          "confidence": "high"
+        },
+        "dragoon": {
+          "id": "dragoon",
+          "name": "Dragoon",
+          "daysToHarvest": 43,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/dragoon-organic-pelleted-lettuce-seed-3884GP.html",
           "confidence": "high"
         },
         "frisygo": {
@@ -1279,44 +1247,52 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/summer-crisp-lettuce-batavia/lalique-pelleted-lettuce-seed-4184JP.html",
           "confidence": "medium"
         },
-        "salanova-reg-green-batavia": {
-          "id": "salanova-reg-green-batavia",
-          "name": "Salanova&reg; Green Batavia",
+        "caravel-salanova-reg-ndash-green-batavia": {
+          "id": "caravel-salanova-reg-ndash-green-batavia",
+          "name": "Caravel Salanova&reg; &ndash; Green Batavia",
           "daysToHarvest": 55,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-batavia-pelleted-lettuce-seed-4185JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/caravel-salanova-green-batavia-pelleted-lettuce-seed-4185JP.html",
           "confidence": "high"
         },
-        "salanova-reg-hydroponic-green-sweet-crisp": {
-          "id": "salanova-reg-hydroponic-green-sweet-crisp",
-          "name": "Salanova&reg; Hydroponic Green Sweet Crisp",
+        "expertise-salanova-reg-ndash-hydroponic-green-sweet-crisp": {
+          "id": "expertise-salanova-reg-ndash-hydroponic-green-sweet-crisp",
+          "name": "Expertise Salanova&reg; &ndash; Hydroponic Green Sweet Crisp",
           "daysToHarvest": 45,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-green-sweet-crisp-pelleted-lettuce-seed-4187JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/expertise-salanova-hydroponic-green-sweet-crisp-pelleted-lettuce-seed-4187JP.html",
           "confidence": "medium"
         },
-        "salanova-reg-hydroponic-green-oakleaf": {
-          "id": "salanova-reg-hydroponic-green-oakleaf",
-          "name": "Salanova&reg; Hydroponic Green Oakleaf",
+        "euler-salanova-reg-ndash-hydroponic-green-butter": {
+          "id": "euler-salanova-reg-ndash-hydroponic-green-butter",
+          "name": "Euler Salanova&reg; &ndash; Hydroponic Green Butter",
           "daysToHarvest": 45,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-green-oakleaf-pelleted-lettuce-seed-4189JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/euler-salanova-hydroponic-green-butter-pelleted-lettuce-seed-4188JP.html",
           "confidence": "medium"
         },
-        "salanova-reg-hydroponic-red-sweet-crisp": {
-          "id": "salanova-reg-hydroponic-red-sweet-crisp",
-          "name": "Salanova&reg; Hydroponic Red Sweet Crisp",
+        "cook-salanova-reg-ndash-hydroponic-green-oakleaf": {
+          "id": "cook-salanova-reg-ndash-hydroponic-green-oakleaf",
+          "name": "Cook Salanova&reg; &ndash;Hydroponic Green Oakleaf",
           "daysToHarvest": 45,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-red-sweet-crisp-pelleted-lettuce-seed-4190JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/cook-salanova--hydroponic-green-oakleaf-pelleted-lettuce-seed-4189JP.html",
           "confidence": "medium"
         },
-        "salanova-reg-hydroponic-red-oakleaf": {
-          "id": "salanova-reg-hydroponic-red-oakleaf",
-          "name": "Salanova&reg; Hydroponic Red Oakleaf",
+        "codex-salanova-reg-ndash-hydroponic-red-sweet-crisp": {
+          "id": "codex-salanova-reg-ndash-hydroponic-red-sweet-crisp",
+          "name": "Codex Salanova&reg; &ndash; Hydroponic Red Sweet Crisp",
           "daysToHarvest": 45,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-red-oakleaf-pelleted-lettuce-seed-4191JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/codex-salanova-hydroponic-red-sweet-crisp-pelleted-lettuce-seed-4190JP.html",
+          "confidence": "medium"
+        },
+        "xem-salanova-reg-ndash-hydroponic-red-oakleaf": {
+          "id": "xem-salanova-reg-ndash-hydroponic-red-oakleaf",
+          "name": "Xem Salanova&reg; &ndash; Hydroponic Red Oakleaf",
+          "daysToHarvest": 45,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/xem-salanova-hydroponic-red-oakleaf-pelleted-lettuce-seed-4191JP.html",
           "confidence": "medium"
         },
         "ezpark": {
@@ -1343,21 +1319,13 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/one-cut-lettuce/ezflor-organic-pelleted-lettuce-seed-4348GP.html",
           "confidence": "high"
         },
-        "salanova-reg-hydroponic-red-butter": {
-          "id": "salanova-reg-hydroponic-red-butter",
-          "name": "Salanova&reg; Hydroponic Red Butter",
+        "klee-salanova-reg-ndash-hydroponic-red-butter": {
+          "id": "klee-salanova-reg-ndash-hydroponic-red-butter",
+          "name": "Klee Salanova&reg; &ndash; Hydroponic Red Butter",
           "daysToHarvest": 45,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-red-butter-pelleted-lettuce-seed-4449JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/klee-salanova-hydroponic-red-butter-pelleted-lettuce-seed-4449JP.html",
           "confidence": "medium"
-        },
-        "intercut": {
-          "id": "intercut",
-          "name": "Intercut",
-          "daysToHarvest": 46,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/one-cut-lettuce/intercut-pelleted-lettuce-seed-4460JP.html",
-          "confidence": "high"
         },
         "hampton": {
           "id": "hampton",
@@ -1367,20 +1335,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/one-cut-lettuce/hampton-organic-pelleted-lettuce-seed-4598GP.html",
           "confidence": "high"
         },
-        "salanova-reg-red-tango": {
-          "id": "salanova-reg-red-tango",
-          "name": "Salanova&reg; Red Tango",
+        "yves-salanova-reg-ndash-red-tango": {
+          "id": "yves-salanova-reg-ndash-red-tango",
+          "name": "Yves Salanova&reg; &ndash; Red Tango",
           "daysToHarvest": 55,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-tango-pelleted-lettuce-seed-4764JP.html",
-          "confidence": "high"
-        },
-        "volcana": {
-          "id": "volcana",
-          "name": "Volcana",
-          "daysToHarvest": 52,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/bibb-lettuce/volcana-pelleted-lettuce-seed-4765JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/yves-salanova-red-tango-pelleted-lettuce-seed-4764JP.html",
           "confidence": "high"
         },
         "prismatic-mini-head-mix": {
@@ -1391,12 +1351,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/one-cut-lettuce/prismatic-mini-head-mix-pelleted-lettuce-seed-4768JP.html",
           "confidence": "high"
         },
-        "salanova-reg-red-gem": {
-          "id": "salanova-reg-red-gem",
-          "name": "Salanova&reg; Red Gem",
+        "coconino-salanova-reg-ndash-red-gem": {
+          "id": "coconino-salanova-reg-ndash-red-gem",
+          "name": "Coconino Salanova&reg; &ndash; Red Gem",
           "daysToHarvest": 45,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-gem-pelleted-lettuce-seed-4823JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/coconino-salanova-red-gem-pelleted-lettuce-seed-4823JP.html",
           "confidence": "medium"
         },
         "gladius": {
@@ -1407,12 +1367,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/gladius-pelleted-lettuce-seed-4826JP.html",
           "confidence": "high"
         },
-        "salanova-reg-hydroponic-red-batavia": {
-          "id": "salanova-reg-hydroponic-red-batavia",
-          "name": "Salanova&reg; Hydroponic Red Batavia",
+        "bonarda-salanova-reg-ndash-hydroponic-red-batavia": {
+          "id": "bonarda-salanova-reg-ndash-hydroponic-red-batavia",
+          "name": "Bonarda Salanova&reg; &ndash; Hydroponic Red Batavia",
           "daysToHarvest": 45,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-red-batavia-pelleted-lettuce-seed-4840JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/bonarda-salanova-hydroponic-red-batavia-pelleted-lettuce-seed-4840JP.html",
           "confidence": "medium"
         },
         "sunagri": {
@@ -1431,12 +1391,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/butterhead-lettuce-boston/cecelia-pelleted-lettuce-seed-5242JP.html",
           "confidence": "high"
         },
-        "salanova-reg-green-upright-oak": {
-          "id": "salanova-reg-green-upright-oak",
-          "name": "Salanova&reg; Green Upright Oak",
+        "rasmussen-salanova-reg-ndash-green-upright-oak": {
+          "id": "rasmussen-salanova-reg-ndash-green-upright-oak",
+          "name": "Rasmussen Salanova&reg; &ndash; Green Upright Oak",
           "daysToHarvest": 55,
           "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-upright-oak-pelleted-lettuce-seed-6085JP.html",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/rasmussen-salanova-green-upright-oak-pelleted-lettuce-seed-6085JP.html",
           "confidence": "high"
         },
         "mini-romaine-trio": {
@@ -2184,14 +2144,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beets/round-red-beets/red-ace-f1-beet-seed-125.html",
           "confidence": "high"
         },
-        "moneta-40-monogerm-41": {
-          "id": "moneta-40-monogerm-41",
-          "name": "Moneta &#40;Monogerm&#41;",
-          "daysToHarvest": 46,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/beets/round-red-beets/moneta-monogerm-f1-beet-seed-2319.html",
-          "confidence": "high"
-        },
         "touchstone-gold": {
           "id": "touchstone-gold",
           "name": "Touchstone Gold",
@@ -2442,469 +2394,6 @@
         }
       }
     },
-    "cucumber": {
-      "id": "cucumber",
-      "name": "Cucumber",
-      "category": "vegetable",
-      "family": "cucurbit",
-      "method": "transplant",
-      "indoorSowOffsetDays": 21,
-      "hardenOffDaysBeforeTransplant": 5,
-      "transplantDaysAfterFrost": 7,
-      "daysToHarvest": 55,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "transplant",
-          "indoorSowOffsetDays": 21,
-          "hardenOffDaysBeforeTransplant": 5,
-          "transplantDaysAfterAnchor": 7
-        },
-        "summer": {
-          "anchor": "lastSpringFrost",
-          "method": "transplant",
-          "indoorSowOffsetDays": 14,
-          "hardenOffDaysBeforeTransplant": 5,
-          "transplantDaysAfterAnchor": 14
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "medium",
-      "varieties": {
-        "katrina": {
-          "id": "katrina",
-          "name": "Katrina",
-          "daysToHarvest": 49,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/katrina-f1-cucumber-seed-47.html",
-          "confidence": "high"
-        },
-        "diva": {
-          "id": "diva",
-          "name": "Diva",
-          "daysToHarvest": 58,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/diva-cucumber-seed-2198.html",
-          "confidence": "high"
-        },
-        "tasty-jade": {
-          "id": "tasty-jade",
-          "name": "Tasty Jade",
-          "daysToHarvest": 54,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/tasty-jade-f1-cucumber-seed-2323.html",
-          "confidence": "high"
-        },
-        "mexican-sour-gherkin": {
-          "id": "mexican-sour-gherkin",
-          "name": "Mexican Sour Gherkin",
-          "daysToHarvest": 67,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/mexican-sour-gherkin-cucumber-seed-3174.html",
-          "confidence": "high"
-        },
-        "lemon": {
-          "id": "lemon",
-          "name": "Lemon",
-          "daysToHarvest": 65,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/lemon-organic-cucumber-seed-329G.html",
-          "confidence": "high"
-        },
-        "h-19-little-leaf": {
-          "id": "h-19-little-leaf",
-          "name": "H-19 Little Leaf",
-          "daysToHarvest": 57,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/h-19-little-leaf-organic-cucumber-seed-331G.html",
-          "confidence": "high"
-        },
-        "suyo-long": {
-          "id": "suyo-long",
-          "name": "Suyo Long",
-          "daysToHarvest": 61,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/suyo-long-organic-cucumber-seed-333G.html",
-          "confidence": "high"
-        },
-        "marketmore-76": {
-          "id": "marketmore-76",
-          "name": "Marketmore 76",
-          "daysToHarvest": 58,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/marketmore-76-organic-cucumber-seed-336G.html",
-          "confidence": "high"
-        },
-        "quirk": {
-          "id": "quirk",
-          "name": "Quirk",
-          "daysToHarvest": 52,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/quirk-f1-cucumber-seed-3408.html",
-          "confidence": "high"
-        },
-        "itachi": {
-          "id": "itachi",
-          "name": "Itachi",
-          "daysToHarvest": 54,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/itachi-f1-cucumber-seed-3436.html",
-          "confidence": "high"
-        },
-        "unagi": {
-          "id": "unagi",
-          "name": "Unagi",
-          "daysToHarvest": 55,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/unagi-f1-cucumber-seed-4552.html",
-          "confidence": "high"
-        },
-        "chaperon": {
-          "id": "chaperon",
-          "name": "Chaperon",
-          "daysToHarvest": 52,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/chaperon-f1-cucumber-seed-4670.html",
-          "confidence": "high"
-        },
-        "sashimi": {
-          "id": "sashimi",
-          "name": "Sashimi",
-          "daysToHarvest": 50,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/sashimi-f1-cucumber-seed-4728.html",
-          "confidence": "high"
-        },
-        "gateway": {
-          "id": "gateway",
-          "name": "Gateway",
-          "daysToHarvest": 56,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/gateway-f1-cucumber-seed-4777.html",
-          "confidence": "high"
-        },
-        "qwerty": {
-          "id": "qwerty",
-          "name": "Qwerty",
-          "daysToHarvest": 50,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/qwerty-f1-cucumber-seed-5129.html",
-          "confidence": "high"
-        },
-        "gershwin": {
-          "id": "gershwin",
-          "name": "Gershwin",
-          "daysToHarvest": 49,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/gershwin-f1-cucumber-seed-5133.html",
-          "confidence": "high"
-        },
-        "mojito": {
-          "id": "mojito",
-          "name": "Mojito",
-          "daysToHarvest": 50,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/mojito-f1-cucumber-seed-5135.html",
-          "confidence": "high"
-        },
-        "margarita": {
-          "id": "margarita",
-          "name": "Margarita",
-          "daysToHarvest": 54,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/margarita-f1-cucumber-seed-5157.html",
-          "confidence": "high"
-        },
-        "quick-snack": {
-          "id": "quick-snack",
-          "name": "Quick Snack",
-          "daysToHarvest": 40,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/quick-snack-f1-cucumber-seed-5158.html",
-          "confidence": "high"
-        },
-        "gimlet": {
-          "id": "gimlet",
-          "name": "Gimlet",
-          "daysToHarvest": 50,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/gimlet-f1-cucumber-seed-5180.html",
-          "confidence": "high"
-        },
-        "demeter": {
-          "id": "demeter",
-          "name": "Demeter",
-          "daysToHarvest": 48,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/demeter-f1-cucumber-seed-5207.html",
-          "confidence": "high"
-        },
-        "super-max": {
-          "id": "super-max",
-          "name": "Super Max",
-          "daysToHarvest": 55,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/super-max-f1-cucumber-seed-5247.html",
-          "confidence": "high"
-        },
-        "samurai-252": {
-          "id": "samurai-252",
-          "name": "Samurai 252",
-          "daysToHarvest": 58,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/samurai-252-f1-cucumber-seed-5248.html",
-          "confidence": "high"
-        },
-        "striped-armenian": {
-          "id": "striped-armenian",
-          "name": "Striped Armenian",
-          "daysToHarvest": 63,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/striped-armenian-organic-cucumber-seed-2317G.html",
-          "confidence": "high"
-        },
-        "corinto": {
-          "id": "corinto",
-          "name": "Corinto",
-          "daysToHarvest": 48,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/corinto-organic-f1-cucumber-seed-2562G.html",
-          "confidence": "high"
-        },
-        "adam-gherkin": {
-          "id": "adam-gherkin",
-          "name": "Adam Gherkin",
-          "daysToHarvest": 47,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/adam-gherkin-organic-f1-cucumber-seed-2563G.html",
-          "confidence": "high"
-        },
-        "socrates": {
-          "id": "socrates",
-          "name": "Socrates",
-          "daysToHarvest": 52,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/socrates-organic-f1-cucumber-seed-2989G.html",
-          "confidence": "high"
-        },
-        "excelsior": {
-          "id": "excelsior",
-          "name": "Excelsior",
-          "daysToHarvest": 50,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/excelsior-organic-f1-cucumber-seed-3082G.html",
-          "confidence": "high"
-        },
-        "cool-customer": {
-          "id": "cool-customer",
-          "name": "Cool Customer",
-          "daysToHarvest": 55,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/cool-customer-organic-cucumber-seed-3449G.html",
-          "confidence": "high"
-        },
-        "picolino": {
-          "id": "picolino",
-          "name": "Picolino",
-          "daysToHarvest": 50,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/picolino-organic-f1-cucumber-seed-3542G.html",
-          "confidence": "high"
-        },
-        "tetsukabuto-rootstock": {
-          "id": "tetsukabuto-rootstock",
-          "name": "Tetsukabuto Rootstock",
-          "daysToHarvest": 55,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/cucumber-rootstock/tetsukabuto-rootstock-f1-rootstock-seed-3578A.html",
-          "confidence": "medium"
-        },
-        "poniente": {
-          "id": "poniente",
-          "name": "Poniente",
-          "daysToHarvest": 56,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/poniente-organic-f1-cucumber-seed-4379G.html",
-          "confidence": "high"
-        },
-        "cucumber-armenian": {
-          "id": "cucumber-armenian",
-          "name": "Cucumber, Armenian",
-          "daysToHarvest": 55,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/cucumber-armenian-shoot-seed-5648S.html",
-          "confidence": "high"
-        },
-        "manny-f1-cucumber": {
-          "id": "manny-f1-cucumber",
-          "name": "Manny F1 Cucumber",
-          "daysToHarvest": 55,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-manny-f1-cucumber.html",
-          "confidence": "high"
-        },
-        "socrates-f1-cucumber": {
-          "id": "socrates-f1-cucumber",
-          "name": "Socrates F1 Cucumber",
-          "daysToHarvest": 52,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-socrates-f1-cucumber.html",
-          "confidence": "high"
-        },
-        "adam-f1-cucumber": {
-          "id": "adam-f1-cucumber",
-          "name": "Adam F1 Cucumber",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-adam-f1-gherkin-cucumber.html",
-          "confidence": "high"
-        },
-        "silver-slicer-cucumber": {
-          "id": "silver-slicer-cucumber",
-          "name": "Silver Slicer Cucumber",
-          "daysToHarvest": 54,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-silver-slicer-cucumber.html",
-          "confidence": "high"
-        },
-        "green-finger-cucumber": {
-          "id": "green-finger-cucumber",
-          "name": "Green Finger Cucumber",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-green-finger-cucumber.html",
-          "confidence": "high"
-        },
-        "paraiso-f1-cucumber": {
-          "id": "paraiso-f1-cucumber",
-          "name": "Paraiso F1 Cucumber",
-          "daysToHarvest": 55,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-paraiso-f1-cucumber.html",
-          "confidence": "high"
-        },
-        "tyria-f1-cucumber": {
-          "id": "tyria-f1-cucumber",
-          "name": "Tyria F1 Cucumber",
-          "daysToHarvest": 58,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-tyria-f1-cucumber.html",
-          "confidence": "high"
-        },
-        "lemon-cucumber": {
-          "id": "lemon-cucumber",
-          "name": "Lemon Cucumber",
-          "daysToHarvest": 68,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-lemon-cucumber.html",
-          "confidence": "high"
-        },
-        "picolino-f1-cucumber": {
-          "id": "picolino-f1-cucumber",
-          "name": "Picolino F1 Cucumber",
-          "daysToHarvest": 50,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-picolino-f1-cucumber.html",
-          "confidence": "high"
-        },
-        "suyo-long-cucumber": {
-          "id": "suyo-long-cucumber",
-          "name": "Suyo Long Cucumber",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-suyo-long-cucumber.html",
-          "confidence": "high"
-        },
-        "marketmore-76-cucumber": {
-          "id": "marketmore-76-cucumber",
-          "name": "Marketmore 76 Cucumber",
-          "daysToHarvest": 65,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-marketmore-76-cucumber.html",
-          "confidence": "high"
-        },
-        "national-pickling-cucumber": {
-          "id": "national-pickling-cucumber",
-          "name": "National Pickling Cucumber",
-          "daysToHarvest": 52,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-national-pickler-cucumber.html",
-          "confidence": "high"
-        },
-        "h-19-little-leaf-cucumber": {
-          "id": "h-19-little-leaf-cucumber",
-          "name": "H-19 Little Leaf Cucumber",
-          "daysToHarvest": 58,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-h19-little-leaf-cucumber.html",
-          "confidence": "high"
-        },
-        "tasty-green-f1-cucumber": {
-          "id": "tasty-green-f1-cucumber",
-          "name": "Tasty Green F1 Cucumber",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-tasty-green-f1-cucumber.html",
-          "confidence": "high"
-        },
-        "minime-f1-cucumber": {
-          "id": "minime-f1-cucumber",
-          "name": "Minime F1 Cucumber",
-          "daysToHarvest": 50,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-minime-f1-cucumber.html",
-          "confidence": "high"
-        },
-        "green-18-f1-cucumber": {
-          "id": "green-18-f1-cucumber",
-          "name": "Green 18 F1 Cucumber",
-          "daysToHarvest": 55,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-green-18-f1-cucumber.html",
-          "confidence": "high"
-        },
-        "shintokiwa-cucumber": {
-          "id": "shintokiwa-cucumber",
-          "name": "Shintokiwa Cucumber",
-          "daysToHarvest": 60,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-shintokiwa-cucumber.html",
-          "confidence": "high"
-        },
-        "marketmore-97-cucumber": {
-          "id": "marketmore-97-cucumber",
-          "name": "Marketmore 97 Cucumber",
-          "daysToHarvest": 55,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cucumber-marketmore-97",
-          "confidence": "high"
-        },
-        "wautoma-cucumber": {
-          "id": "wautoma-cucumber",
-          "name": "Wautoma Cucumber",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cucumber-wautoma",
-          "confidence": "high"
-        },
-        "armenian-cucumber": {
-          "id": "armenian-cucumber",
-          "name": "Armenian Cucumber",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cucumber-armenian",
-          "confidence": "high"
-        },
-        "double-yield-cucumber": {
-          "id": "double-yield-cucumber",
-          "name": "Double Yield Cucumber",
-          "daysToHarvest": 52,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/cucumber-double-yield",
-          "confidence": "high"
-        }
-      }
-    },
     "pepper": {
       "id": "pepper",
       "name": "Pepper",
@@ -2990,12 +2479,28 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-bell-peppers/x3r-red-knight-f1-bell-pepper-seed-2309.html",
           "confidence": "medium"
         },
+        "mellow-star": {
+          "id": "mellow-star",
+          "name": "Mellow Star",
+          "daysToHarvest": 70,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-peppers/mellow-star-f1-shishito-pepper-seed-2592.html",
+          "confidence": "medium"
+        },
         "gourmet": {
           "id": "gourmet",
           "name": "Gourmet",
           "daysToHarvest": 85,
           "source": "territorial",
           "sourceUrl": "https://territorialseed.com/products/pepper-gourmet",
+          "confidence": "high"
+        },
+        "carmen": {
+          "id": "carmen",
+          "name": "Carmen",
+          "daysToHarvest": 70,
+          "source": "fedco",
+          "sourceUrl": "https://fedcoseeds.com/seeds/carmen-organic-elongated-sweet-pepper-3757",
           "confidence": "high"
         },
         "capperino": {
@@ -3022,6 +2527,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-bell-peppers/eros-f1-bell-pepper-seed-3124.html",
           "confidence": "medium"
         },
+        "sprinter": {
+          "id": "sprinter",
+          "name": "Sprinter",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/pepper-sprinter",
+          "confidence": "high"
+        },
         "helios": {
           "id": "helios",
           "name": "Helios",
@@ -3036,6 +2549,14 @@
           "daysToHarvest": 70,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-peppers/goddess-f1-banana-pepper-seed-3230.html",
+          "confidence": "medium"
+        },
+        "flaming-flare": {
+          "id": "flaming-flare",
+          "name": "Flaming Flare",
+          "daysToHarvest": 70,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/hot-peppers/flaming-flare-f1-fresno-pepper-seed-3270.html",
           "confidence": "medium"
         },
         "milena": {
@@ -3321,7 +2842,7 @@
         "salt-and-pepper": {
           "id": "salt-and-pepper",
           "name": "Salt and Pepper",
-          "daysToHarvest": 49,
+          "daysToHarvest": 41,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/salt-and-pepper-organic-cucumber-seed-2524G.html",
           "confidence": "high"
@@ -3397,14 +2918,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/hot-peppers/red-ember-organic-f1-cayenne-pepper-seed-3130G.html",
           "confidence": "medium"
-        },
-        "sprinter": {
-          "id": "sprinter",
-          "name": "Sprinter",
-          "daysToHarvest": 60,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/pepper-sprinter",
-          "confidence": "high"
         },
         "bastan": {
           "id": "bastan",
@@ -4087,6 +3600,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/corn/sweet-corn/bolt-xr-f1-corn-seed-5253.html",
           "confidence": "high"
         },
+        "icon-xr": {
+          "id": "icon-xr",
+          "name": "Icon XR",
+          "daysToHarvest": 72,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/corn/sweet-corn/icon-xr-f1-corn-seed-5347.html",
+          "confidence": "high"
+        },
         "choices": {
           "id": "choices",
           "name": "Choices",
@@ -4133,14 +3654,6 @@
           "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/popcorn-shoot-seed-3164S.html",
-          "confidence": "high"
-        },
-        "enchanted": {
-          "id": "enchanted",
-          "name": "Enchanted",
-          "daysToHarvest": 78,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/corn/sweet-corn/enchanted-organic-f1-corn-seed-3568G.html",
           "confidence": "high"
         },
         "natural-sweet": {
@@ -4608,6 +4121,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/onions/full-size-onions/patterson-f1-onion-seed-2521.html",
           "confidence": "high"
         },
+        "cabernet": {
+          "id": "cabernet",
+          "name": "Cabernet",
+          "daysToHarvest": 100,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/onions/full-size-onions/cabernet-f1-onion-seed-2581.html",
+          "confidence": "high"
+        },
         "candy": {
           "id": "candy",
           "name": "Candy",
@@ -4615,22 +4136,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/onions/full-size-onions/candy-f1-onion-seed-2991.html",
           "confidence": "medium"
-        },
-        "white-castle": {
-          "id": "white-castle",
-          "name": "White Castle",
-          "daysToHarvest": 100,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/onions/full-size-onions/white-castle-f1-onion-seed-3085.html",
-          "confidence": "medium"
-        },
-        "expression": {
-          "id": "expression",
-          "name": "Expression",
-          "daysToHarvest": 105,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/onions/full-size-onions/expression-f1-onion-seed-3215.html",
-          "confidence": "high"
         },
         "red-rock": {
           "id": "red-rock",
@@ -4800,6 +4305,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/onions/full-size-onions/white-ace-f1-onion-seed-5695.html",
           "confidence": "medium"
         },
+        "onion": {
+          "id": "onion",
+          "name": "Onion",
+          "daysToHarvest": 100,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/sprouts/onion-organic-sprouting-seeds-2106G.html",
+          "confidence": "medium"
+        },
         "red-marble": {
           "id": "red-marble",
           "name": "Red Marble",
@@ -4854,14 +4367,6 @@
           "daysToHarvest": 108,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/onions/full-size-onions/powell-organic-f1-onion-seed-4309G.html",
-          "confidence": "high"
-        },
-        "elsye": {
-          "id": "elsye",
-          "name": "Elsye",
-          "daysToHarvest": 105,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/onions/full-size-onions/elsye-organic-f1-onion-seed-4553G.html",
           "confidence": "high"
         },
         "calibra": {
@@ -5852,14 +5357,6 @@
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/broccoli/standard-broccoli/belstar-organic-f1-broccoli-seed-2815G.html",
           "confidence": "high"
-        },
-        "broccoli-sano-verde-max": {
-          "id": "broccoli-sano-verde-max",
-          "name": "Broccoli, Sano Verde Max",
-          "daysToHarvest": 60,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/sprouts/broccoli-sano-verde-max-organic-sprouting-seeds-5560SG.html",
-          "confidence": "medium"
         },
         "broccoli-blend-sprouting-seeds": {
           "id": "broccoli-blend-sprouting-seeds",
@@ -7597,6 +7094,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/eggplant/italian-eggplants/dancer-f1-eggplant-seed-2820.html",
           "confidence": "high"
         },
+        "paloma": {
+          "id": "paloma",
+          "name": "Paloma",
+          "daysToHarvest": 65,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/eggplant/italian-eggplants/paloma-f1-eggplant-seed-3370.html",
+          "confidence": "high"
+        },
         "patio-baby": {
           "id": "patio-baby",
           "name": "Patio Baby",
@@ -9296,6 +8801,469 @@
         }
       }
     },
+    "cucumber": {
+      "id": "cucumber",
+      "name": "Cucumber",
+      "category": "vegetable",
+      "family": "cucurbit",
+      "method": "transplant",
+      "indoorSowOffsetDays": 21,
+      "hardenOffDaysBeforeTransplant": 5,
+      "transplantDaysAfterFrost": 7,
+      "daysToHarvest": 55,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 21,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 7
+        },
+        "summer": {
+          "anchor": "lastSpringFrost",
+          "method": "transplant",
+          "indoorSowOffsetDays": 14,
+          "hardenOffDaysBeforeTransplant": 5,
+          "transplantDaysAfterAnchor": 14
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "medium",
+      "varieties": {
+        "katrina": {
+          "id": "katrina",
+          "name": "Katrina",
+          "daysToHarvest": 32,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/katrina-organic-f1-cucumber-seed-47G.html",
+          "confidence": "high"
+        },
+        "diva": {
+          "id": "diva",
+          "name": "Diva",
+          "daysToHarvest": 41,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/diva-cucumber-seed-2198.html",
+          "confidence": "high"
+        },
+        "tasty-jade": {
+          "id": "tasty-jade",
+          "name": "Tasty Jade",
+          "daysToHarvest": 41,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/tasty-jade-f1-cucumber-seed-2323.html",
+          "confidence": "high"
+        },
+        "mexican-sour-gherkin": {
+          "id": "mexican-sour-gherkin",
+          "name": "Mexican Sour Gherkin",
+          "daysToHarvest": 48,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/mexican-sour-gherkin-cucumber-seed-3174.html",
+          "confidence": "high"
+        },
+        "lemon": {
+          "id": "lemon",
+          "name": "Lemon",
+          "daysToHarvest": 45,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/lemon-organic-cucumber-seed-329G.html",
+          "confidence": "high"
+        },
+        "h-19-little-leaf": {
+          "id": "h-19-little-leaf",
+          "name": "H-19 Little Leaf",
+          "daysToHarvest": 42,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/h-19-little-leaf-organic-cucumber-seed-331G.html",
+          "confidence": "high"
+        },
+        "suyo-long": {
+          "id": "suyo-long",
+          "name": "Suyo Long",
+          "daysToHarvest": 44,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/suyo-long-organic-cucumber-seed-333G.html",
+          "confidence": "high"
+        },
+        "marketmore-76": {
+          "id": "marketmore-76",
+          "name": "Marketmore 76",
+          "daysToHarvest": 39,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/marketmore-76-organic-cucumber-seed-336G.html",
+          "confidence": "high"
+        },
+        "quirk": {
+          "id": "quirk",
+          "name": "Quirk",
+          "daysToHarvest": 35,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/quirk-f1-cucumber-seed-3408.html",
+          "confidence": "high"
+        },
+        "itachi": {
+          "id": "itachi",
+          "name": "Itachi",
+          "daysToHarvest": 37,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/itachi-f1-cucumber-seed-3436.html",
+          "confidence": "high"
+        },
+        "unagi": {
+          "id": "unagi",
+          "name": "Unagi",
+          "daysToHarvest": 39,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/unagi-f1-cucumber-seed-4552.html",
+          "confidence": "high"
+        },
+        "chaperon": {
+          "id": "chaperon",
+          "name": "Chaperon",
+          "daysToHarvest": 30,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/chaperon-f1-cucumber-seed-4670.html",
+          "confidence": "high"
+        },
+        "sashimi": {
+          "id": "sashimi",
+          "name": "Sashimi",
+          "daysToHarvest": 39,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/sashimi-f1-cucumber-seed-4728.html",
+          "confidence": "high"
+        },
+        "gateway": {
+          "id": "gateway",
+          "name": "Gateway",
+          "daysToHarvest": 33,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/gateway-f1-cucumber-seed-4777.html",
+          "confidence": "high"
+        },
+        "qwerty": {
+          "id": "qwerty",
+          "name": "Qwerty",
+          "daysToHarvest": 29,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/qwerty-f1-cucumber-seed-5129.html",
+          "confidence": "high"
+        },
+        "gershwin": {
+          "id": "gershwin",
+          "name": "Gershwin",
+          "daysToHarvest": 29,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/gershwin-f1-cucumber-seed-5133.html",
+          "confidence": "high"
+        },
+        "mojito": {
+          "id": "mojito",
+          "name": "Mojito",
+          "daysToHarvest": 33,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/mojito-f1-cucumber-seed-5135.html",
+          "confidence": "high"
+        },
+        "margarita": {
+          "id": "margarita",
+          "name": "Margarita",
+          "daysToHarvest": 38,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/margarita-f1-cucumber-seed-5157.html",
+          "confidence": "high"
+        },
+        "quick-snack": {
+          "id": "quick-snack",
+          "name": "Quick Snack",
+          "daysToHarvest": 29,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/quick-snack-f1-cucumber-seed-5158.html",
+          "confidence": "high"
+        },
+        "gimlet": {
+          "id": "gimlet",
+          "name": "Gimlet",
+          "daysToHarvest": 29,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/gimlet-f1-cucumber-seed-5180.html",
+          "confidence": "high"
+        },
+        "demeter": {
+          "id": "demeter",
+          "name": "Demeter",
+          "daysToHarvest": 39,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/demeter-f1-cucumber-seed-5207.html",
+          "confidence": "high"
+        },
+        "super-max": {
+          "id": "super-max",
+          "name": "Super Max",
+          "daysToHarvest": 35,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/super-max-f1-cucumber-seed-5247.html",
+          "confidence": "high"
+        },
+        "samurai-252": {
+          "id": "samurai-252",
+          "name": "Samurai 252",
+          "daysToHarvest": 33,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/samurai-252-f1-cucumber-seed-5248.html",
+          "confidence": "high"
+        },
+        "striped-armenian": {
+          "id": "striped-armenian",
+          "name": "Striped Armenian",
+          "daysToHarvest": 43,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/specialty-cucumbers/striped-armenian-organic-cucumber-seed-2317G.html",
+          "confidence": "high"
+        },
+        "corinto": {
+          "id": "corinto",
+          "name": "Corinto",
+          "daysToHarvest": 35,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/slicing-cucumbers/corinto-organic-f1-cucumber-seed-2562G.html",
+          "confidence": "high"
+        },
+        "adam-gherkin": {
+          "id": "adam-gherkin",
+          "name": "Adam Gherkin",
+          "daysToHarvest": 32,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/adam-gherkin-organic-f1-cucumber-seed-2563G.html",
+          "confidence": "high"
+        },
+        "socrates": {
+          "id": "socrates",
+          "name": "Socrates",
+          "daysToHarvest": 35,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/socrates-organic-f1-cucumber-seed-2989G.html",
+          "confidence": "high"
+        },
+        "excelsior": {
+          "id": "excelsior",
+          "name": "Excelsior",
+          "daysToHarvest": 35,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/excelsior-organic-f1-cucumber-seed-3082G.html",
+          "confidence": "high"
+        },
+        "cool-customer": {
+          "id": "cool-customer",
+          "name": "Cool Customer",
+          "daysToHarvest": 37,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/pickling-cucumbers/cool-customer-organic-cucumber-seed-3449G.html",
+          "confidence": "high"
+        },
+        "picolino": {
+          "id": "picolino",
+          "name": "Picolino",
+          "daysToHarvest": 31,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/picolino-organic-f1-cucumber-seed-3542G.html",
+          "confidence": "high"
+        },
+        "tetsukabuto-rootstock": {
+          "id": "tetsukabuto-rootstock",
+          "name": "Tetsukabuto Rootstock",
+          "daysToHarvest": 55,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/cucumber-rootstock/tetsukabuto-rootstock-f1-rootstock-seed-3578A.html",
+          "confidence": "medium"
+        },
+        "poniente": {
+          "id": "poniente",
+          "name": "Poniente",
+          "daysToHarvest": 40,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/cucumbers/seedless-and-thin-skinned-cucumbers/poniente-organic-f1-cucumber-seed-4379G.html",
+          "confidence": "high"
+        },
+        "cucumber-armenian": {
+          "id": "cucumber-armenian",
+          "name": "Cucumber, Armenian",
+          "daysToHarvest": 55,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/cucumber-armenian-shoot-seed-5648S.html",
+          "confidence": "high"
+        },
+        "manny-f1-cucumber": {
+          "id": "manny-f1-cucumber",
+          "name": "Manny F1 Cucumber",
+          "daysToHarvest": 55,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-manny-f1-cucumber.html",
+          "confidence": "high"
+        },
+        "socrates-f1-cucumber": {
+          "id": "socrates-f1-cucumber",
+          "name": "Socrates F1 Cucumber",
+          "daysToHarvest": 52,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-socrates-f1-cucumber.html",
+          "confidence": "high"
+        },
+        "adam-f1-cucumber": {
+          "id": "adam-f1-cucumber",
+          "name": "Adam F1 Cucumber",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-adam-f1-gherkin-cucumber.html",
+          "confidence": "high"
+        },
+        "silver-slicer-cucumber": {
+          "id": "silver-slicer-cucumber",
+          "name": "Silver Slicer Cucumber",
+          "daysToHarvest": 54,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-silver-slicer-cucumber.html",
+          "confidence": "high"
+        },
+        "green-finger-cucumber": {
+          "id": "green-finger-cucumber",
+          "name": "Green Finger Cucumber",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-green-finger-cucumber.html",
+          "confidence": "high"
+        },
+        "paraiso-f1-cucumber": {
+          "id": "paraiso-f1-cucumber",
+          "name": "Paraiso F1 Cucumber",
+          "daysToHarvest": 55,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-paraiso-f1-cucumber.html",
+          "confidence": "high"
+        },
+        "tyria-f1-cucumber": {
+          "id": "tyria-f1-cucumber",
+          "name": "Tyria F1 Cucumber",
+          "daysToHarvest": 58,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-tyria-f1-cucumber.html",
+          "confidence": "high"
+        },
+        "lemon-cucumber": {
+          "id": "lemon-cucumber",
+          "name": "Lemon Cucumber",
+          "daysToHarvest": 68,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-lemon-cucumber.html",
+          "confidence": "high"
+        },
+        "picolino-f1-cucumber": {
+          "id": "picolino-f1-cucumber",
+          "name": "Picolino F1 Cucumber",
+          "daysToHarvest": 50,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-picolino-f1-cucumber.html",
+          "confidence": "high"
+        },
+        "suyo-long-cucumber": {
+          "id": "suyo-long-cucumber",
+          "name": "Suyo Long Cucumber",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-suyo-long-cucumber.html",
+          "confidence": "high"
+        },
+        "marketmore-76-cucumber": {
+          "id": "marketmore-76-cucumber",
+          "name": "Marketmore 76 Cucumber",
+          "daysToHarvest": 65,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-marketmore-76-cucumber.html",
+          "confidence": "high"
+        },
+        "national-pickling-cucumber": {
+          "id": "national-pickling-cucumber",
+          "name": "National Pickling Cucumber",
+          "daysToHarvest": 52,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-national-pickler-cucumber.html",
+          "confidence": "high"
+        },
+        "h-19-little-leaf-cucumber": {
+          "id": "h-19-little-leaf-cucumber",
+          "name": "H-19 Little Leaf Cucumber",
+          "daysToHarvest": 58,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-h19-little-leaf-cucumber.html",
+          "confidence": "high"
+        },
+        "tasty-green-f1-cucumber": {
+          "id": "tasty-green-f1-cucumber",
+          "name": "Tasty Green F1 Cucumber",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-tasty-green-f1-cucumber.html",
+          "confidence": "high"
+        },
+        "mini-me-f1-cucumber": {
+          "id": "mini-me-f1-cucumber",
+          "name": "Mini-Me F1 Cucumber",
+          "daysToHarvest": 50,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-minime-f1-cucumber.html",
+          "confidence": "high"
+        },
+        "green-18-f1-cucumber": {
+          "id": "green-18-f1-cucumber",
+          "name": "Green 18 F1 Cucumber",
+          "daysToHarvest": 55,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-green-18-f1-cucumber.html",
+          "confidence": "high"
+        },
+        "shintokiwa-cucumber": {
+          "id": "shintokiwa-cucumber",
+          "name": "Shintokiwa Cucumber",
+          "daysToHarvest": 60,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-shintokiwa-cucumber.html",
+          "confidence": "high"
+        },
+        "marketmore-97-cucumber": {
+          "id": "marketmore-97-cucumber",
+          "name": "Marketmore 97 Cucumber",
+          "daysToHarvest": 55,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cucumber-marketmore-97",
+          "confidence": "high"
+        },
+        "wautoma-cucumber": {
+          "id": "wautoma-cucumber",
+          "name": "Wautoma Cucumber",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cucumber-wautoma",
+          "confidence": "high"
+        },
+        "armenian-cucumber": {
+          "id": "armenian-cucumber",
+          "name": "Armenian Cucumber",
+          "daysToHarvest": 60,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cucumber-armenian",
+          "confidence": "high"
+        },
+        "double-yield-cucumber": {
+          "id": "double-yield-cucumber",
+          "name": "Double Yield Cucumber",
+          "daysToHarvest": 52,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/cucumber-double-yield",
+          "confidence": "high"
+        }
+      }
+    },
     "pea": {
       "id": "pea",
       "name": "Pea",
@@ -9469,14 +9437,6 @@
           "daysToHarvest": 58,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peas/snap-peas/royal-snap-ii-pea-seed-4115.html",
-          "confidence": "high"
-        },
-        "oregon-sugar-pod-ii": {
-          "id": "oregon-sugar-pod-ii",
-          "name": "Oregon Sugar Pod II",
-          "daysToHarvest": 60,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/peas/snow-peas/oregon-sugar-pod-ii-pea-seed-4960.html",
           "confidence": "high"
         },
         "cascadia": {
@@ -9922,6 +9882,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/specialty-pumpkins/speckled-hound-f1-pumpkin-seed-2506.html",
           "confidence": "high"
         },
+        "champion": {
+          "id": "champion",
+          "name": "Champion",
+          "daysToHarvest": 95,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/jack-o-lanterns/champion-f1-pumpkin-seed-2601.html",
+          "confidence": "high"
+        },
         "musquee-de-provence": {
           "id": "musquee-de-provence",
           "name": "Musquee de Provence",
@@ -10066,6 +10034,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/giant-pumpkins/big-moose-pumpkin-seed-3911.html",
           "confidence": "high"
         },
+        "cargo-pmr": {
+          "id": "cargo-pmr",
+          "name": "Cargo PMR",
+          "daysToHarvest": 100,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/jack-o-lanterns/cargo-pmr-f1-pumpkin-seed-3978.html",
+          "confidence": "high"
+        },
         "porcelain-doll": {
           "id": "porcelain-doll",
           "name": "Porcelain Doll",
@@ -10112,6 +10088,14 @@
           "daysToHarvest": 100,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/jack-o-lanterns/jack-of-hearts-f1-pumpkin-seed-4421.html",
+          "confidence": "high"
+        },
+        "duchess": {
+          "id": "duchess",
+          "name": "Duchess",
+          "daysToHarvest": 100,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/jack-o-lanterns/duchess-f1-pumpkin-seed-4422.html",
           "confidence": "high"
         },
         "atlantic-giant": {
@@ -10401,14 +10385,6 @@
           "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/radishes/specialty-radishes/red-meat-radish-seed-624.html",
-          "confidence": "high"
-        },
-        "miyashige": {
-          "id": "miyashige",
-          "name": "Miyashige",
-          "daysToHarvest": 50,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/radishes/daikon-korean-radishes/miyashige-radish-seed-625.html",
           "confidence": "high"
         },
         "rover": {
@@ -11252,14 +11228,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/shungiku-microgreen-seed-514M.html",
           "confidence": "high"
         },
-        "lemon-balm": {
-          "id": "lemon-balm",
-          "name": "Lemon Balm",
-          "daysToHarvest": 28,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/lemon-balm-microgreen-seed-766M.html",
-          "confidence": "high"
-        },
         "basil-lemon": {
           "id": "basil-lemon",
           "name": "Basil, Lemon",
@@ -11330,14 +11298,6 @@
           "daysToHarvest": 21,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/basil-italian-large-leaf-microgreen-seed-944M.html",
-          "confidence": "high"
-        },
-        "nasturtium-empress-of-india": {
-          "id": "nasturtium-empress-of-india",
-          "name": "Nasturtium, Empress of India",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/shoots/nasturtium-empress-of-india-shoot-seed-1824S.html",
           "confidence": "high"
         },
         "nasturtium": {
@@ -11428,6 +11388,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/carrot-microgreen-seed-2468M.html",
           "confidence": "high"
         },
+        "mustard-scarlet-frills": {
+          "id": "mustard-scarlet-frills",
+          "name": "Mustard, Scarlet Frills",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-scarlet-frills-microgreen-seed-2530M.html",
+          "confidence": "high"
+        },
         "radish-red-rambo": {
           "id": "radish-red-rambo",
           "name": "Radish, Red Rambo",
@@ -11466,14 +11434,6 @@
           "daysToHarvest": 28,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/sorrel-red-veined-microgreen-seed-2827M.html",
-          "confidence": "high"
-        },
-        "beet-bull-39-s-blood": {
-          "id": "beet-bull-39-s-blood",
-          "name": "Beet, Bull&#39;s Blood",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-bulls-blood-microgreen-seed-2912M.html",
           "confidence": "high"
         },
         "anise-hyssop": {
@@ -11546,14 +11506,6 @@
           "daysToHarvest": 21,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/mustard-miz-america-f1-microgreen-seed-3749M.html",
-          "confidence": "high"
-        },
-        "parsley": {
-          "id": "parsley",
-          "name": "Parsley",
-          "daysToHarvest": 28,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-herbs/parsley-microgreen-seed-3770M.html",
           "confidence": "high"
         },
         "kale-bright-green-curly": {
@@ -11732,6 +11684,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/tatsoi-organic-microgreen-seed-2897MG.html",
           "confidence": "high"
         },
+        "beet-bull-39-s-blood": {
+          "id": "beet-bull-39-s-blood",
+          "name": "Beet, Bull&#39;s Blood",
+          "daysToHarvest": 21,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-bulls-blood-organic-microgreen-seed-2912MG.html",
+          "confidence": "high"
+        },
         "basil-bicolor": {
           "id": "basil-bicolor",
           "name": "Basil, Bicolor",
@@ -11756,28 +11716,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/radish-purple-stem-organic-microgreen-seed-4107MG.html",
           "confidence": "high"
         },
-        "scallion": {
-          "id": "scallion",
-          "name": "Scallion",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/scallion-organic-microgreen-seed-4127MG.html",
-          "confidence": "high"
-        },
         "beet-red-beet": {
           "id": "beet-red-beet",
           "name": "Beet, Red Beet",
           "daysToHarvest": 21,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-red-beet-organic-microgreen-seed-4544MG.html",
-          "confidence": "high"
-        },
-        "beet-red-leaf": {
-          "id": "beet-red-leaf",
-          "name": "Beet, Red Leaf",
-          "daysToHarvest": 21,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-red-leaf-organic-microgreen-seed-4609MG.html",
           "confidence": "high"
         },
         "pac-choi-red-choi": {
@@ -13045,14 +12989,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/grape-tomatoes/red-pearl-organic-tomato-seed-97G.html",
           "confidence": "high"
         },
-        "big-beef": {
-          "id": "big-beef",
-          "name": "Big Beef",
-          "daysToHarvest": 70,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/beefsteak-tomatoes/big-beef-f1-tomato-seed-2063.html",
-          "confidence": "high"
-        },
         "estiva": {
           "id": "estiva",
           "name": "Estiva",
@@ -13141,14 +13077,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/heirloom-tomatoes/brandywine-organic-tomato-seed-2845.html",
           "confidence": "high"
         },
-        "rebelski": {
-          "id": "rebelski",
-          "name": "Rebelski",
-          "daysToHarvest": 75,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/slicing-tomatoes/rebelski-f1-tomato-seed-3017.html",
-          "confidence": "high"
-        },
         "mountain-merit": {
           "id": "mountain-merit",
           "name": "Mountain Merit",
@@ -13203,6 +13131,14 @@
           "daysToHarvest": 70,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/specialty-tomatoes/kakao-f1-tomato-seed-3178.html",
+          "confidence": "high"
+        },
+        "bigdena": {
+          "id": "bigdena",
+          "name": "Bigdena",
+          "daysToHarvest": 77,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/beefsteak-tomatoes/bigdena-f1-tomato-seed-3181.html",
           "confidence": "high"
         },
         "dro141tx": {
@@ -13293,14 +13229,6 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/grape-tomatoes/nova-f1-tomato-seed-3889.html",
           "confidence": "high"
         },
-        "pink-wonder": {
-          "id": "pink-wonder",
-          "name": "Pink Wonder",
-          "daysToHarvest": 73,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/specialty-tomatoes/pink-wonder-f1-tomato-seed-3917.html",
-          "confidence": "high"
-        },
         "supersweet-100": {
           "id": "supersweet-100",
           "name": "Supersweet 100",
@@ -13323,6 +13251,14 @@
           "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/paste-tomatoes/tiren-f1-tomato-seed-3998.html",
+          "confidence": "high"
+        },
+        "sungreen-4029": {
+          "id": "sungreen-4029",
+          "name": "Sungreen 4029",
+          "daysToHarvest": 58,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/cherry-tomatoes/sungreen-4029-f1-tomato-seed-4132.html",
           "confidence": "high"
         },
         "red-torch": {
@@ -13776,7 +13712,7 @@
         "galahad": {
           "id": "galahad",
           "name": "Galahad",
-          "daysToHarvest": 72,
+          "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/beefsteak-tomatoes/galahad-organic-f1-tomato-seed-4055G.html",
           "confidence": "high"
@@ -13869,28 +13805,12 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/specialty-tomatoes/black-angel-organic-f1-tomato-seed-5162G.html",
           "confidence": "high"
         },
-        "attracta": {
-          "id": "attracta",
-          "name": "Attracta",
-          "daysToHarvest": 58,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/cherry-tomatoes/attracta-organic-f1-tomato-seed-5185G.html",
-          "confidence": "high"
-        },
         "contessa": {
           "id": "contessa",
           "name": "Contessa",
           "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/beefsteak-tomatoes/contessa-organic-f1-tomato-seed-5274G.html",
-          "confidence": "high"
-        },
-        "blue-tonic": {
-          "id": "blue-tonic",
-          "name": "Blue Tonic",
-          "daysToHarvest": 72,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/slicing-tomatoes/blue-tonic-organic-f1-tomato-seed-5280G.html",
           "confidence": "high"
         },
         "magic-bullet": {
@@ -14950,6 +14870,14 @@
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatillos/de-milpa-organic-tomatillo-seed-2075.html",
           "confidence": "high"
         },
+        "pancho": {
+          "id": "pancho",
+          "name": "Pancho",
+          "daysToHarvest": 60,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatillos/pancho-f1-tomatillo-seed-4808.html",
+          "confidence": "high"
+        },
         "toma-verde-tomatillo": {
           "id": "toma-verde-tomatillo",
           "name": "Toma Verde Tomatillo",
@@ -15523,9 +15451,9 @@
           "sourceUrl": "https://www.johnnyseeds.com/herbs/dill/teddy-dill-seed-5550.html",
           "confidence": "medium"
         },
-        "greensleeves-dill": {
-          "id": "greensleeves-dill",
-          "name": "Greensleeves Dill",
+        "green-sleeves-dill": {
+          "id": "green-sleeves-dill",
+          "name": "Green Sleeves Dill",
           "daysToHarvest": 45,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-greensleeves-dill.html",
@@ -15858,14 +15786,6 @@
       "source": "catalog-etl",
       "confidence": "medium",
       "varieties": {
-        "creeping": {
-          "id": "creeping",
-          "name": "Creeping",
-          "daysToHarvest": 93,
-          "source": "johnnys",
-          "sourceUrl": "https://www.johnnyseeds.com/herbs/thyme/creeping-thyme-seed-938.html",
-          "confidence": "high"
-        },
         "german-winter": {
           "id": "german-winter",
           "name": "German Winter",
@@ -17315,6 +17235,215 @@
         }
       }
     },
+    "garlic": {
+      "id": "garlic",
+      "name": "Garlic",
+      "category": "vegetable",
+      "family": "other",
+      "method": "direct",
+      "directSowDaysBeforeFrost": 150,
+      "daysToHarvest": 240,
+      "seasons": {
+        "spring": {
+          "anchor": "lastSpringFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 150
+        },
+        "fall": {
+          "anchor": "firstFallFrost",
+          "method": "direct",
+          "directSowDaysBeforeAnchor": 21
+        }
+      },
+      "source": "catalog-etl",
+      "confidence": "low",
+      "varieties": {
+        "chesnok-red": {
+          "id": "chesnok-red",
+          "name": "Chesnok Red",
+          "daysToHarvest": 240,
+          "source": "johnnys",
+          "sourceUrl": "https://www.johnnyseeds.com/vegetables/garlic/chesnok-red-certified-naturally-grown-garlic-bulbs-3536.html",
+          "confidence": "medium"
+        },
+        "inchelium-red-garlic": {
+          "id": "inchelium-red-garlic",
+          "name": "Inchelium Red Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-inchelium-red-garlic.html",
+          "confidence": "medium"
+        },
+        "killarney-red-garlic": {
+          "id": "killarney-red-garlic",
+          "name": "Killarney Red Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-killarney-red-garlic.html",
+          "confidence": "medium"
+        },
+        "lorz-italian-garlic": {
+          "id": "lorz-italian-garlic",
+          "name": "Lorz Italian Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-lorz-italian-garlic.html",
+          "confidence": "medium"
+        },
+        "music-garlic": {
+          "id": "music-garlic",
+          "name": "Music Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-music-garlic.html",
+          "confidence": "medium"
+        },
+        "chesnok-red-garlic": {
+          "id": "chesnok-red-garlic",
+          "name": "Chesnok Red Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-chesnok-red-garlic.html",
+          "confidence": "medium"
+        },
+        "silver-white-garlic": {
+          "id": "silver-white-garlic",
+          "name": "Silver White Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-silver-white-garlic.html",
+          "confidence": "medium"
+        },
+        "zemo-garlic": {
+          "id": "zemo-garlic",
+          "name": "Zemo Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-zemo-garlic.html",
+          "confidence": "medium"
+        },
+        "nootka-rose-garlic": {
+          "id": "nootka-rose-garlic",
+          "name": "Nootka Rose Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-nootka-rose-garlic.html",
+          "confidence": "medium"
+        },
+        "spanish-roja-garlic": {
+          "id": "spanish-roja-garlic",
+          "name": "Spanish Roja Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-spanish-roja-garlic.html",
+          "confidence": "medium"
+        },
+        "georgian-crystal-garlic": {
+          "id": "georgian-crystal-garlic",
+          "name": "Georgian Crystal Garlic",
+          "daysToHarvest": 240,
+          "source": "highmowing",
+          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-georgian-crystal-garlic.html",
+          "confidence": "medium"
+        },
+        "purple-glazer-garlic": {
+          "id": "purple-glazer-garlic",
+          "name": "Purple Glazer Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-purple-glazer",
+          "confidence": "medium"
+        },
+        "bavarian-purple-garlic": {
+          "id": "bavarian-purple-garlic",
+          "name": "Bavarian Purple Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-bavarian-purple",
+          "confidence": "medium"
+        },
+        "georgian-fire-garlic": {
+          "id": "georgian-fire-garlic",
+          "name": "Georgian Fire Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-georgian-fire",
+          "confidence": "medium"
+        },
+        "duganski-garlic": {
+          "id": "duganski-garlic",
+          "name": "Duganski Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-duganski",
+          "confidence": "medium"
+        },
+        "uzbekistan-garlic": {
+          "id": "uzbekistan-garlic",
+          "name": "Uzbekistan Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-uzbekistan",
+          "confidence": "medium"
+        },
+        "premium-northern-white-garlic": {
+          "id": "premium-northern-white-garlic",
+          "name": "Premium Northern White Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-premium-northern-white",
+          "confidence": "medium"
+        },
+        "metechi-garlic": {
+          "id": "metechi-garlic",
+          "name": "Metechi Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-metechi",
+          "confidence": "medium"
+        },
+        "siberian-garlic": {
+          "id": "siberian-garlic",
+          "name": "Siberian Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-siberian",
+          "confidence": "medium"
+        },
+        "vietnamese-red-garlic": {
+          "id": "vietnamese-red-garlic",
+          "name": "Vietnamese Red Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-vietnamese-red",
+          "confidence": "medium"
+        },
+        "early-red-italian-garlic": {
+          "id": "early-red-italian-garlic",
+          "name": "Early Red Italian Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-early-red-italian",
+          "confidence": "medium"
+        },
+        "italian-late-garlic": {
+          "id": "italian-late-garlic",
+          "name": "Italian Late Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-italian-late",
+          "confidence": "medium"
+        },
+        "susanville-garlic": {
+          "id": "susanville-garlic",
+          "name": "Susanville Garlic",
+          "daysToHarvest": 240,
+          "source": "territorial",
+          "sourceUrl": "https://territorialseed.com/products/garlic-susanville",
+          "confidence": "medium"
+        }
+      }
+    },
     "angelica": {
       "id": "angelica",
       "name": "Angelica",
@@ -17770,135 +17899,6 @@
           "daysToHarvest": 90,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-magic-molly-potato.html",
-          "confidence": "medium"
-        }
-      }
-    },
-    "garlic": {
-      "id": "garlic",
-      "name": "Garlic",
-      "category": "vegetable",
-      "family": "other",
-      "method": "direct",
-      "directSowDaysBeforeFrost": 150,
-      "daysToHarvest": 240,
-      "seasons": {
-        "spring": {
-          "anchor": "lastSpringFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 150
-        },
-        "fall": {
-          "anchor": "firstFallFrost",
-          "method": "direct",
-          "directSowDaysBeforeAnchor": 21
-        }
-      },
-      "source": "catalog-etl",
-      "confidence": "low",
-      "varieties": {
-        "inchelium-red-garlic": {
-          "id": "inchelium-red-garlic",
-          "name": "Inchelium Red Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-inchelium-red-garlic.html",
-          "confidence": "medium"
-        },
-        "killarney-red-garlic": {
-          "id": "killarney-red-garlic",
-          "name": "Killarney Red Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-killarney-red-garlic.html",
-          "confidence": "medium"
-        },
-        "lorz-italian-garlic": {
-          "id": "lorz-italian-garlic",
-          "name": "Lorz Italian Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-lorz-italian-garlic.html",
-          "confidence": "medium"
-        },
-        "music-garlic": {
-          "id": "music-garlic",
-          "name": "Music Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-music-garlic.html",
-          "confidence": "medium"
-        },
-        "chesnok-red-garlic": {
-          "id": "chesnok-red-garlic",
-          "name": "Chesnok Red Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-chesnok-red-garlic.html",
-          "confidence": "medium"
-        },
-        "silver-white-garlic": {
-          "id": "silver-white-garlic",
-          "name": "Silver White Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-silver-white-garlic.html",
-          "confidence": "medium"
-        },
-        "zemo-garlic": {
-          "id": "zemo-garlic",
-          "name": "Zemo Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-zemo-garlic.html",
-          "confidence": "medium"
-        },
-        "nootka-rose-garlic": {
-          "id": "nootka-rose-garlic",
-          "name": "Nootka Rose Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-nootka-rose-garlic.html",
-          "confidence": "medium"
-        },
-        "spanish-roja-garlic": {
-          "id": "spanish-roja-garlic",
-          "name": "Spanish Roja Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-spanish-roja-garlic.html",
-          "confidence": "medium"
-        },
-        "georgian-crystal-garlic": {
-          "id": "georgian-crystal-garlic",
-          "name": "Georgian Crystal Garlic",
-          "daysToHarvest": 240,
-          "source": "highmowing",
-          "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-georgian-crystal-garlic.html",
-          "confidence": "medium"
-        },
-        "purple-glazer-garlic": {
-          "id": "purple-glazer-garlic",
-          "name": "Purple Glazer Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-purple-glazer",
-          "confidence": "medium"
-        },
-        "bavarian-purple-garlic": {
-          "id": "bavarian-purple-garlic",
-          "name": "Bavarian Purple Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-bavarian-purple",
-          "confidence": "medium"
-        },
-        "georgian-fire-garlic": {
-          "id": "georgian-fire-garlic",
-          "name": "Georgian Fire Garlic",
-          "daysToHarvest": 240,
-          "source": "territorial",
-          "sourceUrl": "https://territorialseed.com/products/garlic-georgian-fire",
           "confidence": "medium"
         }
       }
