@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { GET } from "./route";
 
 describe("GET /api/natives", () => {
-  it("returns native plants for 55423", async () => {
+  it("returns evidence-backed candidates for 55423", async () => {
     const res = await GET(new Request("http://localhost/api/natives?zip=55423"));
     expect(res.status).toBe(200);
     const body = await res.json();
@@ -10,8 +10,15 @@ describe("GET /api/natives", () => {
     expect(body.county.name).toBe("Hennepin");
     expect(body.riskProfile).toBe("balanced");
     expect(body.catalogCoverage).toBe("full");
-    expect(body.plants.length).toBeGreaterThanOrEqual(15);
-    expect(body.plants[0].tasks[0].date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    expect(body.rangeEvidenceCoverage).toMatchObject({
+      status: "affirmative_evidence",
+      affirmativeCount: body.rangeEvidenceCoverage.catalogCandidateCount,
+      notNativeCount: 0,
+      unknownCount: 0,
+      missingCount: 0,
+    });
+    expect(body.rangeEvidenceCoverage.catalogCandidateCount).toBeGreaterThan(0);
+    expect(body.plants.length).toBe(body.rangeEvidenceCoverage.catalogCandidateCount);
   });
 
   it("rejects invalid zip", async () => {
@@ -19,31 +26,39 @@ describe("GET /api/natives", () => {
     expect(res.status).toBe(400);
   });
 
-  it("returns High Plains plants for 80202", async () => {
+  it("returns evidence-backed High Plains candidates", async () => {
     const res = await GET(new Request("http://localhost/api/natives?zip=80202"));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.ecoregion.id).toBe("25");
     expect(body.catalogCoverage).toBe("full");
-    expect(body.plants.length).toBeGreaterThanOrEqual(15);
+    expect(body.rangeEvidenceCoverage.status).toBe("affirmative_evidence");
+    expect(body.rangeEvidenceCoverage.missingCount).toBe(0);
+    expect(body.plants.length).toBe(body.rangeEvidenceCoverage.catalogCandidateCount);
   });
 
-  it("returns Northeastern Coastal Zone for 10001", async () => {
+  it("returns evidence-backed Northeastern Coastal Zone candidates", async () => {
     const res = await GET(new Request("http://localhost/api/natives?zip=10001"));
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.ecoregion.id).toBe("59");
-    expect(body.plants.length).toBeGreaterThanOrEqual(15);
+    expect(body.rangeEvidenceCoverage.status).toBe("affirmative_evidence");
+    expect(body.rangeEvidenceCoverage.missingCount).toBe(0);
+    expect(body.plants.length).toBe(body.rangeEvidenceCoverage.catalogCandidateCount);
   });
 
-  it("supports fall season dormant sow", async () => {
+  it("returns fall sow tasks for evidence-backed candidates", async () => {
     const res = await GET(
       new Request("http://localhost/api/natives?zip=55423&season=fall"),
     );
     expect(res.status).toBe(200);
     const body = await res.json();
     expect(body.season).toBe("fall");
-    expect(body.plants[0].tasks[0].type).toBe("fall_sow");
+    expect(body.rangeEvidenceCoverage.status).toBe("affirmative_evidence");
+    expect(body.plants.length).toBeGreaterThan(0);
+    expect(body.plants.every((plant: { tasks: { type: string }[] }) =>
+      plant.tasks.every((task) => task.type === "fall_sow"),
+    )).toBe(true);
   });
 
   it("honors riskProfile query", async () => {

@@ -1,38 +1,402 @@
 {
-  "version": "2026-07-20",
-  "provenance": "Hand-curated for EPA L3 51, 25, 59, 54. Nativity via USDA PLANTS. Timing: NRCS / regional guidelines + frost offsets. ADR 007 Phase 5.",
+  "version": "2",
+  "provenance": "Candidate species catalog for EPA L3 51, 25, 59, and 54. USDA PLANTS profile links identify species sources but do not establish local county nativity; see plant-range-evidence.json. Timing: NRCS / regional guidelines + frost offsets. ADR 007 Phase 5. Additional candidates are sourced from the USDA culturally significant plant inventory; see native-candidate-discovery.json for raw selection provenance.",
   "plants": {
-    "echinacea-purpurea": {
-      "id": "echinacea-purpurea",
-      "commonName": "Purple coneflower",
-      "scientificName": "Echinacea purpurea",
+    "achillea-millefolium": {
+      "id": "achillea-millefolium",
+      "commonName": "Common yarrow",
+      "scientificName": "Achillea millefolium",
       "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ACMI2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ACMI2",
+        "profileId": 31206,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_acmi2.docx"
+      }
+    },
+    "aesculus-californica": {
+      "id": "aesculus-californica",
+      "commonName": "California buckeye",
+      "scientificName": "Aesculus californica",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=AECA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "AECA",
+        "profileId": 93129,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_aeca.docx"
+      }
+    },
+    "allium-hyalinum": {
+      "id": "allium-hyalinum",
+      "commonName": "Glassy onion",
+      "scientificName": "Allium hyalinum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ALHY",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ALHY",
+        "profileId": 27976,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_alhy.docx"
+      }
+    },
+    "allium-unifolium": {
+      "id": "allium-unifolium",
+      "commonName": "Oneleaf onion",
+      "scientificName": "Allium unifolium",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ALUN",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ALUN",
+        "profileId": 28093,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_alun.docx"
+      }
+    },
+    "alnus-incana": {
+      "id": "alnus-incana",
+      "commonName": "Gray alder",
+      "scientificName": "Alnus incana",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ALIN2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ALIN2",
+        "profileId": 69903,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_alin2.docx"
+      }
+    },
+    "alnus-rubra": {
+      "id": "alnus-rubra",
+      "commonName": "Red alder",
+      "scientificName": "Alnus rubra",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ALRU2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ALRU2",
+        "profileId": 69925,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_alru2.docx"
+      }
+    },
+    "amelanchier-canadensis": {
+      "id": "amelanchier-canadensis",
+      "commonName": "Canadian serviceberry",
+      "scientificName": "Amelanchier canadensis",
+      "habit": "shrub",
+      "light": "part-shade",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 90,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=AMCA4",
+      "confidence": "medium"
+    },
+    "amphicarpaea-bracteata": {
+      "id": "amphicarpaea-bracteata",
+      "commonName": "American hogpeanut",
+      "scientificName": "Amphicarpaea bracteata",
+      "habit": "vine",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=AMBR2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "AMBR2",
+        "profileId": 76911,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ambr2.docx"
+      }
+    },
+    "andropogon-gerardii": {
+      "id": "andropogon-gerardii",
+      "commonName": "Big bluestem",
+      "scientificName": "Andropogon gerardii",
+      "habit": "grass",
       "light": "full-sun",
       "moisture": "medium",
       "method": "direct",
-      "directSowDaysBeforeFrost": -14,
+      "directSowDaysBeforeFrost": -21,
       "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ECPU",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ANGE",
       "confidence": "high"
     },
-    "ratibida-pinnata": {
-      "id": "ratibida-pinnata",
-      "commonName": "Yellow coneflower",
-      "scientificName": "Ratibida pinnata",
+    "anemopsis-californica": {
+      "id": "anemopsis-californica",
+      "commonName": "Yerba mansa",
+      "scientificName": "Anemopsis californica",
       "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ANCA10",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ANCA10",
+        "profileId": 72285,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_anca10.docx"
+      }
+    },
+    "apios-americana": {
+      "id": "apios-americana",
+      "commonName": "Groundnut",
+      "scientificName": "Apios americana",
+      "habit": "vine",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=APAM",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "APAM",
+        "profileId": 76939,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_apam.docx"
+      }
+    },
+    "apocynum-cannabinum": {
+      "id": "apocynum-cannabinum",
+      "commonName": "Indianhemp",
+      "scientificName": "Apocynum cannabinum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=APCA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "APCA",
+        "profileId": 43262,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_apca.docx"
+      }
+    },
+    "aquilegia-canadensis": {
+      "id": "aquilegia-canadensis",
+      "commonName": "Wild columbine",
+      "scientificName": "Aquilegia canadensis",
+      "habit": "forb",
+      "light": "part-shade",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=AQCA",
+      "confidence": "high",
+      "fallDormant": true
+    },
+    "arbutus-menziesii": {
+      "id": "arbutus-menziesii",
+      "commonName": "Pacific madrone",
+      "scientificName": "Arbutus menziesii",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ARME",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ARME",
+        "profileId": 64849,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_arme.docx"
+      }
+    },
+    "arctostaphylos-viscida": {
+      "id": "arctostaphylos-viscida",
+      "commonName": "Sticky whiteleaf manzanita",
+      "scientificName": "Arctostaphylos viscida",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ARVI4",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ARVI4",
+        "profileId": 65080,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/pg_arvi4.pdf"
+      }
+    },
+    "argentina-egedii": {
+      "id": "argentina-egedii",
+      "commonName": "Pacific silverweed",
+      "scientificName": "Argentina egedii",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=AREG",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "AREG",
+        "profileId": 88752,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_areg.docx"
+      }
+    },
+    "artemisia-dracunculus": {
+      "id": "artemisia-dracunculus",
+      "commonName": "Tarragon",
+      "scientificName": "Artemisia dracunculus",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ARDR4",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ARDR4",
+        "profileId": 32258,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ardr4.docx"
+      }
+    },
+    "artemisia-frigida": {
+      "id": "artemisia-frigida",
+      "commonName": "Fringed sagebrush",
+      "scientificName": "Artemisia frigida",
+      "habit": "shrub",
       "light": "full-sun",
       "moisture": "dry",
       "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RAPI",
-      "confidence": "high"
+      "directSowDaysBeforeFrost": -14,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ARFR4",
+      "confidence": "medium"
     },
-    "monarda-fistulosa": {
-      "id": "monarda-fistulosa",
-      "commonName": "Wild bergamot",
-      "scientificName": "Monarda fistulosa",
+    "artemisia-ludoviciana": {
+      "id": "artemisia-ludoviciana",
+      "commonName": "White sagebrush",
+      "scientificName": "Artemisia ludoviciana",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ARLU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ARLU",
+        "profileId": 32298,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_arlu.docx"
+      }
+    },
+    "arundinaria-gigantea": {
+      "id": "arundinaria-gigantea",
+      "commonName": "Giant cane",
+      "scientificName": "Arundinaria gigantea",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ARGI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ARGI",
+        "profileId": 20561,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_argi.docx"
+      }
+    },
+    "asarum-canadense": {
+      "id": "asarum-canadense",
+      "commonName": "Canadian wildginger",
+      "scientificName": "Asarum canadense",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASCA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ASCA",
+        "profileId": 71268,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_asca.docx"
+      }
+    },
+    "asclepias-cordifolia": {
+      "id": "asclepias-cordifolia",
+      "commonName": "Heartleaf milkweed",
+      "scientificName": "Asclepias cordifolia",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASCO",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ASCO",
+        "profileId": 43500,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_asco.docx"
+      }
+    },
+    "asclepias-fascicularis": {
+      "id": "asclepias-fascicularis",
+      "commonName": "Mexican whorled milkweed",
+      "scientificName": "Asclepias fascicularis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASFA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ASFA",
+        "profileId": 43525,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_asfa.docx"
+      }
+    },
+    "asclepias-incarnata": {
+      "id": "asclepias-incarnata",
+      "commonName": "Swamp milkweed",
+      "scientificName": "Asclepias incarnata",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "wet",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASIN",
+      "confidence": "high",
+      "fallDormant": true
+    },
+    "asclepias-speciosa": {
+      "id": "asclepias-speciosa",
+      "commonName": "Showy milkweed",
+      "scientificName": "Asclepias speciosa",
       "habit": "forb",
       "light": "full-sun",
       "moisture": "medium",
@@ -40,7 +404,7 @@
       "stratificationDays": 30,
       "needsStratification": true,
       "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MOFI",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASSP",
       "confidence": "high"
     },
     "asclepias-syriaca": {
@@ -57,330 +421,56 @@
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASSY",
       "confidence": "high"
     },
-    "asclepias-incarnata": {
-      "id": "asclepias-incarnata",
-      "commonName": "Swamp milkweed",
-      "scientificName": "Asclepias incarnata",
+    "asclepias-tuberosa": {
+      "id": "asclepias-tuberosa",
+      "commonName": "Butterfly milkweed",
+      "scientificName": "Asclepias tuberosa",
       "habit": "forb",
-      "light": "full-sun",
-      "moisture": "wet",
       "method": "direct",
-      "stratificationDays": 30,
-      "needsStratification": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASIN",
-      "confidence": "high",
-      "fallDormant": true
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASTU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ASTU",
+        "profileId": 43605,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_astu.docx"
+      }
     },
-    "rudbeckia-hirta": {
-      "id": "rudbeckia-hirta",
-      "commonName": "Black-eyed Susan",
-      "scientificName": "Rudbeckia hirta",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "medium",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -7,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RUHI2",
-      "confidence": "high"
-    },
-    "solidago-rigida": {
-      "id": "solidago-rigida",
-      "commonName": "Stiff goldenrod",
-      "scientificName": "Solidago rigida",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SORIR",
-      "confidence": "medium",
-      "fallDormant": true
-    },
-    "lupinus-perennis": {
-      "id": "lupinus-perennis",
-      "commonName": "Wild lupine",
-      "scientificName": "Lupinus perennis",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "stratificationDays": 14,
-      "needsStratification": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LUPE3",
-      "confidence": "high",
-      "fallDormant": true
-    },
-    "schizachyrium-scoparium": {
-      "id": "schizachyrium-scoparium",
-      "commonName": "Little bluestem",
-      "scientificName": "Schizachyrium scoparium",
-      "habit": "grass",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -21,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SCSC",
-      "confidence": "high"
-    },
-    "andropogon-gerardii": {
-      "id": "andropogon-gerardii",
-      "commonName": "Big bluestem",
-      "scientificName": "Andropogon gerardii",
-      "habit": "grass",
-      "light": "full-sun",
-      "moisture": "medium",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -21,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ANGE",
-      "confidence": "high"
-    },
-    "bouteloua-curtipendula": {
-      "id": "bouteloua-curtipendula",
-      "commonName": "Sideoats grama",
-      "scientificName": "Bouteloua curtipendula",
-      "habit": "grass",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -14,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=BOCU",
-      "confidence": "high"
-    },
-    "panicum-virgatum": {
-      "id": "panicum-virgatum",
-      "commonName": "Switchgrass",
-      "scientificName": "Panicum virgatum",
-      "habit": "grass",
-      "light": "full-sun",
-      "moisture": "medium",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -14,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PAVI2",
-      "confidence": "high"
-    },
-    "sporobolus-heterolepis": {
-      "id": "sporobolus-heterolepis",
-      "commonName": "Prairie dropseed",
-      "scientificName": "Sporobolus heterolepis",
-      "habit": "grass",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -14,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPHE",
-      "confidence": "high"
-    },
-    "aquilegia-canadensis": {
-      "id": "aquilegia-canadensis",
-      "commonName": "Wild columbine",
-      "scientificName": "Aquilegia canadensis",
-      "habit": "forb",
-      "light": "part-shade",
-      "moisture": "medium",
-      "method": "direct",
-      "stratificationDays": 30,
-      "needsStratification": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=AQCA",
-      "confidence": "high",
-      "fallDormant": true
-    },
-    "coreopsis-lanceolata": {
-      "id": "coreopsis-lanceolata",
-      "commonName": "Lanceleaf coreopsis",
-      "scientificName": "Coreopsis lanceolata",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -7,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=COLA5",
-      "confidence": "high"
-    },
-    "penstemon-digitalis": {
-      "id": "penstemon-digitalis",
-      "commonName": "Foxglove beardtongue",
-      "scientificName": "Penstemon digitalis",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "medium",
-      "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PEDI",
-      "confidence": "high"
-    },
-    "bouteloua-gracilis": {
-      "id": "bouteloua-gracilis",
-      "commonName": "Blue grama",
-      "scientificName": "Bouteloua gracilis",
-      "habit": "grass",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -21,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=BOGR2",
-      "confidence": "high"
-    },
-    "ratibida-columnifera": {
-      "id": "ratibida-columnifera",
-      "commonName": "Prairie coneflower",
-      "scientificName": "Ratibida columnifera",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -7,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RACO3",
-      "confidence": "high"
-    },
-    "linum-lewisii": {
-      "id": "linum-lewisii",
-      "commonName": "Blue flax",
-      "scientificName": "Linum lewisii",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "stratificationDays": 30,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LILE3",
-      "confidence": "high"
-    },
-    "gaillardia-aristata": {
-      "id": "gaillardia-aristata",
-      "commonName": "Blanketflower",
-      "scientificName": "Gaillardia aristata",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "directSowDaysBeforeFrost": -14,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=GAAR",
-      "confidence": "high"
-    },
-    "asclepias-speciosa": {
-      "id": "asclepias-speciosa",
-      "commonName": "Showy milkweed",
-      "scientificName": "Asclepias speciosa",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "medium",
-      "method": "direct",
-      "stratificationDays": 30,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASSP",
-      "confidence": "high"
-    },
-    "penstemon-strictus": {
-      "id": "penstemon-strictus",
-      "commonName": "Rocky Mountain penstemon",
-      "scientificName": "Penstemon strictus",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PEST2",
-      "confidence": "high"
-    },
-    "dalea-purpurea": {
-      "id": "dalea-purpurea",
-      "commonName": "Purple prairie clover",
-      "scientificName": "Dalea purpurea",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "stratificationDays": 30,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=DAPU5",
-      "confidence": "high"
-    },
-    "artemisia-frigida": {
-      "id": "artemisia-frigida",
-      "commonName": "Fringed sagebrush",
-      "scientificName": "Artemisia frigida",
+    "asimina-triloba": {
+      "id": "asimina-triloba",
+      "commonName": "Pawpaw",
+      "scientificName": "Asimina triloba",
       "habit": "shrub",
-      "light": "full-sun",
-      "moisture": "dry",
       "method": "direct",
-      "directSowDaysBeforeFrost": -14,
-      "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ARFR4",
-      "confidence": "medium"
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ASTR",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ASTR",
+        "profileId": 71503,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_astr.docx"
+      }
     },
-    "eriogonum-umbellatum": {
-      "id": "eriogonum-umbellatum",
-      "commonName": "Sulphur-flower buckwheat",
-      "scientificName": "Eriogonum umbellatum",
+    "baptisia-australis": {
+      "id": "baptisia-australis",
+      "commonName": "Blue wild indigo",
+      "scientificName": "Baptisia australis",
       "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
       "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ERUM",
-      "confidence": "high"
-    },
-    "oenothera-missouriensis": {
-      "id": "oenothera-missouriensis",
-      "commonName": "Missouri evening primrose",
-      "scientificName": "Oenothera macrocarpa",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "dry",
-      "method": "direct",
-      "stratificationDays": 30,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=OEMA2",
-      "confidence": "medium"
-    },
-    "symphyotrichum-novae-angliae": {
-      "id": "symphyotrichum-novae-angliae",
-      "commonName": "New England aster",
-      "scientificName": "Symphyotrichum novae-angliae",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "medium",
-      "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SYNO2",
-      "confidence": "high"
-    },
-    "liatris-spicata": {
-      "id": "liatris-spicata",
-      "commonName": "Dense blazing star",
-      "scientificName": "Liatris spicata",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "medium",
-      "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LISP",
-      "confidence": "high"
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=BAAU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "BAAU",
+        "profileId": 78033,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_baau.docx"
+      }
     },
     "baptisia-tinctoria": {
       "id": "baptisia-tinctoria",
@@ -396,60 +486,167 @@
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=BATI",
       "confidence": "medium"
     },
-    "vernonia-noveboracensis": {
-      "id": "vernonia-noveboracensis",
-      "commonName": "New York ironweed",
-      "scientificName": "Vernonia noveboracensis",
-      "habit": "forb",
+    "bouteloua-curtipendula": {
+      "id": "bouteloua-curtipendula",
+      "commonName": "Sideoats grama",
+      "scientificName": "Bouteloua curtipendula",
+      "habit": "grass",
       "light": "full-sun",
-      "moisture": "wet",
-      "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VENO",
-      "confidence": "high"
-    },
-    "solidago-sempervirens": {
-      "id": "solidago-sempervirens",
-      "commonName": "Seaside goldenrod",
-      "scientificName": "Solidago sempervirens",
-      "habit": "forb",
-      "light": "full-sun",
-      "moisture": "medium",
+      "moisture": "dry",
       "method": "direct",
       "directSowDaysBeforeFrost": -14,
       "needsStratification": false,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SOSE",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=BOCU",
       "confidence": "high"
     },
-    "amelanchier-canadensis": {
-      "id": "amelanchier-canadensis",
-      "commonName": "Canadian serviceberry",
-      "scientificName": "Amelanchier canadensis",
-      "habit": "shrub",
-      "light": "part-shade",
-      "moisture": "medium",
+    "bouteloua-gracilis": {
+      "id": "bouteloua-gracilis",
+      "commonName": "Blue grama",
+      "scientificName": "Bouteloua gracilis",
+      "habit": "grass",
+      "light": "full-sun",
+      "moisture": "dry",
       "method": "direct",
-      "stratificationDays": 90,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=AMCA4",
-      "confidence": "medium"
+      "directSowDaysBeforeFrost": -21,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=BOGR2",
+      "confidence": "high"
     },
-    "viburnum-dentatum": {
-      "id": "viburnum-dentatum",
-      "commonName": "Arrowwood viburnum",
-      "scientificName": "Viburnum dentatum",
-      "habit": "shrub",
-      "light": "part-shade",
-      "moisture": "medium",
+    "brodiaea-coronaria": {
+      "id": "brodiaea-coronaria",
+      "commonName": "Crown brodiaea",
+      "scientificName": "Brodiaea coronaria",
+      "habit": "forb",
       "method": "direct",
-      "stratificationDays": 90,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VIDE",
-      "confidence": "medium"
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=BRCO3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "BRCO3",
+        "profileId": 28173,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_brco3.docx"
+      }
+    },
+    "calandrinia-ciliata": {
+      "id": "calandrinia-ciliata",
+      "commonName": "Fringed redmaids",
+      "scientificName": "Calandrinia ciliata",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CACI2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CACI2",
+        "profileId": 59684,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_caci2.docx"
+      }
+    },
+    "callicarpa-americana": {
+      "id": "callicarpa-americana",
+      "commonName": "American beautyberry",
+      "scientificName": "Callicarpa americana",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CAAM2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CAAM2",
+        "profileId": 46985,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_caam2.docx"
+      }
+    },
+    "calochortus-luteus": {
+      "id": "calochortus-luteus",
+      "commonName": "Yellow mariposa lily",
+      "scientificName": "Calochortus luteus",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CALU9",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CALU9",
+        "profileId": 28268,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_calu9.docx"
+      }
+    },
+    "calochortus-superbus": {
+      "id": "calochortus-superbus",
+      "commonName": "Yellow mariposa",
+      "scientificName": "Calochortus superbus",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CASU3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CASU3",
+        "profileId": 28303,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_casu3.docx"
+      }
+    },
+    "calochortus-venustus": {
+      "id": "calochortus-venustus",
+      "commonName": "Butterfly mariposa lily",
+      "scientificName": "Calochortus venustus",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CAVE3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CAVE3",
+        "profileId": 28316,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_cave3.docx"
+      }
+    },
+    "carex-barbarae": {
+      "id": "carex-barbarae",
+      "commonName": "Santa Barbara sedge",
+      "scientificName": "Carex barbarae",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CABA4",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CABA4",
+        "profileId": 18219,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_caba4.docx"
+      }
+    },
+    "carex-obnupta": {
+      "id": "carex-obnupta",
+      "commonName": "Slough sedge",
+      "scientificName": "Carex obnupta",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CAOB3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CAOB3",
+        "profileId": 17597,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_caob3.docx"
+      }
     },
     "carex-pensylvanica": {
       "id": "carex-pensylvanica",
@@ -463,6 +660,254 @@
       "needsStratification": false,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CAPE6",
       "confidence": "high"
+    },
+    "carnegiea-gigantea": {
+      "id": "carnegiea-gigantea",
+      "commonName": "Saguaro",
+      "scientificName": "Carnegiea gigantea",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CAGI10",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CAGI10",
+        "profileId": 56035,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/cs_cagi7.pdf"
+      }
+    },
+    "carya-illinoinensis": {
+      "id": "carya-illinoinensis",
+      "commonName": "Pecan",
+      "scientificName": "Carya illinoinensis",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CAIL2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CAIL2",
+        "profileId": 70608,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_cail2.docx"
+      }
+    },
+    "ceanothus-americanus": {
+      "id": "ceanothus-americanus",
+      "commonName": "New Jersey tea",
+      "scientificName": "Ceanothus americanus",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CEAM",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CEAM",
+        "profileId": 87033,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ceam.docx"
+      }
+    },
+    "ceanothus-cuneatus": {
+      "id": "ceanothus-cuneatus",
+      "commonName": "Buckbrush",
+      "scientificName": "Ceanothus cuneatus",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CECU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CECU",
+        "profileId": 87047,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/pg_cecu.pdf"
+      }
+    },
+    "ceanothus-herbaceus": {
+      "id": "ceanothus-herbaceus",
+      "commonName": "Jersey tea",
+      "scientificName": "Ceanothus herbaceus",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CEHE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CEHE",
+        "profileId": 87095,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_cehe.docx"
+      }
+    },
+    "celtis-laevigata": {
+      "id": "celtis-laevigata",
+      "commonName": "Sugarberry",
+      "scientificName": "Celtis laevigata",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CELA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CELA",
+        "profileId": 70928,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_cela.docx"
+      }
+    },
+    "cercis-canadensis": {
+      "id": "cercis-canadensis",
+      "commonName": "Eastern redbud",
+      "scientificName": "Cercis canadensis",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CECA4",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CECA4",
+        "profileId": 78328,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ceca4.docx"
+      }
+    },
+    "cercis-orbiculata": {
+      "id": "cercis-orbiculata",
+      "commonName": "California redbud",
+      "scientificName": "Cercis orbiculata",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CEOR9",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CEOR9",
+        "profileId": 78335,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ceor9.docx"
+      }
+    },
+    "chlorogalum-pomeridianum": {
+      "id": "chlorogalum-pomeridianum",
+      "commonName": "Wavyleaf soap plant",
+      "scientificName": "Chlorogalum pomeridianum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CHPO3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CHPO3",
+        "profileId": 28378,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_chpo3.docx"
+      }
+    },
+    "coreopsis-lanceolata": {
+      "id": "coreopsis-lanceolata",
+      "commonName": "Lanceleaf coreopsis",
+      "scientificName": "Coreopsis lanceolata",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -7,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=COLA5",
+      "confidence": "high"
+    },
+    "cornus-sericea": {
+      "id": "cornus-sericea",
+      "commonName": "Redosier dogwood",
+      "scientificName": "Cornus sericea",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=COSE16",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "COSE16",
+        "profileId": 75206,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_cose16.docx"
+      }
+    },
+    "cyperus-eragrostis": {
+      "id": "cyperus-eragrostis",
+      "commonName": "Tall flatsedge",
+      "scientificName": "Cyperus eragrostis",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=CYER",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "CYER",
+        "profileId": 18586,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_cyer.docx"
+      }
+    },
+    "dalea-purpurea": {
+      "id": "dalea-purpurea",
+      "commonName": "Purple prairie clover",
+      "scientificName": "Dalea purpurea",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=DAPU5",
+      "confidence": "high"
+    },
+    "dichelostemma-capitatum": {
+      "id": "dichelostemma-capitatum",
+      "commonName": "Bluedicks",
+      "scientificName": "Dichelostemma capitatum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=DICA14",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "DICA14",
+        "profileId": 28461,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_dica14.docx"
+      }
+    },
+    "echinacea-angustifolia": {
+      "id": "echinacea-angustifolia",
+      "commonName": "Blacksamson echinacea",
+      "scientificName": "Echinacea angustifolia",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ECAN2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ECAN2",
+        "profileId": 34459,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ecan2.docx"
+      }
     },
     "echinacea-pallida": {
       "id": "echinacea-pallida",
@@ -478,10 +923,91 @@
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ECPA",
       "confidence": "high"
     },
-    "silphium-laciniatum": {
-      "id": "silphium-laciniatum",
-      "commonName": "Compass plant",
-      "scientificName": "Silphium laciniatum",
+    "echinacea-purpurea": {
+      "id": "echinacea-purpurea",
+      "commonName": "Purple coneflower",
+      "scientificName": "Echinacea purpurea",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -14,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ECPU",
+      "confidence": "high"
+    },
+    "ephedra-nevadensis": {
+      "id": "ephedra-nevadensis",
+      "commonName": "Nevada jointfir",
+      "scientificName": "Ephedra nevadensis",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=EPNE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "EPNE",
+        "profileId": 15715,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_epne.docx"
+      }
+    },
+    "ephedra-viridis": {
+      "id": "ephedra-viridis",
+      "commonName": "Mormon tea",
+      "scientificName": "Ephedra viridis",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=EPVI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "EPVI",
+        "profileId": 15722,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_epvi.docx"
+      }
+    },
+    "erigeron-philadelphicus": {
+      "id": "erigeron-philadelphicus",
+      "commonName": "Philadelphia fleabane",
+      "scientificName": "Erigeron philadelphicus",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ERPH",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ERPH",
+        "profileId": 35138,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_erph.docx"
+      }
+    },
+    "eriodictyon-californicum": {
+      "id": "eriodictyon-californicum",
+      "commonName": "California yerba santa",
+      "scientificName": "Eriodictyon californicum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ERCA6",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ERCA6",
+        "profileId": 53312,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_erca6.docx"
+      }
+    },
+    "eriogonum-umbellatum": {
+      "id": "eriogonum-umbellatum",
+      "commonName": "Sulphur-flower buckwheat",
+      "scientificName": "Eriogonum umbellatum",
       "habit": "forb",
       "light": "full-sun",
       "moisture": "dry",
@@ -489,22 +1015,25 @@
       "stratificationDays": 60,
       "needsStratification": true,
       "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SILA2",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ERUM",
       "confidence": "high"
     },
-    "silphium-terebinthinaceum": {
-      "id": "silphium-terebinthinaceum",
-      "commonName": "Prairie dock",
-      "scientificName": "Silphium terebinthinaceum",
+    "eryngium-aquaticum": {
+      "id": "eryngium-aquaticum",
+      "commonName": "Rattlesnakemaster",
+      "scientificName": "Eryngium aquaticum",
       "habit": "forb",
-      "light": "full-sun",
-      "moisture": "medium",
       "method": "direct",
-      "stratificationDays": 60,
-      "needsStratification": true,
-      "fallDormant": true,
-      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SITE3",
-      "confidence": "medium"
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ERAQ",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ERAQ",
+        "profileId": 73969,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_eraq.docx"
+      }
     },
     "eryngium-yuccifolium": {
       "id": "eryngium-yuccifolium",
@@ -519,6 +1048,2758 @@
       "fallDormant": true,
       "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ERYU",
       "confidence": "high"
+    },
+    "fragaria-chiloensis": {
+      "id": "fragaria-chiloensis",
+      "commonName": "Beach strawberry",
+      "scientificName": "Fragaria chiloensis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=FRCH",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "FRCH",
+        "profileId": 89728,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_frch.docx"
+      }
+    },
+    "fragaria-vesca": {
+      "id": "fragaria-vesca",
+      "commonName": "Woodland strawberry",
+      "scientificName": "Fragaria vesca",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=FRVE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "FRVE",
+        "profileId": 89736,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_frve.docx"
+      }
+    },
+    "fragaria-virginiana": {
+      "id": "fragaria-virginiana",
+      "commonName": "Virginia strawberry",
+      "scientificName": "Fragaria virginiana",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=FRVI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "FRVI",
+        "profileId": 89751,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_frvi.docx"
+      }
+    },
+    "fraxinus-americana": {
+      "id": "fraxinus-americana",
+      "commonName": "White ash",
+      "scientificName": "Fraxinus americana",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=FRAM2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "FRAM2",
+        "profileId": 49739,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_fram2.docx"
+      }
+    },
+    "fraxinus-nigra": {
+      "id": "fraxinus-nigra",
+      "commonName": "Black ash",
+      "scientificName": "Fraxinus nigra",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=FRNI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "FRNI",
+        "profileId": 49771,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_frni.docx"
+      }
+    },
+    "fremontodendron-californicum": {
+      "id": "fremontodendron-californicum",
+      "commonName": "California flannelbush",
+      "scientificName": "Fremontodendron californicum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=FRCA6",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "FRCA6",
+        "profileId": 66596,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_frca6.docx"
+      }
+    },
+    "fritillaria-affinis": {
+      "id": "fritillaria-affinis",
+      "commonName": "Checker lily",
+      "scientificName": "Fritillaria affinis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=FRAF2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "FRAF2",
+        "profileId": 28552,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_fraf2.docx"
+      }
+    },
+    "fritillaria-camschatcensis": {
+      "id": "fritillaria-camschatcensis",
+      "commonName": "Kamchatka fritillary",
+      "scientificName": "Fritillaria camschatcensis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=FRCA5",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "FRCA5",
+        "profileId": 28572,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_frca5.docx"
+      }
+    },
+    "gaillardia-aristata": {
+      "id": "gaillardia-aristata",
+      "commonName": "Blanketflower",
+      "scientificName": "Gaillardia aristata",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -14,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=GAAR",
+      "confidence": "high"
+    },
+    "gutierrezia-sarothrae": {
+      "id": "gutierrezia-sarothrae",
+      "commonName": "Broom snakeweed",
+      "scientificName": "Gutierrezia sarothrae",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=GUSA2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "GUSA2",
+        "profileId": 36008,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_gusa2.docx"
+      }
+    },
+    "gymnocladus-dioicus": {
+      "id": "gymnocladus-dioicus",
+      "commonName": "Kentucky coffeetree",
+      "scientificName": "Gymnocladus dioicus",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=GYDI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "GYDI",
+        "profileId": 79411,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_gydi.docx"
+      }
+    },
+    "helianthus-annuus": {
+      "id": "helianthus-annuus",
+      "commonName": "Common sunflower",
+      "scientificName": "Helianthus annuus",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=HEAN3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "HEAN3",
+        "profileId": 36188,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_hean3.docx"
+      }
+    },
+    "hemizonia-fasciculata": {
+      "id": "hemizonia-fasciculata",
+      "commonName": "Clustered tarweed",
+      "scientificName": "Hemizonia fasciculata",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=HEFA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "HEFA",
+        "profileId": 36406,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_hefa.docx"
+      }
+    },
+    "hesperoyucca-whipplei": {
+      "id": "hesperoyucca-whipplei",
+      "commonName": "Chaparral yucca",
+      "scientificName": "Hesperoyucca whipplei",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=HEWH",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "HEWH",
+        "profileId": 27112,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/cs_yuwh.pdf"
+      }
+    },
+    "heteromeles-arbutifolia": {
+      "id": "heteromeles-arbutifolia",
+      "commonName": "Toyon",
+      "scientificName": "Heteromeles arbutifolia",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=HEAR5",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "HEAR5",
+        "profileId": 89859,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_hear5.docx"
+      }
+    },
+    "hierochloe-odorata": {
+      "id": "hierochloe-odorata",
+      "commonName": "Sweetgrass",
+      "scientificName": "Hierochloe odorata",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=HIOD",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "HIOD",
+        "profileId": 23359,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_hiod.docx"
+      }
+    },
+    "ilex-vomitoria": {
+      "id": "ilex-vomitoria",
+      "commonName": "Yaupon",
+      "scientificName": "Ilex vomitoria",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ILVO",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ILVO",
+        "profileId": 74982,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ilvo.docx"
+      }
+    },
+    "iris-douglasiana": {
+      "id": "iris-douglasiana",
+      "commonName": "Douglas iris",
+      "scientificName": "Iris douglasiana",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=IRDO",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "IRDO",
+        "profileId": 27435,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_irdo.docx"
+      }
+    },
+    "iris-fernaldii": {
+      "id": "iris-fernaldii",
+      "commonName": "Fernald's iris",
+      "scientificName": "Iris fernaldii",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=IRFE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "IRFE",
+        "profileId": 27440,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_irfe.docx"
+      }
+    },
+    "iris-macrosiphon": {
+      "id": "iris-macrosiphon",
+      "commonName": "Bowltube iris",
+      "scientificName": "Iris macrosiphon",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=IRMA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "IRMA",
+        "profileId": 27552,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_irma.docx"
+      }
+    },
+    "iris-missouriensis": {
+      "id": "iris-missouriensis",
+      "commonName": "Rocky Mountain iris",
+      "scientificName": "Iris missouriensis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=IRMI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "IRMI",
+        "profileId": 27555,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_irmi.docx"
+      }
+    },
+    "iris-purdyi": {
+      "id": "iris-purdyi",
+      "commonName": "Purdy's iris",
+      "scientificName": "Iris purdyi",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=IRPU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "IRPU",
+        "profileId": 27569,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_irpu.docx"
+      }
+    },
+    "iris-virginica": {
+      "id": "iris-virginica",
+      "commonName": "Virginia iris",
+      "scientificName": "Iris virginica",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=IRVI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "IRVI",
+        "profileId": 27620,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_irvi.docx"
+      }
+    },
+    "juglans-nigra": {
+      "id": "juglans-nigra",
+      "commonName": "Black walnut",
+      "scientificName": "Juglans nigra",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=JUNI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "JUNI",
+        "profileId": 70684,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_juni.docx"
+      }
+    },
+    "juncus-effusus": {
+      "id": "juncus-effusus",
+      "commonName": "Common rush",
+      "scientificName": "Juncus effusus",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=JUEF",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "JUEF",
+        "profileId": 26651,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_juef.docx"
+      }
+    },
+    "juncus-lesueurii": {
+      "id": "juncus-lesueurii",
+      "commonName": "Salt rush",
+      "scientificName": "Juncus lesueurii",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=JULE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "JULE",
+        "profileId": 26711,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_jule.docx"
+      }
+    },
+    "juncus-textilis": {
+      "id": "juncus-textilis",
+      "commonName": "Basket rush",
+      "scientificName": "Juncus textilis",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=JUTE2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "JUTE2",
+        "profileId": 26803,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_jute2.docx"
+      }
+    },
+    "juniperus-pinchotii": {
+      "id": "juniperus-pinchotii",
+      "commonName": "Pinchot's juniper",
+      "scientificName": "Juniperus pinchotii",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=JUPI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "JUPI",
+        "profileId": 15243,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_jupi.docx"
+      }
+    },
+    "juniperus-scopulorum": {
+      "id": "juniperus-scopulorum",
+      "commonName": "Rocky Mountain juniper",
+      "scientificName": "Juniperus scopulorum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=JUSC2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "JUSC2",
+        "profileId": 15254,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_jusc2.docx"
+      }
+    },
+    "juniperus-virginiana": {
+      "id": "juniperus-virginiana",
+      "commonName": "Eastern redcedar",
+      "scientificName": "Juniperus virginiana",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=JUVI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "JUVI",
+        "profileId": 15261,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_juvi.docx"
+      }
+    },
+    "ledum-groenlandicum": {
+      "id": "ledum-groenlandicum",
+      "commonName": "Bog Labrador tea",
+      "scientificName": "Ledum groenlandicum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LEGR",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LEGR",
+        "profileId": 65229,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_legr.docx"
+      }
+    },
+    "lespedeza-capitata": {
+      "id": "lespedeza-capitata",
+      "commonName": "Roundhead lespedeza",
+      "scientificName": "Lespedeza capitata",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LECA8",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LECA8",
+        "profileId": 79847,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_leca8.docx"
+      }
+    },
+    "lewisia-rediviva": {
+      "id": "lewisia-rediviva",
+      "commonName": "Bitter root",
+      "scientificName": "Lewisia rediviva",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LERE7",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LERE7",
+        "profileId": 59889,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_lere7.docx"
+      }
+    },
+    "liatris-spicata": {
+      "id": "liatris-spicata",
+      "commonName": "Dense blazing star",
+      "scientificName": "Liatris spicata",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LISP",
+      "confidence": "high"
+    },
+    "lilium-pardalinum": {
+      "id": "lilium-pardalinum",
+      "commonName": "Leopard lily",
+      "scientificName": "Lilium pardalinum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LIPA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LIPA",
+        "profileId": 28810,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_lipa.docx"
+      }
+    },
+    "linum-lewisii": {
+      "id": "linum-lewisii",
+      "commonName": "Blue flax",
+      "scientificName": "Linum lewisii",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LILE3",
+      "confidence": "high"
+    },
+    "liquidambar-styraciflua": {
+      "id": "liquidambar-styraciflua",
+      "commonName": "Sweetgum",
+      "scientificName": "Liquidambar styraciflua",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LIST2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LIST2",
+        "profileId": 70557,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_list2.docx"
+      }
+    },
+    "lobelia-cardinalis": {
+      "id": "lobelia-cardinalis",
+      "commonName": "Cardinalflower",
+      "scientificName": "Lobelia cardinalis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LOCA2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LOCA2",
+        "profileId": 42478,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_loca2.docx"
+      }
+    },
+    "lobelia-inflata": {
+      "id": "lobelia-inflata",
+      "commonName": "Indian-tobacco",
+      "scientificName": "Lobelia inflata",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LOIN",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LOIN",
+        "profileId": 42525,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_loin.docx"
+      }
+    },
+    "lobelia-siphilitica": {
+      "id": "lobelia-siphilitica",
+      "commonName": "Great blue lobelia",
+      "scientificName": "Lobelia siphilitica",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LOSI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LOSI",
+        "profileId": 42561,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_losi.docx"
+      }
+    },
+    "lupinus-nootkatensis": {
+      "id": "lupinus-nootkatensis",
+      "commonName": "Nootka lupine",
+      "scientificName": "Lupinus nootkatensis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LUNO",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "LUNO",
+        "profileId": 80808,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_luno.docx"
+      }
+    },
+    "lupinus-perennis": {
+      "id": "lupinus-perennis",
+      "commonName": "Wild lupine",
+      "scientificName": "Lupinus perennis",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 14,
+      "needsStratification": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=LUPE3",
+      "confidence": "high",
+      "fallDormant": true
+    },
+    "madia-elegans": {
+      "id": "madia-elegans",
+      "commonName": "Common madia",
+      "scientificName": "Madia elegans",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MAEL",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "MAEL",
+        "profileId": 37888,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_mael.docx"
+      }
+    },
+    "madia-sativa": {
+      "id": "madia-sativa",
+      "commonName": "Coast tarweed",
+      "scientificName": "Madia sativa",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MASA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "MASA",
+        "profileId": 37902,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_masa.docx"
+      }
+    },
+    "mentzelia-dispersa": {
+      "id": "mentzelia-dispersa",
+      "commonName": "Bushy blazingstar",
+      "scientificName": "Mentzelia dispersa",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MEDI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "MEDI",
+        "profileId": 69215,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_medi.docx"
+      }
+    },
+    "monarda-fistulosa": {
+      "id": "monarda-fistulosa",
+      "commonName": "Wild bergamot",
+      "scientificName": "Monarda fistulosa",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MOFI",
+      "confidence": "high"
+    },
+    "monarda-punctata": {
+      "id": "monarda-punctata",
+      "commonName": "Spotted beebalm",
+      "scientificName": "Monarda punctata",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MOPU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "MOPU",
+        "profileId": 45974,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_mopu.docx"
+      }
+    },
+    "morella-californica": {
+      "id": "morella-californica",
+      "commonName": "California wax myrtle",
+      "scientificName": "Morella californica",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MOCA6",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "MOCA6",
+        "profileId": 70710,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_moca6.docx"
+      }
+    },
+    "morus-rubra": {
+      "id": "morus-rubra",
+      "commonName": "Red mulberry",
+      "scientificName": "Morus rubra",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MORU2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "MORU2",
+        "profileId": 70892,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_moru2.docx"
+      }
+    },
+    "muhlenbergia-rigens": {
+      "id": "muhlenbergia-rigens",
+      "commonName": "Deergrass",
+      "scientificName": "Muhlenbergia rigens",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=MURI2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "MURI2",
+        "profileId": 24073,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_muri2.docx"
+      }
+    },
+    "nolina-microcarpa": {
+      "id": "nolina-microcarpa",
+      "commonName": "Sacahuista",
+      "scientificName": "Nolina microcarpa",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=NOMI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "NOMI",
+        "profileId": 28976,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_nomi.docx"
+      }
+    },
+    "notholithocarpus-densiflorus": {
+      "id": "notholithocarpus-densiflorus",
+      "commonName": "Tanoak",
+      "scientificName": "Notholithocarpus densiflorus",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=NODE3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "NODE3",
+        "profileId": 70151,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/cs_lide3.pdf"
+      }
+    },
+    "oenothera-biennis": {
+      "id": "oenothera-biennis",
+      "commonName": "Common evening primrose",
+      "scientificName": "Oenothera biennis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=OEBI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "OEBI",
+        "profileId": 86182,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_oebi.docx"
+      }
+    },
+    "oenothera-missouriensis": {
+      "id": "oenothera-missouriensis",
+      "commonName": "Missouri evening primrose",
+      "scientificName": "Oenothera macrocarpa",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 30,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=OEMA2",
+      "confidence": "medium"
+    },
+    "panax-quinquefolius": {
+      "id": "panax-quinquefolius",
+      "commonName": "American ginseng",
+      "scientificName": "Panax quinquefolius",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PAQU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PAQU",
+        "profileId": 74763,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_paqu.docx"
+      }
+    },
+    "panicum-virgatum": {
+      "id": "panicum-virgatum",
+      "commonName": "Switchgrass",
+      "scientificName": "Panicum virgatum",
+      "habit": "grass",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -14,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PAVI2",
+      "confidence": "high"
+    },
+    "parthenium-integrifolium": {
+      "id": "parthenium-integrifolium",
+      "commonName": "Wild quinine",
+      "scientificName": "Parthenium integrifolium",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PAIN3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PAIN3",
+        "profileId": 38610,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pain3.docx"
+      }
+    },
+    "passiflora-incarnata": {
+      "id": "passiflora-incarnata",
+      "commonName": "Purple passionflower",
+      "scientificName": "Passiflora incarnata",
+      "habit": "vine",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PAIN6",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PAIN6",
+        "profileId": 69379,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pain6.docx"
+      }
+    },
+    "penstemon-digitalis": {
+      "id": "penstemon-digitalis",
+      "commonName": "Foxglove beardtongue",
+      "scientificName": "Penstemon digitalis",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PEDI",
+      "confidence": "high"
+    },
+    "penstemon-grandiflorus": {
+      "id": "penstemon-grandiflorus",
+      "commonName": "Large beardtongue",
+      "scientificName": "Penstemon grandiflorus",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PEGR7",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PEGR7",
+        "profileId": 52019,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pegr7.docx"
+      }
+    },
+    "penstemon-strictus": {
+      "id": "penstemon-strictus",
+      "commonName": "Rocky Mountain penstemon",
+      "scientificName": "Penstemon strictus",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PEST2",
+      "confidence": "high"
+    },
+    "picea-sitchensis": {
+      "id": "picea-sitchensis",
+      "commonName": "Sitka spruce",
+      "scientificName": "Picea sitchensis",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PISI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PISI",
+        "profileId": 15398,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pisi.docx"
+      }
+    },
+    "pinus-edulis": {
+      "id": "pinus-edulis",
+      "commonName": "Twoneedle pinyon",
+      "scientificName": "Pinus edulis",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PIED",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PIED",
+        "profileId": 15449,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pied.docx"
+      }
+    },
+    "pinus-monophylla": {
+      "id": "pinus-monophylla",
+      "commonName": "Singleleaf pinyon",
+      "scientificName": "Pinus monophylla",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PIMO",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PIMO",
+        "profileId": 15489,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pimo.docx"
+      }
+    },
+    "pinus-palustris": {
+      "id": "pinus-palustris",
+      "commonName": "Longleaf pine",
+      "scientificName": "Pinus palustris",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PIPA2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PIPA2",
+        "profileId": 15522,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pipa2.docx"
+      }
+    },
+    "pinus-radiata": {
+      "id": "pinus-radiata",
+      "commonName": "Monterey pine",
+      "scientificName": "Pinus radiata",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PIRA2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PIRA2",
+        "profileId": 15549,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pira2.docx"
+      }
+    },
+    "pinus-resinosa": {
+      "id": "pinus-resinosa",
+      "commonName": "Red pine",
+      "scientificName": "Pinus resinosa",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PIRE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PIRE",
+        "profileId": 15551,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pire.docx"
+      }
+    },
+    "pinus-sabiniana": {
+      "id": "pinus-sabiniana",
+      "commonName": "California foothill pine",
+      "scientificName": "Pinus sabiniana",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PISA2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PISA2",
+        "profileId": 15560,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pisa2.docx"
+      }
+    },
+    "platanthera-ciliaris": {
+      "id": "platanthera-ciliaris",
+      "commonName": "Yellow fringed orchid",
+      "scientificName": "Platanthera ciliaris",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PLCI2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PLCI2",
+        "profileId": 30420,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_plci2.docx"
+      }
+    },
+    "platanus-occidentalis": {
+      "id": "platanus-occidentalis",
+      "commonName": "American sycamore",
+      "scientificName": "Platanus occidentalis",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PLOC",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PLOC",
+        "profileId": 70568,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ploc.docx"
+      }
+    },
+    "poliomintha-incana": {
+      "id": "poliomintha-incana",
+      "commonName": "Frosted mint",
+      "scientificName": "Poliomintha incana",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=POIN3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "POIN3",
+        "profileId": 46294,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_poin3.docx"
+      }
+    },
+    "populus-angustifolia": {
+      "id": "populus-angustifolia",
+      "commonName": "Narrowleaf cottonwood",
+      "scientificName": "Populus angustifolia",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=POAN3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "POAN3",
+        "profileId": 67382,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_poan3.docx"
+      }
+    },
+    "populus-fremontii": {
+      "id": "populus-fremontii",
+      "commonName": "Fremont cottonwood",
+      "scientificName": "Populus fremontii",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=POFR2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "POFR2",
+        "profileId": 67451,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pofr2.docx"
+      }
+    },
+    "populus-tremuloides": {
+      "id": "populus-tremuloides",
+      "commonName": "Quaking aspen",
+      "scientificName": "Populus tremuloides",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=POTR5",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "POTR5",
+        "profileId": 67496,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_potr5.docx"
+      }
+    },
+    "proboscidea-parviflora": {
+      "id": "proboscidea-parviflora",
+      "commonName": "Doubleclaw",
+      "scientificName": "Proboscidea parviflora",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PRPA2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PRPA2",
+        "profileId": 50048,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_prpa2.docx"
+      }
+    },
+    "prosopis-glandulosa": {
+      "id": "prosopis-glandulosa",
+      "commonName": "Honey mesquite",
+      "scientificName": "Prosopis glandulosa",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PRGL2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PRGL2",
+        "profileId": 81932,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_prgl2.docx"
+      }
+    },
+    "prosopis-pubescens": {
+      "id": "prosopis-pubescens",
+      "commonName": "Screwbean mesquite",
+      "scientificName": "Prosopis pubescens",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PRPU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PRPU",
+        "profileId": 81949,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_prpu.docx"
+      }
+    },
+    "prosopis-velutina": {
+      "id": "prosopis-velutina",
+      "commonName": "Velvet mesquite",
+      "scientificName": "Prosopis velutina",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PRVE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PRVE",
+        "profileId": 81961,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_prve.docx"
+      }
+    },
+    "prunus-americana": {
+      "id": "prunus-americana",
+      "commonName": "American plum",
+      "scientificName": "Prunus americana",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PRAM",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PRAM",
+        "profileId": 90536,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pram.docx"
+      }
+    },
+    "prunus-emarginata": {
+      "id": "prunus-emarginata",
+      "commonName": "Bitter cherry",
+      "scientificName": "Prunus emarginata",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PREM",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PREM",
+        "profileId": 90567,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_prem.docx"
+      }
+    },
+    "prunus-ilicifolia": {
+      "id": "prunus-ilicifolia",
+      "commonName": "Hollyleaf cherry",
+      "scientificName": "Prunus ilicifolia",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PRIL",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PRIL",
+        "profileId": 90584,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_pril.docx"
+      }
+    },
+    "prunus-virginiana": {
+      "id": "prunus-virginiana",
+      "commonName": "Chokecherry",
+      "scientificName": "Prunus virginiana",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PRVI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PRVI",
+        "profileId": 90686,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_prvi.docx"
+      }
+    },
+    "pseudotsuga-menziesii": {
+      "id": "pseudotsuga-menziesii",
+      "commonName": "Douglas-fir",
+      "scientificName": "Pseudotsuga menziesii",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=PSME",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "PSME",
+        "profileId": 15595,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_psme.docx"
+      }
+    },
+    "quercus-agrifolia": {
+      "id": "quercus-agrifolia",
+      "commonName": "California live oak",
+      "scientificName": "Quercus agrifolia",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=QUAG",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "QUAG",
+        "profileId": 70165,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_quag.docx"
+      }
+    },
+    "quercus-bicolor": {
+      "id": "quercus-bicolor",
+      "commonName": "Swamp white oak",
+      "scientificName": "Quercus bicolor",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=QUBI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "QUBI",
+        "profileId": 70193,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_qubi.docx"
+      }
+    },
+    "quercus-douglasii": {
+      "id": "quercus-douglasii",
+      "commonName": "Blue oak",
+      "scientificName": "Quercus douglasii",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=QUDO",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "QUDO",
+        "profileId": 70236,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_qudo.docx"
+      }
+    },
+    "quercus-kelloggii": {
+      "id": "quercus-kelloggii",
+      "commonName": "California black oak",
+      "scientificName": "Quercus kelloggii",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=QUKE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "QUKE",
+        "profileId": 70332,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_quke.docx"
+      }
+    },
+    "quercus-rubra": {
+      "id": "quercus-rubra",
+      "commonName": "Northern red oak",
+      "scientificName": "Quercus rubra",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=QURU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "QURU",
+        "profileId": 70448,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_quru.docx"
+      }
+    },
+    "quercus-shumardii": {
+      "id": "quercus-shumardii",
+      "commonName": "Shumard's oak",
+      "scientificName": "Quercus shumardii",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=QUSH",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "QUSH",
+        "profileId": 70468,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_qush.docx"
+      }
+    },
+    "quercus-wislizeni": {
+      "id": "quercus-wislizeni",
+      "commonName": "Interior live oak",
+      "scientificName": "Quercus wislizeni",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=QUWI2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "QUWI2",
+        "profileId": 70532,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_quwi2.docx"
+      }
+    },
+    "ratibida-columnifera": {
+      "id": "ratibida-columnifera",
+      "commonName": "Prairie coneflower",
+      "scientificName": "Ratibida columnifera",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -7,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RACO3",
+      "confidence": "high"
+    },
+    "ratibida-pinnata": {
+      "id": "ratibida-pinnata",
+      "commonName": "Yellow coneflower",
+      "scientificName": "Ratibida pinnata",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RAPI",
+      "confidence": "high"
+    },
+    "rhus-aromatica": {
+      "id": "rhus-aromatica",
+      "commonName": "Fragrant sumac",
+      "scientificName": "Rhus aromatica",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RHAR4",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "RHAR4",
+        "profileId": 92934,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_rhar4.docx"
+      }
+    },
+    "rhus-glabra": {
+      "id": "rhus-glabra",
+      "commonName": "Smooth sumac",
+      "scientificName": "Rhus glabra",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RHGL",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "RHGL",
+        "profileId": 92963,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_rhgl.docx"
+      }
+    },
+    "rhus-trilobata": {
+      "id": "rhus-trilobata",
+      "commonName": "Skunkbush sumac",
+      "scientificName": "Rhus trilobata",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RHTR",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "RHTR",
+        "profileId": 92983,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_rhtr.docx"
+      }
+    },
+    "ribes-aureum": {
+      "id": "ribes-aureum",
+      "commonName": "Golden currant",
+      "scientificName": "Ribes aureum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RIAU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "RIAU",
+        "profileId": 88126,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_riau.docx"
+      }
+    },
+    "rosa-virginiana": {
+      "id": "rosa-virginiana",
+      "commonName": "Virginia rose",
+      "scientificName": "Rosa virginiana",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ROVI2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ROVI2",
+        "profileId": 90954,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_rovi2.docx"
+      }
+    },
+    "rubus-idaeus": {
+      "id": "rubus-idaeus",
+      "commonName": "American red raspberry",
+      "scientificName": "Rubus idaeus",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RUID",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "RUID",
+        "profileId": 91260,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ruid.docx"
+      }
+    },
+    "rubus-spectabilis": {
+      "id": "rubus-spectabilis",
+      "commonName": "Salmonberry",
+      "scientificName": "Rubus spectabilis",
+      "habit": "vine",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RUSP",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "RUSP",
+        "profileId": 91587,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_rusp.docx"
+      }
+    },
+    "rudbeckia-hirta": {
+      "id": "rudbeckia-hirta",
+      "commonName": "Black-eyed Susan",
+      "scientificName": "Rudbeckia hirta",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -7,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=RUHI2",
+      "confidence": "high"
+    },
+    "sabal-minor": {
+      "id": "sabal-minor",
+      "commonName": "Dwarf palmetto",
+      "scientificName": "Sabal minor",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SAMI8",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SAMI8",
+        "profileId": 16772,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sami8.docx"
+      }
+    },
+    "sabal-palmetto": {
+      "id": "sabal-palmetto",
+      "commonName": "Cabbage palmetto",
+      "scientificName": "Sabal palmetto",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SAPA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SAPA",
+        "profileId": 16778,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sapa.docx"
+      }
+    },
+    "sagittaria-cuneata": {
+      "id": "sagittaria-cuneata",
+      "commonName": "Arumleaf arrowhead",
+      "scientificName": "Sagittaria cuneata",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SACU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SACU",
+        "profileId": 15798,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sacu.docx"
+      }
+    },
+    "sagittaria-latifolia": {
+      "id": "sagittaria-latifolia",
+      "commonName": "Broadleaf arrowhead",
+      "scientificName": "Sagittaria latifolia",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SALA2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SALA2",
+        "profileId": 15829,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sala2.docx"
+      }
+    },
+    "salix-amygdaloides": {
+      "id": "salix-amygdaloides",
+      "commonName": "Peachleaf willow",
+      "scientificName": "Salix amygdaloides",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SAAM2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SAAM2",
+        "profileId": 67526,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_saam2.docx"
+      }
+    },
+    "salix-bebbiana": {
+      "id": "salix-bebbiana",
+      "commonName": "Bebb willow",
+      "scientificName": "Salix bebbiana",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SABE2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SABE2",
+        "profileId": 67590,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sabe2.docx"
+      }
+    },
+    "salix-exigua": {
+      "id": "salix-exigua",
+      "commonName": "Narrowleaf willow",
+      "scientificName": "Salix exigua",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SAEX",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SAEX",
+        "profileId": 67735,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_saex.docx"
+      }
+    },
+    "salix-humilis": {
+      "id": "salix-humilis",
+      "commonName": "Prairie willow",
+      "scientificName": "Salix humilis",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SAHU2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SAHU2",
+        "profileId": 67871,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sahu2.docx"
+      }
+    },
+    "salix-lucida": {
+      "id": "salix-lucida",
+      "commonName": "Shining willow",
+      "scientificName": "Salix lucida",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SALU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SALU",
+        "profileId": 67956,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_salu.docx"
+      }
+    },
+    "salix-sitchensis": {
+      "id": "salix-sitchensis",
+      "commonName": "Sitka willow",
+      "scientificName": "Salix sitchensis",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SASI2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SASI2",
+        "profileId": 68306,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sasi2.docx"
+      }
+    },
+    "salvia-apiana": {
+      "id": "salvia-apiana",
+      "commonName": "White sage",
+      "scientificName": "Salvia apiana",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SAAP2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SAAP2",
+        "profileId": 46394,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_saap2.docx"
+      }
+    },
+    "salvia-columbariae": {
+      "id": "salvia-columbariae",
+      "commonName": "Chia",
+      "scientificName": "Salvia columbariae",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SACO6",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SACO6",
+        "profileId": 46415,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_saco6.docx"
+      }
+    },
+    "sassafras-albidum": {
+      "id": "sassafras-albidum",
+      "commonName": "Sassafras",
+      "scientificName": "Sassafras albidum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SAAL5",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SAAL5",
+        "profileId": 71455,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_saal5.docx"
+      }
+    },
+    "schizachyrium-scoparium": {
+      "id": "schizachyrium-scoparium",
+      "commonName": "Little bluestem",
+      "scientificName": "Schizachyrium scoparium",
+      "habit": "grass",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -21,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SCSC",
+      "confidence": "high"
+    },
+    "schoenoplectus-americanus": {
+      "id": "schoenoplectus-americanus",
+      "commonName": "Chairmaker's bulrush",
+      "scientificName": "Schoenoplectus americanus",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SCAM6",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SCAM6",
+        "profileId": 19616,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_scam6.docx"
+      }
+    },
+    "schoenoplectus-californicus": {
+      "id": "schoenoplectus-californicus",
+      "commonName": "California bulrush",
+      "scientificName": "Schoenoplectus californicus",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SCCA11",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SCCA11",
+        "profileId": 19622,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/pg_SCCA11.pdf"
+      }
+    },
+    "schoenoplectus-tabernaemontani": {
+      "id": "schoenoplectus-tabernaemontani",
+      "commonName": "Softstem bulrush",
+      "scientificName": "Schoenoplectus tabernaemontani",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SCTA2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SCTA2",
+        "profileId": 19669,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_scta2.docx"
+      }
+    },
+    "scirpus-cyperinus": {
+      "id": "scirpus-cyperinus",
+      "commonName": "Woolgrass",
+      "scientificName": "Scirpus cyperinus",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SCCY",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SCCY",
+        "profileId": 19736,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sccy.docx"
+      }
+    },
+    "serenoa-repens": {
+      "id": "serenoa-repens",
+      "commonName": "Saw palmetto",
+      "scientificName": "Serenoa repens",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SERE2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SERE2",
+        "profileId": 16785,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sere2.docx"
+      }
+    },
+    "shepherdia-canadensis": {
+      "id": "shepherdia-canadensis",
+      "commonName": "Russet buffaloberry",
+      "scientificName": "Shepherdia canadensis",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SHCA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SHCA",
+        "profileId": 87008,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_shca.docx"
+      }
+    },
+    "silphium-laciniatum": {
+      "id": "silphium-laciniatum",
+      "commonName": "Compass plant",
+      "scientificName": "Silphium laciniatum",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SILA2",
+      "confidence": "high"
+    },
+    "silphium-perfoliatum": {
+      "id": "silphium-perfoliatum",
+      "commonName": "Cup plant",
+      "scientificName": "Silphium perfoliatum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SIPE2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SIPE2",
+        "profileId": 39867,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_sipe2.docx"
+      }
+    },
+    "silphium-terebinthinaceum": {
+      "id": "silphium-terebinthinaceum",
+      "commonName": "Prairie dock",
+      "scientificName": "Silphium terebinthinaceum",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SITE",
+      "confidence": "medium"
+    },
+    "solidago-rigida": {
+      "id": "solidago-rigida",
+      "commonName": "Stiff goldenrod",
+      "scientificName": "Solidago rigida",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=OLRI",
+      "confidence": "medium",
+      "fallDormant": true
+    },
+    "solidago-sempervirens": {
+      "id": "solidago-sempervirens",
+      "commonName": "Seaside goldenrod",
+      "scientificName": "Solidago sempervirens",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -14,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SOSE",
+      "confidence": "high"
+    },
+    "sparganium-americanum": {
+      "id": "sparganium-americanum",
+      "commonName": "American bur-reed",
+      "scientificName": "Sparganium americanum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPAM",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SPAM",
+        "profileId": 26962,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_spam.docx"
+      }
+    },
+    "sparganium-androcladum": {
+      "id": "sparganium-androcladum",
+      "commonName": "Branched bur-reed",
+      "scientificName": "Sparganium androcladum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPAN",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SPAN",
+        "profileId": 26963,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_span.docx"
+      }
+    },
+    "sparganium-angustifolium": {
+      "id": "sparganium-angustifolium",
+      "commonName": "Narrowleaf bur-reed",
+      "scientificName": "Sparganium angustifolium",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPAN2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SPAN2",
+        "profileId": 26965,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_span2.docx"
+      }
+    },
+    "sparganium-eurycarpum": {
+      "id": "sparganium-eurycarpum",
+      "commonName": "Broadfruit bur-reed",
+      "scientificName": "Sparganium eurycarpum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPEU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SPEU",
+        "profileId": 26979,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_speu.docx"
+      }
+    },
+    "sparganium-fluctuans": {
+      "id": "sparganium-fluctuans",
+      "commonName": "Floating bur-reed",
+      "scientificName": "Sparganium fluctuans",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPFL",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SPFL",
+        "profileId": 26982,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_spfl.docx"
+      }
+    },
+    "sparganium-glomeratum": {
+      "id": "sparganium-glomeratum",
+      "commonName": "Clustered bur-reed",
+      "scientificName": "Sparganium glomeratum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPGL",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SPGL",
+        "profileId": 26984,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_spgl.docx"
+      }
+    },
+    "sparganium-natans": {
+      "id": "sparganium-natans",
+      "commonName": "Small bur-reed",
+      "scientificName": "Sparganium natans",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPNA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SPNA",
+        "profileId": 26987,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_spna.docx"
+      }
+    },
+    "sporobolus-airoides": {
+      "id": "sporobolus-airoides",
+      "commonName": "Alkali sacaton",
+      "scientificName": "Sporobolus airoides",
+      "habit": "grass",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPAI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SPAI",
+        "profileId": 25805,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_spai.docx"
+      }
+    },
+    "sporobolus-heterolepis": {
+      "id": "sporobolus-heterolepis",
+      "commonName": "Prairie dropseed",
+      "scientificName": "Sporobolus heterolepis",
+      "habit": "grass",
+      "light": "full-sun",
+      "moisture": "dry",
+      "method": "direct",
+      "directSowDaysBeforeFrost": -14,
+      "needsStratification": false,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SPHE",
+      "confidence": "high"
+    },
+    "strophostyles-helvola": {
+      "id": "strophostyles-helvola",
+      "commonName": "Amberique-bean",
+      "scientificName": "Strophostyles helvola",
+      "habit": "vine",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=STHE9",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "STHE9",
+        "profileId": 82571,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/pdf/pg_STHE9.pdf"
+      }
+    },
+    "symphoricarpos-albus": {
+      "id": "symphoricarpos-albus",
+      "commonName": "Common snowberry",
+      "scientificName": "Symphoricarpos albus",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SYAL",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "SYAL",
+        "profileId": 42887,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_syal.docx"
+      }
+    },
+    "symphyotrichum-novae-angliae": {
+      "id": "symphyotrichum-novae-angliae",
+      "commonName": "New England aster",
+      "scientificName": "Symphyotrichum novae-angliae",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=SYNO2",
+      "confidence": "high"
+    },
+    "thuja-occidentalis": {
+      "id": "thuja-occidentalis",
+      "commonName": "Arborvitae",
+      "scientificName": "Thuja occidentalis",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=THOC2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "THOC2",
+        "profileId": 15299,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_thoc2.docx"
+      }
+    },
+    "thuja-plicata": {
+      "id": "thuja-plicata",
+      "commonName": "Western redcedar",
+      "scientificName": "Thuja plicata",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=THPL",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "THPL",
+        "profileId": 15304,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_thpl.docx"
+      }
+    },
+    "tilia-americana": {
+      "id": "tilia-americana",
+      "commonName": "American basswood",
+      "scientificName": "Tilia americana",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TIAM",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TIAM",
+        "profileId": 66729,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_tiam.docx"
+      }
+    },
+    "tillandsia-usneoides": {
+      "id": "tillandsia-usneoides",
+      "commonName": "Spanish moss",
+      "scientificName": "Tillandsia usneoides",
+      "habit": "vine",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TIUS",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TIUS",
+        "profileId": 30962,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_tius.docx"
+      }
+    },
+    "tradescantia-virginiana": {
+      "id": "tradescantia-virginiana",
+      "commonName": "Virginia spiderwort",
+      "scientificName": "Tradescantia virginiana",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TRVI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TRVI",
+        "profileId": 17027,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_trvi.docx"
+      }
+    },
+    "trichostema-lanceolatum": {
+      "id": "trichostema-lanceolatum",
+      "commonName": "Vinegarweed",
+      "scientificName": "Trichostema lanceolatum",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TRLA4",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TRLA4",
+        "profileId": 46921,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_trla4.docx"
+      }
+    },
+    "trifolium-wormskioldii": {
+      "id": "trifolium-wormskioldii",
+      "commonName": "Cows clover",
+      "scientificName": "Trifolium wormskioldii",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TRWO",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TRWO",
+        "profileId": 83201,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_trwo.docx"
+      }
+    },
+    "triteleia-hyacinthina": {
+      "id": "triteleia-hyacinthina",
+      "commonName": "White brodiaea",
+      "scientificName": "Triteleia hyacinthina",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TRHY3",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TRHY3",
+        "profileId": 29301,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_trhy3.docx"
+      }
+    },
+    "triteleia-ixioides": {
+      "id": "triteleia-ixioides",
+      "commonName": "Prettyface",
+      "scientificName": "Triteleia ixioides",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TRIX",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TRIX",
+        "profileId": 29306,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_trix.docx"
+      }
+    },
+    "triteleia-laxa": {
+      "id": "triteleia-laxa",
+      "commonName": "Ithuriel's spear",
+      "scientificName": "Triteleia laxa",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TRLA16",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TRLA16",
+        "profileId": 29325,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_trla16.docx"
+      }
+    },
+    "tsuga-canadensis": {
+      "id": "tsuga-canadensis",
+      "commonName": "Eastern hemlock",
+      "scientificName": "Tsuga canadensis",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TSCA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TSCA",
+        "profileId": 15604,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_tsca.docx"
+      }
+    },
+    "tsuga-heterophylla": {
+      "id": "tsuga-heterophylla",
+      "commonName": "Western hemlock",
+      "scientificName": "Tsuga heterophylla",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TSHE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TSHE",
+        "profileId": 15606,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_tshe.docx"
+      }
+    },
+    "typha-angustifolia": {
+      "id": "typha-angustifolia",
+      "commonName": "Narrowleaf cattail",
+      "scientificName": "Typha angustifolia",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TYAN",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TYAN",
+        "profileId": 26993,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_tyan.docx"
+      }
+    },
+    "typha-domingensis": {
+      "id": "typha-domingensis",
+      "commonName": "Southern cattail",
+      "scientificName": "Typha domingensis",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TYDO",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TYDO",
+        "profileId": 26998,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_tydo.docx"
+      }
+    },
+    "typha-latifolia": {
+      "id": "typha-latifolia",
+      "commonName": "Broadleaf cattail",
+      "scientificName": "Typha latifolia",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=TYLA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "TYLA",
+        "profileId": 27001,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_tyla.docx"
+      }
+    },
+    "ulmus-rubra": {
+      "id": "ulmus-rubra",
+      "commonName": "Slippery elm",
+      "scientificName": "Ulmus rubra",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ULRU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ULRU",
+        "profileId": 71006,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_ulru.docx"
+      }
+    },
+    "umbellularia-californica": {
+      "id": "umbellularia-californica",
+      "commonName": "California laurel",
+      "scientificName": "Umbellularia californica",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=UMCA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "UMCA",
+        "profileId": 71463,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_umca.docx"
+      }
+    },
+    "vaccinium-deliciosum": {
+      "id": "vaccinium-deliciosum",
+      "commonName": "Cascade bilberry",
+      "scientificName": "Vaccinium deliciosum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VADE",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "VADE",
+        "profileId": 65459,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_vade.docx"
+      }
+    },
+    "vaccinium-membranaceum": {
+      "id": "vaccinium-membranaceum",
+      "commonName": "Thinleaf huckleberry",
+      "scientificName": "Vaccinium membranaceum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VAME",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "VAME",
+        "profileId": 65485,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_vame.docx"
+      }
+    },
+    "vaccinium-ovatum": {
+      "id": "vaccinium-ovatum",
+      "commonName": "California huckleberry",
+      "scientificName": "Vaccinium ovatum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VAOV2",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "VAOV2",
+        "profileId": 65502,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_vaov2.docx"
+      }
+    },
+    "vaccinium-oxycoccos": {
+      "id": "vaccinium-oxycoccos",
+      "commonName": "Small cranberry",
+      "scientificName": "Vaccinium oxycoccos",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VAOX",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "VAOX",
+        "profileId": 65504,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_vaox.docx"
+      }
+    },
+    "vaccinium-parvifolium": {
+      "id": "vaccinium-parvifolium",
+      "commonName": "Red huckleberry",
+      "scientificName": "Vaccinium parvifolium",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VAPA",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "VAPA",
+        "profileId": 65522,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_vapa.docx"
+      }
+    },
+    "vaccinium-scoparium": {
+      "id": "vaccinium-scoparium",
+      "commonName": "Grouse whortleberry",
+      "scientificName": "Vaccinium scoparium",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VASC",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "VASC",
+        "profileId": 65539,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_vasc.docx"
+      }
+    },
+    "vernonia-noveboracensis": {
+      "id": "vernonia-noveboracensis",
+      "commonName": "New York ironweed",
+      "scientificName": "Vernonia noveboracensis",
+      "habit": "forb",
+      "light": "full-sun",
+      "moisture": "wet",
+      "method": "direct",
+      "stratificationDays": 60,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VENO",
+      "confidence": "high"
+    },
+    "viburnum-dentatum": {
+      "id": "viburnum-dentatum",
+      "commonName": "Arrowwood viburnum",
+      "scientificName": "Viburnum dentatum",
+      "habit": "shrub",
+      "light": "part-shade",
+      "moisture": "medium",
+      "method": "direct",
+      "stratificationDays": 90,
+      "needsStratification": true,
+      "fallDormant": true,
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=VIDE",
+      "confidence": "medium"
+    },
+    "washingtonia-filifera": {
+      "id": "washingtonia-filifera",
+      "commonName": "California fan palm",
+      "scientificName": "Washingtonia filifera",
+      "habit": "tree",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=WAFI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "WAFI",
+        "profileId": 16803,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_wafi.docx"
+      }
+    },
+    "yucca-filamentosa": {
+      "id": "yucca-filamentosa",
+      "commonName": "Adam's needle",
+      "scientificName": "Yucca filamentosa",
+      "habit": "forb",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=YUFI",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "YUFI",
+        "profileId": 27210,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_yufi.docx"
+      }
+    },
+    "zamia-pumila": {
+      "id": "zamia-pumila",
+      "commonName": "Coontie",
+      "scientificName": "Zamia pumila",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ZAPU",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ZAPU",
+        "profileId": 15670,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_zapu.docx"
+      }
+    },
+    "zanthoxylum-americanum": {
+      "id": "zanthoxylum-americanum",
+      "commonName": "Common pricklyash",
+      "scientificName": "Zanthoxylum americanum",
+      "habit": "shrub",
+      "method": "direct",
+      "confidence": "low",
+      "sourceUrl": "https://plants.usda.gov/plant-profile?symbol=ZAAM",
+      "catalogSource": {
+        "sourceId": "usda-culturally-significant",
+        "sourceUrl": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+        "retrievedAt": "2026-10-07T05:47:41.476Z",
+        "symbol": "ZAAM",
+        "profileId": 93609,
+        "plantGuideUrl": "https://plantsservices.sc.egov.usda.gov/DocumentLibrary/plantguide/doc/cs_zaam.docx"
+      }
     }
   }
 }

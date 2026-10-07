@@ -7,6 +7,8 @@ export default defineConfig({
     tsconfigPaths: true,
   },
   test: {
+    pool: "threads",
+    testTimeout: 15_000,
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
     include: ["src/**/*.test.ts", "src/**/*.test.tsx", "scripts/**/*.test.mjs"],

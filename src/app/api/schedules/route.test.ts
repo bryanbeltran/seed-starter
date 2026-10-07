@@ -2,6 +2,17 @@ import { describe, expect, it } from "vitest";
 import { POST } from "./route";
 
 describe("POST /api/schedules", () => {
+  it("returns 400 when empty crop selections override seeds", async () => {
+    const req = new Request("http://localhost/api/schedules", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ zip: "55423", seeds: ["tomato"], cropSelections: [] }),
+    });
+    const res = await POST(req);
+    expect(res.status).toBe(400);
+    expect(await res.json()).toMatchObject({ error: "Select at least one crop." });
+  });
+
   it("returns schedule for valid fixture zip", async () => {
     const req = new Request("http://localhost/api/schedules", {
       method: "POST",

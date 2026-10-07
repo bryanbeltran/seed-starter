@@ -12,14 +12,49 @@ import { displayName, slugify, varietyId } from "./slug.mjs";
 /** Drop scraped DTH that is almost certainly a parse error. */
 const MIN_VARIETY_DTH = 21;
 
-function decodeHtmlEntities(text) {
-  return String(text ?? "")
-    .replace(/&#039;/g, "'")
-    .replace(/&apos;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/&amp;/g, "&")
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">");
+const NAMED_HTML_ENTITIES = {
+  amp: "&",
+  apos: "'",
+  copy: "©",
+  deg: "°",
+  eacute: "é",
+  hellip: "…",
+  laquo: "«",
+  ldquo: "“",
+  lt: "<",
+  mdash: "—",
+  nbsp: " ",
+  ndash: "–",
+  quot: '"',
+  raquo: "»",
+  reg: "®",
+  rsquo: "’",
+  trade: "™",
+  ucirc: "û",
+  gt: ">",
+};
+
+const HTML_ENTITY_PATTERN = /&(#(?:x[0-9a-f]+|[0-9]+)|[a-z][a-z0-9]+);/gi;
+
+/** Decode the named and numeric entities commonly emitted by catalog HTML. */
+export function decodeHtmlEntities(text) {
+  let decoded = String(text ?? "");
+  for (let pass = 0; pass < 3; pass++) {
+    const next = decoded.replace(HTML_ENTITY_PATTERN, (entity, body) => {
+      if (body.startsWith("#")) {
+        const hexadecimal = body[1].toLowerCase() === "x";
+        const codePoint = Number.parseInt(body.slice(hexadecimal ? 2 : 1), hexadecimal ? 16 : 10);
+        if (Number.isInteger(codePoint) && codePoint > 0 && codePoint <= 0x10ffff) {
+          return String.fromCodePoint(codePoint);
+        }
+        return entity;
+      }
+      return NAMED_HTML_ENTITIES[body.toLowerCase()] ?? entity;
+    });
+    if (next === decoded) break;
+    decoded = next;
+  }
+  return decoded;
 }
 
 const EDIBLE_PREFIXES = [
@@ -77,18 +112,21 @@ export function mergeRecords(records, { target = 2000 } = {}) {
   const byKey = new Map();
   let dropped = 0;
   for (const rec of records) {
-    const cropId = resolveCropRecord(rec);
+    const normalized = { ...rec, name: decodeHtmlEntities(rec.name) };
+    const cropId = resolveCropRecord(normalized);
     if (!cropId) {
       dropped++;
       continue;
     }
+    // Keep the legacy variety id derived from the source name so saved plans
+    // remain readable while labels are normalized for display.
     const vid = varietyId(rec.name, cropId);
-    const key = `${cropId}::${slugify(rec.name)}`;
+    const key = `${cropId}::${slugify(normalized.name)}`;
     const existing = byKey.get(key);
     if (!existing || score(rec) > score(existing)) {
-      byKey.set(key, { ...rec, cropId, varietyId: vid });
-    } else if (existing && rec.source !== existing.source) {
-      existing.altSources = [...(existing.altSources ?? []), rec.source];
+      byKey.set(key, { ...normalized, cropId, varietyId: vid });
+    } else if (existing && normalized.source !== existing.source) {
+      existing.altSources = [...(existing.altSources ?? []), normalized.source];
     }
   }
 

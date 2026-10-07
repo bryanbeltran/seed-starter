@@ -8,7 +8,7 @@
 | Check | Result |
 |-------|--------|
 | Locks L3 not zone | Yes |
-| PLANTS / no BONAP | Yes |
+| Phase-0 nativity scope | USDA PLANTS only at the time; later source-readiness records owner-confirmed BONAP permission, verified MapKey meanings, and TDC taxon/occurrence interfaces, with map conversion and taxonomy matching still pending |
 | p50 timing | Yes |
 | Pilot 51 | Yes |
 

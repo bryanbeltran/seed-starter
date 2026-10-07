@@ -1,11 +1,12 @@
 "use client";
 
-import { format, parseISO } from "date-fns";
+import { differenceInCalendarDays, format } from "date-fns";
 import type { RiskProfile } from "@/planning";
 import { getCropName } from "@/planning";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { frostAnchorLabel } from "./seasonLabel";
 import type { ScheduleResult } from "./types";
+import { parseTaskDate } from "./taskUtils";
 
 export type CompareResult = Record<RiskProfile, ScheduleResult>;
 
@@ -16,7 +17,11 @@ type Props = {
 
 function keyTasks(tasks: ScheduleResult["tasks"]) {
   return tasks.filter(
-    (t) => t.type === "indoor_sow" || t.type === "transplant" || t.type === "direct_sow",
+    (t) =>
+      t.type === "indoor_sow" ||
+      t.type === "transplant" ||
+      t.type === "direct_sow" ||
+      t.type === "fall_sow",
   );
 }
 
@@ -47,23 +52,23 @@ export function CompareProfiles({ compared, baseline }: Props) {
           <TabsContent key={profile} value={profile}>
             <p className="text-muted-foreground mb-3 text-sm">
               {frostAnchorLabel(schedule.season)}:{" "}
-              {format(parseISO(schedule.lastFrostDate), "MMM d, yyyy")}
+              {format(parseTaskDate(schedule.lastFrostDate), "MMM d, yyyy")}
             </p>
             <ul className="space-y-2 text-sm">
               {tasks.map((task) => {
                 const baseDate = baseByKey.get(taskKey(task));
                 const delta =
                   baseDate && profile !== baseline
-                    ? Math.round(
-                        (parseISO(task.date).getTime() - parseISO(baseDate).getTime()) /
-                          86_400_000,
+                    ? differenceInCalendarDays(
+                        parseTaskDate(task.date),
+                        parseTaskDate(baseDate),
                       )
                     : 0;
                 return (
                   <li key={taskKey(task)} className="flex justify-between gap-4">
                     <span>{getCropName(task.cropId)} · {task.label}</span>
                     <span className="text-muted-foreground shrink-0">
-                      {format(parseISO(task.date), "MMM d")}
+                      {format(parseTaskDate(task.date), "MMM d")}
                       {delta !== 0 && (
                         <span
                           className={

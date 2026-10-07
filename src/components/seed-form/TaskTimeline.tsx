@@ -9,7 +9,7 @@ import {
   Sun,
   type LucideIcon,
 } from "lucide-react";
-import { format, parseISO } from "date-fns";
+import { format } from "date-fns";
 import { getCropName } from "@/planning";
 import { cn } from "@/lib/utils";
 import {
@@ -19,7 +19,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import type { ScheduleTask } from "./types";
-import { daysFromToday, groupTasksByCrop, isPastTask } from "./taskUtils";
+import { daysFromToday, groupTasksByCrop, isPastTask, parseTaskDate } from "./taskUtils";
 
 const taskIcons: Record<string, LucideIcon> = {
   indoor_sow: Home,
@@ -53,7 +53,7 @@ function TaskRow({ task }: { task: ScheduleTask }) {
       <div className="min-w-0 flex-1">
         <p className="text-sm">{task.label}</p>
         <p className="text-xs text-muted-foreground">
-          {format(parseISO(task.date), "MMM d, yyyy")} · {relative}
+          {format(parseTaskDate(task.date), "MMM d, yyyy")} · {relative}
         </p>
       </div>
     </li>
