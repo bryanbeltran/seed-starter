@@ -1,5 +1,7 @@
 import { findJunkCrops } from "./cropResolve.mjs";
 
+const HTML_ENTITY_PATTERN = /&(?:#(?:x[0-9a-f]+|[0-9]+)|[a-z][a-z0-9]+);/i;
+
 export function validateCatalog(catalog) {
   const errors = [];
   const { crops } = catalog;
@@ -19,6 +21,9 @@ export function validateCatalog(catalog) {
   for (const [cropId, crop] of cropEntries) {
     if (crop.id !== cropId) errors.push(`${cropId}: id mismatch`);
     if (!crop.name) errors.push(`${cropId}: missing name`);
+    if (HTML_ENTITY_PATTERN.test(crop.name)) {
+      errors.push(`${cropId}: crop name contains an undecoded HTML entity`);
+    }
     if (!["transplant", "direct"].includes(crop.method)) {
       errors.push(`${cropId}: invalid method`);
     }
@@ -39,6 +44,9 @@ export function validateCatalog(catalog) {
     varieties += vars.length;
     for (const v of vars) {
       if (!v.name) errors.push(`${cropId}/${v.id}: missing variety name`);
+      if (HTML_ENTITY_PATTERN.test(v.name)) {
+        errors.push(`${cropId}/${v.id}: variety name contains an undecoded HTML entity`);
+      }
       if (!v.source) errors.push(`${cropId}/${v.id}: missing source`);
       if (!v.sourceUrl) errors.push(`${cropId}/${v.id}: missing sourceUrl`);
     }

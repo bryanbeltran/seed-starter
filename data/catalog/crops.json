@@ -156,7 +156,7 @@
         },
         "dragon-39-s-tongue": {
           "id": "dragon-39-s-tongue",
-          "name": "Dragon&#39;s Tongue",
+          "name": "Dragon's Tongue",
           "daysToHarvest": 57,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beans/bush-beans/dragons-tongue-bean-seed-3175.html",
@@ -745,7 +745,7 @@
         },
         "waldmann-39-s-dark-green": {
           "id": "waldmann-39-s-dark-green",
-          "name": "Waldmann&#39;s Dark Green",
+          "name": "Waldmann's Dark Green",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/leaf-lettuce/waldmanns-dark-green-organic-lettuce-seed-428G.html",
@@ -889,7 +889,7 @@
         },
         "rouge-d-39-hiver": {
           "id": "rouge-d-39-hiver",
-          "name": "Rouge d&#39;Hiver",
+          "name": "Rouge d'Hiver",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/rouge-dhiver-organic-lettuce-seed-2236N.html",
@@ -961,7 +961,7 @@
         },
         "bergam-39-s-green": {
           "id": "bergam-39-s-green",
-          "name": "Bergam&#39;s Green",
+          "name": "Bergam's Green",
           "daysToHarvest": 51,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/bergams-green-organic-lettuce-seed-3663G.html",
@@ -1129,7 +1129,7 @@
         },
         "reyes-40-3sx3901-41": {
           "id": "reyes-40-3sx3901-41",
-          "name": "Reyes &#40;3SX3901&#41;",
+          "name": "Reyes (3SX3901)",
           "daysToHarvest": 28,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/romaine-lettuce-cos/reyes-3sx3901-organic-lettuce-seed-5152G.html",
@@ -1137,7 +1137,7 @@
         },
         "catalina-40-3sx3104-41": {
           "id": "catalina-40-3sx3104-41",
-          "name": "Catalina &#40;3SX3104&#41;",
+          "name": "Catalina (3SX3104)",
           "daysToHarvest": 37,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/oakleaf-lettuce/catalina-3sx3104-organic-lettuce-seed-5153G.html",
@@ -1185,7 +1185,7 @@
         },
         "salanova-reg-green-incised": {
           "id": "salanova-reg-green-incised",
-          "name": "Salanova&reg; Green Incised",
+          "name": "Salanova® Green Incised",
           "daysToHarvest": 53,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-incised-pelleted-lettuce-seed-3052JP.html",
@@ -1193,7 +1193,7 @@
         },
         "salanova-reg-red-incised": {
           "id": "salanova-reg-red-incised",
-          "name": "Salanova&reg; Red Incised",
+          "name": "Salanova® Red Incised",
           "daysToHarvest": 53,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-incised-pelleted-lettuce-seed-3053JP.html",
@@ -1201,7 +1201,7 @@
         },
         "salanova-reg-green-sweet-crisp": {
           "id": "salanova-reg-green-sweet-crisp",
-          "name": "Salanova&reg; Green Sweet Crisp",
+          "name": "Salanova® Green Sweet Crisp",
           "daysToHarvest": 50,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-sweet-crisp-pelleted-lettuce-seed-3054JP.html",
@@ -1209,7 +1209,7 @@
         },
         "salanova-reg-red-sweet-crisp": {
           "id": "salanova-reg-red-sweet-crisp",
-          "name": "Salanova&reg; Red Sweet Crisp",
+          "name": "Salanova® Red Sweet Crisp",
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-sweet-crisp-pelleted-lettuce-seed-3055JP.html",
@@ -1217,7 +1217,7 @@
         },
         "salanova-reg-green-butter": {
           "id": "salanova-reg-green-butter",
-          "name": "Salanova&reg; Green Butter",
+          "name": "Salanova® Green Butter",
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-butter-pelleted-lettuce-seed-3056JP.html",
@@ -1225,7 +1225,7 @@
         },
         "salanova-reg-red-butter": {
           "id": "salanova-reg-red-butter",
-          "name": "Salanova&reg; Red Butter",
+          "name": "Salanova® Red Butter",
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-butter-pelleted-lettuce-seed-3057JP.html",
@@ -1233,7 +1233,7 @@
         },
         "salanova-reg-green-oakleaf": {
           "id": "salanova-reg-green-oakleaf",
-          "name": "Salanova&reg; Green Oakleaf",
+          "name": "Salanova® Green Oakleaf",
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-oakleaf-pelleted-lettuce-seed-3058JP.html",
@@ -1241,7 +1241,7 @@
         },
         "salanova-reg-red-oakleaf": {
           "id": "salanova-reg-red-oakleaf",
-          "name": "Salanova&reg; Red Oakleaf",
+          "name": "Salanova® Red Oakleaf",
           "daysToHarvest": 57,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-oakleaf-pelleted-lettuce-seed-3059JP.html",
@@ -1281,7 +1281,7 @@
         },
         "salanova-reg-green-batavia": {
           "id": "salanova-reg-green-batavia",
-          "name": "Salanova&reg; Green Batavia",
+          "name": "Salanova® Green Batavia",
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-batavia-pelleted-lettuce-seed-4185JP.html",
@@ -1289,7 +1289,7 @@
         },
         "salanova-reg-hydroponic-green-sweet-crisp": {
           "id": "salanova-reg-hydroponic-green-sweet-crisp",
-          "name": "Salanova&reg; Hydroponic Green Sweet Crisp",
+          "name": "Salanova® Hydroponic Green Sweet Crisp",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-green-sweet-crisp-pelleted-lettuce-seed-4187JP.html",
@@ -1297,7 +1297,7 @@
         },
         "salanova-reg-hydroponic-green-oakleaf": {
           "id": "salanova-reg-hydroponic-green-oakleaf",
-          "name": "Salanova&reg; Hydroponic Green Oakleaf",
+          "name": "Salanova® Hydroponic Green Oakleaf",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-green-oakleaf-pelleted-lettuce-seed-4189JP.html",
@@ -1305,7 +1305,7 @@
         },
         "salanova-reg-hydroponic-red-sweet-crisp": {
           "id": "salanova-reg-hydroponic-red-sweet-crisp",
-          "name": "Salanova&reg; Hydroponic Red Sweet Crisp",
+          "name": "Salanova® Hydroponic Red Sweet Crisp",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-red-sweet-crisp-pelleted-lettuce-seed-4190JP.html",
@@ -1313,7 +1313,7 @@
         },
         "salanova-reg-hydroponic-red-oakleaf": {
           "id": "salanova-reg-hydroponic-red-oakleaf",
-          "name": "Salanova&reg; Hydroponic Red Oakleaf",
+          "name": "Salanova® Hydroponic Red Oakleaf",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-red-oakleaf-pelleted-lettuce-seed-4191JP.html",
@@ -1345,7 +1345,7 @@
         },
         "salanova-reg-hydroponic-red-butter": {
           "id": "salanova-reg-hydroponic-red-butter",
-          "name": "Salanova&reg; Hydroponic Red Butter",
+          "name": "Salanova® Hydroponic Red Butter",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-red-butter-pelleted-lettuce-seed-4449JP.html",
@@ -1369,7 +1369,7 @@
         },
         "salanova-reg-red-tango": {
           "id": "salanova-reg-red-tango",
-          "name": "Salanova&reg; Red Tango",
+          "name": "Salanova® Red Tango",
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-tango-pelleted-lettuce-seed-4764JP.html",
@@ -1393,7 +1393,7 @@
         },
         "salanova-reg-red-gem": {
           "id": "salanova-reg-red-gem",
-          "name": "Salanova&reg; Red Gem",
+          "name": "Salanova® Red Gem",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-red-gem-pelleted-lettuce-seed-4823JP.html",
@@ -1409,7 +1409,7 @@
         },
         "salanova-reg-hydroponic-red-batavia": {
           "id": "salanova-reg-hydroponic-red-batavia",
-          "name": "Salanova&reg; Hydroponic Red Batavia",
+          "name": "Salanova® Hydroponic Red Batavia",
           "daysToHarvest": 45,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-hydroponic-red-batavia-pelleted-lettuce-seed-4840JP.html",
@@ -1433,7 +1433,7 @@
         },
         "salanova-reg-green-upright-oak": {
           "id": "salanova-reg-green-upright-oak",
-          "name": "Salanova&reg; Green Upright Oak",
+          "name": "Salanova® Green Upright Oak",
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/lettuce/salanova-lettuce/salanova-green-upright-oak-pelleted-lettuce-seed-6085JP.html",
@@ -2186,7 +2186,7 @@
         },
         "moneta-40-monogerm-41": {
           "id": "moneta-40-monogerm-41",
-          "name": "Moneta &#40;Monogerm&#41;",
+          "name": "Moneta (Monogerm)",
           "daysToHarvest": 46,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beets/round-red-beets/moneta-monogerm-f1-beet-seed-2319.html",
@@ -2202,7 +2202,7 @@
         },
         "bull-39-s-blood": {
           "id": "bull-39-s-blood",
-          "name": "Bull&#39;s Blood",
+          "name": "Bull's Blood",
           "daysToHarvest": 55,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/beets/beet-greens/bulls-blood-beet-seed-2912.html",
@@ -2984,7 +2984,7 @@
         },
         "x3r-reg-red-knight": {
           "id": "x3r-reg-red-knight",
-          "name": "X3R&reg; Red Knight",
+          "name": "X3R® Red Knight",
           "daysToHarvest": 70,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/peppers/sweet-bell-peppers/x3r-red-knight-f1-bell-pepper-seed-2309.html",
@@ -6929,7 +6929,7 @@
         },
         "mrs-burns-39-lemon": {
           "id": "mrs-burns-39-lemon",
-          "name": "Mrs. Burns&#39; Lemon",
+          "name": "Mrs. Burns' Lemon",
           "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/citrus-basil/mrs.-burns-lemon-basil-seed-774.html",
@@ -7049,7 +7049,7 @@
         },
         "prospera-reg-dmr-40-ps5-41": {
           "id": "prospera-reg-dmr-40-ps5-41",
-          "name": "Prospera&reg; DMR &#40;PS5&#41;",
+          "name": "Prospera® DMR (PS5)",
           "daysToHarvest": 72,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/prospera-dmr-ps5-f1-basil-seed-4341.html",
@@ -7089,7 +7089,7 @@
         },
         "kapoor-tulsi-40-holy-basil-41": {
           "id": "kapoor-tulsi-40-holy-basil-41",
-          "name": "Kapoor Tulsi &#40;Holy Basil&#41;",
+          "name": "Kapoor Tulsi (Holy Basil)",
           "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/holy-basil/kapoor-tulsi-holy-basil-basil-seed-6021.html",
@@ -7121,7 +7121,7 @@
         },
         "prospera-reg-dmr-40-cg1-41": {
           "id": "prospera-reg-dmr-40-cg1-41",
-          "name": "Prospera&reg; DMR &#40;CG1&#41;",
+          "name": "Prospera® DMR (CG1)",
           "daysToHarvest": 68,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/genovese-basil/prospera-dmr-cg1-organic-f1-basil-seed-3597G.html",
@@ -7129,7 +7129,7 @@
         },
         "prospera-reg-compact-dmr-40-pl4-41": {
           "id": "prospera-reg-compact-dmr-40-pl4-41",
-          "name": "Prospera&reg; Compact DMR &#40;PL4&#41;",
+          "name": "Prospera® Compact DMR (PL4)",
           "daysToHarvest": 74,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/genovese-basil/prospera-compact-dmr-pl4-organic-f1-basil-seed-4168G.html",
@@ -7137,7 +7137,7 @@
         },
         "prospera-reg-italian-large-leaf-dmr-40-ill2-41": {
           "id": "prospera-reg-italian-large-leaf-dmr-40-ill2-41",
-          "name": "Prospera&reg; Italian Large Leaf DMR &#40;ILL2&#41;",
+          "name": "Prospera® Italian Large Leaf DMR (ILL2)",
           "daysToHarvest": 74,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/italian-large-leaf-basil/prospera-italian-large-leaf-dmr-ill2-organic-f1-basil-seed-4589G.html",
@@ -7145,7 +7145,7 @@
         },
         "prospera-reg-red-dmr": {
           "id": "prospera-reg-red-dmr",
-          "name": "Prospera&reg; Red DMR",
+          "name": "Prospera® Red DMR",
           "daysToHarvest": 74,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/purple-basil/prospera-red-dmr-organic-f1-basil-seed-4650G.html",
@@ -7153,7 +7153,7 @@
         },
         "thai-thai-prospera-reg-active-dmr": {
           "id": "thai-thai-prospera-reg-active-dmr",
-          "name": "Thai Thai Prospera&reg; Active DMR",
+          "name": "Thai Thai Prospera® Active DMR",
           "daysToHarvest": 70,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/asian-basil/thai-thai-prospera-active-dmr-organic-basil-seed-4968G.html",
@@ -7161,7 +7161,7 @@
         },
         "noga-prospera-reg-active-dmr": {
           "id": "noga-prospera-reg-active-dmr",
-          "name": "Noga Prospera&reg; Active DMR",
+          "name": "Noga Prospera® Active DMR",
           "daysToHarvest": 68,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/genovese-basil/noga-prospera-active-dmr-organic-basil-seed-5467G.html",
@@ -7169,7 +7169,7 @@
         },
         "lihi-prospera-reg-active-dmr": {
           "id": "lihi-prospera-reg-active-dmr",
-          "name": "Lihi Prospera&reg; Active DMR",
+          "name": "Lihi Prospera® Active DMR",
           "daysToHarvest": 74,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/compact-genovese-basil/lihi-prospera-active-dmr-organic-basil-seed-5468G.html",
@@ -7177,7 +7177,7 @@
         },
         "aya-prospera-reg-active-dmr": {
           "id": "aya-prospera-reg-active-dmr",
-          "name": "Aya Prospera&reg; Active DMR",
+          "name": "Aya Prospera® Active DMR",
           "daysToHarvest": 74,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/genovese-basil/aya-prospera-active-dmr-organic-basil-seed-5544G.html",
@@ -7185,7 +7185,7 @@
         },
         "doron-prospera-reg-active-dmr": {
           "id": "doron-prospera-reg-active-dmr",
-          "name": "Doron Prospera&reg; Active DMR",
+          "name": "Doron Prospera® Active DMR",
           "daysToHarvest": 74,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/purple-basil/doron-prospera-active-dmr-organic-basil-seed-5546G.html",
@@ -7193,7 +7193,7 @@
         },
         "mia-prospera-reg-active-dmr": {
           "id": "mia-prospera-reg-active-dmr",
-          "name": "Mia Prospera&reg; Active DMR",
+          "name": "Mia Prospera® Active DMR",
           "daysToHarvest": 70,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/herbs/basil/genovese-basil/mia-prospera-active-dmr-organic-basil-seed-5877G.html",
@@ -7257,7 +7257,7 @@
         },
         "prospera-174-f1-basil": {
           "id": "prospera-174-f1-basil",
-          "name": "Prospera&#174; F1 Basil",
+          "name": "Prospera® F1 Basil",
           "daysToHarvest": 74,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-prospera-f1-basil.html",
@@ -8601,7 +8601,7 @@
       "varieties": {
         "arugula-40-standard-41": {
           "id": "arugula-40-standard-41",
-          "name": "Arugula &#40;Standard&#41;",
+          "name": "Arugula (Standard)",
           "daysToHarvest": 40,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/greens/arugula-roquette/arugula-standard-salad-arugula-seed-385.html",
@@ -8841,7 +8841,7 @@
         },
         "sarah-39-s-choice": {
           "id": "sarah-39-s-choice",
-          "name": "Sarah&#39;s Choice",
+          "name": "Sarah's Choice",
           "daysToHarvest": 76,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/fruits/melons/cantaloupe-muskmelon/sarahs-choice-f1-melon-seed-2784.html",
@@ -8865,7 +8865,7 @@
         },
         "hannah-39-s-choice": {
           "id": "hannah-39-s-choice",
-          "name": "Hannah&#39;s Choice",
+          "name": "Hannah's Choice",
           "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/melons/cantaloupe-muskmelon/hannahs-choice-f1-melon-seed-3560.html",
@@ -8897,7 +8897,7 @@
         },
         "anna-39-s-charentais": {
           "id": "anna-39-s-charentais",
-          "name": "Anna&#39;s Charentais",
+          "name": "Anna's Charentais",
           "daysToHarvest": 78,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/melons/french-melons-charentais/annas-charentais-f1-melon-seed-4183.html",
@@ -8905,7 +8905,7 @@
         },
         "d-39-artagnan": {
           "id": "d-39-artagnan",
-          "name": "D&#39;Artagnan",
+          "name": "D'Artagnan",
           "daysToHarvest": 71,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/melons/french-melons-charentais/dartagnan-f1-melon-seed-4328.html",
@@ -9836,7 +9836,7 @@
       "varieties": {
         "rouge-vif-d-39-etampes": {
           "id": "rouge-vif-d-39-etampes",
-          "name": "Rouge Vif D&#39;Etampes",
+          "name": "Rouge Vif D'Etampes",
           "daysToHarvest": 115,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/specialty-pumpkins/rouge-vif-detampes-pumpkin-seed-614.html",
@@ -9844,7 +9844,7 @@
         },
         "turk-39-s-turban": {
           "id": "turk-39-s-turban",
-          "name": "Turk&#39;s Turban",
+          "name": "Turk's Turban",
           "daysToHarvest": 95,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/specialty-pumpkins/turks-turban-pumpkin-seed-618.html",
@@ -10036,7 +10036,7 @@
         },
         "galeux-d-39-eysines": {
           "id": "galeux-d-39-eysines",
-          "name": "Galeux d&#39;Eysines",
+          "name": "Galeux d'Eysines",
           "daysToHarvest": 95,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/pumpkins/specialty-pumpkins/galeux-deysines-pumpkin-seed-3777.html",
@@ -11470,7 +11470,7 @@
         },
         "beet-bull-39-s-blood": {
           "id": "beet-bull-39-s-blood",
-          "name": "Beet, Bull&#39;s Blood",
+          "name": "Beet, Bull's Blood",
           "daysToHarvest": 21,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/microgreens/microgreen-vegetables/beet-bulls-blood-microgreen-seed-2912M.html",
@@ -12439,7 +12439,7 @@
         },
         "br-ucirc-l-eacute-e-butternut-squash": {
           "id": "br-ucirc-l-eacute-e-butternut-squash",
-          "name": "Br&ucirc;l&eacute;e Butternut Squash",
+          "name": "Brûlée Butternut Squash",
           "daysToHarvest": 93,
           "source": "highmowing",
           "sourceUrl": "https://www.highmowingseeds.com/organic-non-gmo-brulee-butternut-squash.html",
@@ -12967,7 +12967,7 @@
         },
         "pruden-39-s-purple": {
           "id": "pruden-39-s-purple",
-          "name": "Pruden&#39;s Purple",
+          "name": "Pruden's Purple",
           "daysToHarvest": 67,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/heirloom-tomatoes/prudens-purple-organic-tomato-seed-712.html",
@@ -12975,7 +12975,7 @@
         },
         "matt-39-s-wild-cherry": {
           "id": "matt-39-s-wild-cherry",
-          "name": "Matt&#39;s Wild Cherry",
+          "name": "Matt's Wild Cherry",
           "daysToHarvest": 60,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/heirloom-tomatoes/matts-wild-cherry-tomato-seed-732.html",
@@ -13783,7 +13783,7 @@
         },
         "cipolla-39-s-pride": {
           "id": "cipolla-39-s-pride",
-          "name": "Cipolla&#39;s Pride",
+          "name": "Cipolla's Pride",
           "daysToHarvest": 82,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/heirloom-tomatoes/cipollas-pride-organic-tomato-seed-4180G.html",
@@ -13855,7 +13855,7 @@
         },
         "dr-wyche-39-s-yellow": {
           "id": "dr-wyche-39-s-yellow",
-          "name": "Dr. Wyche&#39;s Yellow",
+          "name": "Dr. Wyche's Yellow",
           "daysToHarvest": 75,
           "source": "johnnys",
           "sourceUrl": "https://www.johnnyseeds.com/vegetables/tomatoes/heirloom-tomatoes/dr.-wyches-yellow-organic-tomato-seed-4809G.html",
