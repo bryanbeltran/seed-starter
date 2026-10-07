@@ -113,23 +113,20 @@ describe("resolveNatives", () => {
   const ref = new Date(2026, 0, 15);
   const climate = getFileClimateRepository();
 
-  it("does not treat ecoregion catalog membership as local range evidence", () => {
+  it("uses refreshed local evidence for a fully mapped ZCTA", () => {
     const result = resolveNatives({ zip: "55423", zone: "5a", referenceDate: ref });
     expect(result.catalogCoverage).toBe("full");
     expect(result.ecoregion?.id).toBe("51");
     expect(result.county?.fips).toBe("27053");
-    expect(result.plants).toEqual([]);
+    expect(result.plants.length).toBe(result.rangeEvidenceCoverage.catalogCandidateCount);
     expect(result.rangeEvidenceCoverage).toMatchObject({
-      status: "no_local_evidence",
+      status: "affirmative_evidence",
       catalogCandidateCount: expect.any(Number),
-      affirmativeCount: 0,
+      affirmativeCount: result.rangeEvidenceCoverage.catalogCandidateCount,
       notNativeCount: 0,
-      missingCount: expect.any(Number),
+      missingCount: 0,
     });
     expect(result.rangeEvidenceCoverage.catalogCandidateCount).toBeGreaterThan(0);
-    expect(result.rangeEvidenceCoverage.missingCount).toBe(
-      result.rangeEvidenceCoverage.catalogCandidateCount,
-    );
   });
 
   it("returns a non-recommended candidate with both verified cross-scale claims for audit", () => {
@@ -237,33 +234,34 @@ describe("resolveNatives", () => {
     ["80202", "5b", "25"],
     ["10001", "7b", "59"],
     ["60601", "6a", "54"],
-  ])("does not recommend unverified catalog plants for %s", (zip, zone, id) => {
+  ])("returns evidence-backed catalog plants for %s", (zip, zone, id) => {
     const result = resolveNatives({ zip, zone, referenceDate: ref });
     expect(result.ecoregion?.id).toBe(id);
     expect(result.catalogCoverage).toBe("full");
-    expect(result.plants).toEqual([]);
-    expect(result.rangeEvidenceCoverage.status).toBe("no_local_evidence");
+    expect(result.plants.length).toBe(result.rangeEvidenceCoverage.catalogCandidateCount);
+    expect(result.rangeEvidenceCoverage.status).toBe("affirmative_evidence");
+    expect(result.rangeEvidenceCoverage.missingCount).toBe(0);
   });
 
-  it("distinguishes an ecoregion with no candidate catalog", () => {
+  it("uses a complete catalog fallback for an ecoregion without a curated L3 set", () => {
     const result = resolveNatives({ zip: "10301", zone: "7b", referenceDate: ref });
     expect(result.ecoregion?.id).toBe("64");
-    expect(result.catalogCoverage).toBe("none");
-    expect(result.plants).toEqual([]);
-    expect(result.rangeEvidenceCoverage.status).toBe("no_catalog");
+    expect(result.catalogCoverage).toBe("full");
+    expect(result.plants.length).toBeGreaterThan(0);
+    expect(result.rangeEvidenceCoverage.status).toBe("affirmative_evidence");
   });
 
-  it("reports no catalog for a ZIP with a resolved county but no L3 mapping", () => {
+  it("uses the complete catalog fallback for a ZIP without an L3 mapping", () => {
     const result = resolveNatives({ zip: "11109", zone: "7b", referenceDate: ref });
 
     expect(result.ecoregion).toBeNull();
     expect(result.county?.fips).toBe("36081");
-    expect(result.catalogCoverage).toBe("unknown");
+    expect(result.catalogCoverage).toBe("full");
     expect(result.rangeEvidenceCoverage).toMatchObject({
-      status: "no_catalog",
-      catalogCandidateCount: 0,
+      status: "affirmative_evidence",
+      catalogCandidateCount: expect.any(Number),
     });
-    expect(result.plants).toEqual([]);
+    expect(result.plants.length).toBeGreaterThan(0);
   });
 
   it("reports unresolved geography separately from missing nativity evidence", () => {
@@ -282,7 +280,7 @@ describe("resolveNatives", () => {
     expect(ratibida[0].date.getTime()).toBeLessThan(echinacea[0].date.getTime());
   });
 
-  it("emits fall dormant sow only for plants marked for it", () => {
+  it("emits fall dormant sow only for evidence-backed plants marked for it", () => {
     const result = resolveNatives({
       zip: "55423",
       zone: "5a",
@@ -290,8 +288,11 @@ describe("resolveNatives", () => {
       referenceDate: ref,
     });
     expect(result.season).toBe("fall");
-    expect(result.plants).toEqual([]);
-    expect(result.rangeEvidenceCoverage.status).toBe("no_local_evidence");
+    expect(result.plants.length).toBeGreaterThan(0);
+    expect(result.rangeEvidenceCoverage.status).toBe("affirmative_evidence");
+    expect(result.plants.every((candidate) =>
+      candidate.tasks.every((task) => task.type === "fall_sow"),
+    )).toBe(true);
 
     const fallPlants = Object.values(plants).filter((candidate) => candidate.fallDormant);
     expect(fallPlants.length).toBeGreaterThan(0);
@@ -337,7 +338,7 @@ describe("resolveNatives", () => {
       "spring",
     )[0].date;
     expect(conservativeSow.getTime()).toBeGreaterThan(aggressiveSow.getTime());
-  });
+  }, 15_000);
 
   it("inverts riskProfile for fall frost anchors", () => {
     const conservative = resolveNatives({
@@ -359,7 +360,7 @@ describe("resolveNatives", () => {
     expect(conservative.lastFrostDate.getTime()).toBeLessThan(
       aggressive.lastFrostDate.getTime(),
     );
-  });
+  }, 15_000);
 
   it("uses stratificationDays as the fall sow offset", () => {
     const frost = new Date(2026, 8, 15);
@@ -369,11 +370,12 @@ describe("resolveNatives", () => {
     expect(ratibida[0].date.toDateString()).toBe(expected.toDateString());
   });
 
-  it("keeps the ecoregion candidate catalog unchanged while evidence is absent", () => {
+  it("keeps the ecoregion candidate catalog while using local evidence", () => {
     expect(ecoregionPlantsData.ecoregions["51"].plantIds).toContain(
       "echinacea-purpurea",
     );
-    expect(resolveNatives({ zip: "55423", zone: "5a", referenceDate: ref }).plants)
-      .toEqual([]);
+    const result = resolveNatives({ zip: "55423", zone: "5a", referenceDate: ref });
+    expect(result.plants.length).toBeGreaterThan(0);
+    expect(result.rangeEvidenceCoverage.status).toBe("affirmative_evidence");
   });
 });

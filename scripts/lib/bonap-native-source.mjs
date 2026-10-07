@@ -144,7 +144,11 @@ export function parseBonapFullTaxonList(text) {
   for (const line of String(text ?? "").replace(/^\uFEFF/, "").split(/\r?\n/)) {
     if (!line.trim()) continue;
     const columns = line.split("\t").map((column) => column.trim());
-    if (firstContentRow && /^BONAP\b.*\t2014(?:\t|$)/i.test(line)) {
+    if (
+      firstContentRow &&
+      (/^BONAP\b.*\t2014(?:\t|$)/i.test(line) ||
+        /^©\s*Kartesz,\s*J\.T\.,\s*The Biota of North America Program \(BONAP\)\.\s*2014\./u.test(line.trim()))
+    ) {
       firstContentRow = false;
       continue;
     }
@@ -161,7 +165,7 @@ export function parseBonapFullTaxonList(text) {
       throw new Error("BONAP FullTaxonList contains a malformed non-TSV row");
     }
     const [family, genus, scientificName] = columns;
-    if (!family || !genus || !scientificName || !/^[A-Z][a-z-]+$/.test(genus)) {
+    if (!family || !genus || !scientificName || !/^(?:×)?[A-Z][a-z-]+$/u.test(genus)) {
       throw new Error("BONAP FullTaxonList contains a malformed taxon row");
     }
     taxa.push({ family, genus, scientificName });

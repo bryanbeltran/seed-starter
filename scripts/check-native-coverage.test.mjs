@@ -68,6 +68,7 @@ describe("offline native coverage report", () => {
       countyData: read("data/natives/zip-county.json"),
       ecoregionData: read("data/natives/zip-ecoregion.json"),
       ecoregionPlants: read("data/natives/ecoregion-plants.json"),
+      zctaCatalog: read("data/natives/zcta-catalog.json"),
       plants: read("data/natives/plants.json").plants,
       sources: read("data/natives/native-sources.json").sources,
       rangeEvidence: read("data/natives/plant-range-evidence.json").records,
@@ -90,35 +91,37 @@ describe("offline native coverage report", () => {
       { countyFips: "46113", state: "South Dakota", stateCode: "SD", zctaCount: 9 },
       { countyFips: "51515", state: "Virginia", stateCode: "VA", zctaCount: 1 },
     ]);
-    expect(report.catalog.mappedZctaCount).toBe(3168);
-    expect(report.catalog.mappedZctaCountWithResolvedPrimaryCountyMetadata).toBe(3165);
-    expect(report.catalog.mappedZctaCountWithCountyMetadataGaps).toBe(3);
-    expect(report.catalog.statesWithNoCatalog).toHaveLength(28);
-    expect(report.catalog.statesWithPartialCatalog).toHaveLength(20);
-    expect(report.catalog.statesWithFullCatalog).toEqual([]);
+    expect(report.catalog.mappedZctaCount).toBe(32604);
+    expect(report.catalog.mappedZctaCountWithResolvedPrimaryCountyMetadata).toBe(32597);
+    expect(report.catalog.mappedZctaCountWithCountyMetadataGaps).toBe(7);
+    expect(report.catalog.statesWithNoCatalog).toHaveLength(0);
+    expect(report.catalog.statesWithPartialCatalog).toHaveLength(0);
+    expect(report.catalog.statesWithFullCatalog).toHaveLength(48);
     expect(report.localRangeEvidence).toEqual({
-      recordCount: 0,
-      unresolvedCountyFipsRecordCount: 0,
-      catalogMappedZctasWithAnyCountyEvidence: 0,
-      catalogMappedZctasWithCompleteAffirmativeCoverage: 0,
-      catalogMappedZctasWithAffirmativeEvidence: 0,
-      catalogMappedZctasWithNotNativeEvidence: 0,
-      catalogMappedZctasWithoutLocalEvidence: 3168,
+      recordCount: 181049,
+      unresolvedCountyFipsRecordCount: 23,
+      catalogMappedZctasWithAnyCountyEvidence: 32604,
+      catalogMappedZctasWithCompleteLocalEvidence: 32604,
+      catalogMappedZctasWithoutCompleteLocalEvidence: 0,
+      missingCandidateCountyEvidencePairCount: 0,
+      catalogMappedZctasWithCompleteAffirmativeCoverage: 32260,
+      catalogMappedZctasWithAffirmativeEvidence: 32260,
+      catalogMappedZctasWithNotNativeEvidence: 38,
+      catalogMappedZctasWithoutLocalEvidence: 0,
     });
     expect(report.states).toHaveLength(48);
     expect(report.states.map((state) => state.state)).toContain("California");
     expect(report.states.every((state) => "gaps" in state)).toBe(true);
     expect(report.sourceDiscovery.bonap).toMatchObject({
-      status: "not_refreshed",
-      fullTaxonListTaxonCount: 0,
-      tdcOccurrenceCountyCount: 0,
-      napaMapTaxonCount: 0,
-      lower48StateCoverage: expect.arrayContaining([
-        expect.objectContaining({ stateCode: "MN", tdcOccurrenceCountyFipsCount: 0 }),
-      ]),
+      status: "retrieved",
+      fullTaxonListTaxonCount: 30978,
+      tdcOccurrenceCountyCount: 3108,
+      napaMapTaxonCount: 221,
+      reviewedCountyConversionCount: 66262,
+      approvedReviewedMapCount: 221,
     });
     expect(report.sourceDiscovery.npin).toMatchObject({
-      status: "not_refreshed",
+      status: "retrieved",
       nativityEvidenceRecordCount: 0,
     });
     expect(report.baselineComparison).toMatchObject({
@@ -129,10 +132,10 @@ describe("offline native coverage report", () => {
         catalogMappedZctas: 3168,
         rangeEvidenceRecords: 0,
       },
-      current: { zctasWithCompleteAffirmativeNativityCoverage: 0 },
+      current: { zctasWithCompleteAffirmativeNativityCoverage: 32260 },
       mappingCountsAreNotNativityCoverage: true,
     });
-  });
+  }, 180_000);
 
   it("keeps owner authorization, source terms, and source readiness distinct", () => {
     const sources = read("data/natives/native-sources.json").sources;

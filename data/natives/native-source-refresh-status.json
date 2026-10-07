@@ -1,0 +1,22 @@
+{
+  "version": "1",
+  "startedAt": "2026-10-07T09:13:33.253Z",
+  "completedAt": "2026-10-07T09:41:50.843Z",
+  "status": "succeeded",
+  "lastGoodSnapshotRetrievedAt": "2026-10-07T09:19:58.301Z",
+  "failures": [],
+  "sources": {
+    "usda-plants": {
+      "status": "published",
+      "lastSuccessAt": "2026-10-07T09:41:50.843Z"
+    },
+    "bonap-napa": {
+      "status": "published",
+      "lastSuccessAt": "2026-10-07T09:41:50.843Z"
+    },
+    "npin": {
+      "status": "published",
+      "lastSuccessAt": "2026-10-07T09:41:50.843Z"
+    }
+  }
+}

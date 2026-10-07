@@ -293,6 +293,7 @@ export function buildNativeCoverageReport({
   countyData,
   ecoregionData,
   ecoregionPlants,
+  zctaCatalog = { zctas: {} },
   plants,
   sources,
   rangeEvidence,
@@ -320,6 +321,7 @@ export function buildNativeCoverageReport({
         ecoregionMappedZctas: new Set(),
         catalogMappedZctas: new Set(),
         localRangeEvidenceZctas: new Set(),
+        completeLocalEvidenceZctas: new Set(),
         affirmativeRangeEvidenceZctas: new Set(),
         notNativeEvidenceZctas: new Set(),
         countyMetadataGapZctas: new Set(),
@@ -335,6 +337,8 @@ export function buildNativeCoverageReport({
   const catalogMappedZctas = new Set();
   const catalogMappedZctasWithResolvedPrimaryCounty = new Set();
   const localRangeEvidenceZctas = new Set();
+  const completeLocalEvidenceZctas = new Set();
+  const missingLocalEvidencePairs = new Set();
   const affirmativeRangeEvidenceZctas = new Set();
   const notNativeEvidenceZctas = new Set();
   const countyMetadataGapZctas = new Set();
@@ -378,60 +382,79 @@ export function buildNativeCoverageReport({
     const primaryCounty = primaryFips ? countyData.counties?.[primaryFips] : null;
     if (primaryCounty?.name) primaryCountyNameResolvedZctas.add(zip);
     const zipEcoregionId = ecoregionData.zips[zip];
+    const zctaCatalogEntry = zctaCatalog.zctas?.[zip];
+    const zipCandidates = ((zctaCatalogEntry
+      ? zctaCatalog.plantSets?.[zctaCatalogEntry.plantSetId] ?? []
+      : null) ??
+      (zipEcoregionId && ecoregionData.names[zipEcoregionId]
+        ? ecoregionPlants.ecoregions[zipEcoregionId]?.plantIds ?? []
+        : []))
+      .filter((id) => plants[id]);
     let zipHasAffirmativeEvidence = false;
     let zipHasNotNativeEvidence = false;
-    if (zipEcoregionId && ecoregionData.names[zipEcoregionId]) {
-      const zipCandidates = (ecoregionPlants.ecoregions[zipEcoregionId]?.plantIds ?? [])
-        .filter((id) => plants[id]);
-      const allZipIntersectionsResolved =
-        intersections.length > 0 &&
-        intersections.every((intersection) => {
-          if (!/^\d{5}$/.test(String(intersection.fips ?? ""))) return false;
-          return Boolean(stateForIntersection(intersection, countyData, byFips, byCode));
-        });
-      const targetZctaResolved =
-        Object.hasOwn(countyData.zips ?? {}, zip) ||
-        Object.hasOwn(countyData.intersections ?? {}, zip);
-      if (zipCandidates.length > 0 && (allZipIntersectionsResolved || targetZctaResolved)) {
-        const countyFipses = [...new Set(intersections.map((row) => row.fips))];
-        const claimsByPlant = zipCandidates.map((plantId) => {
-          const finerClaims = targetZctaResolved
-            ? validLocalZctaClaims(plantId, zip, evidenceByPlantAndZcta, sources, currentBonapMapSnapshots)
-            : [];
-          return finerClaims.length > 0
-            ? { finerClaims, claimsByCounty: [] }
-            : {
-                finerClaims: [],
-                claimsByCounty: countyFipses.map((fips) =>
-                  validLocalClaims(
-                    plantId,
-                    fips,
-                    evidenceByPlantAndCounty,
-                    sources,
-                    currentBonapMapSnapshots,
-                    currentBonapReviewRecords,
-                  ),
+    let zipHasCompleteLocalEvidence = false;
+    const allZipIntersectionsResolved =
+      intersections.length > 0 &&
+      intersections.every((intersection) => {
+        if (!/^\d{5}$/.test(String(intersection.fips ?? ""))) return false;
+        return Boolean(stateForIntersection(intersection, countyData, byFips, byCode));
+      });
+    const targetZctaResolved =
+      Object.hasOwn(countyData.zips ?? {}, zip) ||
+      Object.hasOwn(countyData.intersections ?? {}, zip);
+    if (zipCandidates.length > 0 && (allZipIntersectionsResolved || targetZctaResolved)) {
+      const countyFipses = [...new Set(intersections.map((row) => row.fips))];
+      const claimsByPlant = zipCandidates.map((plantId) => {
+        const finerClaims = targetZctaResolved
+          ? validLocalZctaClaims(plantId, zip, evidenceByPlantAndZcta, sources, currentBonapMapSnapshots)
+          : [];
+        return finerClaims.length > 0
+          ? { finerClaims, claimsByCounty: [] }
+          : {
+              finerClaims: [],
+              claimsByCounty: countyFipses.map((fips) =>
+                validLocalClaims(
+                  plantId,
+                  fips,
+                  evidenceByPlantAndCounty,
+                  sources,
+                  currentBonapMapSnapshots,
+                  currentBonapReviewRecords,
                 ),
-              };
-        });
-        zipHasAffirmativeEvidence = claimsByPlant.some(({ finerClaims, claimsByCounty }) =>
-          finerClaims.length > 0
-            ? isAffirmativeRangeClaims(finerClaims, sources, currentBonapMapSnapshots, zip)
-            : claimsByCounty.every((claims) =>
-                isAffirmativeRangeClaims(claims, sources, currentBonapMapSnapshots, null, currentBonapReviewRecords),
-              ),
-        );
-        zipHasNotNativeEvidence = claimsByPlant.some(({ finerClaims, claimsByCounty }) =>
-          finerClaims.length > 0
-            ? isNotNativeRangeClaims(finerClaims, sources, currentBonapMapSnapshots, zip)
-            : claimsByCounty.every((claims) =>
-                isNotNativeRangeClaims(claims, sources, currentBonapMapSnapshots, null, currentBonapReviewRecords),
-              ),
-        );
+            ),
+          };
+      });
+      zipHasCompleteLocalEvidence = true;
+      for (let candidateIndex = 0; candidateIndex < claimsByPlant.length; candidateIndex++) {
+        const { finerClaims, claimsByCounty } = claimsByPlant[candidateIndex];
+        if (finerClaims.length > 0) continue;
+        if (claimsByCounty.length !== countyFipses.length || claimsByCounty.some((claims) => claims.length === 0)) {
+          zipHasCompleteLocalEvidence = false;
+        }
+        for (let countyIndex = 0; countyIndex < countyFipses.length; countyIndex++) {
+          if (claimsByCounty[countyIndex]?.length > 0) continue;
+          missingLocalEvidencePairs.add(
+            `${zip}|${zipCandidates[candidateIndex]}|${countyFipses[countyIndex]}`,
+          );
+        }
       }
-      if (zipHasAffirmativeEvidence) affirmativeRangeEvidenceZctas.add(zip);
-      if (zipHasNotNativeEvidence) notNativeEvidenceZctas.add(zip);
+      zipHasAffirmativeEvidence = claimsByPlant.some(({ finerClaims, claimsByCounty }) =>
+        finerClaims.length > 0
+          ? isAffirmativeRangeClaims(finerClaims, sources, currentBonapMapSnapshots, zip)
+          : claimsByCounty.every((claims) =>
+              isAffirmativeRangeClaims(claims, sources, currentBonapMapSnapshots, null, currentBonapReviewRecords),
+            ),
+      );
+      zipHasNotNativeEvidence = claimsByPlant.some(({ finerClaims, claimsByCounty }) =>
+        finerClaims.length > 0
+          ? isNotNativeRangeClaims(finerClaims, sources, currentBonapMapSnapshots, zip)
+          : claimsByCounty.every((claims) =>
+              isNotNativeRangeClaims(claims, sources, currentBonapMapSnapshots, null, currentBonapReviewRecords),
+            ),
+      );
     }
+    if (zipHasAffirmativeEvidence) affirmativeRangeEvidenceZctas.add(zip);
+    if (zipHasNotNativeEvidence) notNativeEvidenceZctas.add(zip);
     const intersectionsByState = new Map();
     for (const intersection of intersections) {
       const state = stateForIntersection(intersection, countyData, byFips, byCode);
@@ -469,12 +492,12 @@ export function buildNativeCoverageReport({
       }
 
       const ecoregionId = ecoregionData.zips[zip];
-      if (!ecoregionId || !ecoregionData.names[ecoregionId]) continue;
-      ecoregionMappedZctas.add(zip);
-      stats.ecoregionMappedZctas.add(zip);
+      if (ecoregionId && ecoregionData.names[ecoregionId]) {
+        ecoregionMappedZctas.add(zip);
+        stats.ecoregionMappedZctas.add(zip);
+      }
 
-      const candidateIds = ecoregionPlants.ecoregions[ecoregionId]?.plantIds ?? [];
-      const knownCandidateIds = candidateIds.filter((id) => plants[id]);
+      const knownCandidateIds = zipCandidates;
       if (knownCandidateIds.length === 0) continue;
       catalogMappedZctas.add(zip);
       stats.catalogMappedZctas.add(zip);
@@ -506,6 +529,10 @@ export function buildNativeCoverageReport({
       if (zipHasAffirmativeEvidence) {
         stats.affirmativeRangeEvidenceZctas.add(zip);
       }
+      if (zipHasCompleteLocalEvidence) {
+        completeLocalEvidenceZctas.add(zip);
+        stats.completeLocalEvidenceZctas.add(zip);
+      }
       if (zipHasNotNativeEvidence) {
         stats.notNativeEvidenceZctas.add(zip);
       }
@@ -529,6 +556,7 @@ export function buildNativeCoverageReport({
       catalogMappedCount: stats.catalogMappedZctas.size,
       catalogCoverage: catalogStatus,
       localRangeEvidenceZctaCount: stats.localRangeEvidenceZctas.size,
+      completeLocalEvidenceZctaCount: stats.completeLocalEvidenceZctas.size,
       affirmativeRangeEvidenceZctaCount: stats.affirmativeRangeEvidenceZctas.size,
       notNativeEvidenceZctaCount: stats.notNativeEvidenceZctas.size,
       countyMetadataGapZctaCount: stats.countyMetadataGapZctas.size,
@@ -539,6 +567,8 @@ export function buildNativeCoverageReport({
         candidateCatalog: stats.zctas.size - stats.catalogMappedZctas.size,
         localRangeEvidence:
           stats.catalogMappedZctas.size - stats.localRangeEvidenceZctas.size,
+        completeLocalRangeEvidence:
+          stats.catalogMappedZctas.size - stats.completeLocalEvidenceZctas.size,
       },
     };
   });
@@ -584,6 +614,10 @@ export function buildNativeCoverageReport({
       recordCount: rangeEvidence.length,
       unresolvedCountyFipsRecordCount,
       catalogMappedZctasWithAnyCountyEvidence: localRangeEvidenceZctas.size,
+      catalogMappedZctasWithCompleteLocalEvidence: completeLocalEvidenceZctas.size,
+      catalogMappedZctasWithoutCompleteLocalEvidence:
+        catalogMappedZctas.size - completeLocalEvidenceZctas.size,
+      missingCandidateCountyEvidencePairCount: missingLocalEvidencePairs.size,
       catalogMappedZctasWithCompleteAffirmativeCoverage: affirmativeRangeEvidenceZctas.size,
       catalogMappedZctasWithAffirmativeEvidence: affirmativeRangeEvidenceZctas.size,
       catalogMappedZctasWithNotNativeEvidence: notNativeEvidenceZctas.size,
@@ -666,6 +700,7 @@ function main() {
     countyData,
     ecoregionData: readData("data/natives/zip-ecoregion.json"),
     ecoregionPlants: readData("data/natives/ecoregion-plants.json"),
+    zctaCatalog: readData("data/natives/zcta-catalog.json"),
     plants: readData("data/natives/plants.json").plants,
     sources: readData("data/natives/native-sources.json").sources,
     rangeEvidence: readData("data/natives/plant-range-evidence.json").records,

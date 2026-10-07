@@ -69,6 +69,26 @@ describe("BONAP source adapter", () => {
     expect(taxa[0]).not.toHaveProperty("id");
   });
 
+  it("accepts the live BONAP publisher attribution before the TSV rows", () => {
+    const taxa = parseBonapFullTaxonList([
+      "© Kartesz, J.T., The Biota of North America Program (BONAP). 2014. BONAP’s Taxonomic Data Center (TDC) (http://bonap.net/TDC/). Chapel Hill, N.C.",
+      "ACANTHACEAE\tAcanthus\tAcanthus mollis",
+    ].join("\n"));
+    expect(taxa).toEqual([{
+      family: "ACANTHACEAE",
+      genus: "Acanthus",
+      scientificName: "Acanthus mollis",
+    }]);
+  });
+
+  it("accepts BONAP hybrid-genus markers as taxonomic data", () => {
+    expect(parseBonapFullTaxonList("ASTERACEAE\t×Argyrautia\t×Argyrautia degeneri")).toEqual([{
+      family: "ASTERACEAE",
+      genus: "×Argyrautia",
+      scientificName: "×Argyrautia degeneri",
+    }]);
+  });
+
   it("rejects malformed FullTaxonList rows instead of silently dropping them", () => {
     expect(() => parseBonapFullTaxonList(`${taxonText}\ntruncated valid-looking row`)).toThrow(
       /malformed non-TSV row/,

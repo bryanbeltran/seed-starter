@@ -46,6 +46,8 @@ const bonapMapAssetsPath = path.join(root, "data/natives/bonap-map-snapshots");
 const write = process.argv.includes("--write");
 
 export const PLANTS_API = "https://plantsservices.sc.egov.usda.gov/api";
+export const COUNTY_BOUNDARIES_URL =
+  "https://apps.geo.fpac.usda.gov/nrcs-geodata/rest/services/land_use_land_cover/plants/MapServer/2";
 export const COUNTY_LAYER_URL =
   "https://apps.geo.fpac.usda.gov/nrcs-geodata/rest/services/land_use_land_cover/plants/MapServer/6";
 
@@ -87,6 +89,35 @@ function normalizeLocationName(name) {
     .toLocaleLowerCase("en-US")
     .replace(/[^a-z0-9]+/g, "")
     .trim();
+}
+
+function geometryBounds(geometry) {
+  const rings = geometry?.rings;
+  if (!Array.isArray(rings)) return null;
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const ring of rings) {
+    for (const point of ring ?? []) {
+      const [x, y] = point;
+      if (!Number.isFinite(x) || !Number.isFinite(y)) continue;
+      minX = Math.min(minX, x);
+      minY = Math.min(minY, y);
+      maxX = Math.max(maxX, x);
+      maxY = Math.max(maxY, y);
+    }
+  }
+  return Number.isFinite(minX) && Number.isFinite(minY) && Number.isFinite(maxX) && Number.isFinite(maxY)
+    ? { minX, minY, maxX, maxY }
+    : null;
+}
+
+function sameGeometryBounds(left, right) {
+  const a = geometryBounds(left);
+  const b = geometryBounds(right);
+  if (!a || !b) return false;
+  return ["minX", "minY", "maxX", "maxY"].every((key) => Math.abs(a[key] - b[key]) < 1e-8);
 }
 
 /** Interpret the published county Symbol text; the numeric nativity ID stays opaque. */
@@ -192,6 +223,101 @@ export function indexDistributionFips(rows, lower48 = LOWER48) {
   );
 }
 
+function indexDistributionFipsByCode(rows, lower48 = LOWER48) {
+  const lower48StateFips = new Set(lower48.map((state) => state.fips));
+  const byFips = new Map();
+  for (const row of rows) {
+    if (row.Country !== "United States" || !row["County FIP"]) continue;
+    const stateFips = String(row["State FIP"] ?? "").trim().padStart(2, "0");
+    const countyFips = String(row["County FIP"] ?? "").trim().padStart(3, "0");
+    if (!/^\d{2}$/.test(stateFips) || !/^\d{3}$/.test(countyFips)) continue;
+    if (!lower48StateFips.has(stateFips)) continue;
+    const fips = `${stateFips}${countyFips}`;
+    const location = {
+      stateName: row.State,
+      countyName: row.County,
+      fips,
+    };
+    const previous = byFips.get(fips);
+    if (previous && (previous.stateName !== location.stateName || previous.countyName !== location.countyName)) {
+      throw new Error(`USDA Distribution Documentation has conflicting FIPS ${fips}`);
+    }
+    byFips.set(fips, location);
+  }
+  return byFips;
+}
+
+/**
+ * Resolve the USDA county-layer subdivision IDs to official county FIPS.
+ * The plant-specific layer only exposes a county name and an opaque ID; the
+ * sibling county-boundary layer is the authoritative ID→FIPS crosswalk.
+ */
+export async function fetchCountyFipsIndex({
+  fetchImpl = fetch,
+  lower48 = LOWER48,
+} = {}) {
+  const lower48StateFips = new Set(lower48.map((state) => state.fips));
+  const stateByFips = new Map(lower48.map((state) => [state.fips, state.name]));
+  const byName = new Map();
+  const pageSize = 2_000;
+  for (let resultOffset = 0; resultOffset < 100_000; resultOffset += pageSize) {
+    const url = new URL(`${COUNTY_BOUNDARIES_URL}/query`);
+    url.searchParams.set("where", "1=1");
+    url.searchParams.set(
+      "outFields",
+      "plant_location_id,country_subdivision_code,country_subdivision_name",
+    );
+    url.searchParams.set("returnGeometry", "true");
+    url.searchParams.set("outSR", "4326");
+    url.searchParams.set("resultOffset", String(resultOffset));
+    url.searchParams.set("resultRecordCount", String(pageSize));
+    url.searchParams.set("orderByFields", "plant_location_id");
+    url.searchParams.set("f", "json");
+    const response = await getJson(url, fetchImpl);
+    if (response.error) {
+      throw new Error(`USDA county-boundary query failed: ${JSON.stringify(response.error)}`);
+    }
+    const features = response.features;
+    if (!Array.isArray(features)) throw new Error("USDA county-boundary response omitted features");
+    for (const feature of features) {
+      const attributes = feature.attributes ?? feature;
+      const subdivisionId = Number(value(attributes, "plant_location_id", "plantLocationId"));
+      const fips = String(value(attributes, "country_subdivision_code", "countrySubdivisionCode") ?? "").trim();
+      const countyName = String(value(attributes, "country_subdivision_name", "countrySubdivisionName") ?? "").trim();
+      if (!Number.isSafeInteger(subdivisionId) || subdivisionId <= 0 || !countyName) {
+        throw new Error("USDA county-boundary response contains an invalid subdivision row");
+      }
+      if (!/^\d{5}$/.test(fips)) {
+        throw new Error(`USDA county-boundary response contains invalid FIPS ${JSON.stringify(fips)}`);
+      }
+      const location = {
+        stateName: stateByFips.get(fips.slice(0, 2)) ?? null,
+        countyName,
+        fips,
+        knownOutsideLower48: !lower48StateFips.has(fips.slice(0, 2)),
+        geometry: feature.geometry ?? null,
+      };
+      const nameKey = normalizeLocationName(countyName);
+      const candidates = byName.get(nameKey) ?? [];
+      if (!candidates.some((candidate) => candidate.fips === location.fips)) {
+        candidates.push(location);
+        byName.set(nameKey, candidates);
+      }
+    }
+    if (!response.exceededTransferLimit && features.length < pageSize) return { byName };
+    if (features.length === 0) return { byName };
+  }
+  throw new Error("USDA county-boundary layer exceeded pagination limit");
+}
+
+function boundaryLocationForFeature(feature, layerName, countyBoundaryIndex) {
+  const candidates = countyBoundaryIndex?.byName?.get(normalizeLocationName(layerName)) ?? [];
+  if (candidates.length === 1) return candidates[0];
+  if (!feature.geometry) return null;
+  const matches = candidates.filter((candidate) => sameGeometryBounds(feature.geometry, candidate.geometry));
+  return matches.length === 1 ? matches[0] : null;
+}
+
 export function buildPlantRangeEvidence({
   plant,
   masterId,
@@ -200,9 +326,12 @@ export function buildPlantRangeEvidence({
   source,
   retrievedAt,
   lower48 = LOWER48,
+  countyFipsBySubdivisionId = null,
+  countyBoundaryIndex = null,
 }) {
   const distributionRows = parseDistributionDocumentation(distributionCsv);
   const distributionFipsByCountyName = indexDistributionFips(distributionRows, lower48);
+  const distributionFipsByCode = indexDistributionFipsByCode(distributionRows, lower48);
   const records = [];
   const seenIds = new Set();
 
@@ -222,11 +351,18 @@ export function buildPlantRangeEvidence({
     }
     seenIds.add(subdivisionId);
 
-    const mappedLocation = distributionFipsByCountyName.get(normalizeLocationName(layerName)) ?? null;
+    const layerLocation = countyFipsBySubdivisionId?.get(subdivisionId) ??
+      boundaryLocationForFeature(feature, layerName, countyBoundaryIndex);
+    if (layerLocation?.knownOutsideLower48) continue;
+    const mappedLocation = countyFipsBySubdivisionId || countyBoundaryIndex
+      ? layerLocation?.fips && distributionFipsByCode.has(layerLocation.fips)
+        ? distributionFipsByCode.get(layerLocation.fips)
+        : null
+      : distributionFipsByCountyName.get(normalizeLocationName(layerName)) ?? null;
     if (mappedLocation?.knownOutsideLower48) continue;
     const location = {
-      stateName: mappedLocation?.stateName ?? null,
-      countyName: mappedLocation?.countyName ?? layerName,
+      stateName: mappedLocation?.stateName ?? layerLocation?.stateName ?? null,
+      countyName: mappedLocation?.countyName ?? layerLocation?.countyName ?? layerName,
     };
 
     const symbol = value(attributes, "Symbol", "symbol");
@@ -238,6 +374,7 @@ export function buildPlantRangeEvidence({
         : `USDA PLANTS County layer Symbol is ${JSON.stringify(symbol)} (plant_nativity_id ${JSON.stringify(nativityId ?? null)}); this is preserved as unknown nativity.`;
 
     const countyFips = mappedLocation?.fips ?? null;
+    const resolvedNativityStatus = countyFips ? nativityStatus : "unknown";
     if (!mappedLocation) {
       uncertainty = [
         uncertainty,
@@ -267,7 +404,7 @@ export function buildPlantRangeEvidence({
         : `Unresolved USDA county-layer subdivision ${subdivisionId}: ${location.countyName}; state and county FIPS unknown.`,
       spatialResolution: "county",
       countyFips,
-      nativityStatus,
+      nativityStatus: resolvedNativityStatus,
       uncertainty,
     });
   }
@@ -325,7 +462,7 @@ async function postJsonText(url, body, fetchImpl) {
   return response.text();
 }
 
-async function fetchCountyFeatures(masterId, fetchImpl) {
+async function fetchCountyFeatures(masterId, fetchImpl, { returnGeometry = false } = {}) {
   const allFeatures = [];
   const pageSize = 1000;
   for (let resultOffset = 0; resultOffset < 100_000; resultOffset += pageSize) {
@@ -335,7 +472,8 @@ async function fetchCountyFeatures(masterId, fetchImpl) {
       "outFields",
       "plant_master_id,plant_nativity_id,country_subdivision_id,country_subdivision_name,Symbol",
     );
-    url.searchParams.set("returnGeometry", "false");
+    url.searchParams.set("returnGeometry", String(returnGeometry));
+    if (returnGeometry) url.searchParams.set("outSR", "4326");
     url.searchParams.set("resultOffset", String(resultOffset));
     url.searchParams.set("resultRecordCount", String(pageSize));
     url.searchParams.set("orderByFields", "country_subdivision_id");
@@ -628,6 +766,8 @@ export async function fetchRangeEvidence({
   fetchImpl = fetch,
   now = new Date(),
   onPlant = () => {},
+  countyFipsBySubdivisionId = null,
+  countyBoundaryIndex = null,
 }) {
   const source = sources["usda-plants"];
   if (!source?.licenseNote?.trim()) {
@@ -649,7 +789,9 @@ export async function fetchRangeEvidence({
       { masterId },
       fetchImpl,
     );
-    const countyFeatures = await fetchCountyFeatures(masterId, fetchImpl);
+    const countyFeatures = await fetchCountyFeatures(masterId, fetchImpl, {
+      returnGeometry: Boolean(countyBoundaryIndex),
+    });
     const plantRecords = buildPlantRangeEvidence({
       plant,
       masterId,
@@ -658,6 +800,8 @@ export async function fetchRangeEvidence({
       countyFeatures,
       source,
       retrievedAt,
+      countyFipsBySubdivisionId,
+      countyBoundaryIndex,
     });
     records.push(...plantRecords);
     onPlant({ id: plant.id, symbol, recordCount: plantRecords.length });
@@ -666,7 +810,7 @@ export async function fetchRangeEvidence({
   const payload = {
     version: `usda-plants-live-${retrievedAt.slice(0, 10)}`,
     provenance:
-      `Retrieved ${retrievedAt} from USDA PLANTS PlantSearch, PlantProfile, Distribution Documentation, and the official NRCS PLANTS Counties MapServer layer. Only the county Symbol text is used for nativity; profile region status and numeric plant_nativity_id are not interpreted as local status. No per-record release or observation date has been verified, so it is null and retrieval time is recorded. County FIPS are joined only when the layer county name resolves to one unique U.S. state/county row, and that row is in the lower 48, in the same plant's official Distribution Documentation. Uniquely identified non-lower-48 rows are excluded; ambiguous or missing name matches remain null and cannot match ZIPs. This name crosswalk does not independently resolve the MapServer subdivision ID.`,
+      `Retrieved ${retrievedAt} from USDA PLANTS PlantSearch, PlantProfile, Distribution Documentation, the official NRCS PLANTS Counties MapServer layer, and its County Boundaries geometry crosswalk. Only the county Symbol text is used for nativity; profile region status and numeric plant_nativity_id are not interpreted as local status. No per-record release or observation date has been verified, so it is null and retrieval time is recorded. County FIPS are joined by exact official county geometry and must also occur in the same plant's official Distribution Documentation. Uniquely identified non-lower-48 rows are excluded; unresolved joins remain unknown and cannot match ZIPs.`,
     records,
   };
   validateRangeEvidenceFile(payload, {
@@ -718,7 +862,7 @@ export function validateSourceIngestionSnapshot(payload, {
     if (
       !taxon ||
       !String(taxon.family ?? "").trim() ||
-      !/^[A-Z][a-z-]+$/.test(taxon.genus ?? "") ||
+      !/^(?:×)?[A-Z][a-z-]+$/u.test(taxon.genus ?? "") ||
       !String(taxon.scientificName ?? "").trim()
     ) {
       throw new Error(`BONAP FullTaxonList snapshot contains malformed taxon row ${index}`);
@@ -1125,9 +1269,11 @@ export async function main() {
 
     stage = "usda-plants";
     markSource(stage, "retrieving");
+    const countyBoundaryIndex = await fetchCountyFipsIndex();
     const usdaNext = await fetchRangeEvidence({
       plants,
       sources: sourcesFile.sources,
+      countyBoundaryIndex,
       onPlant: ({ id, symbol, recordCount }) =>
         console.log(`${symbol} (${id}): ${recordCount} county records`),
     });

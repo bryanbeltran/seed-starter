@@ -15,6 +15,20 @@
       "uncertainty": "A per-record release or observation date, the numeric plant_nativity_id code domain, and the current endpoint reuse terms were not verified in this worktree. Retrieval time is recorded per claim. Nativity is read from the published county Symbol text; the numeric ID is retained as opaque provenance. The approved project source plan permits cited PLANTS facts and excludes images. Regional profile status is not county evidence. Both, Excluded, Unknown, and unresolved FIPS joins are not affirmative.",
       "rangeEvidenceAvailable": true
     },
+    "usda-culturally-significant": {
+      "authority": "USDA PLANTS",
+      "name": "USDA PLANTS culturally significant plant inventory",
+      "citation": "USDA, NRCS. PLANTS Database culturally significant plant inventory. https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants.",
+      "url": "https://plantsservices.sc.egov.usda.gov/api/common/getCulturallySignificantplants",
+      "releaseOrObservationDate": null,
+      "retrievedAt": null,
+      "licenseNote": "The approved project data-source plan states that PLANTS information is not copyrighted and may be used freely with citation. Do not bundle photos.",
+      "geographicScope": "USDA PLANTS culturally significant plant inventory; the adapter retains accepted species with a published L48 Native profile status and a USDA plant-guide URL.",
+      "spatialResolution": "Candidate inventory and plant profile; not local nativity evidence.",
+      "coverage": "Candidate selection only. Local county nativity is fetched separately from the official PLANTS Counties layer for every included catalog plant.",
+      "uncertainty": "The inventory and L48 profile status establish candidate selection, not county or ZCTA nativity. Botanical authority text is normalized only for exact accepted-species crosswalk; raw profile fields remain in native-candidate-discovery.json.",
+      "rangeEvidenceAvailable": false
+    },
     "bonap-napa": {
       "authority": "Biota of North America Program (BONAP)",
       "name": "BONAP North American Plant Atlas (NAPA)",

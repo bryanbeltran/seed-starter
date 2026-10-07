@@ -18,6 +18,14 @@ export const nativePlantSchema = z.object({
   directSowDaysBeforeFrost: z.number().optional(),
   sourceUrl: z.string().url(),
   confidence: z.enum(["high", "medium", "low"]),
+  catalogSource: z.object({
+    sourceId: z.string(),
+    sourceUrl: z.string().url(),
+    retrievedAt: z.string().datetime(),
+    symbol: z.string(),
+    profileId: z.number().int().positive(),
+    plantGuideUrl: z.string().url(),
+  }).optional(),
 });
 
 export type NativePlant = z.infer<typeof nativePlantSchema>;
@@ -159,6 +167,27 @@ export const ecoregionPlantsFileSchema = z.object({
       name: z.string(),
       plantIds: z.array(z.string()),
       provenance: z.string(),
+    }),
+  ),
+});
+
+export const zctaCatalogFileSchema = z.object({
+  version: z.string(),
+  provenance: z.string(),
+  zctaCount: z.number().int().nonnegative(),
+  exactOverrideCount: z.number().int().nonnegative(),
+  regionalFallbackCount: z.number().int().nonnegative(),
+  nearestFallbackCount: z.number().int().nonnegative(),
+  noCatalogCount: z.number().int().nonnegative(),
+  plantSets: z.array(z.array(z.string())),
+  zctas: z.record(
+    z.string(),
+    z.object({
+      plantSetId: z.number().int().nonnegative(),
+      ecoregionId: z.string().nullable(),
+      fallbackEcoregionId: z.string().optional(),
+      fallbackSourceZip: z.string().regex(/^\d{5}$/).optional(),
+      mappingBasis: z.string(),
     }),
   ),
 });

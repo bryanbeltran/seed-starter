@@ -2,9 +2,8 @@ import { addDays, subDays } from "date-fns";
 import plantsData from "../../data/natives/plants.json";
 import ecoregionPlantsData from "../../data/natives/ecoregion-plants.json";
 import nativeSourcesData from "../../data/natives/native-sources.json";
-import nativeRangeEvidenceData from "../../data/natives/plant-range-evidence.json";
-import nativeSourceIngestionData from "../../data/natives/native-source-ingestion.json";
 import bonapCountyMapReviewsData from "../../data/natives/bonap-county-map-reviews.json";
+import { readNativeJson } from "./nativeData";
 import { isKnownZctaId, lookupZipCounty, lookupZipCountyFips } from "./lookupCounty";
 import { lookupZipEcoregion, type EcoregionRef } from "./lookupEcoregion";
 import {
@@ -13,6 +12,7 @@ import {
   nativeRangeEvidenceFileSchema,
   nativeSourcesFileSchema,
   nativesFileSchema,
+  zctaCatalogFileSchema,
   type NativeRangeEvidence,
   type NativePlant,
 } from "./schema";
@@ -30,9 +30,15 @@ import type { FrostClimateLookup, GardenSeason, RiskProfile } from "@/planning/t
 
 const plantsFile = nativesFileSchema.parse(plantsData);
 const ecoregionFile = ecoregionPlantsFileSchema.parse(ecoregionPlantsData);
+const zctaCatalogFile = zctaCatalogFileSchema.parse(
+  readNativeJson<unknown>("data/natives/zcta-catalog.json"),
+);
 const nativeSourcesFile = nativeSourcesFileSchema.parse(nativeSourcesData);
 const nativeRangeEvidenceFile = nativeRangeEvidenceFileSchema.parse(
-  nativeRangeEvidenceData,
+  readNativeJson<unknown>("data/natives/plant-range-evidence.json"),
+);
+const nativeSourceIngestionData = readNativeJson<unknown>(
+  "data/natives/native-source-ingestion.json",
 );
 const currentBonapMapSnapshots = (
   nativeSourceIngestionData as unknown as {
@@ -174,6 +180,15 @@ export function resolveNatives(input: {
   const county = lookupZipCounty(input.zip);
   const countyFipses = lookupZipCountyFips(input.zip);
   const targetZctaId = isKnownZctaId(input.zip) ? input.zip : null;
+  const zctaListing = targetZctaId ? zctaCatalogFile.zctas[targetZctaId] : undefined;
+  const zctaPlantIds = zctaListing
+    ? zctaCatalogFile.plantSets[zctaListing.plantSetId] ?? []
+    : [];
+  const ecoregionListing = ecoregion
+    ? ecoregionFile.ecoregions[ecoregion.id]
+    : undefined;
+  const candidateIds = (zctaListing ? zctaPlantIds : ecoregionListing?.plantIds ?? [])
+    .filter((id) => plantsFile.plants[id]);
   const frostResolution = resolveFrost(
     {
       zone: input.zone,
@@ -196,10 +211,10 @@ export function resolveNatives(input: {
     frostProvenance: frostResolution.provenance,
   };
 
-  if (!ecoregion) {
+  if (candidateIds.length === 0) {
     return {
       ...base,
-      ecoregion: null,
+      ecoregion: ecoregion ? { id: ecoregion.id, name: ecoregion.name } : null,
       plants: [],
       rangeEvidenceConflicts: [],
       catalogCoverage: "unknown",
@@ -217,35 +232,13 @@ export function resolveNatives(input: {
     };
   }
 
-  const listing = ecoregionFile.ecoregions[ecoregion.id];
-  if (!listing?.plantIds.length) {
-    return {
-      ...base,
-      ecoregion: { id: ecoregion.id, name: ecoregion.name },
-      plants: [],
-      rangeEvidenceConflicts: [],
-      catalogCoverage: "none",
-      rangeEvidenceCoverage: summarizeNativeRangeEvidence({
-        candidateIds: [],
-        countyFips: countyFipses,
-        geographyResolved: Boolean(ecoregion && (countyFipses.length || targetZctaId)),
-        catalogAvailable: false,
-        evidence: nativeRangeEvidenceFile.records,
-        sources: nativeSourcesFile.sources,
-        currentBonapMapSnapshots,
-        currentBonapMapReviews,
-        targetZctaId,
-      }),
-    };
-  }
-
-  const candidates = listing.plantIds
+  const candidates = candidateIds
     .map((id) => plantsFile.plants[id])
     .filter((plant): plant is NativePlant => Boolean(plant));
   const rangeEvidenceCoverage = summarizeNativeRangeEvidence({
     candidateIds: candidates.map((plant) => plant.id),
     countyFips: countyFipses,
-    geographyResolved: Boolean(ecoregion && (countyFipses.length || targetZctaId)),
+    geographyResolved: Boolean(countyFipses.length || targetZctaId),
     catalogAvailable: candidates.length > 0,
     evidence: nativeRangeEvidenceFile.records,
     sources: nativeSourcesFile.sources,
@@ -289,7 +282,9 @@ export function resolveNatives(input: {
 
   return {
     ...base,
-    ecoregion: { id: ecoregion.id, name: listing.name || ecoregion.name },
+    ecoregion: ecoregion
+      ? { id: ecoregion.id, name: ecoregion.name }
+      : null,
     plants,
     rangeEvidenceConflicts,
     catalogCoverage: "full",

@@ -11,10 +11,12 @@ import {
   discoverRangeEvidenceChanges,
   fetchRangeEvidence,
   fetchSupplementalSourceData,
+  fetchCountyFipsIndex,
   lower48CountyFipses,
   indexDistributionFips,
   parseDistributionDocumentation,
   PLANTS_API,
+  COUNTY_BOUNDARIES_URL,
   COUNTY_LAYER_URL,
   validateSourceIngestionSnapshot,
   validateBonapCountyMapReviewFile,
@@ -154,6 +156,38 @@ describe("USDA PLANTS range-evidence ingestion", () => {
     expect(index.get("albany")).toBeNull();
   });
 
+  it("loads the official USDA county-boundary ID to FIPS crosswalk", async () => {
+    const requests = [];
+    const index = await fetchCountyFipsIndex({
+      fetchImpl: async (input) => {
+        const url = new URL(input);
+        requests.push(url);
+        return {
+          ok: true,
+          status: 200,
+          json: async () => ({
+            features: [{
+              attributes: {
+                plant_location_id: 1875,
+                country_subdivision_code: "36001",
+                country_subdivision_name: "Albany",
+              },
+            }],
+            exceededTransferLimit: false,
+          }),
+        };
+      },
+    });
+
+    expect(index.byName.get("albany")[0]).toMatchObject({
+      countyName: "Albany",
+      fips: "36001",
+      knownOutsideLower48: false,
+    });
+    expect(requests[0].href).toContain(`${COUNTY_BOUNDARIES_URL}/query`);
+    expect(requests[0].searchParams.get("outFields")).toContain("country_subdivision_code");
+  });
+
   it("identifies a unique county outside the lower 48 so it is not imported as an unknown gap", () => {
     const alaskaDistribution = [
       "Distribution Data",
@@ -256,11 +290,34 @@ describe("USDA PLANTS range-evidence ingestion", () => {
 
     expect(unresolved[0]).toMatchObject({
       countyFips: null,
-      nativityStatus: "native",
+      nativityStatus: "unknown",
       spatialResolution: "county",
       geographicScope: expect.stringContaining("state and county FIPS unknown"),
     });
     expect(unresolved[0].uncertainty).toContain("cannot match a ZIP county");
+  });
+
+  it("uses the official county ID crosswalk when county names are ambiguous", () => {
+    const ambiguousDistribution = [
+      "Distribution Data",
+      "Symbol,Country,State,State FIP,County,County FIP",
+      "ECPU,United States,New York,36,Albany,001",
+      "ECPU,United States,Georgia,13,Albany,001",
+    ].join("\n");
+    const countyFipsBySubdivisionId = new Map([
+      [1875, { countyName: "Albany", fips: "36001", knownOutsideLower48: false }],
+    ]);
+    const records = buildPlantRangeEvidence({
+      plant,
+      masterId: 34475,
+      distributionCsv: ambiguousDistribution,
+      countyFeatures: [feature()],
+      countyFipsBySubdivisionId,
+      source,
+      retrievedAt,
+    });
+
+    expect(records[0]).toMatchObject({ countyFips: "36001", nativityStatus: "native" });
   });
 
   it("does not use a regional profile status to replace county-level Symbol evidence", () => {
