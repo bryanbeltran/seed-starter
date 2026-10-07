@@ -53,4 +53,29 @@ describe("resolveLocation", () => {
 
     await expect(resolveLocation("59999")).rejects.toThrow(ZoneLookupError);
   });
+
+  it.each([null, [], { zone: 5 }, { zone: "unknown" }, { zone: "0a" }, { zone: "14b" }])(
+    "rejects malformed PHZM response %j as a lookup failure",
+    async (body) => {
+      vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+        ok: true,
+        json: async () => body,
+      }));
+
+      await expect(resolveLocation("59999")).rejects.toThrow(ZoneLookupError);
+    },
+  );
+
+  it.each(["1A", "13B"])("normalizes valid PHZM zone %s", async (zone) => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ zone }),
+    }));
+
+    await expect(resolveLocation("59999")).resolves.toEqual({
+      zip: "59999",
+      zone: zone.toLowerCase(),
+      source: "phzm",
+    });
+  });
 });

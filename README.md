@@ -21,6 +21,14 @@ Frost-aware garden planning for US ZIP codes. Pick a season, crops, varieties, a
 - OpenAPI 3 at `/api/openapi` · Swagger UI at `/docs`
 - CSV, iCalendar, and print exports
 
+Calendar exports use all-day events and preserve the same planting dates as CSV exports, regardless of your browser's timezone. Long calendar lines are folded without splitting Unicode characters, preserving crop and variety names on import.
+
+Repeated tasks receive distinct calendar event IDs so each occurrence can be imported, even when labels and dates match.
+
+The task timeline preserves those same planting dates and calculates “Today,” upcoming, and past status against your local calendar day.
+
+Risk-profile comparisons also preserve calendar dates for tasks and frost anchors; day differences ignore timestamp hours and daylight-saving transitions.
+
 ## Architecture
 
 ```mermaid
@@ -63,6 +71,8 @@ Next builds: portfolio freeze / interview prep · [plans index](docs/plans/).
 | No `DATABASE_URL` on Vercel | Schedules work; saved plans not durable across instances |
 | Rate limit exceeded | `429` + `Retry-After` |
 | Climate data refresh | Saved plans flag stale + show last-frost diff |
+| Browser session storage blocked or full | Form remains usable; current selections may not survive a reload |
+| Malformed saved form selections | Invalid stored state is ignored; the form uses defaults |
 
 ## Climate eval
 

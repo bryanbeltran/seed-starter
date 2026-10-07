@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   cropSelectionsFromForm,
   defaultSeasonForDate,
@@ -10,8 +10,27 @@ import {
 
 describe("formState", () => {
   afterEach(() => {
+    vi.restoreAllMocks();
     sessionStorage.clear();
   });
+
+  it.each(["QuotaExceededError", "SecurityError"])(
+    "does not interrupt form updates when storage throws %s",
+    (name) => {
+      vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => {
+        throw new DOMException("Storage unavailable", name);
+      });
+
+      expect(() => saveFormState({
+        zip: "55423",
+        selectedCrops: ["tomato"],
+        varieties: {},
+        riskProfile: "balanced",
+        season: "spring",
+        compareMode: false,
+      })).not.toThrow();
+    },
+  );
 
   it("validates zip codes", () => {
     expect(isValidZip("55423")).toBe(true);
@@ -42,6 +61,27 @@ describe("formState", () => {
   it("returns null for invalid stored state", () => {
     sessionStorage.setItem(FORM_STORAGE_KEY, "{not json");
     expect(loadFormState()).toBeNull();
+  });
+
+  it.each([
+    null, [], true, 123, "saved",
+    { zip: 55423 },
+    { selectedCrops: 123 },
+    { selectedCrops: ["tomato", null] },
+    { varieties: [] },
+    { varieties: { tomato: 123 } },
+    { riskProfile: "unknown" },
+    { season: "winter" },
+    { compareMode: "false" },
+  ].map((state) => ({ state })))("ignores stored state with an invalid shape: $state", ({ state }) => {
+    sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(state));
+    expect(loadFormState()).toBeNull();
+  });
+
+  it("loads older partial state without requiring newer fields", () => {
+    const state = { zip: "55423", selectedCrops: ["tomato"], varieties: {} };
+    sessionStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(state));
+    expect(loadFormState()).toEqual(state);
   });
 
   it("defaults season to spring", () => {
