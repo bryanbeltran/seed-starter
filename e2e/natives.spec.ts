@@ -4,7 +4,9 @@ test("natives navigation is visible on mobile", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
 
-  await expect(page.getByRole("link", { name: "Natives" })).toBeVisible();
+  await expect(
+    page.getByRole("navigation").getByRole("link", { name: "Natives" }),
+  ).toBeVisible();
 });
 
 test("natives page shows ecoregion plants for ZIP", async ({ page }) => {
