@@ -10,8 +10,8 @@ const nav = [
 export function AppHeader() {
   return (
     <header className="border-b print:hidden">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-4">
-        <div>
+      <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-4 px-4 py-4">
+        <div className="mr-auto">
           <Link href="/" className="text-xl font-bold tracking-tight">
             Seed Starter
           </Link>
@@ -19,18 +19,18 @@ export function AppHeader() {
             Frost-aware garden planning
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <nav className="hidden items-center gap-3 sm:flex">
-            {nav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-muted-foreground hover:text-foreground text-sm"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+        <nav className="order-3 flex basis-full items-center gap-3 border-t pt-3 sm:order-2 sm:basis-auto sm:border-t-0 sm:pt-0">
+          {nav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="text-muted-foreground hover:text-foreground text-sm"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="order-2 flex items-center gap-3">
           <ThemeToggle />
           <a
             href="https://github.com/bryanbeltran/seed-starter"
