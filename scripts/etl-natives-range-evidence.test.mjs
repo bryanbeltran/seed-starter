@@ -2,6 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { createHash } from "node:crypto";
+import { gunzipSync } from "node:zlib";
 import { afterEach, describe, expect, it } from "vitest";
 import {
   buildPlantRangeEvidence,
@@ -899,6 +900,8 @@ describe("USDA PLANTS range-evidence ingestion", () => {
     });
     const lastGoodRange = fs.readFileSync(outputRangePath, "utf8");
     const lastGoodIngestion = fs.readFileSync(outputIngestionPath, "utf8");
+    const lastGoodCompressedRange = fs.readFileSync(`${outputRangePath}.gz`);
+    expect(JSON.parse(gunzipSync(lastGoodCompressedRange).toString("utf8"))).toEqual(goodRange);
 
     const shortMapRefresh = async () => {
       const fullTaxonList = [
@@ -948,6 +951,7 @@ describe("USDA PLANTS range-evidence ingestion", () => {
     await expect(shortMapRefresh()).rejects.toThrow(/BONAP county map is not a complete PNG image/);
     expect(fs.readFileSync(outputRangePath, "utf8")).toBe(lastGoodRange);
     expect(fs.readFileSync(outputIngestionPath, "utf8")).toBe(lastGoodIngestion);
+    expect(fs.readFileSync(`${outputRangePath}.gz`)).toEqual(lastGoodCompressedRange);
     expect(JSON.parse(lastGoodRange).records).toContainEqual(reviewedMapEvidence);
     expect(fs.readFileSync(reviewedMapAssetPath)).toEqual(reviewedMapBytes);
 
@@ -996,6 +1000,7 @@ describe("USDA PLANTS range-evidence ingestion", () => {
     );
     expect(fs.readFileSync(outputRangePath, "utf8")).toBe(lastGoodRange);
     expect(fs.readFileSync(outputIngestionPath, "utf8")).toBe(lastGoodIngestion);
+    expect(fs.readFileSync(`${outputRangePath}.gz`)).toEqual(lastGoodCompressedRange);
 
     expect(() => commitNativeEvidenceSnapshotAtomically({
       rangeEvidencePath: outputRangePath,

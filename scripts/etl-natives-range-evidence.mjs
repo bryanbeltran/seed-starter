@@ -14,6 +14,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { gzipSync } from "node:zlib";
 import { summarizeNativeSourceEvidence } from "./lib/native-source-evidence.mjs";
 import {
   isEligibleFinerRangeEvidenceRecord,
@@ -678,6 +679,7 @@ export function commitNativeEvidenceSnapshotAtomically({
 }) {
   validateRangeEvidenceFile(rangeEvidence, rangeValidation);
   validateSourceIngestionSnapshot(sourceIngestion, sourceValidation);
+  const compressedRangeEvidencePath = `${outputRangePath}.gz`;
   for (const asset of mapAssets) {
     const digest = asset.path.match(/([a-f0-9]{64})\.png$/)?.[1];
     if (!digest || createHash("sha256").update(asset.bytes).digest("hex") !== digest) {
@@ -689,9 +691,10 @@ export function commitNativeEvidenceSnapshotAtomically({
       if (existingHash !== digest) throw new Error(`Existing BONAP map asset has wrong hash: ${asset.path}`);
     }
   }
-  const staged = [outputRangePath, outputIngestionPath].map((outputPath) => `${outputPath}.staged`);
+  const staged = [outputRangePath, outputIngestionPath, compressedRangeEvidencePath]
+    .map((outputPath) => `${outputPath}.staged`);
   const previous = new Map(
-    [outputRangePath, outputIngestionPath].map((outputPath) => [
+    [outputRangePath, outputIngestionPath, compressedRangeEvidencePath].map((outputPath) => [
       outputPath,
       fs.existsSync(outputPath) ? fs.readFileSync(outputPath) : null,
     ]),
@@ -707,8 +710,10 @@ export function commitNativeEvidenceSnapshotAtomically({
         fs.renameSync(stagedAsset, asset.path);
       }
     }
-    fs.writeFileSync(staged[0], `${JSON.stringify(rangeEvidence)}\n`);
+    const rangeEvidenceJson = `${JSON.stringify(rangeEvidence)}\n`;
+    fs.writeFileSync(staged[0], rangeEvidenceJson);
     fs.writeFileSync(staged[1], `${JSON.stringify(sourceIngestion, null, 2)}\n`);
+    fs.writeFileSync(staged[2], gzipSync(rangeEvidenceJson));
     validateRangeEvidenceFile(JSON.parse(fs.readFileSync(staged[0], "utf8")), rangeValidation);
     validateSourceIngestionSnapshot(
       JSON.parse(fs.readFileSync(staged[1], "utf8")),
@@ -716,6 +721,7 @@ export function commitNativeEvidenceSnapshotAtomically({
     );
     fs.renameSync(staged[0], outputRangePath);
     fs.renameSync(staged[1], outputIngestionPath);
+    fs.renameSync(staged[2], compressedRangeEvidencePath);
   } catch (error) {
     for (let index = 0; index < staged.length; index++) {
       fs.rmSync(staged[index], { force: true });

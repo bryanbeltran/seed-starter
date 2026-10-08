@@ -54,6 +54,7 @@ jobs:
           name: native-range-evidence
           path: |
             data/natives/plant-range-evidence.json
+            data/natives/plant-range-evidence.json.gz
             data/natives/native-sources.json
             data/natives/native-source-ingestion.json
             data/natives/bonap-county-map-reviews.json
@@ -81,5 +82,6 @@ jobs:
             Review the [lower-48 coverage report from this run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) in the `native-range-evidence` artifact for source status and evidence date/status changes before merging.
           add-paths: |
             data/natives/plant-range-evidence.json
+            data/natives/plant-range-evidence.json.gz
             data/natives/native-source-ingestion.json
             data/natives/bonap-map-snapshots/**

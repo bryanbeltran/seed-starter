@@ -3,7 +3,7 @@ import plantsData from "../../data/natives/plants.json";
 import ecoregionPlantsData from "../../data/natives/ecoregion-plants.json";
 import nativeSourcesData from "../../data/natives/native-sources.json";
 import bonapCountyMapReviewsData from "../../data/natives/bonap-county-map-reviews.json";
-import { readNativeJson } from "./nativeData";
+import { readNativeGzipJson, readNativeJson } from "./nativeData";
 import { isKnownZctaId, lookupZipCounty, lookupZipCountyFips } from "./lookupCounty";
 import { lookupZipEcoregion, type EcoregionRef } from "./lookupEcoregion";
 import {
@@ -35,7 +35,7 @@ const zctaCatalogFile = zctaCatalogFileSchema.parse(
 );
 const nativeSourcesFile = nativeSourcesFileSchema.parse(nativeSourcesData);
 const nativeRangeEvidenceFile = nativeRangeEvidenceFileSchema.parse(
-  readNativeJson<unknown>("data/natives/plant-range-evidence.json"),
+  readNativeGzipJson<unknown>("data/natives/plant-range-evidence.json.gz"),
 );
 const nativeSourceIngestionData = readNativeJson<unknown>(
   "data/natives/native-source-ingestion.json",
