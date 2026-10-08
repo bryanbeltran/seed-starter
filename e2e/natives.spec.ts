@@ -7,8 +7,8 @@ test("natives page shows ecoregion plants for ZIP", async ({ page }) => {
   await expect(page.getByText("North Central Hardwood Forests")).toBeVisible({
     timeout: 30_000,
   });
-  await expect(page.getByText("Purple coneflower", { exact: true })).toBeVisible();
-  await expect(page.getByText(/Direct sow Purple coneflower/i)).toBeVisible();
+  await expect(page.getByText("Black-eyed Susan", { exact: true })).toBeVisible();
+  await expect(page.getByText(/Direct sow Black-eyed Susan/i)).toBeVisible();
 });
 
 test("natives fall dormant filters to fall sow tasks", async ({ page }) => {
@@ -47,5 +47,5 @@ test("natives expands to Central Corn Belt Plains", async ({ page }) => {
   await expect(page.getByText("Central Corn Belt Plains")).toBeVisible({
     timeout: 30_000,
   });
-  await expect(page.getByText("Compass plant", { exact: true })).toBeVisible();
+  await expect(page.getByText("Purple coneflower", { exact: true })).toBeVisible();
 });
