@@ -1,8 +1,9 @@
-import { cachedFetch, mapConcurrent } from "../lib/http.mjs";
+import { cachedFetch, mapConcurrent, parseSitemapLocs } from "../lib/http.mjs";
 import { isEdibleUrl, parseDays } from "../lib/merge.mjs";
 
-const SITEMAP = "https://www.rareseeds.com/media/sitemap.xml";
+const SITEMAP = "https://www.rareseeds.com/sitemap.xml";
 const STORE = "https://www.rareseeds.com";
+const PRODUCT_SITEMAP = /\/sitemap_products_\d+\.xml(?:\?|$)/;
 
 export const meta = {
   id: "bakercreek",
@@ -11,16 +12,37 @@ export const meta = {
   license: "public-web-citation",
 };
 
-export async function listCategoryUrls(root) {
+async function listSitemapUrls(root) {
   const xml = await cachedFetch(root, "bakercreek", "sitemap.xml", SITEMAP, {
     refresh: true,
   });
-  const cats = [...xml.matchAll(/<loc>([^<]*\/vegetable-seeds\/[^<]+)<\/loc>/g)].map((m) => m[1]);
-  return [...new Set(cats)];
+  return parseSitemapLocs(xml).map((url) => url.replaceAll("&amp;", "&"));
+}
+
+export async function listCategoryUrls(root) {
+  const urls = await listSitemapUrls(root);
+  return [...new Set(urls.filter((url) => url.includes("/vegetable-seeds/")))];
 }
 
 export async function listUrls(root, { limit = Infinity } = {}) {
-  const cats = await listCategoryUrls(root);
+  const sitemapUrls = await listSitemapUrls(root);
+  const productSitemaps = sitemapUrls.filter((url) => PRODUCT_SITEMAP.test(url));
+  if (productSitemaps.length) {
+    const urls = new Set();
+    for (const [index, sitemap] of productSitemaps.entries()) {
+      const xml = await cachedFetch(root, "bakercreek", `sitemap-products-${index}.xml`, sitemap, {
+        refresh: true,
+      });
+      for (const url of parseSitemapLocs(xml).map((value) => value.replaceAll("&amp;", "&"))) {
+        if (!isEdibleUrl(url)) continue;
+        urls.add(url);
+        if (urls.size >= limit) return [...urls];
+      }
+    }
+    return [...urls];
+  }
+
+  const cats = sitemapUrls.filter((url) => url.includes("/vegetable-seeds/"));
   const urls = new Set();
   for (const cat of cats) {
     const key = cat.replace(/https?:\/\//, "");
