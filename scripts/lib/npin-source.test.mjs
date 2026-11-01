@@ -81,6 +81,45 @@ describe("NPIN source adapter", () => {
     expect(responses).toEqual(["autocomplete", "profile"]);
   });
 
+  it("records an autocomplete challenge as unavailable without retrying or bypassing it", async () => {
+    const requests = [];
+    const secondPlant = { id: "asclepias-incarnata", scientificName: "Asclepias incarnata" };
+    const fetchImpl = async (url, options = {}) => {
+      requests.push({ url: new URL(url).href, redirect: options.redirect });
+      return new Response("<title>Just a moment...</title><div>challenge-platform</div>", {
+        status: 403,
+        headers: { "content-type": "text/html" },
+      });
+    };
+    const snapshot = await fetchNpinEnrichment({
+      plants: { [plant.id]: plant, [secondPlant.id]: secondPlant },
+      fetchImpl,
+      now: new Date("2026-10-01T12:00:00.000Z"),
+    });
+
+    expect(snapshot.enrichments).toHaveLength(2);
+    expect(snapshot.enrichments).toEqual(expect.arrayContaining([
+      expect.objectContaining({
+        plantId: plant.id,
+        matchStatus: "unresolved",
+        autocompleteStatus: "challenge",
+        autocompleteHttpStatus: 403,
+        profileStatus: "not_attempted",
+        evidenceUse: "crosswalk_only",
+      }),
+      expect.objectContaining({
+        plantId: secondPlant.id,
+        matchStatus: "unresolved",
+        autocompleteStatus: "challenge",
+        autocompleteHttpStatus: 403,
+        profileStatus: "not_attempted",
+        evidenceUse: "crosswalk_only",
+      }),
+    ]));
+    expect(requests).toHaveLength(1);
+    expect(requests[0].redirect).toBe("manual");
+  });
+
   it("records accessible profile enrichment from the authorized route", async () => {
     const fetchImpl = async (url) => {
       const parsed = new URL(url);

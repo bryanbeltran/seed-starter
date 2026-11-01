@@ -152,14 +152,18 @@ async function fetchJson(url, fetchImpl) {
   const response = await fetchNpinResponse(url, {
     headers: { accept: "application/json,text/plain,*/*" },
   }, fetchImpl, "NPIN autocomplete");
+  const body = await response.text();
+  if (isNpinChallenge(response.status, body)) {
+    return { challenge: true, response };
+  }
   if (!response.ok) throw new Error(`NPIN autocomplete failed (${response.status}): ${url}`);
   let payload;
   try {
-    payload = JSON.parse(await response.text());
+    payload = JSON.parse(body);
   } catch {
     throw new Error(`NPIN autocomplete response was not valid JSON: ${url}`);
   }
-  return { payload, response };
+  return { challenge: false, payload, response };
 }
 
 async function fetchProfile(profileUrl, fetchImpl) {
@@ -182,10 +186,32 @@ export async function fetchNpinEnrichment({
 }) {
   const retrievedAt = now.toISOString();
   const enrichments = [];
-  for (const plant of Object.values(plants)) {
+  const plantList = Object.values(plants);
+  for (let plantIndex = 0; plantIndex < plantList.length; plantIndex += 1) {
+    const plant = plantList[plantIndex];
     const autocompleteUrl = new URL(NPIN_URLS.autocomplete);
     autocompleteUrl.searchParams.set("q", plant.scientificName);
-    const { payload, response: autocompleteResponse } = await fetchJson(autocompleteUrl, fetchImpl);
+    const autocomplete = await fetchJson(autocompleteUrl, fetchImpl);
+    if (autocomplete.challenge) {
+      for (const unavailablePlant of plantList.slice(plantIndex)) {
+        const unavailableUrl = new URL(NPIN_URLS.autocomplete);
+        unavailableUrl.searchParams.set("q", unavailablePlant.scientificName);
+        enrichments.push({
+          plantId: unavailablePlant.id,
+          scientificName: unavailablePlant.scientificName,
+          matchStatus: "unresolved",
+          autocompleteUrl: unavailableUrl.href,
+          autocompleteStatus: "challenge",
+          autocompleteHttpStatus: autocomplete.response.status,
+          profileStatus: "not_attempted",
+          evidenceUse: "crosswalk_only",
+          retrievedAt,
+        });
+        onPlant({ plantId: unavailablePlant.id, status: "challenge" });
+      }
+      return { sourceId: "npin", retrievedAt, enrichments };
+    }
+    const { payload, response: autocompleteResponse } = autocomplete;
     const autocompleteRows = parseNpinAutocomplete(payload);
     const match = matchNpinTaxon(plant.scientificName, autocompleteRows);
     const autocompleteMarkers = {
