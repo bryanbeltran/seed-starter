@@ -69,7 +69,7 @@ export async function listUrls(root, { limit = Infinity } = {}) {
 export async function fetchRecord(root, url, { refresh = false } = {}) {
   const key = url.replace(/https?:\/\//, "");
   const html = await cachedFetch(root, "bakercreek", key, url, {
-    delayMs: 150,
+    delayMs: 1_000,
     refresh,
   });
   const name = html.match(/<h1[^>]*class="[^"]*page-title[^"]*"[^>]*>([^<]+)/)?.[1]?.trim()
@@ -103,6 +103,6 @@ export async function collect(root, opts = {}) {
       console.warn(`bakercreek skip ${url}: ${err.message}`);
       return null;
     }
-  }, { concurrency: 8 });
+  }, { concurrency: 1 });
   return rows.filter(Boolean);
 }
